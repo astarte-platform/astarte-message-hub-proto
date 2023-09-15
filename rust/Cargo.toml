@@ -1,0 +1,17 @@
+[package]
+name = "astarte-message-hub-proto-builder"
+version = "0.1.0"
+
+[workspace]
+resolver = "2"
+members = [
+    "astarte-message-hub-proto"	
+]
+
+[dependencies]
+pbjson-types = "0.5"
+prost = "0.11.3"
+tonic = "0.8.2"
+
+[build-dependencies]
+tonic-build = "0.8.2" 

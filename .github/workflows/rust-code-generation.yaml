@@ -1,0 +1,53 @@
+# This file is part of Astarte.
+#
+# Copyright 2023 SECO Mind Srl
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Rust code generation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+      - 'release-*'
+
+env:
+  PB_REL: https://github.com/protocolbuffers/protobuf/releases
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Install Protoc
+        run: |    
+          curl -LO $PB_REL/download/v24.3/protoc-24.3-linux-x86_64.zip
+          unzip protoc-24.3-linux-x86_64.zip -d $HOME/.local
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: 1.59
+          override: true
+      - name: Remove old code
+        run: (! test -d ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
+        working-directory: ./rust
+      - name: Generate code with cargo build
+        run: cargo build
+        working-directory: ./rust
