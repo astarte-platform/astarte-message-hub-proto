@@ -16,38 +16,26 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Rust code generation
+name: Check build.rs formatting
 
 on:
   pull_request:
   push:
-    branches:
-      - 'master'
-      - 'release-*'
-
-env:
-  PB_REL: https://github.com/protocolbuffers/protobuf/releases
 
 jobs:
-  build:
+  fmt:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v4
-      - name: Install Protoc
-        run: |    
-          curl -LO $PB_REL/download/v24.3/protoc-24.3-linux-x86_64.zip
-          unzip protoc-24.3-linux-x86_64.zip -d $HOME/.local
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        uses: actions/checkout@v2
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: 1.59
+          toolchain: stable
           override: true
-      - name: Remove old code
-        run: (! test -d ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
-        working-directory: ./rust
-      - name: Generate code with cargo build
-        run: cargo build
+      - name: Add rustfmt
+        run: rustup component add rustfmt
+      - name: Check formatting
+        run: rustfmt --check ./build.rs
         working-directory: ./rust

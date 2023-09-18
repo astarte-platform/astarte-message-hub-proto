@@ -17,8 +17,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-//! Build script generating service stubs and proto definitions to be used by tonic in the
-//! message hub.
+//! Build script generating service stubs and proto definitions to be used in the
+//! message hub server and client.
 
 use std::path::Path;
 

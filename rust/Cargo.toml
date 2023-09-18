@@ -1,6 +1,16 @@
+# This file is part of Astarte.
+#
+# Copyright 2023 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
 [package]
 name = "astarte-message-hub-proto-builder"
 version = "0.1.0"
+edition = "2021"
+rust-version = "1.59"
+description ="Astarte message hub protocol buffers builder for Rust"
+license = "Apache-2.0"
 
 [workspace]
 resolver = "2"

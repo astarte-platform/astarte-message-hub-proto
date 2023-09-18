@@ -16,7 +16,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Python code generation
+name: Code generation
 
 on:
   pull_request:
@@ -29,7 +29,7 @@ env:
   PB_REL: https://github.com/protocolbuffers/protobuf/releases
 
 jobs:
-  python-build:
+  python_build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -68,13 +68,58 @@ jobs:
     - name: Remove old code
       run: (! test -d ./astarteplatform) || rm -r ./astarteplatform
       working-directory: ./python
-    - name: Generate code
+    - name: Generate Python code
       run: python3 ./protoc.py "./../grpc/grpc_python_plugin"
       working-directory: ./python
-    - name: Commit the generated Python code
-      if: github.event_name == 'push'
+    - name: Upload Python code
+      uses: actions/upload-artifact@v3
+      with:
+        name: python
+        path: ./python
+  
+  rust_build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install protoc
       run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add ./python
-        git diff --staged --quiet || git commit -s -m "Generated Python code." && git push
+        curl -LO $PB_REL/download/v24.3/protoc-24.3-linux-x86_64.zip
+        unzip protoc-24.3-linux-x86_64.zip -d $HOME/.local
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: Install rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: 1.59
+        override: true
+    - name: Remove Rust old code
+      run: (! test -f ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
+      working-directory: ./rust
+    - name: Generate Rust code with cargo build
+      run: cargo build
+      working-directory: ./rust
+    - name: Upload Rust code
+      uses: actions/upload-artifact@v3
+      with:
+        name: rust-dist
+        path: ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
+
+  commit_and_push_code:
+    if: github.event_name == 'push'
+    name: Commit and push generated code
+    needs: [python_build, rust_build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+      - name: Commit the generated code
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add ./python
+          git diff --staged --quiet || git commit -s -m "[Python]: Add generated code"
+          mv ./rust-dist/astarteplatform.msghub.rs ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
+          git add ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
+          git diff --staged --quiet || git commit -s -m "[Rust]: Add generated code"
+          git push

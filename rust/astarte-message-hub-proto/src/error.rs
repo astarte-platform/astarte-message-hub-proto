@@ -18,6 +18,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    Ok(())
+use thiserror::Error;
+
+/// A list specifying general categories of Astarte Message Hub error.
+#[derive(Error, Debug)]
+pub enum AstarteMessageHubProtoError {
+    /// An infallible error
+    #[error(transparent)]
+    Infallible(#[from] std::convert::Infallible),
+
+    /// Wrapper for integer conversion errors
+    #[error(transparent)]
+    TryFromIntError(#[from] core::num::TryFromIntError),
+
+    /// Failed to convert between types
+    #[error("unable to convert type")]
+    ConversionError,
 }
