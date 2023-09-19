@@ -1,0 +1,13 @@
+# Copyright 2023 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Python build related files/folders
+*.egg-info
+dist/
+
+# Python caching folders
+__pycache__/
+
+# Python virtual environments
+.venv/
