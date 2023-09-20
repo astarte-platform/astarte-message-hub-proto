@@ -18,7 +18,7 @@
 
 name: Python static analysis
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   static:

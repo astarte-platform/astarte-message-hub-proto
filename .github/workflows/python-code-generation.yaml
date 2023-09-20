@@ -18,7 +18,12 @@
 
 name: Python code generation
 
-on: [push]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - 'release-*'
 
 env:
   PB_REL: https://github.com/protocolbuffers/protobuf/releases
@@ -67,7 +72,7 @@ jobs:
       run: python3 ./protoc.py "./../grpc/grpc_python_plugin"
       working-directory: ./python
     - name: Commit the generated Python code
-      if: github.ref == 'refs/heads/master'
+      if: github.event_name == 'push'
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
