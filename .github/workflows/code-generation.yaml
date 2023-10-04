@@ -94,10 +94,10 @@ jobs:
         override: true
     - name: Remove Rust old code
       run: (! test -f ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
-      working-directory: ./rust
+      working-directory: ./rust/rust-codegen
     - name: Generate Rust code with cargo build
-      run: cargo build
-      working-directory: ./rust
+      run: cargo run -- --proto-directory ../../proto --out ../astarte-message-hub-proto/src/
+      working-directory: ./rust/rust-codegen
     - name: Upload Rust code
       uses: actions/upload-artifact@v3
       with:

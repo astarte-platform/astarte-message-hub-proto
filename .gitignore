@@ -11,3 +11,9 @@ __pycache__/
 
 # Python virtual environments
 .venv/
+
+#Rust dist directory
+target/
+
+.idea/
+

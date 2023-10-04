@@ -16,7 +16,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Check build.rs formatting
+name: Check main.rs formatting
 
 on:
   pull_request:
@@ -37,5 +37,5 @@ jobs:
       - name: Add rustfmt
         run: rustup component add rustfmt
       - name: Check formatting
-        run: rustfmt --check ./build.rs
-        working-directory: ./rust
+        run: rustfmt --check ./src/main.rs
+        working-directory: ./rust/rust-codegen
