@@ -87,17 +87,29 @@ jobs:
         unzip protoc-24.3-linux-x86_64.zip -d $HOME/.local
         echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: Install rust toolchain
-      uses: actions-rs/toolchain@v1
+      uses: dtolnay/rust-toolchain@master
       with:
-        profile: minimal
         toolchain: 1.59
-        override: true
+        components: clippy
     - name: Remove Rust old code
       run: (! test -f ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
-      working-directory: ./rust/rust-codegen
+      working-directory: ./rust/
     - name: Generate Rust code with cargo build
       run: cargo run -- --proto-directory ../../proto --out ../astarte-message-hub-proto/src/
       working-directory: ./rust/rust-codegen
+    - name: cargo clippy
+      run: cargo clippy --all-targets --all-features -- -D warnings
+      working-directory: ./rust/astarte-message-hub-proto
+    - name: cargo doc
+      run: cargo doc --no-deps --all-features
+      env:
+        RUSTDOCFLAGS: --cfg docsrs -D warnings
+      working-directory: ./rust/astarte-message-hub-proto
+    - name: cargo check
+      run: cargo check --all-features
+      env:
+        RUSTDOCFLAGS: -D warnings
+      working-directory: ./rust/astarte-message-hub-proto  
     - name: Upload Rust code
       uses: actions/upload-artifact@v3
       with:

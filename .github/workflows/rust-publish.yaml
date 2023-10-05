@@ -29,11 +29,9 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: Install toolchain
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: 1.59
-          override: true
       - name: Publish astarte-message-hub-proto
         run: cargo publish --token ${CRATES_TOKEN} --dry-run
         env:

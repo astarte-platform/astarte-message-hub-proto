@@ -19,8 +19,11 @@
 name: Check main.rs formatting
 
 on:
-  pull_request:
   push:
+    branches:
+      - master
+      - release-*
+  pull_request:
 
 jobs:
   fmt:
@@ -29,13 +32,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v2
       - name: Install toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - name: Add rustfmt
-        run: rustup component add rustfmt
+        uses: dtolnay/rust-toolchain@stable
       - name: Check formatting
         run: rustfmt --check ./src/main.rs
         working-directory: ./rust/rust-codegen
