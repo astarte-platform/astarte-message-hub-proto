@@ -18,14 +18,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-use thiserror::Error;
+use std::convert::Infallible;
 
 /// A list specifying general categories of Astarte Message Hub error.
-#[derive(Error, Debug)]
+#[derive(thiserror::Error, Debug)]
 pub enum AstarteMessageHubProtoError {
     /// An infallible error
     #[error(transparent)]
-    Infallible(#[from] std::convert::Infallible),
+    Infallible(#[from] Infallible),
 
     /// Wrapper for integer conversion errors
     #[error(transparent)]

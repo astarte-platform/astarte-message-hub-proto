@@ -16,122 +16,35 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Code generation
+name: Code Generation
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
-      - master
+      - 'main'
       - 'release-*'
 
-env:
-  PB_REL: https://github.com/protocolbuffers/protobuf/releases
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-  python_build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Install protoc
-      run: |
-        curl -LO $PB_REL/download/v24.3/protoc-24.3-linux-x86_64.zip
-        unzip protoc-24.3-linux-x86_64.zip -d $HOME/.local
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
-    - name: Make dir for grpc
-      run: mkdir ./grpc/
-    - name: Restore cached grpc_python_plugin
-      id: cache-grpc-python-plugin-restore
-      uses: actions/cache/restore@v3
-      with:
-        path: ./grpc/grpc_python_plugin
-        key: grpc-python-plugin-v1.58.1
-    - name: Compile from source the grpc_python_plugin
-      if: steps.cache-grpc-python-plugin-restore.outputs.cache-hit != 'true'
-      run: |
-        git clone -b v1.58.1 https://github.com/grpc/grpc
-        cd grpc
-        git submodule update --init
-        cmake .
-        make grpc_python_plugin
-    - name: Save grpc_python_plugin
-      if: steps.cache-grpc-python-plugin-restore.outputs.cache-hit != 'true'
-      id: cache-grpc-python-plugin-save
-      uses: actions/cache/save@v3
-      with:
-        path: ./grpc/grpc_python_plugin
-        key: ${{ steps.cache-grpc-python-plugin-restore.outputs.cache-primary-key }}
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install termcolor
-    - name: Remove old code
-      run: (! test -d ./astarteplatform) || rm -r ./astarteplatform
-      working-directory: ./python
-    - name: Generate Python code
-      run: python3 ./protoc.py "./../grpc/grpc_python_plugin"
-      working-directory: ./python
-    - name: Upload Python code
-      uses: actions/upload-artifact@v3
-      with:
-        name: python
-        path: ./python
-  
-  rust_build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Install protoc
-      run: |
-        curl -LO $PB_REL/download/v24.3/protoc-24.3-linux-x86_64.zip
-        unzip protoc-24.3-linux-x86_64.zip -d $HOME/.local
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
-    - name: Install rust toolchain
-      uses: dtolnay/rust-toolchain@master
-      with:
-        toolchain: 1.59
-        components: clippy
-    - name: Remove Rust old code
-      run: (! test -f ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
-      working-directory: ./rust/
-    - name: Generate Rust code with cargo build
-      run: cargo run -- --proto-directory ../../proto --out ../astarte-message-hub-proto/src/
-      working-directory: ./rust/rust-codegen
-    - name: cargo clippy
-      run: cargo clippy --all-targets --all-features -- -D warnings
-      working-directory: ./rust/astarte-message-hub-proto
-    - name: cargo doc
-      run: cargo doc --no-deps --all-features
-      env:
-        RUSTDOCFLAGS: --cfg docsrs -D warnings
-      working-directory: ./rust/astarte-message-hub-proto
-    - name: cargo check
-      run: cargo check --all-features
-      env:
-        RUSTDOCFLAGS: -D warnings
-      working-directory: ./rust/astarte-message-hub-proto  
-    - name: Upload Rust code
-      uses: actions/upload-artifact@v3
-      with:
-        name: rust-dist
-        path: ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
-
-  commit_and_push_code:
-    if: github.event_name == 'push'
-    name: Commit and push generated code
-    needs: [python_build, rust_build]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v3
-      - name: Commit the generated code
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add ./python
-          git diff --staged --quiet || git commit -s -m "[Python]: Add generated code"
-          mv ./rust-dist/astarteplatform.msghub.rs ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
-          git add ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
-          git diff --staged --quiet || git commit -s -m "[Rust]: Add generated code"
-          git push
+  reuse:
+    uses: ./.github/workflows/reuse-lint.yaml
+  python-code-generation:
+    needs: [ reuse ]
+    uses: ./.github/workflows/python-code-generation.yaml
+  rust-code-generation:
+    needs: [ reuse ]
+    uses: ./.github/workflows/rust-code-generation.yaml
+  rust-code-check:
+    needs: [ rust-code-generation ]
+    uses: ./.github/workflows/rust-code-check.yaml
+  commit-codegen:
+    # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: [ python-code-generation, rust-code-check ]
+    permissions:
+      contents: write
+    uses: ./.github/workflows/commit-code-generation.yaml
