@@ -31,7 +31,7 @@ jobs:
       - name: Install toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: 1.59
+          toolchain: stable
       - name: Publish astarte-message-hub-proto
         run: cargo publish --token ${CRATES_TOKEN} --dry-run
         env:

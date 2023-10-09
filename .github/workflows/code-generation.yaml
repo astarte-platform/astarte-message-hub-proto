@@ -39,12 +39,9 @@ jobs:
   rust-code-generation:
     needs: [ reuse ]
     uses: ./.github/workflows/rust-code-generation.yaml
+  check-codegen:
+    needs: [ python-code-generation, rust-code-generation ]
+    uses: ./.github/workflows/check-code-generation.yaml
   rust-code-check:
-    needs: [ rust-code-generation ]
-    uses: ./.github/workflows/rust-code-check.yaml
-  commit-codegen:
-    # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: [ python-code-generation, rust-code-check ]
-    permissions:
-      contents: write
-    uses: ./.github/workflows/commit-code-generation.yaml
+    needs: [ check-codegen ]
+    uses: ./.github/workflows/rust-check-code-generation.yaml

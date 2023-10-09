@@ -16,7 +16,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Rust check code
+name: Rust check code generation
 permissions:
   contents: read
 on:
@@ -52,10 +52,6 @@ jobs:
         toolchain: [ stable ]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v3
-        with:
-          name: rust-dist
-          path: rust/astarte-message-hub-proto/src
       - name: Install ${{ matrix.toolchain }}
         uses: dtolnay/rust-toolchain@master
         with:
@@ -74,10 +70,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install nightly
         uses: dtolnay/rust-toolchain@nightly
-      - uses: actions/download-artifact@v3
-        with:
-          name: rust-dist
-          path: rust/astarte-message-hub-proto/src
       - name: cargo doc
         run: cargo doc --no-deps --all-features
         env:
@@ -92,10 +84,6 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
       - name: cargo install cargo-hack
         uses: taiki-e/install-action@cargo-hack
-      - uses: actions/download-artifact@v3
-        with:
-          name: rust-dist
-          path: rust/astarte-message-hub-proto/src
       # intentionally no target specifier; see https://github.com/jonhoo/rust-ci-conf/pull/4
       - name: cargo hack
         run: cargo hack --feature-powerset check
@@ -114,9 +102,5 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.msrv }}
-      - uses: actions/download-artifact@v3
-        with:
-          name: rust-dist
-          path: rust/astarte-message-hub-proto/src
       - name: cargo +${{ matrix.msrv }} check
         run: cargo check --all-features --package astarte-message-hub-proto

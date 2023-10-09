@@ -16,7 +16,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: commit-codegen
+name: Check code generation
 
 on:
   workflow_call:
@@ -27,27 +27,12 @@ permissions:
 
 jobs:
   commit:
-    name: Commit and push generated code
+    name: Check generated code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
-      - name: Commit the generated code
+      - name: Check the generated code
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add ./python
-          git diff --staged --quiet || git commit -s -m "[Python]: Add generated code"
-          mv ./rust-dist/astarteplatform.msghub.rs ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
-          git add ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
-          git diff --staged --quiet || git commit -s -m "[Rust]: Add generated code"
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          title: Update generated code
-          base: master
-          labels: automated-pr
-          branch: update-code-gen
-          delete-branch: true
-          signoff: true
+          git --no-pager diff --no-index -- ./rust-dist/astarteplatform.msghub.rs ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs

@@ -16,7 +16,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Check main.rs formatting
+name: Rust check builder
 
 on:
   push:
