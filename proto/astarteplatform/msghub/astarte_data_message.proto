@@ -26,6 +26,14 @@ import "google/protobuf/timestamp.proto";
 
 import "astarteplatform/msghub/astarte_type.proto";
 
+/* Astarte Data message used when receiving data or an error from Astarte. */
+message AstarteDataMessage{
+  oneof data_message {
+    AstarteMessage astarte_message = 1; // A message that contains data sent from Astarte.
+    AstarteError astarte_error = 2;     // A message that contains a specific Astarte Message Hub error.
+  }
+}
+
 /* Astarte message to be used when sending data to Astarte. */
 message AstarteMessage{
   string interface_name = 1;               // Name of the interface to send data on.
@@ -39,3 +47,17 @@ message AstarteMessage{
 
 /* Null payload for an `AstarteMessage`. */
 message AstarteUnset{}
+
+/* Astarte Error type */
+message AstarteError{
+  // A list specifying general categories of Astarte Message Hub error.
+  enum ErrorCode{
+    UNKNOWN = 0;              // Unknown error.
+    ASTARTE_INVALID_DATA = 1; // Error occurred when trying to send an invalid data.
+    ASTARTE_SDK_ERROR = 2;    // Error returned by the Astarte SDK.
+    CONVERSION_ERROR = 3;     // Error occurred during conversion between types.
+  }
+
+  ErrorCode error_code = 1;     // Error enum value.
+  string error_description = 2; // Human-readable string describing the error.
+}
