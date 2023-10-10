@@ -21,8 +21,8 @@ _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'astarteplatform.msghub.astarte_type_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _ASTARTEDATATYPEOBJECT_OBJECTDATAENTRY._options = None
-  _ASTARTEDATATYPEOBJECT_OBJECTDATAENTRY._serialized_options = b'8\001'
+  _globals['_ASTARTEDATATYPEOBJECT_OBJECTDATAENTRY']._options = None
+  _globals['_ASTARTEDATATYPEOBJECT_OBJECTDATAENTRY']._serialized_options = b'8\001'
   _globals['_ASTARTEDOUBLEARRAY']._serialized_start=102
   _globals['_ASTARTEDOUBLEARRAY']._serialized_end=138
   _globals['_ASTARTEINTEGERARRAY']._serialized_start=140
