@@ -1,0 +1,12 @@
+# This file is part of Astarte.
+#
+# Copyright 2023 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+[workspace]
+resolver = "2"
+members = [
+    "astarte-message-hub-proto",
+    "rust-codegen"
+]
