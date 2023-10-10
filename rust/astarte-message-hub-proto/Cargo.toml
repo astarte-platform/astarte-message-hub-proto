@@ -11,6 +11,9 @@ edition = "2021"
 rust-version = "1.59.0"
 description ="Astarte message hub protocol buffers for Rust"
 license = "Apache-2.0"
+repository = "https://github.com/astarte-platform/astarte-message-hub-proto"
+homepage = "https://astarte.cloud/"
+documentation = "https://docs.rs/astarte-message-hub-proto"
 
 [dependencies]
 chrono = "0.4.24"
