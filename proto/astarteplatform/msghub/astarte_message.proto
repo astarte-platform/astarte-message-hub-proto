@@ -22,15 +22,21 @@ syntax = "proto3";
 
 package astarteplatform.msghub;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/message_hub_error.proto";
 
-/* Astarte Data message used when receiving data or an error from Astarte. */
-message AstarteDataMessage{
-  oneof data_message {
+/* AstarteMessageResult is a type of message for returning and propagating errors.
+ * It is an enum with the variants, AstarteMessage(message), representing success and
+ * containing a astarte message value, and MessageHubError(E) representing error and
+ * containing an error value.
+ */
+message AstarteMessageResult{
+  oneof result {
     AstarteMessage astarte_message = 1; // A message that contains data sent from Astarte.
-    AstarteError astarte_error = 2;     // A message that contains a specific Astarte Message Hub error.
+    MessageHubError hub_error = 2;     // A message that contains a specific Astarte Message Hub error.
   }
 }
 
@@ -47,17 +53,3 @@ message AstarteMessage{
 
 /* Null payload for an `AstarteMessage`. */
 message AstarteUnset{}
-
-/* Astarte Error type */
-message AstarteError{
-  // A list specifying general categories of Astarte Message Hub error.
-  enum ErrorCode{
-    UNKNOWN = 0;              // Unknown error.
-    ASTARTE_INVALID_DATA = 1; // Error occurred when trying to send an invalid data.
-    ASTARTE_SDK_ERROR = 2;    // Error returned by the Astarte SDK.
-    CONVERSION_ERROR = 3;     // Error occurred during conversion between types.
-  }
-
-  ErrorCode error_code = 1;     // Error enum value.
-  string error_description = 2; // Human-readable string describing the error.
-}
