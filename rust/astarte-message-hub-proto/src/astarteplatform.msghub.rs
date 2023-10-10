@@ -135,6 +135,80 @@ pub mod astarte_data_type {
         AstarteObject(super::AstarteDataTypeObject),
     }
 }
+/// MessageHub error type
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageHubError {
+    /// Error enum value.
+    #[prost(enumeration = "message_hub_error::ErrorCode", tag = "1")]
+    pub error_code: i32,
+    /// Human-readable string describing the error.
+    #[prost(string, tag = "2")]
+    pub error_description: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `MessageHubError`.
+pub mod message_hub_error {
+    /// A list specifying general categories of Astarte Message Hub error.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum ErrorCode {
+        /// Unknown error.
+        Unknown = 0,
+        /// Error occurred when trying to send an invalid data.
+        AstarteInvalidData = 1,
+        /// Error returned by the Astarte SDK.
+        AstarteSdkError = 2,
+        /// Error occurred during conversion between types.
+        ConversionError = 3,
+    }
+    impl ErrorCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ErrorCode::Unknown => "UNKNOWN",
+                ErrorCode::AstarteInvalidData => "ASTARTE_INVALID_DATA",
+                ErrorCode::AstarteSdkError => "ASTARTE_SDK_ERROR",
+                ErrorCode::ConversionError => "CONVERSION_ERROR",
+            }
+        }
+    }
+}
+/// AstarteMessageResult is a type of message for returning and propagating errors.
+/// It is an enum with the variants, AstarteMessage(message), representing success and
+/// containing a astarte message value, and MessageHubError(E) representing error and
+/// containing an error value.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AstarteMessageResult {
+    #[prost(oneof = "astarte_message_result::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<astarte_message_result::Result>,
+}
+/// Nested message and enum types in `AstarteMessageResult`.
+pub mod astarte_message_result {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Result {
+        /// A message that contains data sent from Astarte.
+        #[prost(message, tag = "1")]
+        AstarteMessage(super::AstarteMessage),
+        /// A message that contains a specific Astarte Message Hub error.
+        #[prost(message, tag = "2")]
+        HubError(super::MessageHubError),
+    }
+}
 /// Astarte message to be used when sending data to Astarte.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -180,6 +254,28 @@ pub struct Node {
     /// Array of byte arrays representing all .json interface files of the node.
     #[prost(bytes = "vec", repeated, tag = "2")]
     pub interface_jsons: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+}
+/// MessageHubResult is a type of message for returning and propagating errors.
+/// It is an enum with the variants, Empty(()), representing success and containing an empty value,
+/// and MessageHubError(E) representing error and containing an error value.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageHubResult {
+    #[prost(oneof = "message_hub_result::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<message_hub_result::Result>,
+}
+/// Nested message and enum types in `MessageHubResult`.
+pub mod message_hub_result {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Result {
+        /// A message that contains an empty value for success response.
+        #[prost(message, tag = "1")]
+        EmptyMessage(::pbjson_types::Empty),
+        /// A message that contains a specific Astarte Message Hub error.
+        #[prost(message, tag = "2")]
+        HubError(super::MessageHubError),
+    }
 }
 /// Generated client implementations.
 pub mod message_hub_client {
@@ -256,7 +352,7 @@ pub mod message_hub_client {
             &mut self,
             request: impl tonic::IntoRequest<super::Node>,
         ) -> Result<
-            tonic::Response<tonic::codec::Streaming<super::AstarteMessage>>,
+            tonic::Response<tonic::codec::Streaming<super::AstarteMessageResult>>,
             tonic::Status,
         > {
             self.inner
@@ -278,7 +374,7 @@ pub mod message_hub_client {
         pub async fn send(
             &mut self,
             request: impl tonic::IntoRequest<super::AstarteMessage>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -298,7 +394,7 @@ pub mod message_hub_client {
         pub async fn detach(
             &mut self,
             request: impl tonic::IntoRequest<super::Node>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -325,7 +421,7 @@ pub mod message_hub_server {
     pub trait MessageHub: Send + Sync + 'static {
         ///Server streaming response type for the Attach method.
         type AttachStream: futures_core::Stream<
-                Item = Result<super::AstarteMessage, tonic::Status>,
+                Item = Result<super::AstarteMessageResult, tonic::Status>,
             >
             + Send
             + 'static;
@@ -339,12 +435,12 @@ pub mod message_hub_server {
         async fn send(
             &self,
             request: tonic::Request<super::AstarteMessage>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
         /// This function should be used to detach a node from an instance of the Astarte message hub.
         async fn detach(
             &self,
             request: tonic::Request<super::Node>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct MessageHubServer<T: MessageHub> {
@@ -412,7 +508,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::ServerStreamingService<super::Node>
                     for AttachSvc<T> {
-                        type Response = super::AstarteMessage;
+                        type Response = super::AstarteMessageResult;
                         type ResponseStream = T::AttachStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -450,7 +546,7 @@ pub mod message_hub_server {
                     impl<
                         T: MessageHub,
                     > tonic::server::UnaryService<super::AstarteMessage> for SendSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = super::MessageHubResult;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -486,7 +582,7 @@ pub mod message_hub_server {
                     struct DetachSvc<T: MessageHub>(pub Arc<T>);
                     impl<T: MessageHub> tonic::server::UnaryService<super::Node>
                     for DetachSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = super::MessageHubResult;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
