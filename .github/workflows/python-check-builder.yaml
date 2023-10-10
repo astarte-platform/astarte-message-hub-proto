@@ -16,9 +16,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Python static analysis
+name: Python check builder
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - release-*
+  pull_request:
 
 jobs:
   static:
