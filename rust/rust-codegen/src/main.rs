@@ -57,8 +57,9 @@ fn main() -> color_eyre::Result<()> {
     let proto_files = &[
         proto_dir.join("astarteplatform/msghub/message_hub_service.proto"),
         proto_dir.join("astarteplatform/msghub/node.proto"),
-        proto_dir.join("astarteplatform/msghub/astarte_data_message.proto"),
+        proto_dir.join("astarteplatform/msghub/astarte_message.proto"),
         proto_dir.join("astarteplatform/msghub/astarte_type.proto"),
+        proto_dir.join("astarteplatform/msghub/message_hub_error.proto"),
     ];
 
     // NOTE: This is a temporary workaround to build the documentation on docs.rs, since they are

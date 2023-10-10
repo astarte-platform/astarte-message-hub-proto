@@ -24,17 +24,29 @@ package astarteplatform.msghub;
 
 import "google/protobuf/empty.proto";
 
-import "astarteplatform/msghub/astarte_data_message.proto";
+import "astarteplatform/msghub/astarte_message.proto";
 import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/message_hub_error.proto";
 import "astarteplatform/msghub/node.proto";
 
 service MessageHub {
   /* This function should be used to attach a node to an instance of the Astarte message hub.
    * Returns a data stream from the Astarte message hub.
    */
-  rpc Attach(Node) returns (stream AstarteDataMessage) {}
+  rpc Attach(Node) returns (stream AstarteMessageResult) {}
   /* This function should be used to send an `AstarteMessage` to Astarte. */
-  rpc Send(AstarteMessage) returns (google.protobuf.Empty){}
+  rpc Send(AstarteMessage) returns (MessageHubResult){}
   /* This function should be used to detach a node from an instance of the Astarte message hub. */
-  rpc Detach(Node) returns (google.protobuf.Empty){}
+  rpc Detach(Node) returns (MessageHubResult){}
+}
+
+/* MessageHubResult is a type of message for returning and propagating errors.
+ * It is an enum with the variants, Empty(()), representing success and containing an empty value,
+ * and MessageHubError(E) representing error and containing an error value.
+ */
+message MessageHubResult{
+  oneof result {
+    google.protobuf.Empty empty_message = 1;  // A message that contains an empty value for success response.
+    MessageHubError hub_error = 2;            // A message that contains a specific Astarte Message Hub error.
+  }
 }
