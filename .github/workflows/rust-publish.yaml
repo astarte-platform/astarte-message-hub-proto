@@ -19,7 +19,9 @@
 name: Rust crate publish
 
 on:
-  create:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   publish:
