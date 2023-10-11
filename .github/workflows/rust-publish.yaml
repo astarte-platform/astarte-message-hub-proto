@@ -33,7 +33,7 @@ jobs:
         with:
           toolchain: stable
       - name: Publish astarte-message-hub-proto
-        run: cargo publish --token ${CRATES_TOKEN} -p astarte-message-hub-proto
+        run: cargo publish -p astarte-message-hub-proto
         env:
-          CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }
         working-directory: ./rust
