@@ -55,10 +55,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("grpc_python_plugin")
+    parser.add_argument("--proto_dir", default=python_fld.parent.joinpath("proto"))
+    parser.add_argument("--out_dir", default=python_fld)
     args = parser.parse_args()
 
     run_protoc(
         args.grpc_python_plugin,
-        proto_root_fld=python_fld.parent.joinpath("proto"),
-        out_fld=python_fld,
+        proto_root_fld=Path(args.proto_dir),
+        out_fld=args.out_dir,
     )
