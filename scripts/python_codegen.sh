@@ -1,23 +1,15 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Copyright 2023 SECO Mind Srl
 # SPDX-License-Identifier: Apache-2.0
 
-set -e
+set -eEuo pipefail
 
 codegen () {
     PROTO_DIR=$1
     PROJECT_DIR=$2
     OUT_DIR=$3
     DL_DIR=$4
-
-    PROTOC_MAJOR='24.4'
-    version=$(protoc --version | cut -d ' ' -f 2)
-
-    if [[ $version != "$PROTOC_MAJOR" ]]; then
-        echo "incompatible protoc version $version, expected $PROTOC_MAJOR" >&2
-        exit 1
-    fi
 
     # Remove old code
     if [ -d "$OUT_DIR/astarteplatform" ]; then

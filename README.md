@@ -12,7 +12,7 @@ client that wishes to connect itself to the message hub.
 ## Code generation
 
 This project contains a Makefile that allows you to generate code for all supported languages.
-Currently, the language supported are:
+Currently, the following languages are supported:
 - Rust
 - Python.
 

@@ -6,7 +6,7 @@
 
 # we want bash as shell
 SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
-         else if [ -x /bin/bash ]; then echo /bin/bash; \
+         else if [ -x BASH_PATH="$(command -v bash)" ]; then echo $$BASH_PATH; \
          else echo sh; fi; fi)
 
 # Set O variable if not already done on the command line;
@@ -26,10 +26,6 @@ CANONICAL_O := $(shell mkdir -p $(O) >/dev/null 2>&1)$(realpath $(O))
 
 CANONICAL_CURDIR = $(realpath $(CURDIR))
 
-# This is our default rule, so must come first
-all:
-.PHONY: all
-
 PROTO_DIR = $(CANONICAL_CURDIR)/proto
 RUST_LANG_DIR = $(CANONICAL_CURDIR)/rust
 PYTHON_LANG_DIR = $(CANONICAL_CURDIR)/python
@@ -46,11 +42,17 @@ PYTHON_BUILD_DIR := $(BUILD_DIR)/python
 
 FILES=$(wildcard proto/astarteplatform/msghub/*.proto)
 
+PROTOC_CHECK_SCRIPT=$(CANONICAL_CURDIR)/scripts/protoc_check.sh
+
 RUST_LANG=$(RUST_BUILD_DIR)/astarte-message-hub-proto
-RUST_CODEGEN_SCRIPT=./scripts/rust_codegen.sh
+RUST_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/rust_codegen.sh
 
 PYTHON_LANG=$(PYTHON_BUILD_DIR)/astarteplatform
-PYTHON_CODEGEN_SCRIPT=./scripts/python_codegen.sh
+PYTHON_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/python_codegen.sh
+
+# This is our default rule, so must come first
+.PHONY: all
+all : $(RUST_LANG) $(PYTHON_LANG)
 
 $(RUST_LANG): $(FILES) $(RUST_CODEGEN_SCRIPT)
 		mkdir -p $(RUST_BUILD_DIR)
@@ -60,13 +62,15 @@ $(PYTHON_LANG): $(FILES) $(PYTHON_CODEGEN_SCRIPT)
 		mkdir -p $(PYTHON_BUILD_DIR)
 		$(PYTHON_CODEGEN_SCRIPT) codegen $(PROTO_DIR) $(PYTHON_LANG_DIR) $(PYTHON_BUILD_DIR) $(DL_DIR)
 
+.PHONY: protoc-check
+protoc-check: $(PROTOC_CHECK_SCRIPT)
+		$(PROTOC_CHECK_SCRIPT)
+
 .PHONY: rust
-rust: $(RUST_LANG)
+rust: protoc-check $(RUST_LANG)
 
 .PHONY: python
-python: $(PYTHON_LANG)
-
-all : $(RUST_LANG) $(PYTHON_LANG)
+python: protoc-check $(PYTHON_LANG)
 
 .PHONY: rust-install
 rust-install: $(RUST_LANG)
@@ -97,7 +101,7 @@ help:
 		@echo '  clean                  - delete all files created by build'
 		@echo
 		@echo 'Build:'
-		@echo '  all                    - make world'
+		@echo '  all                    - Build everything and generate the code for the various languages'
 		@echo '  install                - Install files into repo folder'
 		@echo
 		@echo 'Language-specific:'
