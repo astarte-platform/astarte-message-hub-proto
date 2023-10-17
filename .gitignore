@@ -12,8 +12,11 @@ __pycache__/
 # Python virtual environments
 .venv/
 
-#Rust dist directory
+# Rust dist directory
 target/
 
+# JetBrains IDE directory
 .idea/
 
+# Codegen output directory
+output/
