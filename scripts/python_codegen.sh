@@ -40,7 +40,7 @@ install_code (){
       INSTALL_DIR=$2
 
       install -d "$INSTALL_DIR"/astarteplatform/msghub
-      install "$OUT_DIR"/astarteplatform/msghub/* "$INSTALL_DIR"/astarteplatform/msghub
+      install -m 644 "$OUT_DIR"/astarteplatform/msghub/* "$INSTALL_DIR"/astarteplatform/msghub
 }
 
 if [ "$1" = "codegen" ]; then
