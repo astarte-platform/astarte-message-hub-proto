@@ -3,6 +3,7 @@
 import grpc
 
 from astarteplatform.msghub import astarte_message_pb2 as astarteplatform_dot_msghub_dot_astarte__message__pb2
+from astarteplatform.msghub import interface_pb2 as astarteplatform_dot_msghub_dot_interface__pb2
 from astarteplatform.msghub import message_hub_service_pb2 as astarteplatform_dot_msghub_dot_message__hub__service__pb2
 from astarteplatform.msghub import node_pb2 as astarteplatform_dot_msghub_dot_node__pb2
 
@@ -29,6 +30,16 @@ class MessageHubStub(object):
         self.Detach = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/Detach',
                 request_serializer=astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
+                response_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
+                )
+        self.AddInterface = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/AddInterface',
+                request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.SerializeToString,
+                response_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
+                )
+        self.RemoveInterface = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/RemoveInterface',
+                request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.SerializeToString,
                 response_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
                 )
 
@@ -58,6 +69,20 @@ class MessageHubServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddInterface(self, request, context):
+        """This function should be used to add an interface to an instance of the Astarte message hub. 
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RemoveInterface(self, request, context):
+        """This function should be used to remove an interface from an instance of the Astarte message hub. 
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MessageHubServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -74,6 +99,16 @@ def add_MessageHubServicer_to_server(servicer, server):
             'Detach': grpc.unary_unary_rpc_method_handler(
                     servicer.Detach,
                     request_deserializer=astarteplatform_dot_msghub_dot_node__pb2.Node.FromString,
+                    response_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.SerializeToString,
+            ),
+            'AddInterface': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddInterface,
+                    request_deserializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.FromString,
+                    response_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.SerializeToString,
+            ),
+            'RemoveInterface': grpc.unary_unary_rpc_method_handler(
+                    servicer.RemoveInterface,
+                    request_deserializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.FromString,
                     response_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.SerializeToString,
             ),
     }
@@ -133,6 +168,40 @@ class MessageHub(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/Detach',
             astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
+            astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddInterface(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/AddInterface',
+            astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.SerializeToString,
+            astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RemoveInterface(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/RemoveInterface',
+            astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.SerializeToString,
             astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

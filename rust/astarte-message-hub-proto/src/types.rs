@@ -98,10 +98,6 @@ impl_array_type_conversion_traits!({
     (Vec<Vec<u8>>, AstarteBinaryBlobArray),
 });
 
-/// This struct can be used to store the content of a `.json` file.
-#[derive(Clone)]
-pub struct InterfaceJson(pub Vec<u8>);
-
 impl From<DateTime<Utc>> for proto_message_hub::AstarteDataTypeIndividual {
     fn from(value: DateTime<Utc>) -> Self {
         use proto_message_hub::astarte_data_type_individual::IndividualData;
