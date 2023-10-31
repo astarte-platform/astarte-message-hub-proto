@@ -26,6 +26,7 @@ import "google/protobuf/empty.proto";
 
 import "astarteplatform/msghub/astarte_message.proto";
 import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/interface.proto";
 import "astarteplatform/msghub/message_hub_error.proto";
 import "astarteplatform/msghub/node.proto";
 
@@ -38,6 +39,10 @@ service MessageHub {
   rpc Send(AstarteMessage) returns (MessageHubResult){}
   /* This function should be used to detach a node from an instance of the Astarte message hub. */
   rpc Detach(Node) returns (MessageHubResult){}
+  /* This function should be used to add an interface to an instance of the Astarte message hub. */
+  rpc AddInterface(InterfaceJson) returns (MessageHubResult){}
+  /* This function should be used to remove an interface from an instance of the Astarte message hub. */
+  rpc RemoveInterface(InterfaceJson) returns (MessageHubResult){}
 }
 
 /* MessageHubResult is a type of message for returning and propagating errors.
