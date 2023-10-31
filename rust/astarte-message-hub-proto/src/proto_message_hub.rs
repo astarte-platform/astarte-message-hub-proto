@@ -220,7 +220,9 @@ impl Node {
             uuid: uuid.to_string(),
             interface_jsons: interface_jsons
                 .iter()
-                .map(|json| json.clone().into())
+                .map(|json| InterfaceJson {
+                    interface_json: json.clone().into(),
+                })
                 .collect(),
         }
     }
@@ -365,7 +367,7 @@ mod test {
         assert_eq!(node.interface_jsons.len(), 2);
 
         for (interface, &expected) in node.interface_jsons.iter().zip(interface_jsons.iter()) {
-            assert_eq!(interface, expected.as_bytes());
+            assert_eq!(interface.interface_json, expected.as_bytes());
         }
     }
 }
