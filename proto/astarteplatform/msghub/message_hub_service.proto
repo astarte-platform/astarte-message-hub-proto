@@ -43,6 +43,10 @@ service MessageHub {
   rpc AddInterface(InterfaceJson) returns (MessageHubResult){}
   /* This function should be used to remove an interface from an instance of the Astarte message hub. */
   rpc RemoveInterface(InterfaceJson) returns (MessageHubResult){}
+  /* This function should be used to send an ack signal to an instance of the Astarte message hub
+  *  to notify that the message was received by a node.
+  */
+  rpc SendAck(AstarteAckMessage) returns (MessageHubResult){}
 }
 
 /* MessageHubResult is a type of message for returning and propagating errors.
@@ -54,4 +58,9 @@ message MessageHubResult{
     google.protobuf.Empty empty_message = 1;  // A message that contains an empty value for success response.
     MessageHubError hub_error = 2;            // A message that contains a specific Astarte Message Hub error.
   }
+}
+
+/* `AstarteAckMessage` to be used to notify to Message Hub that the message was received. */
+message AstarteAckMessage{
+  uint64 id = 1;                              // Astarte message identifier.
 }

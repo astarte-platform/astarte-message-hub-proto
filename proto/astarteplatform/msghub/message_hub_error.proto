@@ -30,6 +30,8 @@ message MessageHubError{
     ASTARTE_INVALID_DATA = 1; // Error occurred when trying to send an invalid data.
     ASTARTE_SDK_ERROR = 2;    // Error returned by the Astarte SDK.
     CONVERSION_ERROR = 3;     // Error occurred during conversion between types.
+    ACK_ID_UNKNOWN = 4;       // Error occurred when declared on `AstarteAckMessage` a message id unknown.
+    ACK_ID_NOT_VALID = 5;     // Error occurred when declared on `AstarteAckMessage` a message id not valid.
   }
 
   ErrorCode error_code = 1;     // Error enum value.
