@@ -17,3 +17,9 @@ class MessageHubResult(_message.Message):
     empty_message: _empty_pb2.Empty
     hub_error: _message_hub_error_pb2.MessageHubError
     def __init__(self, empty_message: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., hub_error: _Optional[_Union[_message_hub_error_pb2.MessageHubError, _Mapping]] = ...) -> None: ...
+
+class AstarteAckMessage(_message.Message):
+    __slots__ = ["id"]
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: int
+    def __init__(self, id: _Optional[int] = ...) -> None: ...

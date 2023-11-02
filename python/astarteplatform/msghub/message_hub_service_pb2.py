@@ -19,7 +19,7 @@ from astarteplatform.msghub import message_hub_error_pb2 as astarteplatform_dot_
 from astarteplatform.msghub import node_pb2 as astarteplatform_dot_msghub_dot_node__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0astarteplatform/msghub/message_hub_service.proto\x12\x16\x61starteplatform.msghub\x1a\x1bgoogle/protobuf/empty.proto\x1a,astarteplatform/msghub/astarte_message.proto\x1a)astarteplatform/msghub/astarte_type.proto\x1a&astarteplatform/msghub/interface.proto\x1a.astarteplatform/msghub/message_hub_error.proto\x1a!astarteplatform/msghub/node.proto\"\x8b\x01\n\x10MessageHubResult\x12/\n\rempty_message\x18\x01 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12<\n\thub_error\x18\x02 \x01(\x0b\x32\'.astarteplatform.msghub.MessageHubErrorH\x00\x42\x08\n\x06result2\xdf\x03\n\nMessageHub\x12X\n\x06\x41ttach\x12\x1c.astarteplatform.msghub.Node\x1a,.astarteplatform.msghub.AstarteMessageResult\"\x00\x30\x01\x12Z\n\x04Send\x12&.astarteplatform.msghub.AstarteMessage\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12R\n\x06\x44\x65tach\x12\x1c.astarteplatform.msghub.Node\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12\x61\n\x0c\x41\x64\x64Interface\x12%.astarteplatform.msghub.InterfaceJson\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12\x64\n\x0fRemoveInterface\x12%.astarteplatform.msghub.InterfaceJson\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0astarteplatform/msghub/message_hub_service.proto\x12\x16\x61starteplatform.msghub\x1a\x1bgoogle/protobuf/empty.proto\x1a,astarteplatform/msghub/astarte_message.proto\x1a)astarteplatform/msghub/astarte_type.proto\x1a&astarteplatform/msghub/interface.proto\x1a.astarteplatform/msghub/message_hub_error.proto\x1a!astarteplatform/msghub/node.proto\"\x8b\x01\n\x10MessageHubResult\x12/\n\rempty_message\x18\x01 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12<\n\thub_error\x18\x02 \x01(\x0b\x32\'.astarteplatform.msghub.MessageHubErrorH\x00\x42\x08\n\x06result\"\x1f\n\x11\x41starteAckMessage\x12\n\n\x02id\x18\x01 \x01(\x04\x32\xc1\x04\n\nMessageHub\x12X\n\x06\x41ttach\x12\x1c.astarteplatform.msghub.Node\x1a,.astarteplatform.msghub.AstarteMessageResult\"\x00\x30\x01\x12Z\n\x04Send\x12&.astarteplatform.msghub.AstarteMessage\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12R\n\x06\x44\x65tach\x12\x1c.astarteplatform.msghub.Node\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12\x61\n\x0c\x41\x64\x64Interface\x12%.astarteplatform.msghub.InterfaceJson\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12\x64\n\x0fRemoveInterface\x12%.astarteplatform.msghub.InterfaceJson\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x12`\n\x07SendAck\x12).astarteplatform.msghub.AstarteAckMessage\x1a(.astarteplatform.msghub.MessageHubResult\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -28,6 +28,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_MESSAGEHUBRESULT']._serialized_start=318
   _globals['_MESSAGEHUBRESULT']._serialized_end=457
-  _globals['_MESSAGEHUB']._serialized_start=460
-  _globals['_MESSAGEHUB']._serialized_end=939
+  _globals['_ASTARTEACKMESSAGE']._serialized_start=459
+  _globals['_ASTARTEACKMESSAGE']._serialized_end=490
+  _globals['_MESSAGEHUB']._serialized_start=493
+  _globals['_MESSAGEHUB']._serialized_end=1070
 # @@protoc_insertion_point(module_scope)

@@ -42,6 +42,11 @@ class MessageHubStub(object):
                 request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.SerializeToString,
                 response_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
                 )
+        self.SendAck = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/SendAck',
+                request_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.AstarteAckMessage.SerializeToString,
+                response_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
+                )
 
 
 class MessageHubServicer(object):
@@ -83,6 +88,14 @@ class MessageHubServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SendAck(self, request, context):
+        """This function should be used to send an ack signal to an instance of the Astarte message hub
+        to notify that the message was received by a node.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MessageHubServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -109,6 +122,11 @@ def add_MessageHubServicer_to_server(servicer, server):
             'RemoveInterface': grpc.unary_unary_rpc_method_handler(
                     servicer.RemoveInterface,
                     request_deserializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.FromString,
+                    response_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.SerializeToString,
+            ),
+            'SendAck': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendAck,
+                    request_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.AstarteAckMessage.FromString,
                     response_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.SerializeToString,
             ),
     }
@@ -202,6 +220,23 @@ class MessageHub(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/RemoveInterface',
             astarteplatform_dot_msghub_dot_interface__pb2.InterfaceJson.SerializeToString,
+            astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendAck(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/SendAck',
+            astarteplatform_dot_msghub_dot_message__hub__service__pb2.AstarteAckMessage.SerializeToString,
             astarteplatform_dot_msghub_dot_message__hub__service__pb2.MessageHubResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -17,7 +17,7 @@ from astarteplatform.msghub import astarte_type_pb2 as astarteplatform_dot_msghu
 from astarteplatform.msghub import message_hub_error_pb2 as astarteplatform_dot_msghub_dot_message__hub__error__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,astarteplatform/msghub/astarte_message.proto\x12\x16\x61starteplatform.msghub\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)astarteplatform/msghub/astarte_type.proto\x1a.astarteplatform/msghub/message_hub_error.proto\"\xa1\x01\n\x14\x41starteMessageResult\x12\x41\n\x0f\x61starte_message\x18\x01 \x01(\x0b\x32&.astarteplatform.msghub.AstarteMessageH\x00\x12<\n\thub_error\x18\x02 \x01(\x0b\x32\'.astarteplatform.msghub.MessageHubErrorH\x00\x42\x08\n\x06result\"\xf0\x01\n\x0e\x41starteMessage\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12?\n\x0c\x61starte_data\x18\x03 \x01(\x0b\x32\'.astarteplatform.msghub.AstarteDataTypeH\x00\x12=\n\rastarte_unset\x18\x04 \x01(\x0b\x32$.astarteplatform.msghub.AstarteUnsetH\x00\x12-\n\ttimestamp\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\t\n\x07payload\"\x0e\n\x0c\x41starteUnsetb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,astarteplatform/msghub/astarte_message.proto\x12\x16\x61starteplatform.msghub\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)astarteplatform/msghub/astarte_type.proto\x1a.astarteplatform/msghub/message_hub_error.proto\"\xa1\x01\n\x14\x41starteMessageResult\x12\x41\n\x0f\x61starte_message\x18\x01 \x01(\x0b\x32&.astarteplatform.msghub.AstarteMessageH\x00\x12<\n\thub_error\x18\x02 \x01(\x0b\x32\'.astarteplatform.msghub.MessageHubErrorH\x00\x42\x08\n\x06result\"\x84\x02\n\x0e\x41starteMessage\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12?\n\x0c\x61starte_data\x18\x03 \x01(\x0b\x32\'.astarteplatform.msghub.AstarteDataTypeH\x00\x12=\n\rastarte_unset\x18\x04 \x01(\x0b\x32$.astarteplatform.msghub.AstarteUnsetH\x00\x12-\n\ttimestamp\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nmessage_id\x18\x06 \x01(\x04\x42\t\n\x07payload\"\x0e\n\x0c\x41starteUnsetb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -27,7 +27,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_ASTARTEMESSAGERESULT']._serialized_start=226
   _globals['_ASTARTEMESSAGERESULT']._serialized_end=387
   _globals['_ASTARTEMESSAGE']._serialized_start=390
-  _globals['_ASTARTEMESSAGE']._serialized_end=630
-  _globals['_ASTARTEUNSET']._serialized_start=632
-  _globals['_ASTARTEUNSET']._serialized_end=646
+  _globals['_ASTARTEMESSAGE']._serialized_end=650
+  _globals['_ASTARTEUNSET']._serialized_start=652
+  _globals['_ASTARTEUNSET']._serialized_end=666
 # @@protoc_insertion_point(module_scope)

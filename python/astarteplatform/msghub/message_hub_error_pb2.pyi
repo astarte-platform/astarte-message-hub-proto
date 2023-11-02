@@ -13,10 +13,14 @@ class MessageHubError(_message.Message):
         ASTARTE_INVALID_DATA: _ClassVar[MessageHubError.ErrorCode]
         ASTARTE_SDK_ERROR: _ClassVar[MessageHubError.ErrorCode]
         CONVERSION_ERROR: _ClassVar[MessageHubError.ErrorCode]
+        ACK_ID_UNKNOWN: _ClassVar[MessageHubError.ErrorCode]
+        ACK_ID_NOT_VALID: _ClassVar[MessageHubError.ErrorCode]
     UNKNOWN: MessageHubError.ErrorCode
     ASTARTE_INVALID_DATA: MessageHubError.ErrorCode
     ASTARTE_SDK_ERROR: MessageHubError.ErrorCode
     CONVERSION_ERROR: MessageHubError.ErrorCode
+    ACK_ID_UNKNOWN: MessageHubError.ErrorCode
+    ACK_ID_NOT_VALID: MessageHubError.ErrorCode
     ERROR_CODE_FIELD_NUMBER: _ClassVar[int]
     ERROR_DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     error_code: MessageHubError.ErrorCode
