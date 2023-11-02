@@ -135,6 +135,86 @@ pub mod astarte_data_type {
         AstarteObject(super::AstarteDataTypeObject),
     }
 }
+/// MessageHub error type
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageHubError {
+    /// Error enum value.
+    #[prost(enumeration = "message_hub_error::ErrorCode", tag = "1")]
+    pub error_code: i32,
+    /// Human-readable string describing the error.
+    #[prost(string, tag = "2")]
+    pub error_description: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `MessageHubError`.
+pub mod message_hub_error {
+    /// A list specifying general categories of Astarte Message Hub error.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum ErrorCode {
+        /// Unknown error.
+        Unknown = 0,
+        /// Error occurred when trying to send an invalid data.
+        AstarteInvalidData = 1,
+        /// Error returned by the Astarte SDK.
+        AstarteSdkError = 2,
+        /// Error occurred during conversion between types.
+        ConversionError = 3,
+        /// Error occurred when declared on `AstarteAckMessage` a message id unknown.
+        AckIdUnknown = 4,
+        /// Error occurred when declared on `AstarteAckMessage` a message id not valid.
+        AckIdNotValid = 5,
+    }
+    impl ErrorCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ErrorCode::Unknown => "UNKNOWN",
+                ErrorCode::AstarteInvalidData => "ASTARTE_INVALID_DATA",
+                ErrorCode::AstarteSdkError => "ASTARTE_SDK_ERROR",
+                ErrorCode::ConversionError => "CONVERSION_ERROR",
+                ErrorCode::AckIdUnknown => "ACK_ID_UNKNOWN",
+                ErrorCode::AckIdNotValid => "ACK_ID_NOT_VALID",
+            }
+        }
+    }
+}
+/// AstarteMessageResult is a type of message for returning and propagating errors.
+/// It is an enum with the variants, AstarteMessage(message), representing success and
+/// containing a astarte message value, and MessageHubError(E) representing error and
+/// containing an error value.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AstarteMessageResult {
+    #[prost(oneof = "astarte_message_result::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<astarte_message_result::Result>,
+}
+/// Nested message and enum types in `AstarteMessageResult`.
+pub mod astarte_message_result {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Result {
+        /// A message that contains data sent from Astarte.
+        #[prost(message, tag = "1")]
+        AstarteMessage(super::AstarteMessage),
+        /// A message that contains a specific Astarte Message Hub error.
+        #[prost(message, tag = "2")]
+        HubError(super::MessageHubError),
+    }
+}
 /// Astarte message to be used when sending data to Astarte.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -148,6 +228,9 @@ pub struct AstarteMessage {
     /// Explicit timestamp for the message transmission.
     #[prost(message, optional, tag = "5")]
     pub timestamp: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// Astarte message identifier.
+    #[prost(uint64, tag = "6")]
+    pub message_id: u64,
     /// Content of the message.
     #[prost(oneof = "astarte_message::Payload", tags = "3, 4")]
     pub payload: ::core::option::Option<astarte_message::Payload>,
@@ -170,6 +253,14 @@ pub mod astarte_message {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstarteUnset {}
+/// This message defines a json interface to be added/removed to the Astarte message hub.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfaceJson {
+    ///   A byte array representing a json interface.
+    #[prost(bytes = "vec", tag = "1")]
+    pub interface_json: ::prost::alloc::vec::Vec<u8>,
+}
 /// This message defines a node to be attached/detached to the Astarte message hub.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -177,9 +268,39 @@ pub struct Node {
     /// The node identifier.
     #[prost(string, tag = "1")]
     pub uuid: ::prost::alloc::string::String,
-    /// Array of byte arrays representing all .json interface files of the node.
-    #[prost(bytes = "vec", repeated, tag = "2")]
-    pub interface_jsons: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+    /// Array of InterfaceJson representing all .json interface files of the node.
+    #[prost(message, repeated, tag = "2")]
+    pub interface_jsons: ::prost::alloc::vec::Vec<InterfaceJson>,
+}
+/// MessageHubResult is a type of message for returning and propagating errors.
+/// It is an enum with the variants, Empty(()), representing success and containing an empty value,
+/// and MessageHubError(E) representing error and containing an error value.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageHubResult {
+    #[prost(oneof = "message_hub_result::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<message_hub_result::Result>,
+}
+/// Nested message and enum types in `MessageHubResult`.
+pub mod message_hub_result {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Result {
+        /// A message that contains an empty value for success response.
+        #[prost(message, tag = "1")]
+        EmptyMessage(::pbjson_types::Empty),
+        /// A message that contains a specific Astarte Message Hub error.
+        #[prost(message, tag = "2")]
+        HubError(super::MessageHubError),
+    }
+}
+/// `AstarteAckMessage` to be used to notify to Message Hub that the message was received.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AstarteAckMessage {
+    /// Astarte message identifier.
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
 }
 /// Generated client implementations.
 pub mod message_hub_client {
@@ -256,7 +377,7 @@ pub mod message_hub_client {
             &mut self,
             request: impl tonic::IntoRequest<super::Node>,
         ) -> Result<
-            tonic::Response<tonic::codec::Streaming<super::AstarteMessage>>,
+            tonic::Response<tonic::codec::Streaming<super::AstarteMessageResult>>,
             tonic::Status,
         > {
             self.inner
@@ -278,7 +399,7 @@ pub mod message_hub_client {
         pub async fn send(
             &mut self,
             request: impl tonic::IntoRequest<super::AstarteMessage>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -298,7 +419,7 @@ pub mod message_hub_client {
         pub async fn detach(
             &mut self,
             request: impl tonic::IntoRequest<super::Node>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -314,6 +435,67 @@ pub mod message_hub_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        /// This function should be used to add an interface to an instance of the Astarte message hub.
+        pub async fn add_interface(
+            &mut self,
+            request: impl tonic::IntoRequest<super::InterfaceJson>,
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/AddInterface",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        /// This function should be used to remove an interface from an instance of the Astarte message hub.
+        pub async fn remove_interface(
+            &mut self,
+            request: impl tonic::IntoRequest<super::InterfaceJson>,
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/RemoveInterface",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        /// This function should be used to send an ack signal to an instance of the Astarte message hub
+        ///  to notify that the message was received by a node.
+        pub async fn send_ack(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AstarteAckMessage>,
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/SendAck",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -325,7 +507,7 @@ pub mod message_hub_server {
     pub trait MessageHub: Send + Sync + 'static {
         ///Server streaming response type for the Attach method.
         type AttachStream: futures_core::Stream<
-                Item = Result<super::AstarteMessage, tonic::Status>,
+                Item = Result<super::AstarteMessageResult, tonic::Status>,
             >
             + Send
             + 'static;
@@ -339,12 +521,28 @@ pub mod message_hub_server {
         async fn send(
             &self,
             request: tonic::Request<super::AstarteMessage>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
         /// This function should be used to detach a node from an instance of the Astarte message hub.
         async fn detach(
             &self,
             request: tonic::Request<super::Node>,
-        ) -> Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
+        /// This function should be used to add an interface to an instance of the Astarte message hub.
+        async fn add_interface(
+            &self,
+            request: tonic::Request<super::InterfaceJson>,
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
+        /// This function should be used to remove an interface from an instance of the Astarte message hub.
+        async fn remove_interface(
+            &self,
+            request: tonic::Request<super::InterfaceJson>,
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
+        /// This function should be used to send an ack signal to an instance of the Astarte message hub
+        ///  to notify that the message was received by a node.
+        async fn send_ack(
+            &self,
+            request: tonic::Request<super::AstarteAckMessage>,
+        ) -> Result<tonic::Response<super::MessageHubResult>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct MessageHubServer<T: MessageHub> {
@@ -412,7 +610,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::ServerStreamingService<super::Node>
                     for AttachSvc<T> {
-                        type Response = super::AstarteMessage;
+                        type Response = super::AstarteMessageResult;
                         type ResponseStream = T::AttachStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -450,7 +648,7 @@ pub mod message_hub_server {
                     impl<
                         T: MessageHub,
                     > tonic::server::UnaryService<super::AstarteMessage> for SendSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = super::MessageHubResult;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -486,7 +684,7 @@ pub mod message_hub_server {
                     struct DetachSvc<T: MessageHub>(pub Arc<T>);
                     impl<T: MessageHub> tonic::server::UnaryService<super::Node>
                     for DetachSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = super::MessageHubResult;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -506,6 +704,120 @@ pub mod message_hub_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = DetachSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/AddInterface" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddInterfaceSvc<T: MessageHub>(pub Arc<T>);
+                    impl<T: MessageHub> tonic::server::UnaryService<super::InterfaceJson>
+                    for AddInterfaceSvc<T> {
+                        type Response = super::MessageHubResult;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::InterfaceJson>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).add_interface(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AddInterfaceSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/RemoveInterface" => {
+                    #[allow(non_camel_case_types)]
+                    struct RemoveInterfaceSvc<T: MessageHub>(pub Arc<T>);
+                    impl<T: MessageHub> tonic::server::UnaryService<super::InterfaceJson>
+                    for RemoveInterfaceSvc<T> {
+                        type Response = super::MessageHubResult;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::InterfaceJson>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).remove_interface(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RemoveInterfaceSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/SendAck" => {
+                    #[allow(non_camel_case_types)]
+                    struct SendAckSvc<T: MessageHub>(pub Arc<T>);
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<super::AstarteAckMessage>
+                    for SendAckSvc<T> {
+                        type Response = super::MessageHubResult;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::AstarteAckMessage>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).send_ack(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SendAckSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
