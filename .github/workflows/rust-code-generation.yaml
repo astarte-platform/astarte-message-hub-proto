@@ -41,7 +41,7 @@ jobs:
     - name: Install rust toolchain
       uses: dtolnay/rust-toolchain@master
       with:
-        toolchain: 1.59
+        toolchain: 1.66.1
         components: clippy
     - name: Remove Rust old code
       run: (! test -f ./astarte-message-hub-proto/src/astarteplatform.msghub.rs) || rm ./astarte-message-hub-proto/src/astarteplatform.msghub.rs
