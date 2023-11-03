@@ -10,3 +10,16 @@ members = [
     "astarte-message-hub-proto",
     "rust-codegen"
 ]
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+rust-version = "1.66.1"
+
+[workspace.dependencies]
+clap = "=4.3.24"
+color-eyre = "0.6.2"
+pbjson-types = "0.6.0"
+prost = "0.12.1"
+tonic = "0.10.2"
+tonic-build = "0.10.2"
