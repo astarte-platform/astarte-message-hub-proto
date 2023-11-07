@@ -7,18 +7,18 @@
 [package]
 name = "astarte-message-hub-proto"
 version = "0.5.1"
-edition = "2021"
-rust-version = "1.59.0"
+edition = { workspace = true }
+rust-version = { workspace = true }
 description ="Astarte message hub protocol buffers for Rust"
-license = "Apache-2.0"
+license = { workspace = true }
 repository = "https://github.com/astarte-platform/astarte-message-hub-proto"
 homepage = "https://astarte.cloud/"
 documentation = "https://docs.rs/astarte-message-hub-proto"
 
 [dependencies]
 chrono = "0.4.24"
-pbjson-types = "=0.5.1"
-prost = "=0.11.3"
+pbjson-types = { workspace = true }
+prost = { workspace = true }
 thiserror = "1.0"
-tonic = "=0.8.2"
+tonic = { workspace = true }
 uuid = { version = "1.4.1", features = ["v4"] }
