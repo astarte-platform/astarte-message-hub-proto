@@ -19,7 +19,6 @@
  */
 #![doc = include_str!("../README.md")]
 
-pub mod error;
 mod proto_message_hub;
 pub mod types;
 pub use crate::proto_message_hub::*;
