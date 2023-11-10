@@ -22,3 +22,9 @@ prost = { workspace = true }
 thiserror = "1.0"
 tonic = { workspace = true }
 uuid = { version = "1.4.1", features = ["v4"] }
+
+[dev-dependencies]
+clap = { workspace = true , features = ["derive"] }
+env_logger = "0.10.0"
+log = "0.4.20"
+tokio = {version = "1.33.0", features = ["rt-multi-thread", "macros"]}

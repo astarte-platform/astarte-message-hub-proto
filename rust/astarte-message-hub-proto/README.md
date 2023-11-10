@@ -47,23 +47,30 @@ struct Cli {
     time: u64,
 }
 
-#[tokio::main]
-async fn main() {
+async fn run_example_client() {
     env_logger::init();
     let args = Cli::parse();
 
     let mut client = MessageHubClient::connect("http://[::1]:50051")
         .await
         .unwrap();
+    
+    let device_datastream_interface: &str = r#"{
+        "interface_name": "org.astarte-platform.rust.examples.datastream.DeviceDatastream",
+        "version_major": 0,
+        "version_minor": 1,
+        "type": "datastream",
+        "ownership": "device",
+        "mappings": [
+            {
+                "endpoint": "/uptime",
+                "type": "string",
+                "explicit_timestamp": true
+            }
+        ]
+    }"#;
 
-    let interface_jsons = [
-        include_str!(
-            "./interfaces/org.astarte-platform.rust.examples.datastream.DeviceDatastream.json"
-        ),
-        include_str!(
-            "./interfaces/org.astarte-platform.rust.examples.datastream.ServerDatastream.json"
-        ),
-    ];
+    let interface_jsons = [device_datastream_interface];
 
     let node = Node::new(&args.uuid, &interface_jsons);
 
