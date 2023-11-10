@@ -63,6 +63,16 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --manifest-path rust/astarte-message-hub-proto/Cargo.toml  --all-targets --all-features -- -D warnings
 
+  test:
+    runs-on: ubuntu-latest
+    name: test / stable
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: cargo test
+        run: cargo test --all-features --package astarte-message-hub-proto
+
   doc:
     runs-on: ubuntu-latest
     name: nightly / doc
