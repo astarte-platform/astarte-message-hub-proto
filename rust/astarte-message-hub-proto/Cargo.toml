@@ -21,7 +21,7 @@ pbjson-types = { workspace = true }
 prost = { workspace = true }
 thiserror = "1.0"
 tonic = { workspace = true }
-uuid = { version = "1.4.1", features = ["v4"] }
+uuid = { version = "1.5.0", features = ["v4"] }
 
 [dev-dependencies]
 clap = { workspace = true , features = ["derive"] }
