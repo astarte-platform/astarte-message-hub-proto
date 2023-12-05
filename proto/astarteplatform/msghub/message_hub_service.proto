@@ -34,8 +34,8 @@ service MessageHub {
    * Returns a data stream from the Astarte message hub.
    */
   rpc Attach(Node) returns (stream AstarteMessageResult) {}
-  /* This function should be used to send an `AstarteMessage` to Astarte. */
-  rpc Send(AstarteMessage) returns (MessageHubResult){}
+  /* This function should be used to send a `NodeMessage` to Astarte. */
+  rpc Send(NodeMessage) returns (MessageHubResult){}
   /* This function should be used to detach a node from an instance of the Astarte message hub. */
   rpc Detach(Node) returns (MessageHubResult){}
 }
