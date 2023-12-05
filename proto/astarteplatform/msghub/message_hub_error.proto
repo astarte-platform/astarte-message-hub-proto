@@ -1,7 +1,7 @@
 /*
  * This file is part of Astarte.
  *
- * Copyright 2022 SECO Mind Srl
+ * Copyright 2023 SECO Mind Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,16 @@ syntax = "proto3";
 
 package astarteplatform.msghub;
 
-import "astarteplatform/msghub/astarte_message.proto";
+/* MessageHub error type */
+message MessageHubError{
+  // A list specifying general categories of Astarte Message Hub error.
+  enum ErrorCode{
+    UNKNOWN = 0;              // Unknown error.
+    ASTARTE_INVALID_DATA = 1; // Error occurred when trying to send an invalid data.
+    ASTARTE_SDK_ERROR = 2;    // Error returned by the Astarte SDK.
+    CONVERSION_ERROR = 3;     // Error occurred during conversion between types.
+  }
 
-/* This message defines a node to be attached/detached to the Astarte message hub. */
-message Node {
-  string uuid = 1;                    // The node identifier.
-  repeated bytes interface_jsons = 2; // Array of byte arrays representing all .json interface files of the node.
-}
-
-/* This message defines a node message to be sent to the Astarte message hub. */
-message NodeMessage {
-  string uuid = 1;                    // The node identifier.
-  AstarteMessage astarte_message = 2; // A message that contains data to send to Astarte.
+  ErrorCode error_code = 1;     // Error enum value.
+  string error_description = 2; // Human-readable string describing the error.
 }

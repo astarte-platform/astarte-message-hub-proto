@@ -27,7 +27,7 @@ use clap::Parser;
 
 use astarte_message_hub_proto::astarte_message::Payload;
 use astarte_message_hub_proto::message_hub_client::MessageHubClient;
-use astarte_message_hub_proto::AstarteMessage;
+use astarte_message_hub_proto::{AstarteMessage, NodeMessage};
 use astarte_message_hub_proto::Node;
 use log::info;
 
@@ -110,7 +110,13 @@ async fn run_example_client() {
                 timestamp: None,
                 payload: Some(Payload::AstarteData(elapsed_str.into())),
             };
-            client.send(msg).await.unwrap();
+            
+            let node_msg = NodeMessage {
+                uuid: args.uuid.clone(),
+                astarte_message: Some(msg)
+            };
+            
+            client.send(node_msg).await.unwrap();
 
             count += 1;
         }

@@ -22,9 +22,23 @@ syntax = "proto3";
 
 package astarteplatform.msghub;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/message_hub_error.proto";
+
+/* AstarteMessageResult is a type of message for returning and propagating errors.
+ * It is an enum with the variants, AstarteMessage(message), representing success and
+ * containing a astarte message value, and MessageHubError(E) representing error and
+ * containing an error value.
+ */
+message AstarteMessageResult{
+  oneof result {
+    AstarteMessage astarte_message = 1; // A message that contains data sent from Astarte.
+    MessageHubError hub_error = 2;     // A message that contains a specific Astarte Message Hub error.
+  }
+}
 
 /* Astarte message to be used when sending data to Astarte. */
 message AstarteMessage{
