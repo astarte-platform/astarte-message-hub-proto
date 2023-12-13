@@ -16,7 +16,7 @@ This module provides access to the Astarte message hub protocol buffers through 
 ## Requirements
 
 - protobuf >= 3.15
-- Rust version >= 1.59.0
+- Rust version >= 1.66.1
 
 ## Client Example
 
