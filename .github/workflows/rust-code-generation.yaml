@@ -50,7 +50,7 @@ jobs:
       run: cargo run -- --proto-directory ../../proto --out ../astarte-message-hub-proto/src/
       working-directory: ./rust/rust-codegen
     - name: Upload Rust code
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rust-dist
         path: ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
