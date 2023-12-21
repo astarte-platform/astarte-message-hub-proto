@@ -16,15 +16,15 @@ homepage = "https://astarte.cloud/"
 documentation = "https://docs.rs/astarte-message-hub-proto"
 
 [dependencies]
-chrono = { workspace = true }
+chrono = "0.4.24"
 pbjson-types = { workspace = true }
 prost = { workspace = true }
-thiserror = { workspace = true }
+thiserror = "1.0"
 tonic = { workspace = true }
-uuid = { workspace = true, features = ["v4"] }
+uuid = { version = "1.5.0", features = ["v4"] }
 
 [dev-dependencies]
 clap = { workspace = true , features = ["derive"] }
-env_logger = { workspace = true }
-log = { workspace = true }
-tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+env_logger = "0.10.0"
+log = "0.4.20"
+tokio = {version = "1.33.0", features = ["rt-multi-thread", "macros"]}
