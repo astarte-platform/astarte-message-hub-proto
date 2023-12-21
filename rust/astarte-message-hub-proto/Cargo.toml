@@ -6,7 +6,7 @@
 
 [package]
 name = "astarte-message-hub-proto"
-version = "0.6.0"
+version = "0.6.1"
 edition = { workspace = true }
 rust-version = { workspace = true }
 description ="Astarte message hub protocol buffers for Rust"
