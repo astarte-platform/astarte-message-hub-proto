@@ -42,7 +42,7 @@ jobs:
       run: mkdir ./grpc/
     - name: Restore cached grpc_python_plugin
       id: cache-grpc-python-plugin-restore
-      uses: actions/cache/restore@v3
+      uses: actions/cache/restore@v4
       with:
         path: ./grpc/grpc_python_plugin
         key: grpc-python-plugin-v1.58.1
@@ -57,7 +57,7 @@ jobs:
     - name: Save grpc_python_plugin
       if: steps.cache-grpc-python-plugin-restore.outputs.cache-hit != 'true'
       id: cache-grpc-python-plugin-save
-      uses: actions/cache/save@v3
+      uses: actions/cache/save@v4
       with:
         path: ./grpc/grpc_python_plugin
         key: ${{ steps.cache-grpc-python-plugin-restore.outputs.cache-primary-key }}
