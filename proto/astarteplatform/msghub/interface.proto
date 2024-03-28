@@ -1,7 +1,7 @@
 /*
  * This file is part of Astarte.
  *
- * Copyright 2022 SECO Mind Srl
+ * Copyright 2024 SECO Mind Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-syntax = "proto3";
 
-import "astarteplatform/msghub/interface.proto";
+syntax = "proto3";
 
 package astarteplatform.msghub;
 
-/* This message defines a node to be attached/detached to the Astarte message hub. */
-message Node {
-  string uuid = 1;                    // The node identifier.
-  InterfacesJson interface_jsons = 2; // Array of byte arrays representing all .json interface files of the node.
+/* This message defines a json interface to be added/removed to the Astarte message hub. */
+message InterfaceJson{
+  bytes interface_json = 1; // A byte array representing a json interface.
+}
+
+/* This message defines a list of json interfaces to be added/removed to the Astarte message hub. */
+message InterfacesJson {
+  repeated InterfaceJson interfaces_json = 1; // An array of json interfaces.
 }
