@@ -171,6 +171,22 @@ pub mod astarte_message {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstarteUnset {}
+/// This message defines a json interface to be added/removed to the Astarte message hub.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfaceJson {
+    /// A byte array representing a json interface.
+    #[prost(bytes = "vec", tag = "1")]
+    pub interface_json: ::prost::alloc::vec::Vec<u8>,
+}
+/// This message defines a list of json interfaces to be added/removed to the Astarte message hub.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfacesJson {
+    /// An array of json interfaces.
+    #[prost(message, repeated, tag = "1")]
+    pub interfaces_json: ::prost::alloc::vec::Vec<InterfaceJson>,
+}
 /// This message defines a node to be attached/detached to the Astarte message hub.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -179,8 +195,8 @@ pub struct Node {
     #[prost(string, tag = "1")]
     pub uuid: ::prost::alloc::string::String,
     /// Array of byte arrays representing all .json interface files of the node.
-    #[prost(bytes = "vec", repeated, tag = "2")]
-    pub interface_jsons: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+    #[prost(message, optional, tag = "2")]
+    pub interface_jsons: ::core::option::Option<InterfacesJson>,
 }
 /// Generated client implementations.
 pub mod message_hub_client {
@@ -340,6 +356,59 @@ pub mod message_hub_client {
                 .insert(GrpcMethod::new("astarteplatform.msghub.MessageHub", "Detach"));
             self.inner.unary(req, path, codec).await
         }
+        /// This function should be used to add one or more interfaces to an instance of the Astarte message hub.
+        pub async fn add_interfaces(
+            &mut self,
+            request: impl tonic::IntoRequest<super::InterfacesJson>,
+        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/AddInterfaces",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("astarteplatform.msghub.MessageHub", "AddInterfaces"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// This function should be used to remove one or more interfaces from an instance of the Astarte message hub.
+        pub async fn remove_interfaces(
+            &mut self,
+            request: impl tonic::IntoRequest<super::InterfacesJson>,
+        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/RemoveInterfaces",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "astarteplatform.msghub.MessageHub",
+                        "RemoveInterfaces",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -370,6 +439,16 @@ pub mod message_hub_server {
         async fn detach(
             &self,
             request: tonic::Request<super::Node>,
+        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        /// This function should be used to add one or more interfaces to an instance of the Astarte message hub.
+        async fn add_interfaces(
+            &self,
+            request: tonic::Request<super::InterfacesJson>,
+        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        /// This function should be used to remove one or more interfaces from an instance of the Astarte message hub.
+        async fn remove_interfaces(
+            &self,
+            request: tonic::Request<super::InterfacesJson>,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
     }
     #[derive(Debug)]
@@ -572,6 +651,98 @@ pub mod message_hub_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = DetachSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/AddInterfaces" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddInterfacesSvc<T: MessageHub>(pub Arc<T>);
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<super::InterfacesJson>
+                    for AddInterfacesSvc<T> {
+                        type Response = ::pbjson_types::Empty;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::InterfacesJson>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MessageHub>::add_interfaces(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AddInterfacesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/RemoveInterfaces" => {
+                    #[allow(non_camel_case_types)]
+                    struct RemoveInterfacesSvc<T: MessageHub>(pub Arc<T>);
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<super::InterfacesJson>
+                    for RemoveInterfacesSvc<T> {
+                        type Response = ::pbjson_types::Empty;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::InterfacesJson>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MessageHub>::remove_interfaces(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RemoveInterfacesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

@@ -99,8 +99,14 @@ impl_array_type_conversion_traits!({
 });
 
 /// This struct can be used to store the content of a `.json` file.
-#[derive(Clone)]
+#[derive(Clone, Default, Debug)]
 pub struct InterfaceJson(pub Vec<u8>);
+
+impl From<proto_message_hub::InterfaceJson> for InterfaceJson {
+    fn from(value: proto_message_hub::InterfaceJson) -> Self {
+        InterfaceJson(value.interface_json)
+    }
+}
 
 impl From<DateTime<Utc>> for proto_message_hub::AstarteDataTypeIndividual {
     fn from(value: DateTime<Utc>) -> Self {

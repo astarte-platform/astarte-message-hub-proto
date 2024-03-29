@@ -218,11 +218,48 @@ impl Node {
     {
         Self {
             uuid: uuid.to_string(),
-            interface_jsons: interface_jsons
-                .iter()
-                .map(|json| json.clone().into())
-                .collect(),
+            interface_jsons: Some(interface_jsons.into())
         }
+    }
+
+    #[cfg(test)]
+    /// provide a reference to the interfaces
+    fn interfaces(&self) -> &[InterfaceJson] {
+        self.interface_jsons.as_ref().map(|x| x.interfaces_json.as_ref()).expect("foo")
+    }
+}
+
+impl<B> From<B> for InterfaceJson where B: Clone + Into<Vec<u8>> {
+    fn from(value: B) -> Self {
+        Self { interface_json: value.into() }
+    }
+}
+
+impl AsRef<[u8]> for InterfaceJson {
+    fn as_ref(&self) -> &[u8] {
+        self.interface_json.as_ref()
+    }
+}
+
+impl<B> From<&[B]> for InterfacesJson where B: Clone + Into<Vec<u8>> {
+    fn from(value: &[B]) -> Self {
+        Self {
+            interfaces_json: value.iter().map(|json| InterfaceJson::from(json.clone())).collect()
+        }
+    }
+}
+
+impl FromIterator<InterfaceJson> for InterfacesJson {
+    fn from_iter<T: IntoIterator<Item=InterfaceJson>>(iter: T) -> Self {
+        InterfacesJson {
+            interfaces_json: iter.into_iter().collect(),
+        }
+    }
+}
+
+impl AsRef<[InterfaceJson]> for InterfacesJson {
+    fn as_ref(&self) -> &[InterfaceJson] {
+        self.interfaces_json.as_ref()
     }
 }
 
@@ -362,10 +399,10 @@ mod test {
         let node = Node::new(uid, &interface_jsons);
 
         assert_eq!(node.uuid, uid.to_string());
-        assert_eq!(node.interface_jsons.len(), 2);
+        assert_eq!(node.interfaces().len(), 2);
 
-        for (interface, &expected) in node.interface_jsons.iter().zip(interface_jsons.iter()) {
-            assert_eq!(interface, expected.as_bytes());
+        for (interface, &expected) in node.interfaces().iter().zip(interface_jsons.iter()) {
+            assert_eq!(interface.as_ref(), expected.as_bytes());
         }
     }
 }
