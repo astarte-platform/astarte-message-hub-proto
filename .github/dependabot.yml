@@ -18,9 +18,19 @@
 
 version: 2
 updates:
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       # Check for updates to GitHub Actions every week
       interval: "weekly"
+  - package-ecosystem: cargo
+    directory: "/rust"
+    schedule:
+      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        # patch and minor updates don't matter for libraries
+        # remove this ignore rule if your package has binaries
+        update-types:
+          - "version-update:semver-patch"
+          - "version-update:semver-minor"
