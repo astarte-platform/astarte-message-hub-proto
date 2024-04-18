@@ -225,13 +225,21 @@ impl Node {
     #[cfg(test)]
     /// provide a reference to the interfaces
     fn interfaces(&self) -> &[InterfaceJson] {
-        self.interface_jsons.as_ref().map(|x| x.interfaces_json.as_ref()).expect("foo")
+        self.interface_jsons
+            .as_ref()
+            .map(|x| x.interfaces_json.as_ref())
+            .expect("foo")
     }
 }
 
-impl<B> From<B> for InterfaceJson where B: Clone + Into<Vec<u8>> {
+impl<B> From<B> for InterfaceJson
+where
+    B: Clone + Into<Vec<u8>>,
+{
     fn from(value: B) -> Self {
-        Self { interface_json: value.into() }
+        Self {
+            interface_json: value.into(),
+        }
     }
 }
 
@@ -241,16 +249,22 @@ impl AsRef<[u8]> for InterfaceJson {
     }
 }
 
-impl<B> From<&[B]> for InterfacesJson where B: Clone + Into<Vec<u8>> {
+impl<B> From<&[B]> for InterfacesJson
+where
+    B: Clone + Into<Vec<u8>>,
+{
     fn from(value: &[B]) -> Self {
         Self {
-            interfaces_json: value.iter().map(|json| InterfaceJson::from(json.clone())).collect()
+            interfaces_json: value
+                .iter()
+                .map(|json| InterfaceJson::from(json.clone()))
+                .collect(),
         }
     }
 }
 
 impl FromIterator<InterfaceJson> for InterfacesJson {
-    fn from_iter<T: IntoIterator<Item=InterfaceJson>>(iter: T) -> Self {
+    fn from_iter<T: IntoIterator<Item = InterfaceJson>>(iter: T) -> Self {
         InterfacesJson {
             interfaces_json: iter.into_iter().collect(),
         }

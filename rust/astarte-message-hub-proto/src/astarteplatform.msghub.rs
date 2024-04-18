@@ -72,8 +72,8 @@ pub struct AstarteDataTypeObject {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstarteDataTypeIndividual {
     #[prost(
-        oneof = "astarte_data_type_individual::IndividualData",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14"
+    oneof = "astarte_data_type_individual::IndividualData",
+    tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14"
     )]
     pub individual_data: ::core::option::Option<
         astarte_data_type_individual::IndividualData,
@@ -187,6 +187,14 @@ pub struct InterfacesJson {
     #[prost(message, repeated, tag = "1")]
     pub interfaces_json: ::prost::alloc::vec::Vec<InterfaceJson>,
 }
+/// This message defines a list of interfaces' names to be removed from the Astarte message hub.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfacesName {
+    /// An array of interfaces' names
+    #[prost(string, repeated, tag = "1")]
+    pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// This message defines a node to be attached/detached to the Astarte message hub.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -210,20 +218,20 @@ pub mod message_hub_client {
     impl MessageHubClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
-        where
-            D: TryInto<tonic::transport::Endpoint>,
-            D::Error: Into<StdError>,
+            where
+                D: TryInto<tonic::transport::Endpoint>,
+                D::Error: Into<StdError>,
         {
             let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
             Ok(Self::new(conn))
         }
     }
     impl<T> MessageHubClient<T>
-    where
-        T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        where
+            T: tonic::client::GrpcService<tonic::body::BoxBody>,
+            T::Error: Into<StdError>,
+            T::ResponseBody: Body<Data = Bytes> + Send + 'static,
+            <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -237,18 +245,18 @@ pub mod message_hub_client {
             inner: T,
             interceptor: F,
         ) -> MessageHubClient<InterceptedService<T, F>>
-        where
-            F: tonic::service::Interceptor,
-            T::ResponseBody: Default,
-            T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+            where
+                F: tonic::service::Interceptor,
+                T::ResponseBody: Default,
+                T: tonic::codegen::Service<
+                    http::Request<tonic::body::BoxBody>,
+                    Response = http::Response<
+                        <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    >,
                 >,
-            >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+                <T as tonic::codegen::Service<
+                    http::Request<tonic::body::BoxBody>,
+                >>::Error: Into<StdError> + Send + Sync,
         {
             MessageHubClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -384,7 +392,7 @@ pub mod message_hub_client {
         /// This function should be used to remove one or more interfaces from an instance of the Astarte message hub.
         pub async fn remove_interfaces(
             &mut self,
-            request: impl tonic::IntoRequest<super::InterfacesJson>,
+            request: impl tonic::IntoRequest<super::InterfacesName>,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
             self.inner
                 .ready()
@@ -420,10 +428,10 @@ pub mod message_hub_server {
     pub trait MessageHub: Send + Sync + 'static {
         /// Server streaming response type for the Attach method.
         type AttachStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::AstarteMessage, tonic::Status>,
-            >
-            + Send
-            + 'static;
+            Item = std::result::Result<super::AstarteMessage, tonic::Status>,
+        >
+        + Send
+        + 'static;
         /// This function should be used to attach a node to an instance of the Astarte message hub.
         /// Returns a data stream from the Astarte message hub.
         async fn attach(
@@ -448,7 +456,7 @@ pub mod message_hub_server {
         /// This function should be used to remove one or more interfaces from an instance of the Astarte message hub.
         async fn remove_interfaces(
             &self,
-            request: tonic::Request<super::InterfacesJson>,
+            request: tonic::Request<super::InterfacesName>,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
     }
     #[derive(Debug)]
@@ -478,8 +486,8 @@ pub mod message_hub_server {
             inner: T,
             interceptor: F,
         ) -> InterceptedService<Self, F>
-        where
-            F: tonic::service::Interceptor,
+            where
+                F: tonic::service::Interceptor,
         {
             InterceptedService::new(Self::new(inner), interceptor)
         }
@@ -513,10 +521,10 @@ pub mod message_hub_server {
         }
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>> for MessageHubServer<T>
-    where
-        T: MessageHub,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        where
+            T: MessageHub,
+            B: Body + Send + 'static,
+            B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -717,7 +725,7 @@ pub mod message_hub_server {
                     struct RemoveInterfacesSvc<T: MessageHub>(pub Arc<T>);
                     impl<
                         T: MessageHub,
-                    > tonic::server::UnaryService<super::InterfacesJson>
+                    > tonic::server::UnaryService<super::InterfacesName>
                     for RemoveInterfacesSvc<T> {
                         type Response = ::pbjson_types::Empty;
                         type Future = BoxFuture<
@@ -726,7 +734,7 @@ pub mod message_hub_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::InterfacesJson>,
+                            request: tonic::Request<super::InterfacesName>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -828,20 +836,20 @@ pub mod message_hub_config_client {
     impl MessageHubConfigClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
-        where
-            D: TryInto<tonic::transport::Endpoint>,
-            D::Error: Into<StdError>,
+            where
+                D: TryInto<tonic::transport::Endpoint>,
+                D::Error: Into<StdError>,
         {
             let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
             Ok(Self::new(conn))
         }
     }
     impl<T> MessageHubConfigClient<T>
-    where
-        T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        where
+            T: tonic::client::GrpcService<tonic::body::BoxBody>,
+            T::Error: Into<StdError>,
+            T::ResponseBody: Body<Data = Bytes> + Send + 'static,
+            <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -855,18 +863,18 @@ pub mod message_hub_config_client {
             inner: T,
             interceptor: F,
         ) -> MessageHubConfigClient<InterceptedService<T, F>>
-        where
-            F: tonic::service::Interceptor,
-            T::ResponseBody: Default,
-            T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+            where
+                F: tonic::service::Interceptor,
+                T::ResponseBody: Default,
+                T: tonic::codegen::Service<
+                    http::Request<tonic::body::BoxBody>,
+                    Response = http::Response<
+                        <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    >,
                 >,
-            >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+                <T as tonic::codegen::Service<
+                    http::Request<tonic::body::BoxBody>,
+                >>::Error: Into<StdError> + Send + Sync,
         {
             MessageHubConfigClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -971,8 +979,8 @@ pub mod message_hub_config_server {
             inner: T,
             interceptor: F,
         ) -> InterceptedService<Self, F>
-        where
-            F: tonic::service::Interceptor,
+            where
+                F: tonic::service::Interceptor,
         {
             InterceptedService::new(Self::new(inner), interceptor)
         }
@@ -1006,10 +1014,10 @@ pub mod message_hub_config_server {
         }
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>> for MessageHubConfigServer<T>
-    where
-        T: MessageHubConfig,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        where
+            T: MessageHubConfig,
+            B: Body + Send + 'static,
+            B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
