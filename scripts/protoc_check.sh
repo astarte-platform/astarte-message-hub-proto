@@ -5,7 +5,7 @@
 
 set -eEuo pipefail
 
-PROTOC_VERSION='25.4'
+PROTOC_VERSION='26.1'
 version=$(protoc --version | cut -d ' ' -f 2)
 
 if [[ $version != "$PROTOC_VERSION" ]]; then
