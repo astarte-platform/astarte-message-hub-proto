@@ -218,7 +218,7 @@ impl Node {
     {
         Self {
             uuid: uuid.to_string(),
-            interface_jsons: Some(interface_jsons.into())
+            interface_jsons: Some(interface_jsons.into()),
         }
     }
 
@@ -263,6 +263,14 @@ where
     }
 }
 
+impl From<InterfaceJson> for InterfacesJson {
+    fn from(value: InterfaceJson) -> Self {
+        InterfacesJson {
+            interfaces_json: vec![value],
+        }
+    }
+}
+
 impl FromIterator<InterfaceJson> for InterfacesJson {
     fn from_iter<T: IntoIterator<Item = InterfaceJson>>(iter: T) -> Self {
         InterfacesJson {
@@ -274,6 +282,12 @@ impl FromIterator<InterfaceJson> for InterfacesJson {
 impl AsRef<[InterfaceJson]> for InterfacesJson {
     fn as_ref(&self) -> &[InterfaceJson] {
         self.interfaces_json.as_ref()
+    }
+}
+
+impl InterfacesName {
+    pub fn iter_inner(&self) -> impl Iterator<Item = &str> + Send {
+        self.names.iter().map(|s| s.as_str())
     }
 }
 
