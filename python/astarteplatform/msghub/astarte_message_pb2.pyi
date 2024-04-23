@@ -7,7 +7,7 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class AstarteMessage(_message.Message):
-    __slots__ = ("interface_name", "path", "astarte_data", "astarte_unset", "timestamp")
+    __slots__ = ["interface_name", "path", "astarte_data", "astarte_unset", "timestamp"]
     INTERFACE_NAME_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     ASTARTE_DATA_FIELD_NUMBER: _ClassVar[int]
@@ -21,5 +21,5 @@ class AstarteMessage(_message.Message):
     def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ..., astarte_data: _Optional[_Union[_astarte_type_pb2.AstarteDataType, _Mapping]] = ..., astarte_unset: _Optional[_Union[AstarteUnset, _Mapping]] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AstarteUnset(_message.Message):
-    __slots__ = ()
+    __slots__ = []
     def __init__(self) -> None: ...

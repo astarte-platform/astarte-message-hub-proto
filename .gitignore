@@ -20,5 +20,3 @@ target/
 
 # Codegen output directory
 output/
-
-.pre-commit-config.yaml

@@ -26,7 +26,7 @@ on:
 
 env:
   PB_REL: https://github.com/protocolbuffers/protobuf/releases
-  PB_VER: '26.1'
+  PB_VER: '24.4'
 
 jobs:
   python-build:
@@ -72,7 +72,7 @@ jobs:
       run: python3 ./protoc.py "./../grpc/grpc_python_plugin"
       working-directory: ./python
     - name: Upload artifact with generated code
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: python-dist
         path: ./python/astarteplatform
