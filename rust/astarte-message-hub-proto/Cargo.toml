@@ -6,7 +6,7 @@
 
 [package]
 name = "astarte-message-hub-proto"
-version = "0.6.1"
+version = "0.6.2"
 documentation = "https://docs.rs/astarte-message-hub-proto"
 edition = { workspace = true }
 homepage = "https://astarte.cloud/"

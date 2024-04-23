@@ -23,7 +23,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "astarte_message_hub_proto"
 description="Astarte message hub protocol buffers for Python"
-version = "0.6.1"
+version = "0.6.2"
 authors = [
     { name = "Simone Orru", email = "simone.orru@secomind.com" }
 ]
