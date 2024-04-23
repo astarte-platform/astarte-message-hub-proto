@@ -16,7 +16,7 @@ This module provides access to the Astarte message hub protocol buffers through 
 ## Requirements
 
 - protobuf >= 3.15
-- Rust version >= 1.72.0
+- Rust version >= 1.66.1
 
 ## Client Example
 
@@ -54,7 +54,7 @@ async fn run_example_client() {
     let mut client = MessageHubClient::connect("http://[::1]:50051")
         .await
         .unwrap();
-
+    
     let device_datastream_interface: &str = r#"{
         "interface_name": "org.astarte-platform.rust.examples.datastream.DeviceDatastream",
         "version_major": 0,
