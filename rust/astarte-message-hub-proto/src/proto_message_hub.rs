@@ -241,7 +241,7 @@ impl InterfaceJson  {
 impl From<Vec<u8>> for InterfaceJson {
     fn from(value: Vec<u8>) -> Self {
         Self {
-            interface_json: value.into(),
+            interface_json: value,
         }
     }
 }
