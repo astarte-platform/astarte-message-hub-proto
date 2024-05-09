@@ -30,6 +30,7 @@ use astarte_message_hub_proto::message_hub_client::MessageHubClient;
 use astarte_message_hub_proto::AstarteMessage;
 use astarte_message_hub_proto::Node;
 use log::info;
+use uuid::Uuid;
 
 /// Create a ProtoBuf client for the Astarte message hub.
 #[derive(Parser, Debug)]
@@ -70,9 +71,9 @@ async fn run_example_client() {
         ]
     }"#;
 
-    let interface_jsons = [device_datastream_interface];
-
-    let node = Node::new(&args.uuid, &interface_jsons);
+    let node_id = Uuid::parse_str(&args.uuid).unwrap();
+    let interface_jsons = vec![device_datastream_interface.to_string()];
+    let node = Node::new(&node_id, interface_jsons);
 
     let mut stream = client.attach(node.clone()).await.unwrap().into_inner();
 

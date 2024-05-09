@@ -23,14 +23,9 @@ syntax = "proto3";
 
 package astarteplatform.msghub;
 
-/* This message defines a json interface to be added/removed to the Astarte message hub. */
-message InterfaceJson {
-  bytes interface_json = 1; // A byte array representing a json interface.
-}
-
 /* This message defines a list of json interfaces to be added/removed to the Astarte message hub. */
 message InterfacesJson {
-  repeated InterfaceJson interfaces_json = 1; // An array of json interfaces.
+  repeated string interfaces_json = 1; // An array of json interfaces.
 }
 
 /* This message defines a list of interfaces' names to be removed from the Astarte message hub. */

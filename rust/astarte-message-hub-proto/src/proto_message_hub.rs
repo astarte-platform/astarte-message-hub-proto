@@ -23,9 +23,9 @@
 //! elements starting from the `.proto` files present in the `./proto/astarteplatform/msghub`
 //! folder.
 
+use self::{astarte_data_type::Data, astarte_message::Payload};
 use serde::Serialize;
 use uuid::Uuid;
-use self::{astarte_data_type::Data, astarte_message::Payload};
 
 include!("astarteplatform.msghub.rs");
 
@@ -213,61 +213,47 @@ impl AstarteDataType {
 
 impl Node {
     /// Create a new [Node] with the given [uuid](Node::uuid) and [interface_jsons](Node::interface_jsons).
-    pub fn new(uuid: Uuid, interface_jsons: Vec<Vec<u8>>) -> Self {
+    pub fn new(uuid: &Uuid, interface_jsons: Vec<String>) -> Self {
         Self {
             uuid: uuid.to_string(),
-            interface_jsons: Some(InterfacesJson::from_iter(interface_jsons)),
+            interface_jsons,
         }
     }
 
-    pub fn from_interfaces<'a, I,T>(uuid: Uuid, interfaces: I) -> Result<Self, serde_json::error::Error> where
+    pub fn from_interfaces<'a, I, T>(
+        uuid: &Uuid,
+        interfaces: I,
+    ) -> Result<Self, serde_json::error::Error>
+    where
         I: IntoIterator<Item = &'a T>,
-        T: ?Sized + Serialize + 'a, {
-        let interfaces_json = InterfacesJson::try_from_iter(interfaces)?;
+        T: ?Sized + Serialize + 'a,
+    {
+        let interface_jsons = interfaces
+            .into_iter()
+            .map(serde_json::to_string)
+            .collect::<Result<Vec<String>, serde_json::error::Error>>()?;
 
-        Ok(Self {
-            uuid: uuid.to_string(),
-            interface_jsons: Some(interfaces_json),
-        })
-    }
-}
-
-impl InterfaceJson  {
-    pub fn from_value<T>(value: &T) -> Result<Self, serde_json::error::Error> where T: ?Sized + Serialize {
-        serde_json::to_vec(value).map(InterfaceJson::from)
-    }
-}
-
-impl From<Vec<u8>> for InterfaceJson {
-    fn from(value: Vec<u8>) -> Self {
-        Self {
-            interface_json: value,
-        }
+        Ok(Self::new(uuid, interface_jsons))
     }
 }
 
 impl InterfacesJson {
     pub fn try_from_iter<'a, I, T>(iter: I) -> Result<Self, serde_json::error::Error>
-        where
+    where
         I: IntoIterator<Item = &'a T>,
         T: ?Sized + Serialize + 'a,
     {
-        iter.into_iter().map(InterfaceJson::from_value).collect::<Result<Vec<InterfaceJson>, serde_json::error::Error>>().map(|interfaces_json| Self {interfaces_json})
+        iter.into_iter()
+            .map(serde_json::to_string)
+            .collect::<Result<Vec<String>, serde_json::error::Error>>()
+            .map(|interfaces_json| Self { interfaces_json })
     }
 }
 
-impl FromIterator<Vec<u8>> for InterfacesJson {
-    fn from_iter<T: IntoIterator<Item=Vec<u8>>>(iter: T) -> Self {
+impl FromIterator<String> for InterfacesJson {
+    fn from_iter<T: IntoIterator<Item = String>>(iter: T) -> Self {
         Self {
-            interfaces_json: iter.into_iter().map(InterfaceJson::from).collect()
-        }
-    }
-}
-
-impl From<InterfaceJson> for InterfacesJson {
-    fn from(value: InterfaceJson) -> Self {
-        InterfacesJson {
-            interfaces_json: vec![value],
+            interfaces_json: iter.into_iter().collect(),
         }
     }
 }
@@ -392,7 +378,7 @@ mod test {
                     "explicit_timestamp": true
                 }
             ]
-        }"#.as_bytes().to_vec();
+        }"#;
 
         let server_datastream_interface = r#"{
             "interface_name": "org.astarte-platform.rust.examples.datastream.ServerDatastream",
@@ -407,18 +393,19 @@ mod test {
                     "explicit_timestamp": true
                 }
             ]
-        }"#.as_bytes().to_vec();
+        }"#;
 
-        let interface_jsons = vec![device_datastream_interface, server_datastream_interface];
+        let interface_jsons = [device_datastream_interface, server_datastream_interface]
+            .map(|s| s.to_string())
+            .to_vec();
 
-        let node = Node::new(uuid, interface_jsons.clone());
+        let node = Node::new(&uuid, interface_jsons.clone());
 
         assert_eq!(node.uuid, uuid.to_string());
-        let interfaces = node.interface_jsons.unwrap().interfaces_json;
-        assert_eq!(interfaces.len(), 2);
+        assert_eq!(node.interface_jsons.len(), 2);
 
-        for (interface, expected) in interfaces.iter().zip(interface_jsons.iter()) {
-            assert_eq!(&interface.interface_json, expected);
+        for (interface, expected) in node.interface_jsons.iter().zip(interface_jsons.iter()) {
+            assert_eq!(interface, expected);
         }
     }
 }
