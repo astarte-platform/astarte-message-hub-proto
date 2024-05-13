@@ -72,8 +72,8 @@ async fn run_example_client() {
     }"#;
 
     let node_id = Uuid::parse_str(&args.uuid).unwrap();
-    let interface_jsons = vec![device_datastream_interface.to_string()];
-    let node = Node::new(&node_id, interface_jsons);
+    let interfaces_json = vec![device_datastream_interface.to_string()];
+    let node = Node::new(&node_id, interfaces_json);
 
     let mut stream = client.attach(node.clone()).await.unwrap().into_inner();
 

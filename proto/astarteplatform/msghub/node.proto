@@ -27,5 +27,5 @@ package astarteplatform.msghub;
 /* This message defines a node to be attached/detached to the Astarte message hub. */
 message Node {
   string uuid = 1;                      // The node identifier.
-  repeated string interface_jsons = 2;  // Array of string representing all .json interface files of the node.
+  repeated string interfaces_json = 2;  // Array of string representing all .json interface files of the node.
 }

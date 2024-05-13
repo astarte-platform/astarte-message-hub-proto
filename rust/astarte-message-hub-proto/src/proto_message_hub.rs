@@ -212,11 +212,11 @@ impl AstarteDataType {
 }
 
 impl Node {
-    /// Create a new [Node] with the given [uuid](Node::uuid) and [interface_jsons](Node::interface_jsons).
-    pub fn new(uuid: &Uuid, interface_jsons: Vec<String>) -> Self {
+    /// Create a new [Node] with the given [uuid](Node::uuid) and [interfaces_json](Node::interfaces_json).
+    pub fn new(uuid: &Uuid, interfaces_json: Vec<String>) -> Self {
         Self {
             uuid: uuid.to_string(),
-            interface_jsons,
+            interfaces_json,
         }
     }
 
@@ -228,12 +228,12 @@ impl Node {
         I: IntoIterator<Item = &'a T>,
         T: ?Sized + Serialize + 'a,
     {
-        let interface_jsons = interfaces
+        let interfaces_json = interfaces
             .into_iter()
             .map(serde_json::to_string)
             .collect::<Result<Vec<String>, serde_json::error::Error>>()?;
 
-        Ok(Self::new(uuid, interface_jsons))
+        Ok(Self::new(uuid, interfaces_json))
     }
 }
 
@@ -395,16 +395,16 @@ mod test {
             ]
         }"#;
 
-        let interface_jsons = [device_datastream_interface, server_datastream_interface]
+        let interfaces_json = [device_datastream_interface, server_datastream_interface]
             .map(|s| s.to_string())
             .to_vec();
 
-        let node = Node::new(&uuid, interface_jsons.clone());
+        let node = Node::new(&uuid, interfaces_json.clone());
 
         assert_eq!(node.uuid, uuid.to_string());
-        assert_eq!(node.interface_jsons.len(), 2);
+        assert_eq!(node.interfaces_json.len(), 2);
 
-        for (interface, expected) in node.interface_jsons.iter().zip(interface_jsons.iter()) {
+        for (interface, expected) in node.interfaces_json.iter().zip(interfaces_json.iter()) {
             assert_eq!(interface, expected);
         }
     }

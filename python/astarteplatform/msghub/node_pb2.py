@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from astarteplatform.msghub import interface_pb2 as astarteplatform_dot_msghub_dot_interface__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!astarteplatform/msghub/node.proto\x12\x16\x61starteplatform.msghub\x1a&astarteplatform/msghub/interface.proto\"-\n\x04Node\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x17\n\x0finterface_jsons\x18\x02 \x03(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!astarteplatform/msghub/node.proto\x12\x16\x61starteplatform.msghub\x1a&astarteplatform/msghub/interface.proto\"-\n\x04Node\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x17\n\x0finterfaces_json\x18\x02 \x03(\tb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)

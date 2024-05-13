@@ -7,9 +7,9 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Node(_message.Message):
-    __slots__ = ("uuid", "interface_jsons")
+    __slots__ = ("uuid", "interfaces_json")
     UUID_FIELD_NUMBER: _ClassVar[int]
-    INTERFACE_JSONS_FIELD_NUMBER: _ClassVar[int]
+    INTERFACES_JSON_FIELD_NUMBER: _ClassVar[int]
     uuid: str
-    interface_jsons: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, uuid: _Optional[str] = ..., interface_jsons: _Optional[_Iterable[str]] = ...) -> None: ...
+    interfaces_json: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, uuid: _Optional[str] = ..., interfaces_json: _Optional[_Iterable[str]] = ...) -> None: ...

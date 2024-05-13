@@ -195,7 +195,7 @@ pub struct Node {
     pub uuid: ::prost::alloc::string::String,
     /// Array of string representing all .json interface files of the node.
     #[prost(string, repeated, tag = "2")]
-    pub interface_jsons: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Generated client implementations.
 pub mod message_hub_client {
