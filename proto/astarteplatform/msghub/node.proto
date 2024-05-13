@@ -20,10 +20,12 @@
 
 syntax = "proto3";
 
+import "astarteplatform/msghub/interface.proto";
+
 package astarteplatform.msghub;
 
 /* This message defines a node to be attached/detached to the Astarte message hub. */
 message Node {
-  string uuid = 1;                    // The node identifier.
-  repeated bytes interface_jsons = 2; // Array of byte arrays representing all .json interface files of the node.
+  string uuid = 1;                      // The node identifier.
+  repeated string interfaces_json = 2;  // Array of string representing all .json interface files of the node.
 }

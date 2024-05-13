@@ -60,6 +60,7 @@ fn main() -> color_eyre::Result<()> {
         proto_dir.join("astarteplatform/msghub/astarte_message.proto"),
         proto_dir.join("astarteplatform/msghub/astarte_type.proto"),
         proto_dir.join("astarteplatform/msghub/config.proto"),
+        proto_dir.join("astarteplatform/msghub/interface.proto"),
     ];
 
     // NOTE: This is a temporary workaround to build the documentation on docs.rs, since they are

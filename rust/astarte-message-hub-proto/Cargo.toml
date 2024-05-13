@@ -19,6 +19,8 @@ description = "Astarte message hub protocol buffers for Rust"
 chrono = { workspace = true }
 pbjson-types = { workspace = true }
 prost = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
 thiserror = { workspace = true }
 tonic = { workspace = true }
 uuid = { workspace = true, features = ["v4"] }

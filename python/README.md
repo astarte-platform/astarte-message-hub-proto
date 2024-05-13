@@ -27,7 +27,7 @@ from astarteplatform.msghub.astarte_type_pb2 import AstarteDataType, AstarteData
 grpc_channel = grpc.insecure_channel("server address")
 message_hub_stub = MessageHubStub(grpc_channel)
 
-message_hub_node = Node(uuid="node uuid", interface_jsons=[b"interface 1 bin", b"interface 2 bin"])
+message_hub_node = Node(uuid="node uuid", interfaces_json=[b"interface 1 bin", b"interface 2 bin"])
 message_hub_stream = message_hub_stub.Attach(message_hub_node)
 
 # Transmit a very simple message

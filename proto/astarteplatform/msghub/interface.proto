@@ -1,7 +1,7 @@
 /*
  * This file is part of Astarte.
  *
- * Copyright 2023 SECO Mind Srl
+ * Copyright 2024 SECO Mind Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,18 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-#![doc = include_str!("../README.md")]
 
-mod proto_message_hub;
-pub mod types;
-pub use crate::proto_message_hub::*;
-pub use pbjson_types;
-pub use prost;
-pub use serde;
-pub use serde_json;
-pub use tonic;
+
+syntax = "proto3";
+
+package astarteplatform.msghub;
+
+/* This message defines a list of json interfaces to be added/removed to the Astarte message hub. */
+message InterfacesJson {
+  repeated string interfaces_json = 1; // An array of json interfaces.
+}
+
+/* This message defines a list of interfaces' names to be removed from the Astarte message hub. */
+message InterfacesName {
+  repeated string names = 1; // An array of interfaces' names
+}

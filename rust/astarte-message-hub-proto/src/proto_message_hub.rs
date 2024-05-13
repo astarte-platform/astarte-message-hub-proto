@@ -24,6 +24,8 @@
 //! folder.
 
 use self::{astarte_data_type::Data, astarte_message::Payload};
+use serde::Serialize;
+use uuid::Uuid;
 
 include!("astarteplatform.msghub.rs");
 
@@ -210,19 +212,55 @@ impl AstarteDataType {
 }
 
 impl Node {
-    /// Create a new [Node] with the given [uuid](Node::uuid) and [interface_jsons](Node::interface_jsons).
-    pub fn new<S, B>(uuid: S, interface_jsons: &[B]) -> Self
-    where
-        S: ToString,
-        B: Clone + Into<Vec<u8>>,
-    {
+    /// Create a new [Node] with the given [uuid](Node::uuid) and [interfaces_json](Node::interfaces_json).
+    pub fn new(uuid: &Uuid, interfaces_json: Vec<String>) -> Self {
         Self {
             uuid: uuid.to_string(),
-            interface_jsons: interface_jsons
-                .iter()
-                .map(|json| json.clone().into())
-                .collect(),
+            interfaces_json,
         }
+    }
+
+    pub fn from_interfaces<'a, I, T>(
+        uuid: &Uuid,
+        interfaces: I,
+    ) -> Result<Self, serde_json::error::Error>
+    where
+        I: IntoIterator<Item = &'a T>,
+        T: ?Sized + Serialize + 'a,
+    {
+        let interfaces_json = interfaces
+            .into_iter()
+            .map(serde_json::to_string)
+            .collect::<Result<Vec<String>, serde_json::error::Error>>()?;
+
+        Ok(Self::new(uuid, interfaces_json))
+    }
+}
+
+impl InterfacesJson {
+    pub fn try_from_iter<'a, I, T>(iter: I) -> Result<Self, serde_json::error::Error>
+    where
+        I: IntoIterator<Item = &'a T>,
+        T: ?Sized + Serialize + 'a,
+    {
+        iter.into_iter()
+            .map(serde_json::to_string)
+            .collect::<Result<Vec<String>, serde_json::error::Error>>()
+            .map(|interfaces_json| Self { interfaces_json })
+    }
+}
+
+impl FromIterator<String> for InterfacesJson {
+    fn from_iter<T: IntoIterator<Item = String>>(iter: T) -> Self {
+        Self {
+            interfaces_json: iter.into_iter().collect(),
+        }
+    }
+}
+
+impl InterfacesName {
+    pub fn iter_inner(&self) -> impl Iterator<Item = &str> + Send {
+        self.names.iter().map(|s| s.as_str())
     }
 }
 
@@ -324,8 +362,8 @@ mod test {
     }
 
     #[test]
-    fn create_note_from_interface_files() {
-        let uid = uuid::Uuid::new_v4();
+    fn create_node_from_interface_files() {
+        let uuid = Uuid::new_v4();
 
         let device_datastream_interface = r#"{
             "interface_name": "org.astarte-platform.rust.examples.datastream.DeviceDatastream",
@@ -357,15 +395,17 @@ mod test {
             ]
         }"#;
 
-        let interface_jsons = [device_datastream_interface, server_datastream_interface];
+        let interfaces_json = [device_datastream_interface, server_datastream_interface]
+            .map(|s| s.to_string())
+            .to_vec();
 
-        let node = Node::new(uid, &interface_jsons);
+        let node = Node::new(&uuid, interfaces_json.clone());
 
-        assert_eq!(node.uuid, uid.to_string());
-        assert_eq!(node.interface_jsons.len(), 2);
+        assert_eq!(node.uuid, uuid.to_string());
+        assert_eq!(node.interfaces_json.len(), 2);
 
-        for (interface, &expected) in node.interface_jsons.iter().zip(interface_jsons.iter()) {
-            assert_eq!(interface, expected.as_bytes());
+        for (interface, expected) in node.interfaces_json.iter().zip(interfaces_json.iter()) {
+            assert_eq!(interface, expected);
         }
     }
 }
