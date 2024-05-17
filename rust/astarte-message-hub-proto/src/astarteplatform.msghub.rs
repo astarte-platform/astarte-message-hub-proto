@@ -186,7 +186,7 @@ pub struct InterfacesName {
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// This message defines a node to be attached/detached to the Astarte message hub.
+/// This message defines a node to be attached to the Astarte message hub.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Node {
@@ -335,7 +335,7 @@ pub mod message_hub_client {
         /// This function should be used to detach a node from an instance of the Astarte message hub.
         pub async fn detach(
             &mut self,
-            request: impl tonic::IntoRequest<super::Node>,
+            request: impl tonic::IntoRequest<::pbjson_types::Empty>,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
             self.inner
                 .ready()
@@ -437,7 +437,7 @@ pub mod message_hub_server {
         /// This function should be used to detach a node from an instance of the Astarte message hub.
         async fn detach(
             &self,
-            request: tonic::Request<super::Node>,
+            request: tonic::Request<::pbjson_types::Empty>,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
         /// This function should be used to add one or more interfaces to an instance of the Astarte message hub.
         async fn add_interfaces(
@@ -624,7 +624,9 @@ pub mod message_hub_server {
                 "/astarteplatform.msghub.MessageHub/Detach" => {
                     #[allow(non_camel_case_types)]
                     struct DetachSvc<T: MessageHub>(pub Arc<T>);
-                    impl<T: MessageHub> tonic::server::UnaryService<super::Node>
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<::pbjson_types::Empty>
                     for DetachSvc<T> {
                         type Response = ::pbjson_types::Empty;
                         type Future = BoxFuture<
@@ -633,7 +635,7 @@ pub mod message_hub_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::Node>,
+                            request: tonic::Request<::pbjson_types::Empty>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
