@@ -11,6 +11,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Dynamic introspection API.
 
+### Changed
+
+- Send Empty parameter instead of Node in the detach rpc.
+
 ## [0.6.2] - 2024-04-23
 
 ### Changed
