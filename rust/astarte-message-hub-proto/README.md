@@ -29,6 +29,7 @@ use astarte_message_hub_proto::astarte_message::Payload;
 use astarte_message_hub_proto::message_hub_client::MessageHubClient;
 use astarte_message_hub_proto::AstarteMessage;
 use astarte_message_hub_proto::Node;
+use astarte_message_hub_proto::pbjson_types::Empty;
 use log::info;
 use uuid::Uuid;
 
@@ -117,7 +118,7 @@ async fn run_example_client() {
         }
 
         info!("Done sending messages, closing the connection.");
-        client.detach(node).await.expect("Detach failed");
+        client.detach(Empty {}).await.expect("Detach failed");
     });
 
     let res = tokio::join!(reply_handle, send_handle);

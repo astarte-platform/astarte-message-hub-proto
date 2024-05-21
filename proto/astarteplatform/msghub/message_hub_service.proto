@@ -37,7 +37,7 @@ service MessageHub {
   /* This function should be used to send an `AstarteMessage` to Astarte. */
   rpc Send(AstarteMessage) returns (google.protobuf.Empty){}
   /* This function should be used to detach a node from an instance of the Astarte message hub. */
-  rpc Detach(Node) returns (google.protobuf.Empty){}
+  rpc Detach(google.protobuf.Empty) returns (google.protobuf.Empty){}
   /* This function should be used to add one or more interfaces to an instance of the Astarte message hub. */
   rpc AddInterfaces(InterfacesJson) returns (google.protobuf.Empty){}
   /* This function should be used to remove one or more interfaces from an instance of the Astarte message hub. */

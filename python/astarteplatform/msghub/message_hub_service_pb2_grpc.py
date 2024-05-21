@@ -29,7 +29,7 @@ class MessageHubStub(object):
                 )
         self.Detach = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/Detach',
-                request_serializer=astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.AddInterfaces = channel.unary_unary(
@@ -98,7 +98,7 @@ def add_MessageHubServicer_to_server(servicer, server):
             ),
             'Detach': grpc.unary_unary_rpc_method_handler(
                     servicer.Detach,
-                    request_deserializer=astarteplatform_dot_msghub_dot_node__pb2.Node.FromString,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'AddInterfaces': grpc.unary_unary_rpc_method_handler(
@@ -167,7 +167,7 @@ class MessageHub(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/Detach',
-            astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
