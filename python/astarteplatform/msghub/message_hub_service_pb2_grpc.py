@@ -20,7 +20,7 @@ class MessageHubStub(object):
         self.Attach = channel.unary_stream(
                 '/astarteplatform.msghub.MessageHub/Attach',
                 request_serializer=astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
-                response_deserializer=astarteplatform_dot_msghub_dot_astarte__message__pb2.AstarteMessage.FromString,
+                response_deserializer=astarteplatform_dot_msghub_dot_astarte__message__pb2.MessageHubEvent.FromString,
                 )
         self.Send = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/Send',
@@ -89,7 +89,7 @@ def add_MessageHubServicer_to_server(servicer, server):
             'Attach': grpc.unary_stream_rpc_method_handler(
                     servicer.Attach,
                     request_deserializer=astarteplatform_dot_msghub_dot_node__pb2.Node.FromString,
-                    response_serializer=astarteplatform_dot_msghub_dot_astarte__message__pb2.AstarteMessage.SerializeToString,
+                    response_serializer=astarteplatform_dot_msghub_dot_astarte__message__pb2.MessageHubEvent.SerializeToString,
             ),
             'Send': grpc.unary_unary_rpc_method_handler(
                     servicer.Send,
@@ -134,7 +134,7 @@ class MessageHub(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/astarteplatform.msghub.MessageHub/Attach',
             astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
-            astarteplatform_dot_msghub_dot_astarte__message__pb2.AstarteMessage.FromString,
+            astarteplatform_dot_msghub_dot_astarte__message__pb2.MessageHubEvent.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -264,6 +264,35 @@ impl InterfacesName {
     }
 }
 
+impl From<AstarteMessage> for MessageHubEvent {
+    fn from(value: AstarteMessage) -> Self {
+        Self {
+            event: Some(message_hub_event::Event::Message(value)),
+        }
+    }
+}
+
+impl MessageHubEvent {
+    pub fn take_message(self) -> Option<AstarteMessage> {
+        self.event.and_then(|r| match r {
+            message_hub_event::Event::Message(msg) => Some(msg),
+            message_hub_event::Event::Error(_) => None,
+        })
+    }
+}
+
+impl MessageHubError {
+    pub fn error<S>(description: S, source: Vec<String>) -> Self
+    where
+        S: Into<String>,
+    {
+        Self {
+            description: description.into(),
+            source,
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use std::collections::HashMap;

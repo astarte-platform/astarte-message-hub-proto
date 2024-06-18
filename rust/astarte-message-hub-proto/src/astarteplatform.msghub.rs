@@ -135,6 +135,40 @@ pub mod astarte_data_type {
         AstarteObject(super::AstarteDataTypeObject),
     }
 }
+/// MessageHub error type
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageHubError {
+    /// Human-readable string describing the error.
+    #[prost(string, tag = "1")]
+    pub description: ::prost::alloc::string::String,
+    /// A list specifying general categories of Astarte Message Hub error.
+    #[prost(string, repeated, tag = "2")]
+    pub source: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// MessageHubEvent is a type of message for returning and propagating errors.
+/// It is an enum with the variants, AstarteMessage(message), representing success and
+/// containing an astarte message value, and MessageHubError(E) representing error and
+/// containing an error value.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MessageHubEvent {
+    #[prost(oneof = "message_hub_event::Event", tags = "1, 2")]
+    pub event: ::core::option::Option<message_hub_event::Event>,
+}
+/// Nested message and enum types in `MessageHubEvent`.
+pub mod message_hub_event {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Event {
+        /// A message that contains data sent from Astarte.
+        #[prost(message, tag = "1")]
+        Message(super::AstarteMessage),
+        /// A message that contains a specific Astarte Message Hub error.
+        #[prost(message, tag = "2")]
+        Error(super::MessageHubError),
+    }
+}
 /// Astarte message to be used when sending data to Astarte.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -170,6 +204,17 @@ pub mod astarte_message {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstarteUnset {}
+/// This message defines a node to be attached to the Astarte message hub.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Node {
+    /// The node identifier.
+    #[prost(string, tag = "1")]
+    pub uuid: ::prost::alloc::string::String,
+    /// Array of string representing all .json interface files of the node.
+    #[prost(string, repeated, tag = "2")]
+    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// This message defines a list of json interfaces to be added/removed to the Astarte message hub.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -185,17 +230,6 @@ pub struct InterfacesName {
     /// An array of interfaces' names
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
-/// This message defines a node to be attached to the Astarte message hub.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Node {
-    /// The node identifier.
-    #[prost(string, tag = "1")]
-    pub uuid: ::prost::alloc::string::String,
-    /// Array of string representing all .json interface files of the node.
-    #[prost(string, repeated, tag = "2")]
-    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Generated client implementations.
 pub mod message_hub_client {
@@ -288,7 +322,7 @@ pub mod message_hub_client {
             &mut self,
             request: impl tonic::IntoRequest<super::Node>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::AstarteMessage>>,
+            tonic::Response<tonic::codec::Streaming<super::MessageHubEvent>>,
             tonic::Status,
         > {
             self.inner
@@ -419,7 +453,7 @@ pub mod message_hub_server {
     pub trait MessageHub: Send + Sync + 'static {
         /// Server streaming response type for the Attach method.
         type AttachStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::AstarteMessage, tonic::Status>,
+                Item = std::result::Result<super::MessageHubEvent, tonic::Status>,
             >
             + Send
             + 'static;
@@ -536,7 +570,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::ServerStreamingService<super::Node>
                     for AttachSvc<T> {
-                        type Response = super::AstarteMessage;
+                        type Response = super::MessageHubEvent;
                         type ResponseStream = T::AttachStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
