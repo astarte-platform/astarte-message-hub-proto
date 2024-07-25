@@ -25,6 +25,7 @@
 
 use self::{astarte_data_type::Data, astarte_message::Payload};
 use serde::Serialize;
+use std::fmt::{Display, Formatter};
 use uuid::Uuid;
 
 include!("astarteplatform.msghub.rs");
@@ -328,6 +329,18 @@ impl MessageHubError {
             description,
             source: source_vec,
         }
+    }
+}
+
+impl Display for MessageHubError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.description)?;
+
+        for cause in self.source.clone() {
+            write!(f, ": {cause}")?;
+        }
+
+        Ok(())
     }
 }
 
