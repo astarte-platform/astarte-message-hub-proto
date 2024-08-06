@@ -814,8 +814,10 @@ pub struct ConfigMessage {
     pub pairing_url: ::prost::alloc::string::String,
     #[prost(string, optional, tag = "5")]
     pub pairing_token: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(uint32, tag = "6")]
-    pub grpc_socket_port: u32,
+    #[prost(uint32, optional, tag = "6")]
+    pub grpc_socket_port: ::core::option::Option<u32>,
+    #[prost(string, optional, tag = "7")]
+    pub grpc_socket_host: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Generated client implementations.
 pub mod message_hub_config_client {

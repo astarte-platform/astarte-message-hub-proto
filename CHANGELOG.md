@@ -10,10 +10,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - Dynamic introspection API.
+- Add `grpc_socket_host` optional field to the `ConfigMessage` to configure the server IP to bind.
 
 ### Changed
 
 - Send Empty parameter instead of Node in the detach rpc.
+- Make the `grpc_socket_port` field optional for the `ConfigMessage`, the default port will be
+  `50051` on the server.
 
 ## [0.6.2] - 2024-04-23
 
