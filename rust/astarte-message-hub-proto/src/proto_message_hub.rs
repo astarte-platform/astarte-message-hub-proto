@@ -300,6 +300,20 @@ impl MessageHubEvent {
     }
 }
 
+impl std::error::Error for MessageHubError {}
+
+impl Display for MessageHubError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.description)?;
+
+        for s in &self.source {
+            write!(f, ": {s}")?;
+        }
+
+        Ok(())
+    }
+}
+
 impl MessageHubError {
     pub fn new<S>(description: S, source: Vec<String>) -> Self
     where
@@ -329,18 +343,6 @@ impl MessageHubError {
             description,
             source: source_vec,
         }
-    }
-}
-
-impl Display for MessageHubError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.description)?;
-
-        for cause in self.source.clone() {
-            write!(f, ": {cause}")?;
-        }
-
-        Ok(())
     }
 }
 
