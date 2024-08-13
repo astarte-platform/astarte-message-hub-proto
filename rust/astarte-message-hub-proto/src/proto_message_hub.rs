@@ -318,7 +318,7 @@ impl MessageHubError {
         let description = error.to_string();
         let mut source_vec = vec![];
 
-        // the cause need to be casted as a &dyn Error
+        // the cause need to be cast as a &dyn Error
         let mut cause: &dyn std::error::Error = &error;
         while let Some(source) = cause.source() {
             cause = source;
