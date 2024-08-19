@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#astarteplatform/msghub/config.proto\x12\x16\x61starteplatform.msghub\x1a\x1bgoogle/protobuf/empty.proto\"\xd9\x01\n\rConfigMessage\x12\r\n\x05realm\x18\x01 \x01(\t\x12\x16\n\tdevice_id\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x1f\n\x12\x63redentials_secret\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x13\n\x0bpairing_url\x18\x04 \x01(\t\x12\x1a\n\rpairing_token\x18\x05 \x01(\tH\x02\x88\x01\x01\x12\x18\n\x10grpc_socket_port\x18\x06 \x01(\rB\x0c\n\n_device_idB\x15\n\x13_credentials_secretB\x10\n\x0e_pairing_token2^\n\x10MessageHubConfig\x12J\n\tSetConfig\x12%.astarteplatform.msghub.ConfigMessage\x1a\x16.google.protobuf.Emptyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#astarteplatform/msghub/config.proto\x12\x16\x61starteplatform.msghub\x1a\x1bgoogle/protobuf/empty.proto\"\xa7\x02\n\rConfigMessage\x12\r\n\x05realm\x18\x01 \x01(\t\x12\x16\n\tdevice_id\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x1f\n\x12\x63redentials_secret\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x13\n\x0bpairing_url\x18\x04 \x01(\t\x12\x1a\n\rpairing_token\x18\x05 \x01(\tH\x02\x88\x01\x01\x12\x1d\n\x10grpc_socket_port\x18\x06 \x01(\rH\x03\x88\x01\x01\x12\x1d\n\x10grpc_socket_host\x18\x07 \x01(\tH\x04\x88\x01\x01\x42\x0c\n\n_device_idB\x15\n\x13_credentials_secretB\x10\n\x0e_pairing_tokenB\x13\n\x11_grpc_socket_portB\x13\n\x11_grpc_socket_host2^\n\x10MessageHubConfig\x12J\n\tSetConfig\x12%.astarteplatform.msghub.ConfigMessage\x1a\x16.google.protobuf.Emptyb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,7 +23,7 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'astarteplatform.msghub.conf
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_CONFIGMESSAGE']._serialized_start=93
-  _globals['_CONFIGMESSAGE']._serialized_end=310
-  _globals['_MESSAGEHUBCONFIG']._serialized_start=312
-  _globals['_MESSAGEHUBCONFIG']._serialized_end=406
+  _globals['_CONFIGMESSAGE']._serialized_end=388
+  _globals['_MESSAGEHUBCONFIG']._serialized_start=390
+  _globals['_MESSAGEHUBCONFIG']._serialized_end=484
 # @@protoc_insertion_point(module_scope)
