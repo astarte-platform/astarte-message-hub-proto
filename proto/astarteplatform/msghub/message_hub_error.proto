@@ -25,5 +25,5 @@ package astarteplatform.msghub;
 /* MessageHub error type */
 message MessageHubError{
   string description = 1;     // Human-readable string describing the error.
-  repeated string source = 2; // A list specifying general categories of Astarte Message Hub error.
+  repeated string source = 2; // List representing a backtrace of an Astarte Message Hub error.
 }

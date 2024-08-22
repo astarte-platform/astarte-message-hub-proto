@@ -142,7 +142,7 @@ pub struct MessageHubError {
     /// Human-readable string describing the error.
     #[prost(string, tag = "1")]
     pub description: ::prost::alloc::string::String,
-    /// A list specifying general categories of Astarte Message Hub error.
+    /// List representing a backtrace of an Astarte Message Hub error.
     #[prost(string, repeated, tag = "2")]
     pub source: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
