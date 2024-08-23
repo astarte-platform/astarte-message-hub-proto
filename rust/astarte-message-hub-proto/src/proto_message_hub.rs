@@ -25,6 +25,7 @@
 
 use self::{astarte_data_type::Data, astarte_message::Payload};
 use serde::Serialize;
+use std::fmt::{Display, Formatter};
 use uuid::Uuid;
 
 include!("astarteplatform.msghub.rs");
@@ -261,6 +262,87 @@ impl FromIterator<String> for InterfacesJson {
 impl InterfacesName {
     pub fn iter_inner(&self) -> impl Iterator<Item = &str> + Send {
         self.names.iter().map(|s| s.as_str())
+    }
+}
+
+impl From<AstarteMessage> for MessageHubEvent {
+    fn from(value: AstarteMessage) -> Self {
+        Self {
+            event: Some(message_hub_event::Event::Message(value)),
+        }
+    }
+}
+
+impl MessageHubEvent {
+    pub fn take_message(self) -> Option<AstarteMessage> {
+        self.event.and_then(|r| match r {
+            message_hub_event::Event::Message(msg) => Some(msg),
+            message_hub_event::Event::Error(_) => None,
+        })
+    }
+
+    pub fn take_error(self) -> Option<MessageHubError> {
+        self.event.and_then(|r| match r {
+            message_hub_event::Event::Message(_) => None,
+            message_hub_event::Event::Error(err) => Some(err),
+        })
+    }
+
+    pub fn from_error<E>(error: E) -> Self
+    where
+        E: std::error::Error,
+    {
+        Self {
+            event: Some(message_hub_event::Event::Error(
+                MessageHubError::from_error(error),
+            )),
+        }
+    }
+}
+
+impl std::error::Error for MessageHubError {}
+
+impl Display for MessageHubError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.description)?;
+
+        for s in &self.source {
+            write!(f, ": {s}")?;
+        }
+
+        Ok(())
+    }
+}
+
+impl MessageHubError {
+    pub fn new<S>(description: S, source: Vec<String>) -> Self
+    where
+        S: Into<String>,
+    {
+        Self {
+            description: description.into(),
+            source,
+        }
+    }
+
+    pub fn from_error<E>(error: E) -> Self
+    where
+        E: std::error::Error,
+    {
+        let description = error.to_string();
+        let mut source_vec = vec![];
+
+        // the cause need to be cast as a &dyn Error
+        let mut cause: &dyn std::error::Error = &error;
+        while let Some(source) = cause.source() {
+            cause = source;
+            source_vec.push(source.to_string());
+        }
+
+        Self {
+            description,
+            source: source_vec,
+        }
     }
 }
 

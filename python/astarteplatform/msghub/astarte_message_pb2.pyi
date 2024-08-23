@@ -1,10 +1,19 @@
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from astarteplatform.msghub import astarte_type_pb2 as _astarte_type_pb2
+from astarteplatform.msghub import message_hub_error_pb2 as _message_hub_error_pb2
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class MessageHubEvent(_message.Message):
+    __slots__ = ("message", "error")
+    MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    message: AstarteMessage
+    error: _message_hub_error_pb2.MessageHubError
+    def __init__(self, message: _Optional[_Union[AstarteMessage, _Mapping]] = ..., error: _Optional[_Union[_message_hub_error_pb2.MessageHubError, _Mapping]] = ...) -> None: ...
 
 class AstarteMessage(_message.Message):
     __slots__ = ("interface_name", "path", "astarte_data", "astarte_unset", "timestamp")
