@@ -12,16 +12,15 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
-from astarteplatform.msghub import interface_pb2 as astarteplatform_dot_msghub_dot_interface__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!astarteplatform/msghub/node.proto\x12\x16\x61starteplatform.msghub\x1a&astarteplatform/msghub/interface.proto\"-\n\x04Node\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x17\n\x0finterfaces_json\x18\x02 \x03(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!astarteplatform/msghub/node.proto\x12\x16\x61starteplatform.msghub\"\x1f\n\x04Node\x12\x17\n\x0finterfaces_json\x18\x02 \x03(\tb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'astarteplatform.msghub.node_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_NODE']._serialized_start=101
-  _globals['_NODE']._serialized_end=146
+  _globals['_NODE']._serialized_start=61
+  _globals['_NODE']._serialized_end=92
 # @@protoc_insertion_point(module_scope)

@@ -204,6 +204,14 @@ pub mod astarte_message {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstarteUnset {}
+/// This message defines a node to be attached to the Astarte message hub.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Node {
+    /// Array of string representing all .json interface files of the node.
+    #[prost(string, repeated, tag = "2")]
+    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// This message defines a list of json interfaces to be added/removed to the Astarte message hub.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -219,17 +227,6 @@ pub struct InterfacesName {
     /// An array of interfaces' names
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
-/// This message defines a node to be attached to the Astarte message hub.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Node {
-    /// The node identifier.
-    #[prost(string, tag = "1")]
-    pub uuid: ::prost::alloc::string::String,
-    /// Array of string representing all .json interface files of the node.
-    #[prost(string, repeated, tag = "2")]
-    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Generated client implementations.
 pub mod message_hub_client {
