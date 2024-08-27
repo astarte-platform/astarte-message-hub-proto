@@ -26,7 +26,6 @@
 use self::{astarte_data_type::Data, astarte_message::Payload};
 use serde::Serialize;
 use std::fmt::{Display, Formatter};
-use uuid::Uuid;
 
 include!("astarteplatform.msghub.rs");
 
@@ -213,18 +212,13 @@ impl AstarteDataType {
 }
 
 impl Node {
-    /// Create a new [Node] with the given [uuid](Node::uuid) and [interfaces_json](Node::interfaces_json).
-    pub fn new(uuid: &Uuid, interfaces_json: Vec<String>) -> Self {
-        Self {
-            uuid: uuid.to_string(),
-            interfaces_json,
-        }
+    /// Create a new [Node] with the given `interfaces_json`.
+    pub fn new(interfaces_json: Vec<String>) -> Self {
+        Self { interfaces_json }
     }
 
-    pub fn from_interfaces<'a, I, T>(
-        uuid: &Uuid,
-        interfaces: I,
-    ) -> Result<Self, serde_json::error::Error>
+    /// Create a new [Node] from an iterator of interfaces.
+    pub fn from_interfaces<'a, I, T>(interfaces: I) -> Result<Self, serde_json::error::Error>
     where
         I: IntoIterator<Item = &'a T>,
         T: ?Sized + Serialize + 'a,
@@ -234,7 +228,7 @@ impl Node {
             .map(serde_json::to_string)
             .collect::<Result<Vec<String>, serde_json::error::Error>>()?;
 
-        Ok(Self::new(uuid, interfaces_json))
+        Ok(Self::new(interfaces_json))
     }
 }
 
@@ -348,10 +342,9 @@ impl MessageHubError {
 
 #[cfg(test)]
 mod test {
-    use std::collections::HashMap;
-
     use super::astarte_data_type_individual::IndividualData;
     use super::*;
+    use std::collections::HashMap;
 
     #[test]
     fn test_astarte_message_data() {
@@ -445,8 +438,6 @@ mod test {
 
     #[test]
     fn create_node_from_interface_files() {
-        let uuid = Uuid::new_v4();
-
         let device_datastream_interface = r#"{
             "interface_name": "org.astarte-platform.rust.examples.datastream.DeviceDatastream",
             "version_major": 0,
@@ -481,9 +472,8 @@ mod test {
             .map(|s| s.to_string())
             .to_vec();
 
-        let node = Node::new(&uuid, interfaces_json.clone());
+        let node = Node::new(interfaces_json.clone());
 
-        assert_eq!(node.uuid, uuid.to_string());
         assert_eq!(node.interfaces_json.len(), 2);
 
         for (interface, expected) in node.interfaces_json.iter().zip(interfaces_json.iter()) {

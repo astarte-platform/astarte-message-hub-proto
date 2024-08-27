@@ -23,13 +23,14 @@ This module provides access to the Astarte message hub protocol buffers through 
 ```rust
 use std::time;
 
-use clap::Parser;
-
 use astarte_message_hub_proto::astarte_message::Payload;
 use astarte_message_hub_proto::message_hub_client::MessageHubClient;
 use astarte_message_hub_proto::AstarteMessage;
 use astarte_message_hub_proto::Node;
 use astarte_message_hub_proto::pbjson_types::Empty;
+use clap::Parser;
+use tonic::metadata::MetadataValue; 
+use tonic::transport::channel::Endpoint;
 use log::info;
 use uuid::Uuid;
 
@@ -52,10 +53,21 @@ struct Cli {
 async fn run_example_client() {
     env_logger::init();
     let args = Cli::parse();
+    
+    let uuid = Uuid::parse_str(&args.uuid).unwrap();
 
-    let mut client = MessageHubClient::connect("http://[::1]:50051")
+    let channel = Endpoint::from_static("http://[::1]:50051")
+        .connect()
         .await
         .unwrap();
+    
+    // adding the interceptor layer will include the Node ID inside the metadata
+    let mut client =
+        MessageHubClient::with_interceptor(channel, move |mut req: tonic::Request<()>| {
+            req.metadata_mut()
+                .insert_bin("node-id-bin", MetadataValue::from_bytes(uuid.as_ref()));
+            Ok(req)
+        });
 
     let device_datastream_interface: &str = r#"{
         "interface_name": "org.astarte-platform.rust.examples.datastream.DeviceDatastream",
@@ -71,10 +83,9 @@ async fn run_example_client() {
             }
         ]
     }"#;
-
-    let node_id = Uuid::parse_str(&args.uuid).unwrap();
+    
     let interfaces_json = vec![device_datastream_interface.to_string()];
-    let node = Node::new(&node_id, interfaces_json);
+    let node = Node::new(interfaces_json);
 
     let mut stream = client.attach(node.clone()).await.unwrap().into_inner();
 

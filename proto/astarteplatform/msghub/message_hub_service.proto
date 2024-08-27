@@ -25,7 +25,6 @@ package astarteplatform.msghub;
 import "google/protobuf/empty.proto";
 
 import "astarteplatform/msghub/astarte_message.proto";
-import "astarteplatform/msghub/message_hub_error.proto";
 import "astarteplatform/msghub/node.proto";
 import "astarteplatform/msghub/interface.proto";
 

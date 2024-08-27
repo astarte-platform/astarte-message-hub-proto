@@ -39,6 +39,11 @@ install_code (){
       OUT_DIR=$1
       INSTALL_DIR=$2
 
+      # Check if the directory exists and is not empty
+      if [ -d "$INSTALL_DIR"/astarteplatform/msghub ] && [ "$(ls -A "$INSTALL_DIR"/astarteplatform/msghub)" ]; then
+        rm -v "$INSTALL_DIR"/astarteplatform/msghub/*
+      fi
+
       install -d "$INSTALL_DIR"/astarteplatform/msghub
       install -m 644 "$OUT_DIR"/astarteplatform/msghub/* "$INSTALL_DIR"/astarteplatform/msghub
 }
