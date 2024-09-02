@@ -21,27 +21,27 @@ class MessageHubStub(object):
                 '/astarteplatform.msghub.MessageHub/Attach',
                 request_serializer=astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
                 response_deserializer=astarteplatform_dot_msghub_dot_astarte__message__pb2.MessageHubEvent.FromString,
-                )
+                _registered_method=True)
         self.Send = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/Send',
                 request_serializer=astarteplatform_dot_msghub_dot_astarte__message__pb2.AstarteMessage.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+                _registered_method=True)
         self.Detach = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/Detach',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+                _registered_method=True)
         self.AddInterfaces = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/AddInterfaces',
                 request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfacesJson.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+                _registered_method=True)
         self.RemoveInterfaces = channel.unary_unary(
                 '/astarteplatform.msghub.MessageHub/RemoveInterfaces',
                 request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+                _registered_method=True)
 
 
 class MessageHubServicer(object):
@@ -115,6 +115,7 @@ def add_MessageHubServicer_to_server(servicer, server):
     generic_handler = grpc.method_handlers_generic_handler(
             'astarteplatform.msghub.MessageHub', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('astarteplatform.msghub.MessageHub', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -132,11 +133,21 @@ class MessageHub(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/astarteplatform.msghub.MessageHub/Attach',
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/Attach',
             astarteplatform_dot_msghub_dot_node__pb2.Node.SerializeToString,
             astarteplatform_dot_msghub_dot_astarte__message__pb2.MessageHubEvent.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def Send(request,
@@ -149,11 +160,21 @@ class MessageHub(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/Send',
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/Send',
             astarteplatform_dot_msghub_dot_astarte__message__pb2.AstarteMessage.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def Detach(request,
@@ -166,11 +187,21 @@ class MessageHub(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/Detach',
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/Detach',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def AddInterfaces(request,
@@ -183,11 +214,21 @@ class MessageHub(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/AddInterfaces',
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/AddInterfaces',
             astarteplatform_dot_msghub_dot_interface__pb2.InterfacesJson.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def RemoveInterfaces(request,
@@ -200,8 +241,18 @@ class MessageHub(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/astarteplatform.msghub.MessageHub/RemoveInterfaces',
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/RemoveInterfaces',
             astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
