@@ -45,11 +45,11 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: ./grpc/grpc_python_plugin
-        key: grpc-python-plugin-v1.58.1
+        key: grpc-python-plugin-v1.66.1
     - name: Compile from source the grpc_python_plugin
       if: steps.cache-grpc-python-plugin-restore.outputs.cache-hit != 'true'
       run: |
-        git clone -b v1.58.1 https://github.com/grpc/grpc
+        git clone -b v1.66.1 https://github.com/grpc/grpc
         cd grpc
         git submodule update --init
         cmake .

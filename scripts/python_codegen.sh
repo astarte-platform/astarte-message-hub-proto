@@ -18,7 +18,7 @@ codegen () {
 
     if [ ! -d "$DL_DIR/grpc" ]; then
         cd "$DL_DIR"
-        git clone -b v1.58.1 https://github.com/grpc/grpc
+        git clone -b v1.66.1 https://github.com/grpc/grpc
         cd grpc
         git submodule update --init
     fi
