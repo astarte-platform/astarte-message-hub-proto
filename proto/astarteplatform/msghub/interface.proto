@@ -32,3 +32,9 @@ message InterfacesJson {
 message InterfacesName {
   repeated string names = 1; // An array of interfaces' names
 }
+
+/*  */
+enum Ownership {
+  DEVICE = 0;
+  SERVER = 1;
+}
