@@ -229,6 +229,95 @@ pub struct InterfacesName {
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+///
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum Ownership {
+    Device = 0,
+    Server = 1,
+}
+impl Ownership {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Ownership::Device => "DEVICE",
+            Ownership::Server => "SERVER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "DEVICE" => Some(Self::Device),
+            "SERVER" => Some(Self::Server),
+            _ => None,
+        }
+    }
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Property {
+    /// Property path.
+    #[prost(string, tag = "1")]
+    pub path: ::prost::alloc::string::String,
+    /// Astarte data.
+    #[prost(oneof = "property::Value", tags = "2, 3")]
+    pub value: ::core::option::Option<property::Value>,
+}
+/// Nested message and enum types in `Property`.
+pub mod property {
+    /// Astarte data.
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Value {
+        /// Individual property data
+        #[prost(message, tag = "2")]
+        AstarteProperty(super::AstarteDataTypeIndividual),
+        /// Unset property
+        #[prost(message, tag = "3")]
+        AstarteUnset(super::AstarteUnset),
+    }
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfaceProperties {
+    #[prost(enumeration = "Ownership", tag = "1")]
+    pub ownership: i32,
+    #[prost(int32, tag = "2")]
+    pub version_major: i32,
+    #[prost(message, repeated, tag = "3")]
+    pub properties: ::prost::alloc::vec::Vec<Property>,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StoredProperties {
+    #[prost(map = "string, message", tag = "1")]
+    pub interface_properties: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        InterfaceProperties,
+    >,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StoredPropertiesFilter {
+    #[prost(enumeration = "Ownership", optional, tag = "1")]
+    pub ownership: ::core::option::Option<i32>,
+}
+///
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PropertyIdentifier {
+    #[prost(string, tag = "1")]
+    pub interface_name: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub path: ::prost::alloc::string::String,
+}
 /// Generated client implementations.
 pub mod message_hub_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
@@ -440,6 +529,90 @@ pub mod message_hub_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        ///
+        pub async fn get_properties(
+            &mut self,
+            request: impl tonic::IntoRequest<super::InterfacesName>,
+        ) -> std::result::Result<
+            tonic::Response<super::StoredProperties>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/GetProperties",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("astarteplatform.msghub.MessageHub", "GetProperties"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        ///
+        pub async fn get_all_properties(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StoredPropertiesFilter>,
+        ) -> std::result::Result<
+            tonic::Response<super::StoredProperties>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/GetAllProperties",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "astarteplatform.msghub.MessageHub",
+                        "GetAllProperties",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        ///
+        pub async fn get_property(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PropertyIdentifier>,
+        ) -> std::result::Result<tonic::Response<super::Property>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/GetProperty",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("astarteplatform.msghub.MessageHub", "GetProperty"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -481,6 +654,27 @@ pub mod message_hub_server {
             &self,
             request: tonic::Request<super::InterfacesName>,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ///
+        async fn get_properties(
+            &self,
+            request: tonic::Request<super::InterfacesName>,
+        ) -> std::result::Result<
+            tonic::Response<super::StoredProperties>,
+            tonic::Status,
+        >;
+        ///
+        async fn get_all_properties(
+            &self,
+            request: tonic::Request<super::StoredPropertiesFilter>,
+        ) -> std::result::Result<
+            tonic::Response<super::StoredProperties>,
+            tonic::Status,
+        >;
+        ///
+        async fn get_property(
+            &self,
+            request: tonic::Request<super::PropertyIdentifier>,
+        ) -> std::result::Result<tonic::Response<super::Property>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct MessageHubServer<T: MessageHub> {
@@ -776,6 +970,144 @@ pub mod message_hub_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = RemoveInterfacesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/GetProperties" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetPropertiesSvc<T: MessageHub>(pub Arc<T>);
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<super::InterfacesName>
+                    for GetPropertiesSvc<T> {
+                        type Response = super::StoredProperties;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::InterfacesName>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MessageHub>::get_properties(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetPropertiesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/GetAllProperties" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetAllPropertiesSvc<T: MessageHub>(pub Arc<T>);
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<super::StoredPropertiesFilter>
+                    for GetAllPropertiesSvc<T> {
+                        type Response = super::StoredProperties;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StoredPropertiesFilter>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MessageHub>::get_all_properties(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetAllPropertiesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/GetProperty" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetPropertySvc<T: MessageHub>(pub Arc<T>);
+                    impl<
+                        T: MessageHub,
+                    > tonic::server::UnaryService<super::PropertyIdentifier>
+                    for GetPropertySvc<T> {
+                        type Response = super::Property;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::PropertyIdentifier>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MessageHub>::get_property(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetPropertySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

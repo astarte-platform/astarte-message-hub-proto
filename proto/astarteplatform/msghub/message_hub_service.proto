@@ -27,6 +27,7 @@ import "google/protobuf/empty.proto";
 import "astarteplatform/msghub/astarte_message.proto";
 import "astarteplatform/msghub/node.proto";
 import "astarteplatform/msghub/interface.proto";
+import "astarteplatform/msghub/property.proto";
 
 service MessageHub {
   /* This function should be used to attach a node to an instance of the Astarte message hub.
@@ -41,4 +42,10 @@ service MessageHub {
   rpc AddInterfaces(InterfacesJson) returns (google.protobuf.Empty){}
   /* This function should be used to remove one or more interfaces from an instance of the Astarte message hub. */
   rpc RemoveInterfaces(InterfacesName) returns (google.protobuf.Empty){}
+  /*  */
+  rpc GetProperties(InterfacesName) returns (StoredProperties){}
+  /*  */
+  rpc GetAllProperties(StoredPropertiesFilter) returns (StoredProperties){}
+  /*  */
+  rpc GetProperty(PropertyIdentifier) returns (Property) {}
 }

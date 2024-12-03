@@ -1,0 +1,60 @@
+/*
+ * This file is part of Astarte.
+ *
+ * Copyright 2024 SECO Mind Srl
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+
+syntax = "proto3";
+
+package astarteplatform.msghub;
+
+import "astarteplatform/msghub/astarte_message.proto";
+import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/interface.proto";
+
+/*  */
+message Property {
+  string path = 1;                      // Property path.
+  oneof value {                         // Astarte data.
+    AstarteDataTypeIndividual astarte_property = 2;      // Individual property data
+    AstarteUnset astarte_unset = 3;                   // Unset property
+  }
+}
+
+/* */
+message InterfaceProperties {
+  Ownership ownership = 1;
+  int32 version_major = 2;
+  repeated Property properties = 3;
+}
+
+/*  */
+message StoredProperties {
+  map<string, InterfaceProperties> interface_properties = 1;
+}
+
+/*  */
+message StoredPropertiesFilter {
+  optional Ownership ownership = 1;
+}
+
+/*  */
+message PropertyIdentifier {
+  string interface_name = 1;
+  string path = 2;
+}
