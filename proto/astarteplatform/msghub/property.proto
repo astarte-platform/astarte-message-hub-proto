@@ -23,18 +23,34 @@ syntax = "proto3";
 
 package astarteplatform.msghub;
 
-/* This message defines a list of json interfaces to be added/removed to the Astarte message hub. */
-message InterfacesJson {
-  repeated string interfaces_json = 1; // An array of json interfaces.
+import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/interface.proto";
+
+/*  */
+message Property {
+  string path = 1;
+  AstarteDataTypeIndividual value = 2;
 }
 
-/* This message defines a list of interfaces' names to be removed from the Astarte message hub. */
-message InterfacesName {
-  repeated string names = 1; // An array of interfaces' names
+/* */
+message InterfaceProperties {
+  Ownership ownership = 1;
+  uint32 version_major = 2;
+  repeated Property properties = 3;
 }
 
 /*  */
-enum Ownership {
-  DEVICE = 0;
-  SERVER = 1;
+message StoredProperties {
+  map<string, InterfaceProperties> interface_properties = 1;
+}
+
+/*  */
+message StoredPropertiesFilter {
+  optional Ownership ownership = 1;
+}
+
+/*  */
+message PropertyIdentifier {
+  string interface_name = 1;
+  string path = 2;
 }
