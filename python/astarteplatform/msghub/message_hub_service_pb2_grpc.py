@@ -5,6 +5,7 @@ import grpc
 from astarteplatform.msghub import astarte_message_pb2 as astarteplatform_dot_msghub_dot_astarte__message__pb2
 from astarteplatform.msghub import interface_pb2 as astarteplatform_dot_msghub_dot_interface__pb2
 from astarteplatform.msghub import node_pb2 as astarteplatform_dot_msghub_dot_node__pb2
+from astarteplatform.msghub import property_pb2 as astarteplatform_dot_msghub_dot_property__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
@@ -41,6 +42,21 @@ class MessageHubStub(object):
                 '/astarteplatform.msghub.MessageHub/RemoveInterfaces',
                 request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.GetProperties = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/GetProperties',
+                request_serializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.SerializeToString,
+                response_deserializer=astarteplatform_dot_msghub_dot_property__pb2.StoredProperties.FromString,
+                _registered_method=True)
+        self.GetAllProperties = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/GetAllProperties',
+                request_serializer=astarteplatform_dot_msghub_dot_property__pb2.StoredPropertiesFilter.SerializeToString,
+                response_deserializer=astarteplatform_dot_msghub_dot_property__pb2.StoredProperties.FromString,
+                _registered_method=True)
+        self.GetProperty = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/GetProperty',
+                request_serializer=astarteplatform_dot_msghub_dot_property__pb2.PropertyIdentifier.SerializeToString,
+                response_deserializer=astarteplatform_dot_msghub_dot_property__pb2.Property.FromString,
                 _registered_method=True)
 
 
@@ -83,6 +99,27 @@ class MessageHubServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetProperties(self, request, context):
+        """
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAllProperties(self, request, context):
+        """
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetProperty(self, request, context):
+        """
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MessageHubServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -110,6 +147,21 @@ def add_MessageHubServicer_to_server(servicer, server):
                     servicer.RemoveInterfaces,
                     request_deserializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetProperties': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetProperties,
+                    request_deserializer=astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.FromString,
+                    response_serializer=astarteplatform_dot_msghub_dot_property__pb2.StoredProperties.SerializeToString,
+            ),
+            'GetAllProperties': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAllProperties,
+                    request_deserializer=astarteplatform_dot_msghub_dot_property__pb2.StoredPropertiesFilter.FromString,
+                    response_serializer=astarteplatform_dot_msghub_dot_property__pb2.StoredProperties.SerializeToString,
+            ),
+            'GetProperty': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetProperty,
+                    request_deserializer=astarteplatform_dot_msghub_dot_property__pb2.PropertyIdentifier.FromString,
+                    response_serializer=astarteplatform_dot_msghub_dot_property__pb2.Property.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -247,6 +299,87 @@ class MessageHub(object):
             '/astarteplatform.msghub.MessageHub/RemoveInterfaces',
             astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetProperties(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/GetProperties',
+            astarteplatform_dot_msghub_dot_interface__pb2.InterfacesName.SerializeToString,
+            astarteplatform_dot_msghub_dot_property__pb2.StoredProperties.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetAllProperties(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/GetAllProperties',
+            astarteplatform_dot_msghub_dot_property__pb2.StoredPropertiesFilter.SerializeToString,
+            astarteplatform_dot_msghub_dot_property__pb2.StoredProperties.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetProperty(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/GetProperty',
+            astarteplatform_dot_msghub_dot_property__pb2.PropertyIdentifier.SerializeToString,
+            astarteplatform_dot_msghub_dot_property__pb2.Property.FromString,
             options,
             channel_credentials,
             insecure,
