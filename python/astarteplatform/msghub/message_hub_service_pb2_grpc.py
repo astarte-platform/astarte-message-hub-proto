@@ -100,21 +100,21 @@ class MessageHubServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetProperties(self, request, context):
-        """
+        """Get properties associated with the passed interfaces. 
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAllProperties(self, request, context):
-        """
+        """Get all the properties, allowing also filtering by interface ownership. 
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetProperty(self, request, context):
-        """
+        """Get a specific property by its identifier, could be an unset property  
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

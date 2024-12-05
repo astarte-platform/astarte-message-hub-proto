@@ -33,7 +33,7 @@ message InterfacesName {
   repeated string names = 1; // An array of interfaces' names
 }
 
-/*  */
+/* Enum representing an Astarte interface ownership. */
 enum Ownership {
   DEVICE = 0;
   SERVER = 1;
