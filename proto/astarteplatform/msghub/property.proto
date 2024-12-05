@@ -27,7 +27,9 @@ import "astarteplatform/msghub/astarte_message.proto";
 import "astarteplatform/msghub/astarte_type.proto";
 import "astarteplatform/msghub/interface.proto";
 
-/*  */
+/* A message representing the property value associated to a certain interface and path.
+ * Required for the `GetProperty` method that could need to return an unset property.
+ */
 message Property {
   string path = 1;                      // Property path.
   oneof value {                         // Astarte data.
@@ -36,25 +38,28 @@ message Property {
   }
 }
 
-/* */
+/* A message containing all the properties values and information associated to a given astarte interface. */
 message InterfaceProperties {
-  Ownership ownership = 1;
-  int32 version_major = 2;
-  repeated Property properties = 3;
+  Ownership ownership = 1;            // Interface ownership.
+  int32 version_major = 2;           // Interface major version.
+  repeated Property properties = 3;   // A list of Properties values. These properties should not be unset
 }
 
-/*  */
+/* This message is the response to the GetProperties rpc method. */
 message StoredProperties {
-  map<string, InterfaceProperties> interface_properties = 1;
+  map<string, InterfaceProperties> interface_properties = 1; // Map interface names to interface property data.
 }
 
-/*  */
+/* This message is the request to the GetAllProperties rpc.
+ * If the ownership is not specified, all the interfaces are retrieved, both device and server owned.
+ * Otherwise, only the interfaces with the specified interfaces are retrieved.
+ */
 message StoredPropertiesFilter {
-  optional Ownership ownership = 1;
+  optional Ownership ownership = 1;   // Optional field representing the ownership of the interface to retrieve.
 }
 
-/*  */
+/* This message is the request for a single property identified by interface name and path. */
 message PropertyIdentifier {
-  string interface_name = 1;
-  string path = 2;
+  string interface_name = 1;    // Interface name.
+  string path = 2;              // Property path.
 }

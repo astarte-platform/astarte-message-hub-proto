@@ -42,10 +42,10 @@ service MessageHub {
   rpc AddInterfaces(InterfacesJson) returns (google.protobuf.Empty){}
   /* This function should be used to remove one or more interfaces from an instance of the Astarte message hub. */
   rpc RemoveInterfaces(InterfacesName) returns (google.protobuf.Empty){}
-  /*  */
+  /* Get properties associated with the passed interfaces. */
   rpc GetProperties(InterfacesName) returns (StoredProperties){}
-  /*  */
+  /* Get all the properties, allowing also filtering by interface ownership. */
   rpc GetAllProperties(StoredPropertiesFilter) returns (StoredProperties){}
-  /*  */
+  /* Get a specific property by its identifier, could be an unset property  */
   rpc GetProperty(PropertyIdentifier) returns (Property) {}
 }
