@@ -1,0 +1,93 @@
+# This file is part of Astarte.
+#
+# Copyright 2025 SECO Mind Srl
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: C++ code generation
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+
+env:
+  PB_REL: https://github.com/protocolbuffers/protobuf/releases
+  PB_VER: '26.1'
+
+jobs:
+  cpp-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        path: astarte-message-hub-proto
+    - name: Install gRPC dependencies
+      run: |
+        sudo apt install -y build-essential autoconf libtool pkg-config
+    - name: Check out the gRPC repo
+      run: git clone --recurse-submodules -b v1.66.1 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+    - name: Set MY_INSTALL_DIR variable
+      run: |
+        MY_INSTALL_DIR=$PWD/grpc-install
+        echo "MY_INSTALL_DIR=$MY_INSTALL_DIR" >> $GITHUB_ENV
+        mkdir -p $MY_INSTALL_DIR
+        echo "$MY_INSTALL_DIR" >> "$GITHUB_PATH"
+    - name: Restore cached gRPC build directory
+      id: cache-grpc-cpp-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          ./grpc/cmake
+          ./grpc-install
+        key: grpc-cpp-v1.66.1
+    - name: Compile from source gRPC
+      if: steps.cache-grpc-cpp-restore.outputs.cache-hit != 'true'
+      run: |
+        mkdir ./grpc/cmake/build
+        pushd ./grpc/cmake/build
+        cmake -DgRPC_INSTALL=ON \
+              -DgRPC_BUILD_TESTS=OFF \
+              -DCMAKE_CXX_STANDARD=17 \
+              -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR \
+              ../..
+        make -j $(nproc)
+        make install
+        popd
+    - name: Cache the gRPC build directory
+      if: steps.cache-grpc-cpp-restore.outputs.cache-hit != 'true'
+      id: cache-grpc-cpp-save
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          ./grpc/cmake
+          ./grpc-install
+        key: ${{ steps.cache-grpc-cpp-restore.outputs.cache-primary-key }}
+    - name: Remove old code
+      working-directory: ./astarte-message-hub-proto/cpp
+      run: (! test -d ./astarteplatform) || rm -r ./astarteplatform
+    - name: Generate code
+      working-directory: ./astarte-message-hub-proto/cpp
+      run: |
+        mkdir -p ./cmake/build
+        cd ./cmake/build
+        cmake ../..
+        make
+    - name: Upload artifact with generated code
+      uses: actions/upload-artifact@v4
+      with:
+        name: cpp-dist
+        path: ./astarte-message-hub-proto/cpp/astarteplatform

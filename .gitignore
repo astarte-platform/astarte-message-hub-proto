@@ -22,3 +22,6 @@ target/
 output/
 
 .pre-commit-config.yaml
+
+# CMake build directory
+cmake/

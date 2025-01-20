@@ -39,3 +39,6 @@ jobs:
       - name: Check the Python generated code
         run: |
           git --no-pager diff --no-index -- ./python-dist ./python/astarteplatform
+      - name: Check the C++ generated code
+        run: |
+          git --no-pager diff --no-index -- ./cpp-dist ./cpp/astarteplatform

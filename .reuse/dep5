@@ -6,6 +6,10 @@ Files: python/astarteplatform/msghub/*
 Copyright: SECO Mind Srl
 License: CC0-1.0
 
+Files: cpp/astarteplatform/msghub/*
+Copyright: SECO Mind Srl
+License: Apache-2.0
+
 Files: rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
 Copyright: SECO Mind Srl
 License: Apache-2.0

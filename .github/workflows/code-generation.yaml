@@ -39,8 +39,11 @@ jobs:
   rust-code-generation:
     needs: [ reuse ]
     uses: ./.github/workflows/rust-code-generation.yaml
+  cpp-code-generation:
+    needs: [ reuse ]
+    uses: ./.github/workflows/cpp-code-generation.yaml
   check-codegen:
-    needs: [ python-code-generation, rust-code-generation ]
+    needs: [ python-code-generation, rust-code-generation, cpp-code-generation ]
     uses: ./.github/workflows/check-code-generation.yaml
   rust-code-check:
     needs: [ check-codegen ]
