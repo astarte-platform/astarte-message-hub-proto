@@ -11,28 +11,40 @@ codegen () {
     OUT_DIR=$3
     DL_DIR=$4
 
+    # Check if the environment and dependencies are ok
+    if [ ! -d ".venv" ]; then
+        python3 -m venv .venv
+    fi
+    source .venv/bin/activate
+    pip install --upgrade pip
+    package_name="grpcio"
+    package_version="1.69.0"
+    installed_version=$((pip show $package_name | grep Version | awk '{print $2}') || true)
+    if [ "$installed_version" != "$package_version" ]; then
+        pip install $package_name==$package_version
+        if [ $? -ne 0 ]; then
+            echo "Failed to install $package_name version $package_version."
+            exit 1
+        fi
+    fi
+    package_name="grpcio-tools"
+    package_version="1.69.0"
+    installed_version=$((pip show $package_name | grep Version | awk '{print $2}') || true)
+    if [ "$installed_version" != "$package_version" ]; then
+        pip install $package_name==$package_version
+        if [ $? -ne 0 ]; then
+            echo "Failed to install $package_name version $package_version."
+            exit 1
+        fi
+    fi
+    pip install termcolor
+
     # Remove old code
     if [ -d "$OUT_DIR/astarteplatform" ]; then
         rm -r "$OUT_DIR/astarteplatform"
     fi
 
-    if [ ! -d "$DL_DIR/grpc" ]; then
-        cd "$DL_DIR"
-        git clone -b v1.66.1 https://github.com/grpc/grpc
-        cd grpc
-        git submodule update --init
-    fi
-
-    if [ ! -f "$DL_DIR/grpc/grpc_python_plugin" ]; then
-        cd "$DL_DIR/grpc"
-        cmake .
-        make -j$(nproc) grpc_python_plugin
-        python3 -m pip install --upgrade pip
-        python3 -m pip install termcolor
-        cd -
-    fi
-
-    python3 "$PROJECT_DIR/protoc.py" "$DL_DIR/grpc/grpc_python_plugin" --proto_dir "$PROTO_DIR" --out_dir "$OUT_DIR"
+    python "$PROJECT_DIR/protoc.py" --proto_dir "$PROTO_DIR" --out_dir "$OUT_DIR"
     }
 
 install_code (){

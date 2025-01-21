@@ -14,6 +14,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Bump protoc version to 29.0 for C++ and Python and 29.3 for Rust.
+- Bump gRPC version to 1.69.0.
 - Bump Rust MSRV to 1.78.0.
 
 ## [0.7.0] - 2024-09-02
