@@ -10,9 +10,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - Get properties API. [astarte-device-sdk-rust#290](https://github.com/astarte-platform/astarte-device-sdk-rust/issues/290)
+- Support for C++.
 
 ### Changed
 
+- Bump protoc version to 29.0 for C++ and Python and 29.3 for Rust.
+- Bump gRPC version to 1.69.0.
 - Bump Rust MSRV to 1.78.0.
 
 ## [0.7.0] - 2024-09-02

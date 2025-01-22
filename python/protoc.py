@@ -26,11 +26,13 @@ import subprocess
 from termcolor import cprint
 
 
-def run_protoc(grpc_python_plugin: str, proto_root_fld: Path, out_fld: Path):
+def run_protoc(proto_root_fld: Path, out_fld: Path):
     """
     Run system protoc over the .proto files contained in this repo.
     """
-    result = subprocess.run("protoc --version", capture_output=True, shell=True, check=True)
+    result = subprocess.run(
+        "python -m grpc_tools.protoc --version", capture_output=True, shell=True, check=True
+    )
     result.check_returncode()
     cprint(f"Installed protoc: {result.stdout.decode('utf-8')}", "green")
 
@@ -38,7 +40,7 @@ def run_protoc(grpc_python_plugin: str, proto_root_fld: Path, out_fld: Path):
     srcs = [src_fld.joinpath(f) for f in src_fld.glob("*.proto")]
     for src in srcs:
         cmd = [
-            f"protoc --plugin=protoc-gen-grpc_python={grpc_python_plugin}",
+            "python -m grpc_tools.protoc",
             f'-I="{proto_root_fld}"',
             f'--python_out="{out_fld}"',
             f'--pyi_out="{out_fld}"',
@@ -54,13 +56,11 @@ if __name__ == "__main__":
     python_fld = Path(__file__).parent
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("grpc_python_plugin")
     parser.add_argument("--proto_dir", default=python_fld.parent.joinpath("proto"))
     parser.add_argument("--out_dir", default=python_fld)
     args = parser.parse_args()
 
     run_protoc(
-        args.grpc_python_plugin,
         proto_root_fld=Path(args.proto_dir),
         out_fld=args.out_dir,
     )
