@@ -17,6 +17,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+
+pub use mockall;
+
 use mockall::mock;
 
 mock! {
