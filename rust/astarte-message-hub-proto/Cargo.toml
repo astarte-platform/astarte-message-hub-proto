@@ -6,14 +6,16 @@
 
 [package]
 name = "astarte-message-hub-proto"
-version = "0.7.0"
-documentation = "https://docs.rs/astarte-message-hub-proto"
-edition = { workspace = true }
-homepage = "https://astarte.cloud/"
-license = { workspace = true }
-repository = "https://github.com/astarte-platform/astarte-message-hub-proto"
-rust-version = { workspace = true }
+version.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+readme.workspace = true
 description = "Astarte message hub protocol buffers for Rust"
+categories = ["api-bindings"]
+keywords = ["astarte", "protobuf", "iot"]
 
 [dependencies]
 chrono = { workspace = true }
