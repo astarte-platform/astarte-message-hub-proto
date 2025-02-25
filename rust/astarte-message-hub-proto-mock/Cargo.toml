@@ -1,0 +1,24 @@
+# This file is part of Astarte.
+#
+# Copyright 2025 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+[package]
+name = "astarte-message-hub-proto-mock"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+rust-version.workspace = true
+readme.workspace = true
+repository.workspace = true
+description = "Astarte message hub protocol buffers mock crate"
+keywords = ["test", "mock"]
+categories = ["development-tools::testing"]
+
+[dependencies]
+astarte-message-hub-proto = { workspace = true }
+mockall = { workspace = true }
+pbjson-types = { workspace = true }
+tonic = { workspace = true }

@@ -35,7 +35,9 @@ jobs:
         with:
           toolchain: stable
       - name: Publish astarte-message-hub-proto
-        run: cargo publish -p astarte-message-hub-proto
+        run: |
+          cargo publish -p astarte-message-hub-proto
+          cargo publish -p astarte-message-hub-proto-mock
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
         working-directory: ./rust

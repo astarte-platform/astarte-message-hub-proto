@@ -109,7 +109,6 @@ dependencies = [
  "clap",
  "env_logger",
  "log",
- "mockall",
  "pbjson-types",
  "prost",
  "serde",
@@ -118,6 +117,16 @@ dependencies = [
  "tokio",
  "tonic",
  "uuid",
+]
+
+[[package]]
+name = "astarte-message-hub-proto-mock"
+version = "0.7.0"
+dependencies = [
+ "astarte-message-hub-proto",
+ "mockall",
+ "pbjson-types",
+ "tonic",
 ]
 
 [[package]]

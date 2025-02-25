@@ -19,8 +19,6 @@
  */
 use mockall::mock;
 
-pub type Streaming<T> = MockStreaming<T>;
-
 mock! {
     pub Streaming<T: 'static> {
         pub async fn message(&mut self) -> Result<Option<T>, tonic::Status>;
@@ -40,18 +38,18 @@ mock! {
             &mut self,
             request: R,
         ) -> std::result::Result<
-            tonic::Response<Streaming<crate::MessageHubEvent>>,
+            tonic::Response<MockStreaming<astarte_message_hub_proto::MessageHubEvent>>,
             tonic::Status,
         >
         where
-            R: tonic::IntoRequest<crate::Node> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::Node> + 'static;
 
         pub async fn send<R>(
             &mut self,
             request: R,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
         where
-            R: tonic::IntoRequest<crate::AstarteMessage> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::AstarteMessage> + 'static;
 
         pub async fn detach<R>(
             &mut self,
@@ -65,41 +63,41 @@ mock! {
             request: R,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
         where
-            R: tonic::IntoRequest<crate::InterfacesJson> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::InterfacesJson> + 'static;
 
         pub async fn remove_interfaces<R>(
             &mut self,
             request: R,
         ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
         where
-            R: tonic::IntoRequest<crate::InterfacesName> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::InterfacesName> + 'static;
 
         pub async fn get_properties<R>(
             &mut self,
             request: R,
         ) -> std::result::Result<
-            tonic::Response<crate::StoredProperties>,
+            tonic::Response<astarte_message_hub_proto::StoredProperties>,
             tonic::Status,
         >
         where
-            R: tonic::IntoRequest<crate::InterfacesName> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::InterfacesName> + 'static;
 
         pub async fn get_all_properties<R>(
             &mut self,
             request: R,
         ) -> std::result::Result<
-            tonic::Response<crate::StoredProperties>,
+            tonic::Response<astarte_message_hub_proto::StoredProperties>,
             tonic::Status,
         >
         where
-            R: tonic::IntoRequest<crate::StoredPropertiesFilter> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::StoredPropertiesFilter> + 'static;
 
         pub async fn get_property<R>(
             &mut self,
             request: R,
-        ) -> std::result::Result<tonic::Response<crate::Property>, tonic::Status>
+        ) -> std::result::Result<tonic::Response<astarte_message_hub_proto::Property>, tonic::Status>
         where
-            R: tonic::IntoRequest<crate::PropertyIdentifier> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::PropertyIdentifier> + 'static;
     }
 
     impl<T: 'static> std::clone::Clone for MessageHubClient<T> {

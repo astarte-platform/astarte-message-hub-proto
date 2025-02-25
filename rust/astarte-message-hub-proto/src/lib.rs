@@ -19,10 +19,6 @@
  */
 #![doc = include_str!("../README.md")]
 
-#[cfg(feature = "mock")]
-pub use mockall;
-#[cfg(feature = "mock")]
-pub mod mock;
 mod proto_message_hub;
 pub mod types;
 pub use crate::proto_message_hub::*;
