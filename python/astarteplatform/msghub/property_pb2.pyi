@@ -1,5 +1,4 @@
-from astarteplatform.msghub import astarte_message_pb2 as _astarte_message_pb2
-from astarteplatform.msghub import astarte_type_pb2 as _astarte_type_pb2
+from astarteplatform.msghub import astarte_data_pb2 as _astarte_data_pb2
 from astarteplatform.msghub import interface_pb2 as _interface_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
@@ -9,14 +8,12 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Property(_message.Message):
-    __slots__ = ("path", "astarte_property", "astarte_unset")
+    __slots__ = ("path", "data")
     PATH_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_PROPERTY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_UNSET_FIELD_NUMBER: _ClassVar[int]
+    DATA_FIELD_NUMBER: _ClassVar[int]
     path: str
-    astarte_property: _astarte_type_pb2.AstarteDataTypeIndividual
-    astarte_unset: _astarte_message_pb2.AstarteUnset
-    def __init__(self, path: _Optional[str] = ..., astarte_property: _Optional[_Union[_astarte_type_pb2.AstarteDataTypeIndividual, _Mapping]] = ..., astarte_unset: _Optional[_Union[_astarte_message_pb2.AstarteUnset, _Mapping]] = ...) -> None: ...
+    data: _astarte_data_pb2.AstarteData
+    def __init__(self, path: _Optional[str] = ..., data: _Optional[_Union[_astarte_data_pb2.AstarteData, _Mapping]] = ...) -> None: ...
 
 class InterfaceProperties(_message.Message):
     __slots__ = ("ownership", "version_major", "properties")

@@ -58,7 +58,7 @@ fn main() -> color_eyre::Result<()> {
         proto_dir.join("astarteplatform/msghub/message_hub_service.proto"),
         proto_dir.join("astarteplatform/msghub/node.proto"),
         proto_dir.join("astarteplatform/msghub/astarte_message.proto"),
-        proto_dir.join("astarteplatform/msghub/astarte_type.proto"),
+        proto_dir.join("astarteplatform/msghub/astarte_data.proto"),
         proto_dir.join("astarteplatform/msghub/config.proto"),
         proto_dir.join("astarteplatform/msghub/interface.proto"),
         proto_dir.join("astarteplatform/msghub/property.proto"),

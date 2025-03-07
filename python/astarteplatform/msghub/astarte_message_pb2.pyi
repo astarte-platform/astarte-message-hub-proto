@@ -1,5 +1,5 @@
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
-from astarteplatform.msghub import astarte_type_pb2 as _astarte_type_pb2
+from astarteplatform.msghub import astarte_data_pb2 as _astarte_data_pb2
 from astarteplatform.msghub import message_hub_error_pb2 as _message_hub_error_pb2
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -16,19 +16,17 @@ class MessageHubEvent(_message.Message):
     def __init__(self, message: _Optional[_Union[AstarteMessage, _Mapping]] = ..., error: _Optional[_Union[_message_hub_error_pb2.MessageHubError, _Mapping]] = ...) -> None: ...
 
 class AstarteMessage(_message.Message):
-    __slots__ = ("interface_name", "path", "astarte_data", "astarte_unset", "timestamp")
+    __slots__ = ("interface_name", "path", "timestamp", "datastream_individual", "datastream_object", "property_individual")
     INTERFACE_NAME_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_UNSET_FIELD_NUMBER: _ClassVar[int]
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
+    DATASTREAM_INDIVIDUAL_FIELD_NUMBER: _ClassVar[int]
+    DATASTREAM_OBJECT_FIELD_NUMBER: _ClassVar[int]
+    PROPERTY_INDIVIDUAL_FIELD_NUMBER: _ClassVar[int]
     interface_name: str
     path: str
-    astarte_data: _astarte_type_pb2.AstarteDataType
-    astarte_unset: AstarteUnset
     timestamp: _timestamp_pb2.Timestamp
-    def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ..., astarte_data: _Optional[_Union[_astarte_type_pb2.AstarteDataType, _Mapping]] = ..., astarte_unset: _Optional[_Union[AstarteUnset, _Mapping]] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
-
-class AstarteUnset(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    datastream_individual: _astarte_data_pb2.AstarteDatastreamInidividual
+    datastream_object: _astarte_data_pb2.AstarteDatastreamObject
+    property_individual: _astarte_data_pb2.AstartePropertyIndividual
+    def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., datastream_individual: _Optional[_Union[_astarte_data_pb2.AstarteDatastreamInidividual, _Mapping]] = ..., datastream_object: _Optional[_Union[_astarte_data_pb2.AstarteDatastreamObject, _Mapping]] = ..., property_individual: _Optional[_Union[_astarte_data_pb2.AstartePropertyIndividual, _Mapping]] = ...) -> None: ...
