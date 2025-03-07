@@ -71,33 +71,33 @@ pub mod astarte_data {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AstarteData {
         #[prost(double, tag = "1")]
-        AstarteDataDouble(f64),
+        Double(f64),
         #[prost(int32, tag = "2")]
-        AstarteDataInteger(i32),
+        Integer(i32),
         #[prost(bool, tag = "3")]
-        AstarteDataBoolean(bool),
+        Boolean(bool),
         #[prost(int64, tag = "4")]
-        AstarteDataLongInteger(i64),
+        LongInteger(i64),
         #[prost(string, tag = "5")]
-        AstarteDataString(::prost::alloc::string::String),
+        String(::prost::alloc::string::String),
         #[prost(bytes, tag = "6")]
-        AstarteDataBinaryBlob(::prost::alloc::vec::Vec<u8>),
+        BinaryBlob(::prost::alloc::vec::Vec<u8>),
         #[prost(message, tag = "7")]
-        AstarteDataDateTime(::pbjson_types::Timestamp),
+        DateTime(::pbjson_types::Timestamp),
         #[prost(message, tag = "8")]
-        AstarteDataDoubleArray(super::AstarteDoubleArray),
+        DoubleArray(super::AstarteDoubleArray),
         #[prost(message, tag = "9")]
-        AstarteDataIntegerArray(super::AstarteIntegerArray),
+        IntegerArray(super::AstarteIntegerArray),
         #[prost(message, tag = "10")]
-        AstarteDataBooleanArray(super::AstarteBooleanArray),
+        BooleanArray(super::AstarteBooleanArray),
         #[prost(message, tag = "11")]
-        AstarteDataLongIntegerArray(super::AstarteLongIntegerArray),
+        LongIntegerArray(super::AstarteLongIntegerArray),
         #[prost(message, tag = "12")]
-        AstarteDataStringArray(super::AstarteStringArray),
+        StringArray(super::AstarteStringArray),
         #[prost(message, tag = "13")]
-        AstarteDataBinaryBlobArray(super::AstarteBinaryBlobArray),
+        BinaryBlobArray(super::AstarteBinaryBlobArray),
         #[prost(message, tag = "14")]
-        AstarteDataDateTimeArray(super::AstarteDateTimeArray),
+        DateTimeArray(super::AstarteDateTimeArray),
     }
 }
 /// A datastream individual data type.

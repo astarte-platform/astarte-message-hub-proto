@@ -49,36 +49,36 @@ class AstarteDateTimeArray(_message.Message):
     def __init__(self, values: _Optional[_Iterable[_Union[_timestamp_pb2.Timestamp, _Mapping]]] = ...) -> None: ...
 
 class AstarteData(_message.Message):
-    __slots__ = ("astarte_data_double", "astarte_data_integer", "astarte_data_boolean", "astarte_data_long_integer", "astarte_data_string", "astarte_data_binary_blob", "astarte_data_date_time", "astarte_data_double_array", "astarte_data_integer_array", "astarte_data_boolean_array", "astarte_data_long_integer_array", "astarte_data_string_array", "astarte_data_binary_blob_array", "astarte_data_date_time_array")
-    ASTARTE_DATA_DOUBLE_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_INTEGER_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_BOOLEAN_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_LONG_INTEGER_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_STRING_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_BINARY_BLOB_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_DATE_TIME_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_DOUBLE_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_INTEGER_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_BOOLEAN_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_LONG_INTEGER_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_STRING_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_BINARY_BLOB_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    ASTARTE_DATA_DATE_TIME_ARRAY_FIELD_NUMBER: _ClassVar[int]
-    astarte_data_double: float
-    astarte_data_integer: int
-    astarte_data_boolean: bool
-    astarte_data_long_integer: int
-    astarte_data_string: str
-    astarte_data_binary_blob: bytes
-    astarte_data_date_time: _timestamp_pb2.Timestamp
-    astarte_data_double_array: AstarteDoubleArray
-    astarte_data_integer_array: AstarteIntegerArray
-    astarte_data_boolean_array: AstarteBooleanArray
-    astarte_data_long_integer_array: AstarteLongIntegerArray
-    astarte_data_string_array: AstarteStringArray
-    astarte_data_binary_blob_array: AstarteBinaryBlobArray
-    astarte_data_date_time_array: AstarteDateTimeArray
-    def __init__(self, astarte_data_double: _Optional[float] = ..., astarte_data_integer: _Optional[int] = ..., astarte_data_boolean: bool = ..., astarte_data_long_integer: _Optional[int] = ..., astarte_data_string: _Optional[str] = ..., astarte_data_binary_blob: _Optional[bytes] = ..., astarte_data_date_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., astarte_data_double_array: _Optional[_Union[AstarteDoubleArray, _Mapping]] = ..., astarte_data_integer_array: _Optional[_Union[AstarteIntegerArray, _Mapping]] = ..., astarte_data_boolean_array: _Optional[_Union[AstarteBooleanArray, _Mapping]] = ..., astarte_data_long_integer_array: _Optional[_Union[AstarteLongIntegerArray, _Mapping]] = ..., astarte_data_string_array: _Optional[_Union[AstarteStringArray, _Mapping]] = ..., astarte_data_binary_blob_array: _Optional[_Union[AstarteBinaryBlobArray, _Mapping]] = ..., astarte_data_date_time_array: _Optional[_Union[AstarteDateTimeArray, _Mapping]] = ...) -> None: ...
+    __slots__ = ("double", "integer", "boolean", "long_integer", "string", "binary_blob", "date_time", "double_array", "integer_array", "boolean_array", "long_integer_array", "string_array", "binary_blob_array", "date_time_array")
+    DOUBLE_FIELD_NUMBER: _ClassVar[int]
+    INTEGER_FIELD_NUMBER: _ClassVar[int]
+    BOOLEAN_FIELD_NUMBER: _ClassVar[int]
+    LONG_INTEGER_FIELD_NUMBER: _ClassVar[int]
+    STRING_FIELD_NUMBER: _ClassVar[int]
+    BINARY_BLOB_FIELD_NUMBER: _ClassVar[int]
+    DATE_TIME_FIELD_NUMBER: _ClassVar[int]
+    DOUBLE_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    INTEGER_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    BOOLEAN_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    LONG_INTEGER_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    STRING_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    BINARY_BLOB_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    DATE_TIME_ARRAY_FIELD_NUMBER: _ClassVar[int]
+    double: float
+    integer: int
+    boolean: bool
+    long_integer: int
+    string: str
+    binary_blob: bytes
+    date_time: _timestamp_pb2.Timestamp
+    double_array: AstarteDoubleArray
+    integer_array: AstarteIntegerArray
+    boolean_array: AstarteBooleanArray
+    long_integer_array: AstarteLongIntegerArray
+    string_array: AstarteStringArray
+    binary_blob_array: AstarteBinaryBlobArray
+    date_time_array: AstarteDateTimeArray
+    def __init__(self, double: _Optional[float] = ..., integer: _Optional[int] = ..., boolean: bool = ..., long_integer: _Optional[int] = ..., string: _Optional[str] = ..., binary_blob: _Optional[bytes] = ..., date_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., double_array: _Optional[_Union[AstarteDoubleArray, _Mapping]] = ..., integer_array: _Optional[_Union[AstarteIntegerArray, _Mapping]] = ..., boolean_array: _Optional[_Union[AstarteBooleanArray, _Mapping]] = ..., long_integer_array: _Optional[_Union[AstarteLongIntegerArray, _Mapping]] = ..., string_array: _Optional[_Union[AstarteStringArray, _Mapping]] = ..., binary_blob_array: _Optional[_Union[AstarteBinaryBlobArray, _Mapping]] = ..., date_time_array: _Optional[_Union[AstarteDateTimeArray, _Mapping]] = ...) -> None: ...
 
 class AstarteDatastreamInidividual(_message.Message):
     __slots__ = ("data",)

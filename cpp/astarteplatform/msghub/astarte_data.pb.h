@@ -1567,20 +1567,20 @@ class AstarteData final
     return *internal_default_instance();
   }
   enum AstarteDataCase {
-    kAstarteDataDouble = 1,
-    kAstarteDataInteger = 2,
-    kAstarteDataBoolean = 3,
-    kAstarteDataLongInteger = 4,
-    kAstarteDataString = 5,
-    kAstarteDataBinaryBlob = 6,
-    kAstarteDataDateTime = 7,
-    kAstarteDataDoubleArray = 8,
-    kAstarteDataIntegerArray = 9,
-    kAstarteDataBooleanArray = 10,
-    kAstarteDataLongIntegerArray = 11,
-    kAstarteDataStringArray = 12,
-    kAstarteDataBinaryBlobArray = 13,
-    kAstarteDataDateTimeArray = 14,
+    kDouble = 1,
+    kInteger = 2,
+    kBoolean = 3,
+    kLongInteger = 4,
+    kString = 5,
+    kBinaryBlob = 6,
+    kDateTime = 7,
+    kDoubleArray = 8,
+    kIntegerArray = 9,
+    kBooleanArray = 10,
+    kLongIntegerArray = 11,
+    kStringArray = 12,
+    kBinaryBlobArray = 13,
+    kDateTimeArray = 14,
     ASTARTE_DATA_NOT_SET = 0,
   };
   static inline const AstarteData* internal_default_instance() {
@@ -1674,249 +1674,249 @@ class AstarteData final
 
   // accessors -------------------------------------------------------
   enum : int {
-    kAstarteDataDoubleFieldNumber = 1,
-    kAstarteDataIntegerFieldNumber = 2,
-    kAstarteDataBooleanFieldNumber = 3,
-    kAstarteDataLongIntegerFieldNumber = 4,
-    kAstarteDataStringFieldNumber = 5,
-    kAstarteDataBinaryBlobFieldNumber = 6,
-    kAstarteDataDateTimeFieldNumber = 7,
-    kAstarteDataDoubleArrayFieldNumber = 8,
-    kAstarteDataIntegerArrayFieldNumber = 9,
-    kAstarteDataBooleanArrayFieldNumber = 10,
-    kAstarteDataLongIntegerArrayFieldNumber = 11,
-    kAstarteDataStringArrayFieldNumber = 12,
-    kAstarteDataBinaryBlobArrayFieldNumber = 13,
-    kAstarteDataDateTimeArrayFieldNumber = 14,
+    kDoubleFieldNumber = 1,
+    kIntegerFieldNumber = 2,
+    kBooleanFieldNumber = 3,
+    kLongIntegerFieldNumber = 4,
+    kStringFieldNumber = 5,
+    kBinaryBlobFieldNumber = 6,
+    kDateTimeFieldNumber = 7,
+    kDoubleArrayFieldNumber = 8,
+    kIntegerArrayFieldNumber = 9,
+    kBooleanArrayFieldNumber = 10,
+    kLongIntegerArrayFieldNumber = 11,
+    kStringArrayFieldNumber = 12,
+    kBinaryBlobArrayFieldNumber = 13,
+    kDateTimeArrayFieldNumber = 14,
   };
-  // double astarte_data_double = 1;
-  bool has_astarte_data_double() const;
-  void clear_astarte_data_double() ;
-  double astarte_data_double() const;
-  void set_astarte_data_double(double value);
+  // double double = 1;
+  bool has_double_() const;
+  void clear_double_() ;
+  double double_() const;
+  void set_double_(double value);
 
   private:
-  double _internal_astarte_data_double() const;
-  void _internal_set_astarte_data_double(double value);
+  double _internal_double_() const;
+  void _internal_set_double_(double value);
 
   public:
-  // int32 astarte_data_integer = 2;
-  bool has_astarte_data_integer() const;
-  void clear_astarte_data_integer() ;
-  ::int32_t astarte_data_integer() const;
-  void set_astarte_data_integer(::int32_t value);
+  // int32 integer = 2;
+  bool has_integer() const;
+  void clear_integer() ;
+  ::int32_t integer() const;
+  void set_integer(::int32_t value);
 
   private:
-  ::int32_t _internal_astarte_data_integer() const;
-  void _internal_set_astarte_data_integer(::int32_t value);
+  ::int32_t _internal_integer() const;
+  void _internal_set_integer(::int32_t value);
 
   public:
-  // bool astarte_data_boolean = 3;
-  bool has_astarte_data_boolean() const;
-  void clear_astarte_data_boolean() ;
-  bool astarte_data_boolean() const;
-  void set_astarte_data_boolean(bool value);
+  // bool boolean = 3;
+  bool has_boolean() const;
+  void clear_boolean() ;
+  bool boolean() const;
+  void set_boolean(bool value);
 
   private:
-  bool _internal_astarte_data_boolean() const;
-  void _internal_set_astarte_data_boolean(bool value);
+  bool _internal_boolean() const;
+  void _internal_set_boolean(bool value);
 
   public:
-  // int64 astarte_data_long_integer = 4;
-  bool has_astarte_data_long_integer() const;
-  void clear_astarte_data_long_integer() ;
-  ::int64_t astarte_data_long_integer() const;
-  void set_astarte_data_long_integer(::int64_t value);
+  // int64 long_integer = 4;
+  bool has_long_integer() const;
+  void clear_long_integer() ;
+  ::int64_t long_integer() const;
+  void set_long_integer(::int64_t value);
 
   private:
-  ::int64_t _internal_astarte_data_long_integer() const;
-  void _internal_set_astarte_data_long_integer(::int64_t value);
+  ::int64_t _internal_long_integer() const;
+  void _internal_set_long_integer(::int64_t value);
 
   public:
-  // string astarte_data_string = 5;
-  bool has_astarte_data_string() const;
-  void clear_astarte_data_string() ;
-  const std::string& astarte_data_string() const;
+  // string string = 5;
+  bool has_string() const;
+  void clear_string() ;
+  const std::string& string() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_astarte_data_string(Arg_&& arg, Args_... args);
-  std::string* mutable_astarte_data_string();
-  PROTOBUF_NODISCARD std::string* release_astarte_data_string();
-  void set_allocated_astarte_data_string(std::string* value);
+  void set_string(Arg_&& arg, Args_... args);
+  std::string* mutable_string();
+  PROTOBUF_NODISCARD std::string* release_string();
+  void set_allocated_string(std::string* value);
 
   private:
-  const std::string& _internal_astarte_data_string() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_astarte_data_string(
+  const std::string& _internal_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_string(
       const std::string& value);
-  std::string* _internal_mutable_astarte_data_string();
+  std::string* _internal_mutable_string();
 
   public:
-  // bytes astarte_data_binary_blob = 6;
-  bool has_astarte_data_binary_blob() const;
-  void clear_astarte_data_binary_blob() ;
-  const std::string& astarte_data_binary_blob() const;
+  // bytes binary_blob = 6;
+  bool has_binary_blob() const;
+  void clear_binary_blob() ;
+  const std::string& binary_blob() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_astarte_data_binary_blob(Arg_&& arg, Args_... args);
-  std::string* mutable_astarte_data_binary_blob();
-  PROTOBUF_NODISCARD std::string* release_astarte_data_binary_blob();
-  void set_allocated_astarte_data_binary_blob(std::string* value);
+  void set_binary_blob(Arg_&& arg, Args_... args);
+  std::string* mutable_binary_blob();
+  PROTOBUF_NODISCARD std::string* release_binary_blob();
+  void set_allocated_binary_blob(std::string* value);
 
   private:
-  const std::string& _internal_astarte_data_binary_blob() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_astarte_data_binary_blob(
+  const std::string& _internal_binary_blob() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_binary_blob(
       const std::string& value);
-  std::string* _internal_mutable_astarte_data_binary_blob();
+  std::string* _internal_mutable_binary_blob();
 
   public:
-  // .google.protobuf.Timestamp astarte_data_date_time = 7;
-  bool has_astarte_data_date_time() const;
+  // .google.protobuf.Timestamp date_time = 7;
+  bool has_date_time() const;
   private:
-  bool _internal_has_astarte_data_date_time() const;
+  bool _internal_has_date_time() const;
 
   public:
-  void clear_astarte_data_date_time() ;
-  const ::google::protobuf::Timestamp& astarte_data_date_time() const;
-  PROTOBUF_NODISCARD ::google::protobuf::Timestamp* release_astarte_data_date_time();
-  ::google::protobuf::Timestamp* mutable_astarte_data_date_time();
-  void set_allocated_astarte_data_date_time(::google::protobuf::Timestamp* value);
-  void unsafe_arena_set_allocated_astarte_data_date_time(::google::protobuf::Timestamp* value);
-  ::google::protobuf::Timestamp* unsafe_arena_release_astarte_data_date_time();
+  void clear_date_time() ;
+  const ::google::protobuf::Timestamp& date_time() const;
+  PROTOBUF_NODISCARD ::google::protobuf::Timestamp* release_date_time();
+  ::google::protobuf::Timestamp* mutable_date_time();
+  void set_allocated_date_time(::google::protobuf::Timestamp* value);
+  void unsafe_arena_set_allocated_date_time(::google::protobuf::Timestamp* value);
+  ::google::protobuf::Timestamp* unsafe_arena_release_date_time();
 
   private:
-  const ::google::protobuf::Timestamp& _internal_astarte_data_date_time() const;
-  ::google::protobuf::Timestamp* _internal_mutable_astarte_data_date_time();
+  const ::google::protobuf::Timestamp& _internal_date_time() const;
+  ::google::protobuf::Timestamp* _internal_mutable_date_time();
 
   public:
-  // .astarteplatform.msghub.AstarteDoubleArray astarte_data_double_array = 8;
-  bool has_astarte_data_double_array() const;
+  // .astarteplatform.msghub.AstarteDoubleArray double_array = 8;
+  bool has_double_array() const;
   private:
-  bool _internal_has_astarte_data_double_array() const;
+  bool _internal_has_double_array() const;
 
   public:
-  void clear_astarte_data_double_array() ;
-  const ::astarteplatform::msghub::AstarteDoubleArray& astarte_data_double_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDoubleArray* release_astarte_data_double_array();
-  ::astarteplatform::msghub::AstarteDoubleArray* mutable_astarte_data_double_array();
-  void set_allocated_astarte_data_double_array(::astarteplatform::msghub::AstarteDoubleArray* value);
-  void unsafe_arena_set_allocated_astarte_data_double_array(::astarteplatform::msghub::AstarteDoubleArray* value);
-  ::astarteplatform::msghub::AstarteDoubleArray* unsafe_arena_release_astarte_data_double_array();
+  void clear_double_array() ;
+  const ::astarteplatform::msghub::AstarteDoubleArray& double_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDoubleArray* release_double_array();
+  ::astarteplatform::msghub::AstarteDoubleArray* mutable_double_array();
+  void set_allocated_double_array(::astarteplatform::msghub::AstarteDoubleArray* value);
+  void unsafe_arena_set_allocated_double_array(::astarteplatform::msghub::AstarteDoubleArray* value);
+  ::astarteplatform::msghub::AstarteDoubleArray* unsafe_arena_release_double_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteDoubleArray& _internal_astarte_data_double_array() const;
-  ::astarteplatform::msghub::AstarteDoubleArray* _internal_mutable_astarte_data_double_array();
+  const ::astarteplatform::msghub::AstarteDoubleArray& _internal_double_array() const;
+  ::astarteplatform::msghub::AstarteDoubleArray* _internal_mutable_double_array();
 
   public:
-  // .astarteplatform.msghub.AstarteIntegerArray astarte_data_integer_array = 9;
-  bool has_astarte_data_integer_array() const;
+  // .astarteplatform.msghub.AstarteIntegerArray integer_array = 9;
+  bool has_integer_array() const;
   private:
-  bool _internal_has_astarte_data_integer_array() const;
+  bool _internal_has_integer_array() const;
 
   public:
-  void clear_astarte_data_integer_array() ;
-  const ::astarteplatform::msghub::AstarteIntegerArray& astarte_data_integer_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteIntegerArray* release_astarte_data_integer_array();
-  ::astarteplatform::msghub::AstarteIntegerArray* mutable_astarte_data_integer_array();
-  void set_allocated_astarte_data_integer_array(::astarteplatform::msghub::AstarteIntegerArray* value);
-  void unsafe_arena_set_allocated_astarte_data_integer_array(::astarteplatform::msghub::AstarteIntegerArray* value);
-  ::astarteplatform::msghub::AstarteIntegerArray* unsafe_arena_release_astarte_data_integer_array();
+  void clear_integer_array() ;
+  const ::astarteplatform::msghub::AstarteIntegerArray& integer_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteIntegerArray* release_integer_array();
+  ::astarteplatform::msghub::AstarteIntegerArray* mutable_integer_array();
+  void set_allocated_integer_array(::astarteplatform::msghub::AstarteIntegerArray* value);
+  void unsafe_arena_set_allocated_integer_array(::astarteplatform::msghub::AstarteIntegerArray* value);
+  ::astarteplatform::msghub::AstarteIntegerArray* unsafe_arena_release_integer_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteIntegerArray& _internal_astarte_data_integer_array() const;
-  ::astarteplatform::msghub::AstarteIntegerArray* _internal_mutable_astarte_data_integer_array();
+  const ::astarteplatform::msghub::AstarteIntegerArray& _internal_integer_array() const;
+  ::astarteplatform::msghub::AstarteIntegerArray* _internal_mutable_integer_array();
 
   public:
-  // .astarteplatform.msghub.AstarteBooleanArray astarte_data_boolean_array = 10;
-  bool has_astarte_data_boolean_array() const;
+  // .astarteplatform.msghub.AstarteBooleanArray boolean_array = 10;
+  bool has_boolean_array() const;
   private:
-  bool _internal_has_astarte_data_boolean_array() const;
+  bool _internal_has_boolean_array() const;
 
   public:
-  void clear_astarte_data_boolean_array() ;
-  const ::astarteplatform::msghub::AstarteBooleanArray& astarte_data_boolean_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteBooleanArray* release_astarte_data_boolean_array();
-  ::astarteplatform::msghub::AstarteBooleanArray* mutable_astarte_data_boolean_array();
-  void set_allocated_astarte_data_boolean_array(::astarteplatform::msghub::AstarteBooleanArray* value);
-  void unsafe_arena_set_allocated_astarte_data_boolean_array(::astarteplatform::msghub::AstarteBooleanArray* value);
-  ::astarteplatform::msghub::AstarteBooleanArray* unsafe_arena_release_astarte_data_boolean_array();
+  void clear_boolean_array() ;
+  const ::astarteplatform::msghub::AstarteBooleanArray& boolean_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteBooleanArray* release_boolean_array();
+  ::astarteplatform::msghub::AstarteBooleanArray* mutable_boolean_array();
+  void set_allocated_boolean_array(::astarteplatform::msghub::AstarteBooleanArray* value);
+  void unsafe_arena_set_allocated_boolean_array(::astarteplatform::msghub::AstarteBooleanArray* value);
+  ::astarteplatform::msghub::AstarteBooleanArray* unsafe_arena_release_boolean_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteBooleanArray& _internal_astarte_data_boolean_array() const;
-  ::astarteplatform::msghub::AstarteBooleanArray* _internal_mutable_astarte_data_boolean_array();
+  const ::astarteplatform::msghub::AstarteBooleanArray& _internal_boolean_array() const;
+  ::astarteplatform::msghub::AstarteBooleanArray* _internal_mutable_boolean_array();
 
   public:
-  // .astarteplatform.msghub.AstarteLongIntegerArray astarte_data_long_integer_array = 11;
-  bool has_astarte_data_long_integer_array() const;
+  // .astarteplatform.msghub.AstarteLongIntegerArray long_integer_array = 11;
+  bool has_long_integer_array() const;
   private:
-  bool _internal_has_astarte_data_long_integer_array() const;
+  bool _internal_has_long_integer_array() const;
 
   public:
-  void clear_astarte_data_long_integer_array() ;
-  const ::astarteplatform::msghub::AstarteLongIntegerArray& astarte_data_long_integer_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteLongIntegerArray* release_astarte_data_long_integer_array();
-  ::astarteplatform::msghub::AstarteLongIntegerArray* mutable_astarte_data_long_integer_array();
-  void set_allocated_astarte_data_long_integer_array(::astarteplatform::msghub::AstarteLongIntegerArray* value);
-  void unsafe_arena_set_allocated_astarte_data_long_integer_array(::astarteplatform::msghub::AstarteLongIntegerArray* value);
-  ::astarteplatform::msghub::AstarteLongIntegerArray* unsafe_arena_release_astarte_data_long_integer_array();
+  void clear_long_integer_array() ;
+  const ::astarteplatform::msghub::AstarteLongIntegerArray& long_integer_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteLongIntegerArray* release_long_integer_array();
+  ::astarteplatform::msghub::AstarteLongIntegerArray* mutable_long_integer_array();
+  void set_allocated_long_integer_array(::astarteplatform::msghub::AstarteLongIntegerArray* value);
+  void unsafe_arena_set_allocated_long_integer_array(::astarteplatform::msghub::AstarteLongIntegerArray* value);
+  ::astarteplatform::msghub::AstarteLongIntegerArray* unsafe_arena_release_long_integer_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteLongIntegerArray& _internal_astarte_data_long_integer_array() const;
-  ::astarteplatform::msghub::AstarteLongIntegerArray* _internal_mutable_astarte_data_long_integer_array();
+  const ::astarteplatform::msghub::AstarteLongIntegerArray& _internal_long_integer_array() const;
+  ::astarteplatform::msghub::AstarteLongIntegerArray* _internal_mutable_long_integer_array();
 
   public:
-  // .astarteplatform.msghub.AstarteStringArray astarte_data_string_array = 12;
-  bool has_astarte_data_string_array() const;
+  // .astarteplatform.msghub.AstarteStringArray string_array = 12;
+  bool has_string_array() const;
   private:
-  bool _internal_has_astarte_data_string_array() const;
+  bool _internal_has_string_array() const;
 
   public:
-  void clear_astarte_data_string_array() ;
-  const ::astarteplatform::msghub::AstarteStringArray& astarte_data_string_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteStringArray* release_astarte_data_string_array();
-  ::astarteplatform::msghub::AstarteStringArray* mutable_astarte_data_string_array();
-  void set_allocated_astarte_data_string_array(::astarteplatform::msghub::AstarteStringArray* value);
-  void unsafe_arena_set_allocated_astarte_data_string_array(::astarteplatform::msghub::AstarteStringArray* value);
-  ::astarteplatform::msghub::AstarteStringArray* unsafe_arena_release_astarte_data_string_array();
+  void clear_string_array() ;
+  const ::astarteplatform::msghub::AstarteStringArray& string_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteStringArray* release_string_array();
+  ::astarteplatform::msghub::AstarteStringArray* mutable_string_array();
+  void set_allocated_string_array(::astarteplatform::msghub::AstarteStringArray* value);
+  void unsafe_arena_set_allocated_string_array(::astarteplatform::msghub::AstarteStringArray* value);
+  ::astarteplatform::msghub::AstarteStringArray* unsafe_arena_release_string_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteStringArray& _internal_astarte_data_string_array() const;
-  ::astarteplatform::msghub::AstarteStringArray* _internal_mutable_astarte_data_string_array();
+  const ::astarteplatform::msghub::AstarteStringArray& _internal_string_array() const;
+  ::astarteplatform::msghub::AstarteStringArray* _internal_mutable_string_array();
 
   public:
-  // .astarteplatform.msghub.AstarteBinaryBlobArray astarte_data_binary_blob_array = 13;
-  bool has_astarte_data_binary_blob_array() const;
+  // .astarteplatform.msghub.AstarteBinaryBlobArray binary_blob_array = 13;
+  bool has_binary_blob_array() const;
   private:
-  bool _internal_has_astarte_data_binary_blob_array() const;
+  bool _internal_has_binary_blob_array() const;
 
   public:
-  void clear_astarte_data_binary_blob_array() ;
-  const ::astarteplatform::msghub::AstarteBinaryBlobArray& astarte_data_binary_blob_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteBinaryBlobArray* release_astarte_data_binary_blob_array();
-  ::astarteplatform::msghub::AstarteBinaryBlobArray* mutable_astarte_data_binary_blob_array();
-  void set_allocated_astarte_data_binary_blob_array(::astarteplatform::msghub::AstarteBinaryBlobArray* value);
-  void unsafe_arena_set_allocated_astarte_data_binary_blob_array(::astarteplatform::msghub::AstarteBinaryBlobArray* value);
-  ::astarteplatform::msghub::AstarteBinaryBlobArray* unsafe_arena_release_astarte_data_binary_blob_array();
+  void clear_binary_blob_array() ;
+  const ::astarteplatform::msghub::AstarteBinaryBlobArray& binary_blob_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteBinaryBlobArray* release_binary_blob_array();
+  ::astarteplatform::msghub::AstarteBinaryBlobArray* mutable_binary_blob_array();
+  void set_allocated_binary_blob_array(::astarteplatform::msghub::AstarteBinaryBlobArray* value);
+  void unsafe_arena_set_allocated_binary_blob_array(::astarteplatform::msghub::AstarteBinaryBlobArray* value);
+  ::astarteplatform::msghub::AstarteBinaryBlobArray* unsafe_arena_release_binary_blob_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteBinaryBlobArray& _internal_astarte_data_binary_blob_array() const;
-  ::astarteplatform::msghub::AstarteBinaryBlobArray* _internal_mutable_astarte_data_binary_blob_array();
+  const ::astarteplatform::msghub::AstarteBinaryBlobArray& _internal_binary_blob_array() const;
+  ::astarteplatform::msghub::AstarteBinaryBlobArray* _internal_mutable_binary_blob_array();
 
   public:
-  // .astarteplatform.msghub.AstarteDateTimeArray astarte_data_date_time_array = 14;
-  bool has_astarte_data_date_time_array() const;
+  // .astarteplatform.msghub.AstarteDateTimeArray date_time_array = 14;
+  bool has_date_time_array() const;
   private:
-  bool _internal_has_astarte_data_date_time_array() const;
+  bool _internal_has_date_time_array() const;
 
   public:
-  void clear_astarte_data_date_time_array() ;
-  const ::astarteplatform::msghub::AstarteDateTimeArray& astarte_data_date_time_array() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDateTimeArray* release_astarte_data_date_time_array();
-  ::astarteplatform::msghub::AstarteDateTimeArray* mutable_astarte_data_date_time_array();
-  void set_allocated_astarte_data_date_time_array(::astarteplatform::msghub::AstarteDateTimeArray* value);
-  void unsafe_arena_set_allocated_astarte_data_date_time_array(::astarteplatform::msghub::AstarteDateTimeArray* value);
-  ::astarteplatform::msghub::AstarteDateTimeArray* unsafe_arena_release_astarte_data_date_time_array();
+  void clear_date_time_array() ;
+  const ::astarteplatform::msghub::AstarteDateTimeArray& date_time_array() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDateTimeArray* release_date_time_array();
+  ::astarteplatform::msghub::AstarteDateTimeArray* mutable_date_time_array();
+  void set_allocated_date_time_array(::astarteplatform::msghub::AstarteDateTimeArray* value);
+  void unsafe_arena_set_allocated_date_time_array(::astarteplatform::msghub::AstarteDateTimeArray* value);
+  ::astarteplatform::msghub::AstarteDateTimeArray* unsafe_arena_release_date_time_array();
 
   private:
-  const ::astarteplatform::msghub::AstarteDateTimeArray& _internal_astarte_data_date_time_array() const;
-  ::astarteplatform::msghub::AstarteDateTimeArray* _internal_mutable_astarte_data_date_time_array();
+  const ::astarteplatform::msghub::AstarteDateTimeArray& _internal_date_time_array() const;
+  ::astarteplatform::msghub::AstarteDateTimeArray* _internal_mutable_date_time_array();
 
   public:
   void clear_astarte_data();
@@ -1924,26 +1924,26 @@ class AstarteData final
   // @@protoc_insertion_point(class_scope:astarteplatform.msghub.AstarteData)
  private:
   class _Internal;
-  void set_has_astarte_data_double();
-  void set_has_astarte_data_integer();
-  void set_has_astarte_data_boolean();
-  void set_has_astarte_data_long_integer();
-  void set_has_astarte_data_string();
-  void set_has_astarte_data_binary_blob();
-  void set_has_astarte_data_date_time();
-  void set_has_astarte_data_double_array();
-  void set_has_astarte_data_integer_array();
-  void set_has_astarte_data_boolean_array();
-  void set_has_astarte_data_long_integer_array();
-  void set_has_astarte_data_string_array();
-  void set_has_astarte_data_binary_blob_array();
-  void set_has_astarte_data_date_time_array();
+  void set_has_double_();
+  void set_has_integer();
+  void set_has_boolean();
+  void set_has_long_integer();
+  void set_has_string();
+  void set_has_binary_blob();
+  void set_has_date_time();
+  void set_has_double_array();
+  void set_has_integer_array();
+  void set_has_boolean_array();
+  void set_has_long_integer_array();
+  void set_has_string_array();
+  void set_has_binary_blob_array();
+  void set_has_date_time_array();
   inline bool has_astarte_data() const;
   inline void clear_has_astarte_data();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 14, 8,
-      70, 2>
+      57, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -1963,20 +1963,20 @@ class AstarteData final
     union AstarteDataUnion {
       constexpr AstarteDataUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
-      double astarte_data_double_;
-      ::int32_t astarte_data_integer_;
-      bool astarte_data_boolean_;
-      ::int64_t astarte_data_long_integer_;
-      ::google::protobuf::internal::ArenaStringPtr astarte_data_string_;
-      ::google::protobuf::internal::ArenaStringPtr astarte_data_binary_blob_;
-      ::google::protobuf::Timestamp* astarte_data_date_time_;
-      ::astarteplatform::msghub::AstarteDoubleArray* astarte_data_double_array_;
-      ::astarteplatform::msghub::AstarteIntegerArray* astarte_data_integer_array_;
-      ::astarteplatform::msghub::AstarteBooleanArray* astarte_data_boolean_array_;
-      ::astarteplatform::msghub::AstarteLongIntegerArray* astarte_data_long_integer_array_;
-      ::astarteplatform::msghub::AstarteStringArray* astarte_data_string_array_;
-      ::astarteplatform::msghub::AstarteBinaryBlobArray* astarte_data_binary_blob_array_;
-      ::astarteplatform::msghub::AstarteDateTimeArray* astarte_data_date_time_array_;
+      double double__;
+      ::int32_t integer_;
+      bool boolean_;
+      ::int64_t long_integer_;
+      ::google::protobuf::internal::ArenaStringPtr string_;
+      ::google::protobuf::internal::ArenaStringPtr binary_blob_;
+      ::google::protobuf::Timestamp* date_time_;
+      ::astarteplatform::msghub::AstarteDoubleArray* double_array_;
+      ::astarteplatform::msghub::AstarteIntegerArray* integer_array_;
+      ::astarteplatform::msghub::AstarteBooleanArray* boolean_array_;
+      ::astarteplatform::msghub::AstarteLongIntegerArray* long_integer_array_;
+      ::astarteplatform::msghub::AstarteStringArray* string_array_;
+      ::astarteplatform::msghub::AstarteBinaryBlobArray* binary_blob_array_;
+      ::astarteplatform::msghub::AstarteDateTimeArray* date_time_array_;
     } astarte_data_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint32_t _oneof_case_[1];
@@ -3015,926 +3015,926 @@ AstarteDateTimeArray::_internal_mutable_values() {
 
 // AstarteData
 
-// double astarte_data_double = 1;
-inline bool AstarteData::has_astarte_data_double() const {
-  return astarte_data_case() == kAstarteDataDouble;
+// double double = 1;
+inline bool AstarteData::has_double_() const {
+  return astarte_data_case() == kDouble;
 }
-inline void AstarteData::set_has_astarte_data_double() {
-  _impl_._oneof_case_[0] = kAstarteDataDouble;
+inline void AstarteData::set_has_double_() {
+  _impl_._oneof_case_[0] = kDouble;
 }
-inline void AstarteData::clear_astarte_data_double() {
+inline void AstarteData::clear_double_() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataDouble) {
-    _impl_.astarte_data_.astarte_data_double_ = 0;
+  if (astarte_data_case() == kDouble) {
+    _impl_.astarte_data_.double__ = 0;
     clear_has_astarte_data();
   }
 }
-inline double AstarteData::astarte_data_double() const {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_double)
-  return _internal_astarte_data_double();
+inline double AstarteData::double_() const {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.double)
+  return _internal_double_();
 }
-inline void AstarteData::set_astarte_data_double(double value) {
-  if (astarte_data_case() != kAstarteDataDouble) {
+inline void AstarteData::set_double_(double value) {
+  if (astarte_data_case() != kDouble) {
     clear_astarte_data();
-    set_has_astarte_data_double();
+    set_has_double_();
   }
-  _impl_.astarte_data_.astarte_data_double_ = value;
-  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.astarte_data_double)
+  _impl_.astarte_data_.double__ = value;
+  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.double)
 }
-inline double AstarteData::_internal_astarte_data_double() const {
-  if (astarte_data_case() == kAstarteDataDouble) {
-    return _impl_.astarte_data_.astarte_data_double_;
+inline double AstarteData::_internal_double_() const {
+  if (astarte_data_case() == kDouble) {
+    return _impl_.astarte_data_.double__;
   }
   return 0;
 }
 
-// int32 astarte_data_integer = 2;
-inline bool AstarteData::has_astarte_data_integer() const {
-  return astarte_data_case() == kAstarteDataInteger;
+// int32 integer = 2;
+inline bool AstarteData::has_integer() const {
+  return astarte_data_case() == kInteger;
 }
-inline void AstarteData::set_has_astarte_data_integer() {
-  _impl_._oneof_case_[0] = kAstarteDataInteger;
+inline void AstarteData::set_has_integer() {
+  _impl_._oneof_case_[0] = kInteger;
 }
-inline void AstarteData::clear_astarte_data_integer() {
+inline void AstarteData::clear_integer() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataInteger) {
-    _impl_.astarte_data_.astarte_data_integer_ = 0;
+  if (astarte_data_case() == kInteger) {
+    _impl_.astarte_data_.integer_ = 0;
     clear_has_astarte_data();
   }
 }
-inline ::int32_t AstarteData::astarte_data_integer() const {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_integer)
-  return _internal_astarte_data_integer();
+inline ::int32_t AstarteData::integer() const {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.integer)
+  return _internal_integer();
 }
-inline void AstarteData::set_astarte_data_integer(::int32_t value) {
-  if (astarte_data_case() != kAstarteDataInteger) {
+inline void AstarteData::set_integer(::int32_t value) {
+  if (astarte_data_case() != kInteger) {
     clear_astarte_data();
-    set_has_astarte_data_integer();
+    set_has_integer();
   }
-  _impl_.astarte_data_.astarte_data_integer_ = value;
-  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.astarte_data_integer)
+  _impl_.astarte_data_.integer_ = value;
+  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.integer)
 }
-inline ::int32_t AstarteData::_internal_astarte_data_integer() const {
-  if (astarte_data_case() == kAstarteDataInteger) {
-    return _impl_.astarte_data_.astarte_data_integer_;
+inline ::int32_t AstarteData::_internal_integer() const {
+  if (astarte_data_case() == kInteger) {
+    return _impl_.astarte_data_.integer_;
   }
   return 0;
 }
 
-// bool astarte_data_boolean = 3;
-inline bool AstarteData::has_astarte_data_boolean() const {
-  return astarte_data_case() == kAstarteDataBoolean;
+// bool boolean = 3;
+inline bool AstarteData::has_boolean() const {
+  return astarte_data_case() == kBoolean;
 }
-inline void AstarteData::set_has_astarte_data_boolean() {
-  _impl_._oneof_case_[0] = kAstarteDataBoolean;
+inline void AstarteData::set_has_boolean() {
+  _impl_._oneof_case_[0] = kBoolean;
 }
-inline void AstarteData::clear_astarte_data_boolean() {
+inline void AstarteData::clear_boolean() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataBoolean) {
-    _impl_.astarte_data_.astarte_data_boolean_ = false;
+  if (astarte_data_case() == kBoolean) {
+    _impl_.astarte_data_.boolean_ = false;
     clear_has_astarte_data();
   }
 }
-inline bool AstarteData::astarte_data_boolean() const {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_boolean)
-  return _internal_astarte_data_boolean();
+inline bool AstarteData::boolean() const {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.boolean)
+  return _internal_boolean();
 }
-inline void AstarteData::set_astarte_data_boolean(bool value) {
-  if (astarte_data_case() != kAstarteDataBoolean) {
+inline void AstarteData::set_boolean(bool value) {
+  if (astarte_data_case() != kBoolean) {
     clear_astarte_data();
-    set_has_astarte_data_boolean();
+    set_has_boolean();
   }
-  _impl_.astarte_data_.astarte_data_boolean_ = value;
-  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.astarte_data_boolean)
+  _impl_.astarte_data_.boolean_ = value;
+  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.boolean)
 }
-inline bool AstarteData::_internal_astarte_data_boolean() const {
-  if (astarte_data_case() == kAstarteDataBoolean) {
-    return _impl_.astarte_data_.astarte_data_boolean_;
+inline bool AstarteData::_internal_boolean() const {
+  if (astarte_data_case() == kBoolean) {
+    return _impl_.astarte_data_.boolean_;
   }
   return false;
 }
 
-// int64 astarte_data_long_integer = 4;
-inline bool AstarteData::has_astarte_data_long_integer() const {
-  return astarte_data_case() == kAstarteDataLongInteger;
+// int64 long_integer = 4;
+inline bool AstarteData::has_long_integer() const {
+  return astarte_data_case() == kLongInteger;
 }
-inline void AstarteData::set_has_astarte_data_long_integer() {
-  _impl_._oneof_case_[0] = kAstarteDataLongInteger;
+inline void AstarteData::set_has_long_integer() {
+  _impl_._oneof_case_[0] = kLongInteger;
 }
-inline void AstarteData::clear_astarte_data_long_integer() {
+inline void AstarteData::clear_long_integer() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataLongInteger) {
-    _impl_.astarte_data_.astarte_data_long_integer_ = ::int64_t{0};
+  if (astarte_data_case() == kLongInteger) {
+    _impl_.astarte_data_.long_integer_ = ::int64_t{0};
     clear_has_astarte_data();
   }
 }
-inline ::int64_t AstarteData::astarte_data_long_integer() const {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_long_integer)
-  return _internal_astarte_data_long_integer();
+inline ::int64_t AstarteData::long_integer() const {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.long_integer)
+  return _internal_long_integer();
 }
-inline void AstarteData::set_astarte_data_long_integer(::int64_t value) {
-  if (astarte_data_case() != kAstarteDataLongInteger) {
+inline void AstarteData::set_long_integer(::int64_t value) {
+  if (astarte_data_case() != kLongInteger) {
     clear_astarte_data();
-    set_has_astarte_data_long_integer();
+    set_has_long_integer();
   }
-  _impl_.astarte_data_.astarte_data_long_integer_ = value;
-  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.astarte_data_long_integer)
+  _impl_.astarte_data_.long_integer_ = value;
+  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.long_integer)
 }
-inline ::int64_t AstarteData::_internal_astarte_data_long_integer() const {
-  if (astarte_data_case() == kAstarteDataLongInteger) {
-    return _impl_.astarte_data_.astarte_data_long_integer_;
+inline ::int64_t AstarteData::_internal_long_integer() const {
+  if (astarte_data_case() == kLongInteger) {
+    return _impl_.astarte_data_.long_integer_;
   }
   return ::int64_t{0};
 }
 
-// string astarte_data_string = 5;
-inline bool AstarteData::has_astarte_data_string() const {
-  return astarte_data_case() == kAstarteDataString;
+// string string = 5;
+inline bool AstarteData::has_string() const {
+  return astarte_data_case() == kString;
 }
-inline void AstarteData::set_has_astarte_data_string() {
-  _impl_._oneof_case_[0] = kAstarteDataString;
+inline void AstarteData::set_has_string() {
+  _impl_._oneof_case_[0] = kString;
 }
-inline void AstarteData::clear_astarte_data_string() {
+inline void AstarteData::clear_string() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataString) {
-    _impl_.astarte_data_.astarte_data_string_.Destroy();
+  if (astarte_data_case() == kString) {
+    _impl_.astarte_data_.string_.Destroy();
     clear_has_astarte_data();
   }
 }
-inline const std::string& AstarteData::astarte_data_string() const
+inline const std::string& AstarteData::string() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_string)
-  return _internal_astarte_data_string();
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.string)
+  return _internal_string();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void AstarteData::set_astarte_data_string(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void AstarteData::set_string(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() != kAstarteDataString) {
+  if (astarte_data_case() != kString) {
     clear_astarte_data();
 
-    set_has_astarte_data_string();
-    _impl_.astarte_data_.astarte_data_string_.InitDefault();
+    set_has_string();
+    _impl_.astarte_data_.string_.InitDefault();
   }
-  _impl_.astarte_data_.astarte_data_string_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.astarte_data_string)
+  _impl_.astarte_data_.string_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.string)
 }
-inline std::string* AstarteData::mutable_astarte_data_string() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_astarte_data_string();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_string)
+inline std::string* AstarteData::mutable_string() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_string();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.string)
   return _s;
 }
-inline const std::string& AstarteData::_internal_astarte_data_string() const {
+inline const std::string& AstarteData::_internal_string() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  if (astarte_data_case() != kAstarteDataString) {
+  if (astarte_data_case() != kString) {
     return ::google::protobuf::internal::GetEmptyStringAlreadyInited();
   }
-  return _impl_.astarte_data_.astarte_data_string_.Get();
+  return _impl_.astarte_data_.string_.Get();
 }
-inline void AstarteData::_internal_set_astarte_data_string(const std::string& value) {
+inline void AstarteData::_internal_set_string(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() != kAstarteDataString) {
+  if (astarte_data_case() != kString) {
     clear_astarte_data();
 
-    set_has_astarte_data_string();
-    _impl_.astarte_data_.astarte_data_string_.InitDefault();
+    set_has_string();
+    _impl_.astarte_data_.string_.InitDefault();
   }
-  _impl_.astarte_data_.astarte_data_string_.Set(value, GetArena());
+  _impl_.astarte_data_.string_.Set(value, GetArena());
 }
-inline std::string* AstarteData::_internal_mutable_astarte_data_string() {
+inline std::string* AstarteData::_internal_mutable_string() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() != kAstarteDataString) {
+  if (astarte_data_case() != kString) {
     clear_astarte_data();
 
-    set_has_astarte_data_string();
-    _impl_.astarte_data_.astarte_data_string_.InitDefault();
+    set_has_string();
+    _impl_.astarte_data_.string_.InitDefault();
   }
-  return _impl_.astarte_data_.astarte_data_string_.Mutable( GetArena());
+  return _impl_.astarte_data_.string_.Mutable( GetArena());
 }
-inline std::string* AstarteData::release_astarte_data_string() {
+inline std::string* AstarteData::release_string() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_string)
-  if (astarte_data_case() != kAstarteDataString) {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.string)
+  if (astarte_data_case() != kString) {
     return nullptr;
   }
   clear_has_astarte_data();
-  return _impl_.astarte_data_.astarte_data_string_.Release();
+  return _impl_.astarte_data_.string_.Release();
 }
-inline void AstarteData::set_allocated_astarte_data_string(std::string* value) {
+inline void AstarteData::set_allocated_string(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (has_astarte_data()) {
     clear_astarte_data();
   }
   if (value != nullptr) {
-    set_has_astarte_data_string();
-    _impl_.astarte_data_.astarte_data_string_.InitAllocated(value, GetArena());
+    set_has_string();
+    _impl_.astarte_data_.string_.InitAllocated(value, GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_string)
+  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteData.string)
 }
 
-// bytes astarte_data_binary_blob = 6;
-inline bool AstarteData::has_astarte_data_binary_blob() const {
-  return astarte_data_case() == kAstarteDataBinaryBlob;
+// bytes binary_blob = 6;
+inline bool AstarteData::has_binary_blob() const {
+  return astarte_data_case() == kBinaryBlob;
 }
-inline void AstarteData::set_has_astarte_data_binary_blob() {
-  _impl_._oneof_case_[0] = kAstarteDataBinaryBlob;
+inline void AstarteData::set_has_binary_blob() {
+  _impl_._oneof_case_[0] = kBinaryBlob;
 }
-inline void AstarteData::clear_astarte_data_binary_blob() {
+inline void AstarteData::clear_binary_blob() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataBinaryBlob) {
-    _impl_.astarte_data_.astarte_data_binary_blob_.Destroy();
+  if (astarte_data_case() == kBinaryBlob) {
+    _impl_.astarte_data_.binary_blob_.Destroy();
     clear_has_astarte_data();
   }
 }
-inline const std::string& AstarteData::astarte_data_binary_blob() const
+inline const std::string& AstarteData::binary_blob() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_binary_blob)
-  return _internal_astarte_data_binary_blob();
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.binary_blob)
+  return _internal_binary_blob();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void AstarteData::set_astarte_data_binary_blob(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void AstarteData::set_binary_blob(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() != kAstarteDataBinaryBlob) {
+  if (astarte_data_case() != kBinaryBlob) {
     clear_astarte_data();
 
-    set_has_astarte_data_binary_blob();
-    _impl_.astarte_data_.astarte_data_binary_blob_.InitDefault();
+    set_has_binary_blob();
+    _impl_.astarte_data_.binary_blob_.InitDefault();
   }
-  _impl_.astarte_data_.astarte_data_binary_blob_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.astarte_data_binary_blob)
+  _impl_.astarte_data_.binary_blob_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:astarteplatform.msghub.AstarteData.binary_blob)
 }
-inline std::string* AstarteData::mutable_astarte_data_binary_blob() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_astarte_data_binary_blob();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_binary_blob)
+inline std::string* AstarteData::mutable_binary_blob() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_binary_blob();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.binary_blob)
   return _s;
 }
-inline const std::string& AstarteData::_internal_astarte_data_binary_blob() const {
+inline const std::string& AstarteData::_internal_binary_blob() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  if (astarte_data_case() != kAstarteDataBinaryBlob) {
+  if (astarte_data_case() != kBinaryBlob) {
     return ::google::protobuf::internal::GetEmptyStringAlreadyInited();
   }
-  return _impl_.astarte_data_.astarte_data_binary_blob_.Get();
+  return _impl_.astarte_data_.binary_blob_.Get();
 }
-inline void AstarteData::_internal_set_astarte_data_binary_blob(const std::string& value) {
+inline void AstarteData::_internal_set_binary_blob(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() != kAstarteDataBinaryBlob) {
+  if (astarte_data_case() != kBinaryBlob) {
     clear_astarte_data();
 
-    set_has_astarte_data_binary_blob();
-    _impl_.astarte_data_.astarte_data_binary_blob_.InitDefault();
+    set_has_binary_blob();
+    _impl_.astarte_data_.binary_blob_.InitDefault();
   }
-  _impl_.astarte_data_.astarte_data_binary_blob_.Set(value, GetArena());
+  _impl_.astarte_data_.binary_blob_.Set(value, GetArena());
 }
-inline std::string* AstarteData::_internal_mutable_astarte_data_binary_blob() {
+inline std::string* AstarteData::_internal_mutable_binary_blob() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() != kAstarteDataBinaryBlob) {
+  if (astarte_data_case() != kBinaryBlob) {
     clear_astarte_data();
 
-    set_has_astarte_data_binary_blob();
-    _impl_.astarte_data_.astarte_data_binary_blob_.InitDefault();
+    set_has_binary_blob();
+    _impl_.astarte_data_.binary_blob_.InitDefault();
   }
-  return _impl_.astarte_data_.astarte_data_binary_blob_.Mutable( GetArena());
+  return _impl_.astarte_data_.binary_blob_.Mutable( GetArena());
 }
-inline std::string* AstarteData::release_astarte_data_binary_blob() {
+inline std::string* AstarteData::release_binary_blob() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_binary_blob)
-  if (astarte_data_case() != kAstarteDataBinaryBlob) {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.binary_blob)
+  if (astarte_data_case() != kBinaryBlob) {
     return nullptr;
   }
   clear_has_astarte_data();
-  return _impl_.astarte_data_.astarte_data_binary_blob_.Release();
+  return _impl_.astarte_data_.binary_blob_.Release();
 }
-inline void AstarteData::set_allocated_astarte_data_binary_blob(std::string* value) {
+inline void AstarteData::set_allocated_binary_blob(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (has_astarte_data()) {
     clear_astarte_data();
   }
   if (value != nullptr) {
-    set_has_astarte_data_binary_blob();
-    _impl_.astarte_data_.astarte_data_binary_blob_.InitAllocated(value, GetArena());
+    set_has_binary_blob();
+    _impl_.astarte_data_.binary_blob_.InitAllocated(value, GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_binary_blob)
+  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteData.binary_blob)
 }
 
-// .google.protobuf.Timestamp astarte_data_date_time = 7;
-inline bool AstarteData::has_astarte_data_date_time() const {
-  return astarte_data_case() == kAstarteDataDateTime;
+// .google.protobuf.Timestamp date_time = 7;
+inline bool AstarteData::has_date_time() const {
+  return astarte_data_case() == kDateTime;
 }
-inline bool AstarteData::_internal_has_astarte_data_date_time() const {
-  return astarte_data_case() == kAstarteDataDateTime;
+inline bool AstarteData::_internal_has_date_time() const {
+  return astarte_data_case() == kDateTime;
 }
-inline void AstarteData::set_has_astarte_data_date_time() {
-  _impl_._oneof_case_[0] = kAstarteDataDateTime;
+inline void AstarteData::set_has_date_time() {
+  _impl_._oneof_case_[0] = kDateTime;
 }
-inline ::google::protobuf::Timestamp* AstarteData::release_astarte_data_date_time() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_date_time)
-  if (astarte_data_case() == kAstarteDataDateTime) {
+inline ::google::protobuf::Timestamp* AstarteData::release_date_time() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.date_time)
+  if (astarte_data_case() == kDateTime) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_date_time_;
+    auto* temp = _impl_.astarte_data_.date_time_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_date_time_ = nullptr;
+    _impl_.astarte_data_.date_time_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::google::protobuf::Timestamp& AstarteData::_internal_astarte_data_date_time() const {
-  return astarte_data_case() == kAstarteDataDateTime ? *_impl_.astarte_data_.astarte_data_date_time_ : reinterpret_cast<::google::protobuf::Timestamp&>(::google::protobuf::_Timestamp_default_instance_);
+inline const ::google::protobuf::Timestamp& AstarteData::_internal_date_time() const {
+  return astarte_data_case() == kDateTime ? *_impl_.astarte_data_.date_time_ : reinterpret_cast<::google::protobuf::Timestamp&>(::google::protobuf::_Timestamp_default_instance_);
 }
-inline const ::google::protobuf::Timestamp& AstarteData::astarte_data_date_time() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_date_time)
-  return _internal_astarte_data_date_time();
+inline const ::google::protobuf::Timestamp& AstarteData::date_time() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.date_time)
+  return _internal_date_time();
 }
-inline ::google::protobuf::Timestamp* AstarteData::unsafe_arena_release_astarte_data_date_time() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_date_time)
-  if (astarte_data_case() == kAstarteDataDateTime) {
+inline ::google::protobuf::Timestamp* AstarteData::unsafe_arena_release_date_time() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.date_time)
+  if (astarte_data_case() == kDateTime) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_date_time_;
-    _impl_.astarte_data_.astarte_data_date_time_ = nullptr;
+    auto* temp = _impl_.astarte_data_.date_time_;
+    _impl_.astarte_data_.date_time_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_date_time(::google::protobuf::Timestamp* value) {
+inline void AstarteData::unsafe_arena_set_allocated_date_time(::google::protobuf::Timestamp* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_date_time();
-    _impl_.astarte_data_.astarte_data_date_time_ = value;
+    set_has_date_time();
+    _impl_.astarte_data_.date_time_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_date_time)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.date_time)
 }
-inline ::google::protobuf::Timestamp* AstarteData::_internal_mutable_astarte_data_date_time() {
-  if (astarte_data_case() != kAstarteDataDateTime) {
+inline ::google::protobuf::Timestamp* AstarteData::_internal_mutable_date_time() {
+  if (astarte_data_case() != kDateTime) {
     clear_astarte_data();
-    set_has_astarte_data_date_time();
-    _impl_.astarte_data_.astarte_data_date_time_ =
+    set_has_date_time();
+    _impl_.astarte_data_.date_time_ =
         ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Timestamp>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_date_time_;
+  return _impl_.astarte_data_.date_time_;
 }
-inline ::google::protobuf::Timestamp* AstarteData::mutable_astarte_data_date_time() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::Timestamp* _msg = _internal_mutable_astarte_data_date_time();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_date_time)
+inline ::google::protobuf::Timestamp* AstarteData::mutable_date_time() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::Timestamp* _msg = _internal_mutable_date_time();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.date_time)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteDoubleArray astarte_data_double_array = 8;
-inline bool AstarteData::has_astarte_data_double_array() const {
-  return astarte_data_case() == kAstarteDataDoubleArray;
+// .astarteplatform.msghub.AstarteDoubleArray double_array = 8;
+inline bool AstarteData::has_double_array() const {
+  return astarte_data_case() == kDoubleArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_double_array() const {
-  return astarte_data_case() == kAstarteDataDoubleArray;
+inline bool AstarteData::_internal_has_double_array() const {
+  return astarte_data_case() == kDoubleArray;
 }
-inline void AstarteData::set_has_astarte_data_double_array() {
-  _impl_._oneof_case_[0] = kAstarteDataDoubleArray;
+inline void AstarteData::set_has_double_array() {
+  _impl_._oneof_case_[0] = kDoubleArray;
 }
-inline void AstarteData::clear_astarte_data_double_array() {
+inline void AstarteData::clear_double_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataDoubleArray) {
+  if (astarte_data_case() == kDoubleArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_double_array_;
+      delete _impl_.astarte_data_.double_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_double_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.double_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::release_astarte_data_double_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_double_array)
-  if (astarte_data_case() == kAstarteDataDoubleArray) {
+inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::release_double_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.double_array)
+  if (astarte_data_case() == kDoubleArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_double_array_;
+    auto* temp = _impl_.astarte_data_.double_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_double_array_ = nullptr;
+    _impl_.astarte_data_.double_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteDoubleArray& AstarteData::_internal_astarte_data_double_array() const {
-  return astarte_data_case() == kAstarteDataDoubleArray ? *_impl_.astarte_data_.astarte_data_double_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteDoubleArray&>(::astarteplatform::msghub::_AstarteDoubleArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteDoubleArray& AstarteData::_internal_double_array() const {
+  return astarte_data_case() == kDoubleArray ? *_impl_.astarte_data_.double_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteDoubleArray&>(::astarteplatform::msghub::_AstarteDoubleArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteDoubleArray& AstarteData::astarte_data_double_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_double_array)
-  return _internal_astarte_data_double_array();
+inline const ::astarteplatform::msghub::AstarteDoubleArray& AstarteData::double_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.double_array)
+  return _internal_double_array();
 }
-inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::unsafe_arena_release_astarte_data_double_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_double_array)
-  if (astarte_data_case() == kAstarteDataDoubleArray) {
+inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::unsafe_arena_release_double_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.double_array)
+  if (astarte_data_case() == kDoubleArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_double_array_;
-    _impl_.astarte_data_.astarte_data_double_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.double_array_;
+    _impl_.astarte_data_.double_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_double_array(::astarteplatform::msghub::AstarteDoubleArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_double_array(::astarteplatform::msghub::AstarteDoubleArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_double_array();
-    _impl_.astarte_data_.astarte_data_double_array_ = value;
+    set_has_double_array();
+    _impl_.astarte_data_.double_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_double_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.double_array)
 }
-inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::_internal_mutable_astarte_data_double_array() {
-  if (astarte_data_case() != kAstarteDataDoubleArray) {
+inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::_internal_mutable_double_array() {
+  if (astarte_data_case() != kDoubleArray) {
     clear_astarte_data();
-    set_has_astarte_data_double_array();
-    _impl_.astarte_data_.astarte_data_double_array_ =
+    set_has_double_array();
+    _impl_.astarte_data_.double_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteDoubleArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_double_array_;
+  return _impl_.astarte_data_.double_array_;
 }
-inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::mutable_astarte_data_double_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteDoubleArray* _msg = _internal_mutable_astarte_data_double_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_double_array)
+inline ::astarteplatform::msghub::AstarteDoubleArray* AstarteData::mutable_double_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteDoubleArray* _msg = _internal_mutable_double_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.double_array)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteIntegerArray astarte_data_integer_array = 9;
-inline bool AstarteData::has_astarte_data_integer_array() const {
-  return astarte_data_case() == kAstarteDataIntegerArray;
+// .astarteplatform.msghub.AstarteIntegerArray integer_array = 9;
+inline bool AstarteData::has_integer_array() const {
+  return astarte_data_case() == kIntegerArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_integer_array() const {
-  return astarte_data_case() == kAstarteDataIntegerArray;
+inline bool AstarteData::_internal_has_integer_array() const {
+  return astarte_data_case() == kIntegerArray;
 }
-inline void AstarteData::set_has_astarte_data_integer_array() {
-  _impl_._oneof_case_[0] = kAstarteDataIntegerArray;
+inline void AstarteData::set_has_integer_array() {
+  _impl_._oneof_case_[0] = kIntegerArray;
 }
-inline void AstarteData::clear_astarte_data_integer_array() {
+inline void AstarteData::clear_integer_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataIntegerArray) {
+  if (astarte_data_case() == kIntegerArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_integer_array_;
+      delete _impl_.astarte_data_.integer_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_integer_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.integer_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::release_astarte_data_integer_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_integer_array)
-  if (astarte_data_case() == kAstarteDataIntegerArray) {
+inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::release_integer_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.integer_array)
+  if (astarte_data_case() == kIntegerArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_integer_array_;
+    auto* temp = _impl_.astarte_data_.integer_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_integer_array_ = nullptr;
+    _impl_.astarte_data_.integer_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteIntegerArray& AstarteData::_internal_astarte_data_integer_array() const {
-  return astarte_data_case() == kAstarteDataIntegerArray ? *_impl_.astarte_data_.astarte_data_integer_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteIntegerArray&>(::astarteplatform::msghub::_AstarteIntegerArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteIntegerArray& AstarteData::_internal_integer_array() const {
+  return astarte_data_case() == kIntegerArray ? *_impl_.astarte_data_.integer_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteIntegerArray&>(::astarteplatform::msghub::_AstarteIntegerArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteIntegerArray& AstarteData::astarte_data_integer_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_integer_array)
-  return _internal_astarte_data_integer_array();
+inline const ::astarteplatform::msghub::AstarteIntegerArray& AstarteData::integer_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.integer_array)
+  return _internal_integer_array();
 }
-inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::unsafe_arena_release_astarte_data_integer_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_integer_array)
-  if (astarte_data_case() == kAstarteDataIntegerArray) {
+inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::unsafe_arena_release_integer_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.integer_array)
+  if (astarte_data_case() == kIntegerArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_integer_array_;
-    _impl_.astarte_data_.astarte_data_integer_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.integer_array_;
+    _impl_.astarte_data_.integer_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_integer_array(::astarteplatform::msghub::AstarteIntegerArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_integer_array(::astarteplatform::msghub::AstarteIntegerArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_integer_array();
-    _impl_.astarte_data_.astarte_data_integer_array_ = value;
+    set_has_integer_array();
+    _impl_.astarte_data_.integer_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_integer_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.integer_array)
 }
-inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::_internal_mutable_astarte_data_integer_array() {
-  if (astarte_data_case() != kAstarteDataIntegerArray) {
+inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::_internal_mutable_integer_array() {
+  if (astarte_data_case() != kIntegerArray) {
     clear_astarte_data();
-    set_has_astarte_data_integer_array();
-    _impl_.astarte_data_.astarte_data_integer_array_ =
+    set_has_integer_array();
+    _impl_.astarte_data_.integer_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteIntegerArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_integer_array_;
+  return _impl_.astarte_data_.integer_array_;
 }
-inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::mutable_astarte_data_integer_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteIntegerArray* _msg = _internal_mutable_astarte_data_integer_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_integer_array)
+inline ::astarteplatform::msghub::AstarteIntegerArray* AstarteData::mutable_integer_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteIntegerArray* _msg = _internal_mutable_integer_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.integer_array)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteBooleanArray astarte_data_boolean_array = 10;
-inline bool AstarteData::has_astarte_data_boolean_array() const {
-  return astarte_data_case() == kAstarteDataBooleanArray;
+// .astarteplatform.msghub.AstarteBooleanArray boolean_array = 10;
+inline bool AstarteData::has_boolean_array() const {
+  return astarte_data_case() == kBooleanArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_boolean_array() const {
-  return astarte_data_case() == kAstarteDataBooleanArray;
+inline bool AstarteData::_internal_has_boolean_array() const {
+  return astarte_data_case() == kBooleanArray;
 }
-inline void AstarteData::set_has_astarte_data_boolean_array() {
-  _impl_._oneof_case_[0] = kAstarteDataBooleanArray;
+inline void AstarteData::set_has_boolean_array() {
+  _impl_._oneof_case_[0] = kBooleanArray;
 }
-inline void AstarteData::clear_astarte_data_boolean_array() {
+inline void AstarteData::clear_boolean_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataBooleanArray) {
+  if (astarte_data_case() == kBooleanArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_boolean_array_;
+      delete _impl_.astarte_data_.boolean_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_boolean_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.boolean_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::release_astarte_data_boolean_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_boolean_array)
-  if (astarte_data_case() == kAstarteDataBooleanArray) {
+inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::release_boolean_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.boolean_array)
+  if (astarte_data_case() == kBooleanArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_boolean_array_;
+    auto* temp = _impl_.astarte_data_.boolean_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_boolean_array_ = nullptr;
+    _impl_.astarte_data_.boolean_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteBooleanArray& AstarteData::_internal_astarte_data_boolean_array() const {
-  return astarte_data_case() == kAstarteDataBooleanArray ? *_impl_.astarte_data_.astarte_data_boolean_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteBooleanArray&>(::astarteplatform::msghub::_AstarteBooleanArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteBooleanArray& AstarteData::_internal_boolean_array() const {
+  return astarte_data_case() == kBooleanArray ? *_impl_.astarte_data_.boolean_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteBooleanArray&>(::astarteplatform::msghub::_AstarteBooleanArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteBooleanArray& AstarteData::astarte_data_boolean_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_boolean_array)
-  return _internal_astarte_data_boolean_array();
+inline const ::astarteplatform::msghub::AstarteBooleanArray& AstarteData::boolean_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.boolean_array)
+  return _internal_boolean_array();
 }
-inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::unsafe_arena_release_astarte_data_boolean_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_boolean_array)
-  if (astarte_data_case() == kAstarteDataBooleanArray) {
+inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::unsafe_arena_release_boolean_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.boolean_array)
+  if (astarte_data_case() == kBooleanArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_boolean_array_;
-    _impl_.astarte_data_.astarte_data_boolean_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.boolean_array_;
+    _impl_.astarte_data_.boolean_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_boolean_array(::astarteplatform::msghub::AstarteBooleanArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_boolean_array(::astarteplatform::msghub::AstarteBooleanArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_boolean_array();
-    _impl_.astarte_data_.astarte_data_boolean_array_ = value;
+    set_has_boolean_array();
+    _impl_.astarte_data_.boolean_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_boolean_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.boolean_array)
 }
-inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::_internal_mutable_astarte_data_boolean_array() {
-  if (astarte_data_case() != kAstarteDataBooleanArray) {
+inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::_internal_mutable_boolean_array() {
+  if (astarte_data_case() != kBooleanArray) {
     clear_astarte_data();
-    set_has_astarte_data_boolean_array();
-    _impl_.astarte_data_.astarte_data_boolean_array_ =
+    set_has_boolean_array();
+    _impl_.astarte_data_.boolean_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteBooleanArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_boolean_array_;
+  return _impl_.astarte_data_.boolean_array_;
 }
-inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::mutable_astarte_data_boolean_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteBooleanArray* _msg = _internal_mutable_astarte_data_boolean_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_boolean_array)
+inline ::astarteplatform::msghub::AstarteBooleanArray* AstarteData::mutable_boolean_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteBooleanArray* _msg = _internal_mutable_boolean_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.boolean_array)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteLongIntegerArray astarte_data_long_integer_array = 11;
-inline bool AstarteData::has_astarte_data_long_integer_array() const {
-  return astarte_data_case() == kAstarteDataLongIntegerArray;
+// .astarteplatform.msghub.AstarteLongIntegerArray long_integer_array = 11;
+inline bool AstarteData::has_long_integer_array() const {
+  return astarte_data_case() == kLongIntegerArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_long_integer_array() const {
-  return astarte_data_case() == kAstarteDataLongIntegerArray;
+inline bool AstarteData::_internal_has_long_integer_array() const {
+  return astarte_data_case() == kLongIntegerArray;
 }
-inline void AstarteData::set_has_astarte_data_long_integer_array() {
-  _impl_._oneof_case_[0] = kAstarteDataLongIntegerArray;
+inline void AstarteData::set_has_long_integer_array() {
+  _impl_._oneof_case_[0] = kLongIntegerArray;
 }
-inline void AstarteData::clear_astarte_data_long_integer_array() {
+inline void AstarteData::clear_long_integer_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataLongIntegerArray) {
+  if (astarte_data_case() == kLongIntegerArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_long_integer_array_;
+      delete _impl_.astarte_data_.long_integer_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_long_integer_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.long_integer_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::release_astarte_data_long_integer_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_long_integer_array)
-  if (astarte_data_case() == kAstarteDataLongIntegerArray) {
+inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::release_long_integer_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.long_integer_array)
+  if (astarte_data_case() == kLongIntegerArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_long_integer_array_;
+    auto* temp = _impl_.astarte_data_.long_integer_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_long_integer_array_ = nullptr;
+    _impl_.astarte_data_.long_integer_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteLongIntegerArray& AstarteData::_internal_astarte_data_long_integer_array() const {
-  return astarte_data_case() == kAstarteDataLongIntegerArray ? *_impl_.astarte_data_.astarte_data_long_integer_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteLongIntegerArray&>(::astarteplatform::msghub::_AstarteLongIntegerArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteLongIntegerArray& AstarteData::_internal_long_integer_array() const {
+  return astarte_data_case() == kLongIntegerArray ? *_impl_.astarte_data_.long_integer_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteLongIntegerArray&>(::astarteplatform::msghub::_AstarteLongIntegerArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteLongIntegerArray& AstarteData::astarte_data_long_integer_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_long_integer_array)
-  return _internal_astarte_data_long_integer_array();
+inline const ::astarteplatform::msghub::AstarteLongIntegerArray& AstarteData::long_integer_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.long_integer_array)
+  return _internal_long_integer_array();
 }
-inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::unsafe_arena_release_astarte_data_long_integer_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_long_integer_array)
-  if (astarte_data_case() == kAstarteDataLongIntegerArray) {
+inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::unsafe_arena_release_long_integer_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.long_integer_array)
+  if (astarte_data_case() == kLongIntegerArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_long_integer_array_;
-    _impl_.astarte_data_.astarte_data_long_integer_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.long_integer_array_;
+    _impl_.astarte_data_.long_integer_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_long_integer_array(::astarteplatform::msghub::AstarteLongIntegerArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_long_integer_array(::astarteplatform::msghub::AstarteLongIntegerArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_long_integer_array();
-    _impl_.astarte_data_.astarte_data_long_integer_array_ = value;
+    set_has_long_integer_array();
+    _impl_.astarte_data_.long_integer_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_long_integer_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.long_integer_array)
 }
-inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::_internal_mutable_astarte_data_long_integer_array() {
-  if (astarte_data_case() != kAstarteDataLongIntegerArray) {
+inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::_internal_mutable_long_integer_array() {
+  if (astarte_data_case() != kLongIntegerArray) {
     clear_astarte_data();
-    set_has_astarte_data_long_integer_array();
-    _impl_.astarte_data_.astarte_data_long_integer_array_ =
+    set_has_long_integer_array();
+    _impl_.astarte_data_.long_integer_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteLongIntegerArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_long_integer_array_;
+  return _impl_.astarte_data_.long_integer_array_;
 }
-inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::mutable_astarte_data_long_integer_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteLongIntegerArray* _msg = _internal_mutable_astarte_data_long_integer_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_long_integer_array)
+inline ::astarteplatform::msghub::AstarteLongIntegerArray* AstarteData::mutable_long_integer_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteLongIntegerArray* _msg = _internal_mutable_long_integer_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.long_integer_array)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteStringArray astarte_data_string_array = 12;
-inline bool AstarteData::has_astarte_data_string_array() const {
-  return astarte_data_case() == kAstarteDataStringArray;
+// .astarteplatform.msghub.AstarteStringArray string_array = 12;
+inline bool AstarteData::has_string_array() const {
+  return astarte_data_case() == kStringArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_string_array() const {
-  return astarte_data_case() == kAstarteDataStringArray;
+inline bool AstarteData::_internal_has_string_array() const {
+  return astarte_data_case() == kStringArray;
 }
-inline void AstarteData::set_has_astarte_data_string_array() {
-  _impl_._oneof_case_[0] = kAstarteDataStringArray;
+inline void AstarteData::set_has_string_array() {
+  _impl_._oneof_case_[0] = kStringArray;
 }
-inline void AstarteData::clear_astarte_data_string_array() {
+inline void AstarteData::clear_string_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataStringArray) {
+  if (astarte_data_case() == kStringArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_string_array_;
+      delete _impl_.astarte_data_.string_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_string_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.string_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::release_astarte_data_string_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_string_array)
-  if (astarte_data_case() == kAstarteDataStringArray) {
+inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::release_string_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.string_array)
+  if (astarte_data_case() == kStringArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_string_array_;
+    auto* temp = _impl_.astarte_data_.string_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_string_array_ = nullptr;
+    _impl_.astarte_data_.string_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteStringArray& AstarteData::_internal_astarte_data_string_array() const {
-  return astarte_data_case() == kAstarteDataStringArray ? *_impl_.astarte_data_.astarte_data_string_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteStringArray&>(::astarteplatform::msghub::_AstarteStringArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteStringArray& AstarteData::_internal_string_array() const {
+  return astarte_data_case() == kStringArray ? *_impl_.astarte_data_.string_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteStringArray&>(::astarteplatform::msghub::_AstarteStringArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteStringArray& AstarteData::astarte_data_string_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_string_array)
-  return _internal_astarte_data_string_array();
+inline const ::astarteplatform::msghub::AstarteStringArray& AstarteData::string_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.string_array)
+  return _internal_string_array();
 }
-inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::unsafe_arena_release_astarte_data_string_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_string_array)
-  if (astarte_data_case() == kAstarteDataStringArray) {
+inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::unsafe_arena_release_string_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.string_array)
+  if (astarte_data_case() == kStringArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_string_array_;
-    _impl_.astarte_data_.astarte_data_string_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.string_array_;
+    _impl_.astarte_data_.string_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_string_array(::astarteplatform::msghub::AstarteStringArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_string_array(::astarteplatform::msghub::AstarteStringArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_string_array();
-    _impl_.astarte_data_.astarte_data_string_array_ = value;
+    set_has_string_array();
+    _impl_.astarte_data_.string_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_string_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.string_array)
 }
-inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::_internal_mutable_astarte_data_string_array() {
-  if (astarte_data_case() != kAstarteDataStringArray) {
+inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::_internal_mutable_string_array() {
+  if (astarte_data_case() != kStringArray) {
     clear_astarte_data();
-    set_has_astarte_data_string_array();
-    _impl_.astarte_data_.astarte_data_string_array_ =
+    set_has_string_array();
+    _impl_.astarte_data_.string_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteStringArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_string_array_;
+  return _impl_.astarte_data_.string_array_;
 }
-inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::mutable_astarte_data_string_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteStringArray* _msg = _internal_mutable_astarte_data_string_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_string_array)
+inline ::astarteplatform::msghub::AstarteStringArray* AstarteData::mutable_string_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteStringArray* _msg = _internal_mutable_string_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.string_array)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteBinaryBlobArray astarte_data_binary_blob_array = 13;
-inline bool AstarteData::has_astarte_data_binary_blob_array() const {
-  return astarte_data_case() == kAstarteDataBinaryBlobArray;
+// .astarteplatform.msghub.AstarteBinaryBlobArray binary_blob_array = 13;
+inline bool AstarteData::has_binary_blob_array() const {
+  return astarte_data_case() == kBinaryBlobArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_binary_blob_array() const {
-  return astarte_data_case() == kAstarteDataBinaryBlobArray;
+inline bool AstarteData::_internal_has_binary_blob_array() const {
+  return astarte_data_case() == kBinaryBlobArray;
 }
-inline void AstarteData::set_has_astarte_data_binary_blob_array() {
-  _impl_._oneof_case_[0] = kAstarteDataBinaryBlobArray;
+inline void AstarteData::set_has_binary_blob_array() {
+  _impl_._oneof_case_[0] = kBinaryBlobArray;
 }
-inline void AstarteData::clear_astarte_data_binary_blob_array() {
+inline void AstarteData::clear_binary_blob_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataBinaryBlobArray) {
+  if (astarte_data_case() == kBinaryBlobArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_binary_blob_array_;
+      delete _impl_.astarte_data_.binary_blob_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_binary_blob_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.binary_blob_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::release_astarte_data_binary_blob_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_binary_blob_array)
-  if (astarte_data_case() == kAstarteDataBinaryBlobArray) {
+inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::release_binary_blob_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.binary_blob_array)
+  if (astarte_data_case() == kBinaryBlobArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_binary_blob_array_;
+    auto* temp = _impl_.astarte_data_.binary_blob_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_binary_blob_array_ = nullptr;
+    _impl_.astarte_data_.binary_blob_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteBinaryBlobArray& AstarteData::_internal_astarte_data_binary_blob_array() const {
-  return astarte_data_case() == kAstarteDataBinaryBlobArray ? *_impl_.astarte_data_.astarte_data_binary_blob_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteBinaryBlobArray&>(::astarteplatform::msghub::_AstarteBinaryBlobArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteBinaryBlobArray& AstarteData::_internal_binary_blob_array() const {
+  return astarte_data_case() == kBinaryBlobArray ? *_impl_.astarte_data_.binary_blob_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteBinaryBlobArray&>(::astarteplatform::msghub::_AstarteBinaryBlobArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteBinaryBlobArray& AstarteData::astarte_data_binary_blob_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_binary_blob_array)
-  return _internal_astarte_data_binary_blob_array();
+inline const ::astarteplatform::msghub::AstarteBinaryBlobArray& AstarteData::binary_blob_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.binary_blob_array)
+  return _internal_binary_blob_array();
 }
-inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::unsafe_arena_release_astarte_data_binary_blob_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_binary_blob_array)
-  if (astarte_data_case() == kAstarteDataBinaryBlobArray) {
+inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::unsafe_arena_release_binary_blob_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.binary_blob_array)
+  if (astarte_data_case() == kBinaryBlobArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_binary_blob_array_;
-    _impl_.astarte_data_.astarte_data_binary_blob_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.binary_blob_array_;
+    _impl_.astarte_data_.binary_blob_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_binary_blob_array(::astarteplatform::msghub::AstarteBinaryBlobArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_binary_blob_array(::astarteplatform::msghub::AstarteBinaryBlobArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_binary_blob_array();
-    _impl_.astarte_data_.astarte_data_binary_blob_array_ = value;
+    set_has_binary_blob_array();
+    _impl_.astarte_data_.binary_blob_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_binary_blob_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.binary_blob_array)
 }
-inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::_internal_mutable_astarte_data_binary_blob_array() {
-  if (astarte_data_case() != kAstarteDataBinaryBlobArray) {
+inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::_internal_mutable_binary_blob_array() {
+  if (astarte_data_case() != kBinaryBlobArray) {
     clear_astarte_data();
-    set_has_astarte_data_binary_blob_array();
-    _impl_.astarte_data_.astarte_data_binary_blob_array_ =
+    set_has_binary_blob_array();
+    _impl_.astarte_data_.binary_blob_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteBinaryBlobArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_binary_blob_array_;
+  return _impl_.astarte_data_.binary_blob_array_;
 }
-inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::mutable_astarte_data_binary_blob_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteBinaryBlobArray* _msg = _internal_mutable_astarte_data_binary_blob_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_binary_blob_array)
+inline ::astarteplatform::msghub::AstarteBinaryBlobArray* AstarteData::mutable_binary_blob_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteBinaryBlobArray* _msg = _internal_mutable_binary_blob_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.binary_blob_array)
   return _msg;
 }
 
-// .astarteplatform.msghub.AstarteDateTimeArray astarte_data_date_time_array = 14;
-inline bool AstarteData::has_astarte_data_date_time_array() const {
-  return astarte_data_case() == kAstarteDataDateTimeArray;
+// .astarteplatform.msghub.AstarteDateTimeArray date_time_array = 14;
+inline bool AstarteData::has_date_time_array() const {
+  return astarte_data_case() == kDateTimeArray;
 }
-inline bool AstarteData::_internal_has_astarte_data_date_time_array() const {
-  return astarte_data_case() == kAstarteDataDateTimeArray;
+inline bool AstarteData::_internal_has_date_time_array() const {
+  return astarte_data_case() == kDateTimeArray;
 }
-inline void AstarteData::set_has_astarte_data_date_time_array() {
-  _impl_._oneof_case_[0] = kAstarteDataDateTimeArray;
+inline void AstarteData::set_has_date_time_array() {
+  _impl_._oneof_case_[0] = kDateTimeArray;
 }
-inline void AstarteData::clear_astarte_data_date_time_array() {
+inline void AstarteData::clear_date_time_array() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (astarte_data_case() == kAstarteDataDateTimeArray) {
+  if (astarte_data_case() == kDateTimeArray) {
     if (GetArena() == nullptr) {
-      delete _impl_.astarte_data_.astarte_data_date_time_array_;
+      delete _impl_.astarte_data_.date_time_array_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.astarte_data_date_time_array_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.astarte_data_.date_time_array_);
     }
     clear_has_astarte_data();
   }
 }
-inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::release_astarte_data_date_time_array() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.astarte_data_date_time_array)
-  if (astarte_data_case() == kAstarteDataDateTimeArray) {
+inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::release_date_time_array() {
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteData.date_time_array)
+  if (astarte_data_case() == kDateTimeArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_date_time_array_;
+    auto* temp = _impl_.astarte_data_.date_time_array_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.astarte_data_.astarte_data_date_time_array_ = nullptr;
+    _impl_.astarte_data_.date_time_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteDateTimeArray& AstarteData::_internal_astarte_data_date_time_array() const {
-  return astarte_data_case() == kAstarteDataDateTimeArray ? *_impl_.astarte_data_.astarte_data_date_time_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteDateTimeArray&>(::astarteplatform::msghub::_AstarteDateTimeArray_default_instance_);
+inline const ::astarteplatform::msghub::AstarteDateTimeArray& AstarteData::_internal_date_time_array() const {
+  return astarte_data_case() == kDateTimeArray ? *_impl_.astarte_data_.date_time_array_ : reinterpret_cast<::astarteplatform::msghub::AstarteDateTimeArray&>(::astarteplatform::msghub::_AstarteDateTimeArray_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteDateTimeArray& AstarteData::astarte_data_date_time_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.astarte_data_date_time_array)
-  return _internal_astarte_data_date_time_array();
+inline const ::astarteplatform::msghub::AstarteDateTimeArray& AstarteData::date_time_array() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteData.date_time_array)
+  return _internal_date_time_array();
 }
-inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::unsafe_arena_release_astarte_data_date_time_array() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.astarte_data_date_time_array)
-  if (astarte_data_case() == kAstarteDataDateTimeArray) {
+inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::unsafe_arena_release_date_time_array() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteData.date_time_array)
+  if (astarte_data_case() == kDateTimeArray) {
     clear_has_astarte_data();
-    auto* temp = _impl_.astarte_data_.astarte_data_date_time_array_;
-    _impl_.astarte_data_.astarte_data_date_time_array_ = nullptr;
+    auto* temp = _impl_.astarte_data_.date_time_array_;
+    _impl_.astarte_data_.date_time_array_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void AstarteData::unsafe_arena_set_allocated_astarte_data_date_time_array(::astarteplatform::msghub::AstarteDateTimeArray* value) {
+inline void AstarteData::unsafe_arena_set_allocated_date_time_array(::astarteplatform::msghub::AstarteDateTimeArray* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_astarte_data();
   if (value) {
-    set_has_astarte_data_date_time_array();
-    _impl_.astarte_data_.astarte_data_date_time_array_ = value;
+    set_has_date_time_array();
+    _impl_.astarte_data_.date_time_array_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.astarte_data_date_time_array)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteData.date_time_array)
 }
-inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::_internal_mutable_astarte_data_date_time_array() {
-  if (astarte_data_case() != kAstarteDataDateTimeArray) {
+inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::_internal_mutable_date_time_array() {
+  if (astarte_data_case() != kDateTimeArray) {
     clear_astarte_data();
-    set_has_astarte_data_date_time_array();
-    _impl_.astarte_data_.astarte_data_date_time_array_ =
+    set_has_date_time_array();
+    _impl_.astarte_data_.date_time_array_ =
         ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteDateTimeArray>(GetArena());
   }
-  return _impl_.astarte_data_.astarte_data_date_time_array_;
+  return _impl_.astarte_data_.date_time_array_;
 }
-inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::mutable_astarte_data_date_time_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteDateTimeArray* _msg = _internal_mutable_astarte_data_date_time_array();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.astarte_data_date_time_array)
+inline ::astarteplatform::msghub::AstarteDateTimeArray* AstarteData::mutable_date_time_array() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteDateTimeArray* _msg = _internal_mutable_date_time_array();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteData.date_time_array)
   return _msg;
 }
 

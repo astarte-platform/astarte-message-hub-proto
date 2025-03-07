@@ -76,21 +76,21 @@ message AstarteDateTimeArray{
 /* A base Astarte data type for transmission with protobuf. */
 message AstarteData {
   oneof astarte_data {
-    double astarte_data_double = 1;
-    int32 astarte_data_integer = 2;
-    bool astarte_data_boolean = 3;
-    int64 astarte_data_long_integer = 4;
-    string astarte_data_string = 5;
-    bytes astarte_data_binary_blob = 6;
-    google.protobuf.Timestamp astarte_data_date_time = 7;
+    double double = 1;
+    int32 integer = 2;
+    bool boolean = 3;
+    int64 long_integer = 4;
+    string string = 5;
+    bytes binary_blob = 6;
+    google.protobuf.Timestamp date_time = 7;
 
-    AstarteDoubleArray astarte_data_double_array = 8;
-    AstarteIntegerArray astarte_data_integer_array = 9;
-    AstarteBooleanArray astarte_data_boolean_array = 10;
-    AstarteLongIntegerArray astarte_data_long_integer_array = 11;
-    AstarteStringArray astarte_data_string_array = 12;
-    AstarteBinaryBlobArray astarte_data_binary_blob_array = 13;
-    AstarteDateTimeArray astarte_data_date_time_array = 14;
+    AstarteDoubleArray double_array = 8;
+    AstarteIntegerArray integer_array = 9;
+    AstarteBooleanArray boolean_array = 10;
+    AstarteLongIntegerArray long_integer_array = 11;
+    AstarteStringArray string_array = 12;
+    AstarteBinaryBlobArray binary_blob_array = 13;
+    AstarteDateTimeArray date_time_array = 14;
   }
 }
 
