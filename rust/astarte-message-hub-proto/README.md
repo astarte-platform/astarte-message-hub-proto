@@ -121,7 +121,7 @@ async fn run_example_client() {
                     .to_string(),
                 path: "/uptime".to_string(),
                 timestamp: None,
-                payload: Some(Payload::AstarteData(elapsed_str.into())),
+                payload: Some(Payload::DatastreamIndividual(elapsed_str.into())),
             };
             client.send(msg).await.unwrap();
 
@@ -140,5 +140,4 @@ async fn run_example_client() {
         (Err(e1), Err(e2)) => panic!("Error:\n\t{}\n\t{}", e1, e2),
     }
 }
-
 ```
