@@ -22,142 +22,113 @@ use std::collections::HashMap;
 
 use chrono::{DateTime, Utc};
 
-use crate::proto_message_hub;
+use crate::{
+    proto_message_hub::astarte_data::AstarteData, AstarteDatastreamInidividual,
+    AstarteDatastreamObject, AstarteDateTimeArray,
+};
 
 /// This macro can be used to implement the from trait for an AstarteDataTypeIndividual from a
 /// generic type that is not an array.
-macro_rules! impl_type_conversion_traits {
-    ( {$( ($typ:ty, $astartedatatype:ident) ,)*}) => {
+macro_rules! from_to_impl {
+    ($from:ty, $to:path) => {
+        impl From<$from> for crate::proto_message_hub::astarte_data::AstarteData {
+            fn from(value: $from) -> Self {
+                $to(value.into())
+            }
+        }
+    };
+    ($from:ty, $array:ident, $to:path) => {
+        impl From<$from> for crate::proto_message_hub::astarte_data::AstarteData {
+            fn from(value: $from) -> Self {
+                let value = crate::proto_message_hub::$array {
+                    values: value.into(),
+                };
 
-        $(
-               impl From<$typ> for proto_message_hub::AstarteDataTypeIndividual {
-                    fn from(d: $typ) -> Self {
-                        use proto_message_hub::AstarteDataTypeIndividual;
-                        use proto_message_hub::astarte_data_type_individual::IndividualData;
-
-                        AstarteDataTypeIndividual {
-                            individual_data: Some(IndividualData::$astartedatatype(d.into())),
-                        }
-                    }
-                }
-
-                impl From<&$typ> for proto_message_hub::AstarteDataTypeIndividual {
-                    fn from(d: &$typ) -> Self {
-                        use proto_message_hub::AstarteDataTypeIndividual;
-                        use proto_message_hub::astarte_data_type_individual::IndividualData;
-
-                        AstarteDataTypeIndividual {
-                            individual_data: Some(IndividualData::$astartedatatype(d.clone().into())),
-                        }
-                    }
-                }
-        )*
+                $to(value)
+            }
+        }
     };
 }
 
-/// This macro can be used to implement the from trait for an AstarteDataTypeIndividual from a
-/// generic type that is an array.
-macro_rules! impl_array_type_conversion_traits {
-    ( {$( ($typ:ty, $astartedatatype:ident) ,)*}) => {
+from_to_impl!(f64, AstarteData::Double);
+from_to_impl!(f32, AstarteData::Double);
+from_to_impl!(i32, AstarteData::Integer);
+from_to_impl!(bool, AstarteData::Boolean);
+from_to_impl!(i64, AstarteData::LongInteger);
+from_to_impl!(&str, AstarteData::String);
+from_to_impl!(String, AstarteData::String);
+from_to_impl!(&String, AstarteData::String);
+from_to_impl!(Vec<u8>, AstarteData::BinaryBlob);
+from_to_impl!(&[u8], AstarteData::BinaryBlob);
+from_to_impl!(DateTime<Utc>, AstarteData::DateTime);
+from_to_impl!(Vec<f64>, AstarteDoubleArray, AstarteData::DoubleArray);
+from_to_impl!(&[f64], AstarteDoubleArray, AstarteData::DoubleArray);
+from_to_impl!(Vec<i32>, AstarteIntegerArray, AstarteData::IntegerArray);
+from_to_impl!(&[i32], AstarteIntegerArray, AstarteData::IntegerArray);
+from_to_impl!(Vec<bool>, AstarteBooleanArray, AstarteData::BooleanArray);
+from_to_impl!(&[bool], AstarteBooleanArray, AstarteData::BooleanArray);
+from_to_impl!(
+    Vec<i64>,
+    AstarteLongIntegerArray,
+    AstarteData::LongIntegerArray
+);
+from_to_impl!(
+    &[i64],
+    AstarteLongIntegerArray,
+    AstarteData::LongIntegerArray
+);
+from_to_impl!(Vec<String>, AstarteStringArray, AstarteData::StringArray);
+from_to_impl!(&[String], AstarteStringArray, AstarteData::StringArray);
+from_to_impl!(
+    Vec<Vec<u8>>,
+    AstarteBinaryBlobArray,
+    AstarteData::BinaryBlobArray
+);
 
-        $(
-               impl From<$typ> for proto_message_hub::AstarteDataTypeIndividual {
-                    fn from(values: $typ) -> Self {
-                        use proto_message_hub::AstarteDataTypeIndividual;
-                        use proto_message_hub::astarte_data_type_individual::IndividualData;
+impl From<Vec<DateTime<Utc>>> for AstarteData {
+    fn from(value: Vec<DateTime<Utc>>) -> Self {
+        let values = value
+            .into_iter()
+            .map(pbjson_types::Timestamp::from)
+            .collect();
 
-                        AstarteDataTypeIndividual {
-                            individual_data: Some(
-                                IndividualData::$astartedatatype(
-                                    proto_message_hub::$astartedatatype { values },
-                                ),
-                            ),
-                        }
-                    }
-                }
-        )*
-    };
-}
-
-impl_type_conversion_traits!({
-    (f64, AstarteDouble),
-    (i32, AstarteInteger),
-    (bool, AstarteBoolean),
-    (i64, AstarteLongInteger),
-    (&str, AstarteString),
-    (String, AstarteString),
-    (Vec<u8>, AstarteBinaryBlob),
-});
-
-impl_array_type_conversion_traits!({
-    (Vec<f64>, AstarteDoubleArray),
-    (Vec<i32>, AstarteIntegerArray),
-    (Vec<bool>, AstarteBooleanArray),
-    (Vec<i64>, AstarteLongIntegerArray),
-    (Vec<String>, AstarteStringArray),
-    (Vec<Vec<u8>>, AstarteBinaryBlobArray),
-});
-
-/// This struct can be used to store the content of a `.json` file.
-#[derive(Clone, Default, Debug)]
-pub struct InterfaceJson(pub String);
-
-impl From<DateTime<Utc>> for proto_message_hub::AstarteDataTypeIndividual {
-    fn from(value: DateTime<Utc>) -> Self {
-        use proto_message_hub::astarte_data_type_individual::IndividualData;
-        use proto_message_hub::AstarteDataTypeIndividual;
-
-        AstarteDataTypeIndividual {
-            individual_data: Some(IndividualData::AstarteDateTime(value.into())),
-        }
+        AstarteData::DateTimeArray(AstarteDateTimeArray { values })
     }
 }
 
-impl From<Vec<DateTime<Utc>>> for proto_message_hub::AstarteDataTypeIndividual {
-    fn from(values: Vec<DateTime<Utc>>) -> Self {
-        use pbjson_types::Timestamp;
-        use proto_message_hub::astarte_data_type_individual::IndividualData;
-        use proto_message_hub::AstarteDataTypeIndividual;
-        use proto_message_hub::AstarteDateTimeArray;
-
-        AstarteDataTypeIndividual {
-            individual_data: Some(IndividualData::AstarteDateTimeArray(AstarteDateTimeArray {
-                values: values
-                    .into_iter()
-                    .map(|x| x.into())
-                    .collect::<Vec<Timestamp>>(),
-            })),
-        }
-    }
-}
-
-impl<T> From<T> for proto_message_hub::AstarteDataType
+impl<T> From<T> for AstarteDatastreamInidividual
 where
-    T: Into<proto_message_hub::AstarteDataTypeIndividual>,
+    T: Into<AstarteData>,
 {
     fn from(value: T) -> Self {
-        use proto_message_hub::astarte_data_type::Data;
-        use proto_message_hub::AstarteDataType;
-
-        AstarteDataType {
-            data: Some(Data::AstarteIndividual(value.into())),
+        Self {
+            data: Some(crate::proto_message_hub::AstarteData {
+                astarte_data: Some(value.into()),
+            }),
         }
     }
 }
 
-impl From<HashMap<String, proto_message_hub::AstarteDataTypeIndividual>>
-    for proto_message_hub::AstarteDataType
-{
-    fn from(value: HashMap<String, proto_message_hub::AstarteDataTypeIndividual>) -> Self {
-        use proto_message_hub::astarte_data_type::Data;
-        use proto_message_hub::AstarteDataType;
-        use proto_message_hub::AstarteDataTypeObject;
+impl From<HashMap<String, AstarteData>> for AstarteDatastreamObject {
+    fn from(value: HashMap<String, AstarteData>) -> Self {
+        let data = value
+            .into_iter()
+            .map(|(k, v)| {
+                (
+                    k,
+                    crate::AstarteData {
+                        astarte_data: Some(v),
+                    },
+                )
+            })
+            .collect();
 
-        AstarteDataType {
-            data: Some(Data::AstarteObject(AstarteDataTypeObject {
-                object_data: value,
-            })),
-        }
+        AstarteDatastreamObject { data }
+    }
+}
+impl From<HashMap<String, crate::AstarteData>> for AstarteDatastreamObject {
+    fn from(value: HashMap<String, crate::AstarteData>) -> Self {
+        AstarteDatastreamObject { data: value }
     }
 }
 
@@ -167,252 +138,136 @@ mod test {
 
     use chrono::DateTime;
 
+    use super::*;
     use crate::proto_message_hub;
-    use crate::proto_message_hub::astarte_data_type_individual::IndividualData;
-    use crate::proto_message_hub::AstarteDataType;
-    use crate::proto_message_hub::AstarteDataTypeIndividual;
 
     #[test]
     fn from_double_to_astarte_individual_type_success() {
         let expected_double_value: f64 = 15.5;
-        let d_astarte_individual_type: AstarteDataTypeIndividual =
-            AstarteDataTypeIndividual::from(expected_double_value);
+        let value = AstarteDatastreamInidividual::from(expected_double_value)
+            .data
+            .unwrap()
+            .astarte_data
+            .unwrap();
 
-        let double_value = d_astarte_individual_type.individual_data.unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteDouble(expected_double_value),
-            double_value
-        );
+        assert_eq!(AstarteData::Double(expected_double_value), value);
     }
 
     #[test]
-    fn from_double_by_ref_to_astarte_individual_type_success() {
-        let expected_double_value: f64 = 15.5;
-        let d_astarte_individual_type: AstarteDataTypeIndividual =
-            AstarteDataTypeIndividual::from(&expected_double_value);
+    fn from_integer_into_astarte_individual_type_success() {
+        let expected: i32 = 15;
+        let value = AstarteDatastreamInidividual::from(expected)
+            .data
+            .unwrap()
+            .astarte_data
+            .unwrap();
 
-        let double_value = d_astarte_individual_type.individual_data.unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteDouble(expected_double_value),
-            double_value
-        );
-    }
-
-    #[test]
-    fn double_into_astarte_individual_type_success() {
-        let expected_double_value: f64 = 15.5;
-        let d_astarte_individual_type: AstarteDataTypeIndividual = expected_double_value.into();
-
-        let double_value = d_astarte_individual_type.individual_data.unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteDouble(expected_double_value),
-            double_value
-        );
-    }
-
-    #[test]
-    fn integer_into_astarte_individual_type_success() {
-        let expected_integer_value: i32 = 15;
-        let i32_individual_data_type: AstarteDataTypeIndividual = expected_integer_value.into();
-
-        let i32_value = i32_individual_data_type.individual_data.unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteInteger(expected_integer_value),
-            i32_value
-        );
+        assert_eq!(AstarteData::Integer(expected), value);
     }
 
     #[test]
     fn bool_into_astarte_individual_type_success() {
-        let expected_bool_value: bool = true;
-        let bool_individual_data_type: AstarteDataTypeIndividual = expected_bool_value.into();
+        let expected = true;
+        let value = AstarteDatastreamInidividual::from(expected)
+            .data
+            .unwrap()
+            .astarte_data
+            .unwrap();
 
-        let bool_value = bool_individual_data_type.individual_data.unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteBoolean(expected_bool_value),
-            bool_value
-        );
+        assert_eq!(AstarteData::Boolean(expected), value);
     }
 
     #[test]
     fn u8_array_into_individual_type_success() {
-        let expected_vec_u8_value: Vec<u8> = vec![10, 44];
-        let vec_u8_astarte_individual_type: AstarteDataTypeIndividual =
-            expected_vec_u8_value.clone().into();
+        let expected: Vec<u8> = vec![10, 44];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
+            .unwrap();
 
-        let vec_u8_values = vec_u8_astarte_individual_type.individual_data.unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteBinaryBlob(expected_vec_u8_value),
-            vec_u8_values
-        );
+        assert_eq!(AstarteData::BinaryBlob(expected), value);
     }
 
     #[test]
     fn double_array_into_individual_type_success() {
-        let expected_vec_double_value: Vec<f64> = vec![10.54, 44.99];
-        let vec_double_individual_type: AstarteDataTypeIndividual =
-            expected_vec_double_value.clone().into();
-
-        let vec_double_values = vec_double_individual_type.individual_data.unwrap();
+        let expected: Vec<f64> = vec![10.54, 44.99];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
+            .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteDoubleArray(proto_message_hub::AstarteDoubleArray {
-                values: expected_vec_double_value
-            }),
-            vec_double_values
+            AstarteData::DoubleArray(proto_message_hub::AstarteDoubleArray { values: expected }),
+            value
         );
     }
 
     #[test]
     fn string_array_into_individual_type_success() {
-        let expected_vec_string_value: Vec<String> = vec!["test1".to_owned(), "test2".to_owned()];
-        let vec_string_individual_type: AstarteDataTypeIndividual =
-            expected_vec_string_value.clone().into();
-
-        let vec_string_values = vec_string_individual_type.individual_data.unwrap();
+        let expected: Vec<String> = vec!["test1".to_owned(), "test2".to_owned()];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
+            .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteStringArray(proto_message_hub::AstarteStringArray {
-                values: expected_vec_string_value
-            }),
-            vec_string_values
+            AstarteData::StringArray(proto_message_hub::AstarteStringArray { values: expected }),
+            value
         );
     }
 
     #[test]
     fn double_into_astarte_data_type_success() {
-        let expected_double_value: f64 = 15.5;
-        let d_astarte_data_type: AstarteDataType = expected_double_value.into();
-
-        let double_value = d_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: f32 = 15.5;
+        let value = AstarteDatastreamInidividual::from(expected)
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
-        assert_eq!(
-            IndividualData::AstarteDouble(expected_double_value),
-            double_value
-        );
-    }
-
-    #[test]
-    fn integer_into_astarte_data_type_success() {
-        let expected_integer_value: i32 = 15;
-        let i32_astarte_data_type: AstarteDataType = expected_integer_value.into();
-
-        let i32_value = i32_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
-            .unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteInteger(expected_integer_value),
-            i32_value
-        );
-    }
-
-    #[test]
-    fn bool_into_astarte_data_type_success() {
-        let expected_bool_value: bool = true;
-        let bool_astarte_data_type: AstarteDataType = expected_bool_value.into();
-
-        let bool_value = bool_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
-            .unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteBoolean(expected_bool_value),
-            bool_value
-        );
+        assert_eq!(AstarteData::Double(expected.into()), value);
     }
 
     #[test]
     fn longinteger_into_astarte_data_type_success() {
-        let expected_longinteger_value: i64 = 15;
-        let i64_astarte_data_type: AstarteDataType = expected_longinteger_value.into();
-
-        let i64_value = i64_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: i64 = 15;
+        let value = AstarteDatastreamInidividual::from(expected)
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
-        assert_eq!(
-            IndividualData::AstarteLongInteger(expected_longinteger_value),
-            i64_value
-        );
+        assert_eq!(AstarteData::LongInteger(expected), value);
     }
 
     #[test]
     fn string_into_astarte_data_type_success() {
-        let expected_string_value: String = "15".to_owned();
-        let string_astarte_data_type: AstarteDataType = expected_string_value.clone().into();
-
-        let string_value = string_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: String = "15".to_owned();
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
-        assert_eq!(
-            IndividualData::AstarteString(expected_string_value),
-            string_value
-        );
-    }
-
-    #[test]
-    fn strings_slice_into_astarte_data_type_success() {
-        let expected_string_value = "15".to_string();
-        let string_astarte_data_type: AstarteDataType = expected_string_value.as_str().into();
-
-        let string_value = string_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
-            .unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteString(expected_string_value),
-            string_value
-        );
-    }
-
-    #[test]
-    fn u8_array_into_astarte_data_type_success() {
-        let expected_vec_u8_value: Vec<u8> = vec![10, 44];
-        let vec_u8_astarte_data_type: AstarteDataType = expected_vec_u8_value.clone().into();
-
-        let vec_u8_values = vec_u8_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
-            .unwrap();
-
-        assert_eq!(
-            IndividualData::AstarteBinaryBlob(expected_vec_u8_value),
-            vec_u8_values
-        );
+        assert_eq!(AstarteData::String(expected), value);
     }
 
     #[test]
     fn datetime_into_astarte_data_type_success() {
-        use chrono::Utc;
+        let expected = Utc::now();
 
-        let expected_datetime_value = Utc::now();
-
-        let datetime_astarte_data_type: AstarteDataType = expected_datetime_value.into();
-
-        let data = datetime_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let value = AstarteDatastreamInidividual::from(expected)
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
-        if let IndividualData::AstarteDateTime(date_time_value) = data {
+        if let AstarteData::DateTime(date_time_value) = value {
             let resul_date_time: DateTime<Utc> = date_time_value.try_into().unwrap();
-            assert_eq!(expected_datetime_value, resul_date_time);
+            assert_eq!(expected, resul_date_time);
         } else {
             panic!();
         }
@@ -420,202 +275,144 @@ mod test {
 
     #[test]
     fn double_array_into_astarte_data_type_success() {
-        let expected_vec_double_value: Vec<f64> = vec![10.54, 44.99];
-        let vec_double_astarte_data_type: AstarteDataType =
-            expected_vec_double_value.clone().into();
-
-        let vec_double_values = vec_double_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: Vec<f64> = vec![10.54, 44.99];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteDoubleArray(proto_message_hub::AstarteDoubleArray {
-                values: expected_vec_double_value
-            }),
-            vec_double_values
+            AstarteData::DoubleArray(proto_message_hub::AstarteDoubleArray { values: expected }),
+            value
         );
     }
 
     #[test]
     fn integer_array_into_astarte_data_type_success() {
-        let expected_vec_i32_value: Vec<i32> = vec![10, 44];
-        let vec_i32_astarte_data_type: AstarteDataType = expected_vec_i32_value.clone().into();
-
-        let vec_i32_values = vec_i32_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: Vec<i32> = vec![10, 44];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteIntegerArray(proto_message_hub::AstarteIntegerArray {
-                values: expected_vec_i32_value
-            }),
-            vec_i32_values
+            AstarteData::IntegerArray(proto_message_hub::AstarteIntegerArray { values: expected }),
+            value
         );
     }
 
     #[test]
     fn long_integer_array_into_astarte_data_type_success() {
-        let expected_vec_i64_value: Vec<i64> = vec![10, 44];
-        let vec_i64_astarte_data_type: AstarteDataType = expected_vec_i64_value.clone().into();
-
-        let vec_i64_values = vec_i64_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: Vec<i64> = vec![10, 44];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteLongIntegerArray(proto_message_hub::AstarteLongIntegerArray {
-                values: expected_vec_i64_value
+            AstarteData::LongIntegerArray(proto_message_hub::AstarteLongIntegerArray {
+                values: expected
             }),
-            vec_i64_values
+            value
         );
     }
 
     #[test]
     fn bool_array_into_astarte_data_type_success() {
-        let expected_vec_bool_value: Vec<bool> = vec![false, true];
-        let vec_bool_astarte_data_type: AstarteDataType = expected_vec_bool_value.clone().into();
-
-        let vec_bool_values = vec_bool_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: Vec<bool> = vec![false, true];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteBooleanArray(proto_message_hub::AstarteBooleanArray {
-                values: expected_vec_bool_value
-            }),
-            vec_bool_values
+            AstarteData::BooleanArray(proto_message_hub::AstarteBooleanArray { values: expected }),
+            value
         );
     }
 
     #[test]
     fn string_array_into_astarte_data_type_success() {
-        let expected_vec_string_value: Vec<String> = vec!["test1".to_owned(), "test2".to_owned()];
-        let vec_string_astarte_data_type: AstarteDataType =
-            expected_vec_string_value.clone().into();
-
-        let vec_string_values = vec_string_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: Vec<String> = vec!["test1".to_owned(), "test2".to_owned()];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteStringArray(proto_message_hub::AstarteStringArray {
-                values: expected_vec_string_value
-            }),
-            vec_string_values
+            AstarteData::StringArray(proto_message_hub::AstarteStringArray { values: expected }),
+            value
         );
     }
 
     #[test]
     fn binary_blob_array_into_astarte_data_type_success() {
-        let expected_vec_binary_blob_value: Vec<Vec<u8>> = vec![vec![12, 245], vec![78, 11, 128]];
-        let vec_binary_blob_astarte_data_type: AstarteDataType =
-            expected_vec_binary_blob_value.clone().into();
-
-        let vec_binary_blob_values = vec_binary_blob_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected: Vec<Vec<u8>> = vec![vec![12, 245], vec![78, 11, 128]];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
         assert_eq!(
-            IndividualData::AstarteBinaryBlobArray(proto_message_hub::AstarteBinaryBlobArray {
-                values: expected_vec_binary_blob_value
+            AstarteData::BinaryBlobArray(proto_message_hub::AstarteBinaryBlobArray {
+                values: expected
             }),
-            vec_binary_blob_values
+            value
         );
     }
 
     #[test]
     fn datetime_array_into_astarte_type_individual_success() {
-        use chrono::{DateTime, Utc};
-
-        let expected_vec_datetime_value = vec![Utc::now(), Utc::now()];
-        let vec_datetime_astarte_individual_type: AstarteDataTypeIndividual =
-            expected_vec_datetime_value.clone().into();
-
-        if let IndividualData::AstarteDateTimeArray(vec_datetime_value) =
-            vec_datetime_astarte_individual_type
-                .individual_data
-                .unwrap()
-        {
-            for i in 0..expected_vec_datetime_value.len() {
-                let date_time: DateTime<Utc> = vec_datetime_value
-                    .values
-                    .get(i)
-                    .unwrap()
-                    .clone()
-                    .try_into()
-                    .unwrap();
-
-                assert_eq!(expected_vec_datetime_value.get(i).unwrap(), &date_time);
-            }
-        } else {
-            panic!();
-        }
-    }
-
-    #[test]
-    fn datetime_array_into_astarte_data_type_success() {
-        use chrono::{DateTime, Utc};
-
-        let expected_vec_datetime_value = vec![Utc::now(), Utc::now()];
-        let vec_datetime_astarte_data_type: AstarteDataType =
-            expected_vec_datetime_value.clone().into();
-
-        let data = vec_datetime_astarte_data_type
-            .take_individual()
-            .and_then(|data| data.individual_data)
+        let expected = vec![Utc::now(), Utc::now()];
+        let value = AstarteDatastreamInidividual::from(expected.clone())
+            .data
+            .unwrap()
+            .astarte_data
             .unwrap();
 
-        if let IndividualData::AstarteDateTimeArray(vec_datetime_value) = data {
-            for i in 0..expected_vec_datetime_value.len() {
-                let date_time: DateTime<Utc> = vec_datetime_value
-                    .values
-                    .get(i)
-                    .unwrap()
-                    .clone()
-                    .try_into()
-                    .unwrap();
-
-                assert_eq!(expected_vec_datetime_value.get(i).unwrap(), &date_time);
-            }
-        } else {
+        let AstarteData::DateTimeArray(value) = value else {
             panic!();
+        };
+
+        assert_eq!(value.values.len(), expected.len());
+
+        for (value, exp) in value.values.into_iter().zip(expected) {
+            let date_time = DateTime::<Utc>::try_from(value).unwrap();
+
+            assert_eq!(date_time, exp);
         }
     }
 
     #[test]
     fn map_into_astarte_data_type_success() {
-        use crate::proto_message_hub::AstarteDataTypeIndividual;
-
         let expected_i32 = 5;
         let expected_f64 = 5.12;
-        let mut map_val: HashMap<String, AstarteDataTypeIndividual> = HashMap::new();
+        let mut map_val: HashMap<String, AstarteData> = HashMap::new();
         map_val.insert("i32".to_owned(), expected_i32.into());
         map_val.insert("f64".to_owned(), expected_f64.into());
 
-        let astarte_data_object: AstarteDataType = map_val.into();
+        let astarte_data_object: AstarteDatastreamObject = map_val.into();
 
-        let data = astarte_data_object.object().unwrap();
+        let mut data = astarte_data_object.data;
 
         let i32_value = data
-            .object_data
-            .get("i32")
-            .and_then(|data| data.individual_data.clone())
+            .remove("i32")
+            .and_then(|data| data.astarte_data)
             .unwrap();
 
-        assert_eq!(IndividualData::AstarteInteger(expected_i32), i32_value);
+        assert_eq!(AstarteData::Integer(expected_i32), i32_value);
 
         let f64_value = data
-            .object_data
-            .get("f64")
-            .and_then(|data| data.individual_data.clone())
+            .remove("f64")
+            .and_then(|data| data.astarte_data)
             .unwrap();
 
-        assert_eq!(IndividualData::AstarteDouble(expected_f64), f64_value);
+        assert_eq!(AstarteData::Double(expected_f64), f64_value);
     }
 }
