@@ -24,7 +24,7 @@ package astarteplatform.msghub;
 
 import "google/protobuf/timestamp.proto";
 
-import "astarteplatform/msghub/astarte_type.proto";
+import "astarteplatform/msghub/astarte_data.proto";
 import "astarteplatform/msghub/message_hub_error.proto";
 
 /* MessageHubEvent is a type of message for returning and propagating errors.
@@ -41,14 +41,12 @@ message MessageHubEvent{
 
 /* Astarte message to be used when sending data to Astarte. */
 message AstarteMessage{
-  string interface_name = 1;               // Name of the interface to send data on.
-  string path = 2;                         // Endpoint to send the data on.
-  oneof payload {                          // Content of the message.
-    AstarteDataType astarte_data = 3;      // Effective payload.
-    AstarteUnset astarte_unset = 4;        // Null payload.
+  string interface_name = 1;                        // Name of the interface to send data on.
+  string path = 2;                                  // Endpoint to send the data on.
+  optional google.protobuf.Timestamp timestamp = 3; // Explicit timestamp for the message transmission.
+  oneof payload {                                   // Content of the message.
+    AstarteDatastreamInidividual datastream_individual = 4; // An individual data type.
+    AstarteDatastreamObject datastream_object = 5;          // An object data type.
+    AstartePropertyIndividual property_individual = 6;      // A property data type.
   }
-  google.protobuf.Timestamp timestamp = 5; // Explicit timestamp for the message transmission.
 }
-
-/* Null payload for an `AstarteMessage`. */
-message AstarteUnset{}

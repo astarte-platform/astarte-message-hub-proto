@@ -32,8 +32,7 @@
 #include "google/protobuf/map_entry.h"
 #include "google/protobuf/map_field_inl.h"
 #include "google/protobuf/unknown_field_set.h"
-#include "astarteplatform/msghub/astarte_message.pb.h"
-#include "astarteplatform/msghub/astarte_type.pb.h"
+#include "astarteplatform/msghub/astarte_data.pb.h"
 #include "astarteplatform/msghub/interface.pb.h"
 // @@protoc_insertion_point(includes)
 
@@ -556,11 +555,6 @@ class Property final
   static const Property& default_instance() {
     return *internal_default_instance();
   }
-  enum ValueCase {
-    kAstarteProperty = 2,
-    kAstarteUnset = 3,
-    VALUE_NOT_SET = 0,
-  };
   static inline const Property* internal_default_instance() {
     return reinterpret_cast<const Property*>(
         &_Property_default_instance_);
@@ -653,8 +647,7 @@ class Property final
   // accessors -------------------------------------------------------
   enum : int {
     kPathFieldNumber = 1,
-    kAstartePropertyFieldNumber = 2,
-    kAstarteUnsetFieldNumber = 3,
+    kDataFieldNumber = 2,
   };
   // string path = 1;
   void clear_path() ;
@@ -672,56 +665,27 @@ class Property final
   std::string* _internal_mutable_path();
 
   public:
-  // .astarteplatform.msghub.AstarteDataTypeIndividual astarte_property = 2;
-  bool has_astarte_property() const;
-  private:
-  bool _internal_has_astarte_property() const;
-
-  public:
-  void clear_astarte_property() ;
-  const ::astarteplatform::msghub::AstarteDataTypeIndividual& astarte_property() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDataTypeIndividual* release_astarte_property();
-  ::astarteplatform::msghub::AstarteDataTypeIndividual* mutable_astarte_property();
-  void set_allocated_astarte_property(::astarteplatform::msghub::AstarteDataTypeIndividual* value);
-  void unsafe_arena_set_allocated_astarte_property(::astarteplatform::msghub::AstarteDataTypeIndividual* value);
-  ::astarteplatform::msghub::AstarteDataTypeIndividual* unsafe_arena_release_astarte_property();
+  // optional .astarteplatform.msghub.AstarteData data = 2;
+  bool has_data() const;
+  void clear_data() ;
+  const ::astarteplatform::msghub::AstarteData& data() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteData* release_data();
+  ::astarteplatform::msghub::AstarteData* mutable_data();
+  void set_allocated_data(::astarteplatform::msghub::AstarteData* value);
+  void unsafe_arena_set_allocated_data(::astarteplatform::msghub::AstarteData* value);
+  ::astarteplatform::msghub::AstarteData* unsafe_arena_release_data();
 
   private:
-  const ::astarteplatform::msghub::AstarteDataTypeIndividual& _internal_astarte_property() const;
-  ::astarteplatform::msghub::AstarteDataTypeIndividual* _internal_mutable_astarte_property();
+  const ::astarteplatform::msghub::AstarteData& _internal_data() const;
+  ::astarteplatform::msghub::AstarteData* _internal_mutable_data();
 
   public:
-  // .astarteplatform.msghub.AstarteUnset astarte_unset = 3;
-  bool has_astarte_unset() const;
-  private:
-  bool _internal_has_astarte_unset() const;
-
-  public:
-  void clear_astarte_unset() ;
-  const ::astarteplatform::msghub::AstarteUnset& astarte_unset() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteUnset* release_astarte_unset();
-  ::astarteplatform::msghub::AstarteUnset* mutable_astarte_unset();
-  void set_allocated_astarte_unset(::astarteplatform::msghub::AstarteUnset* value);
-  void unsafe_arena_set_allocated_astarte_unset(::astarteplatform::msghub::AstarteUnset* value);
-  ::astarteplatform::msghub::AstarteUnset* unsafe_arena_release_astarte_unset();
-
-  private:
-  const ::astarteplatform::msghub::AstarteUnset& _internal_astarte_unset() const;
-  ::astarteplatform::msghub::AstarteUnset* _internal_mutable_astarte_unset();
-
-  public:
-  void clear_value();
-  ValueCase value_case() const;
   // @@protoc_insertion_point(class_scope:astarteplatform.msghub.Property)
  private:
   class _Internal;
-  void set_has_astarte_property();
-  void set_has_astarte_unset();
-  inline bool has_value() const;
-  inline void clear_has_value();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 3, 2,
+      1, 2, 1,
       44, 2>
       _table_;
 
@@ -739,15 +703,10 @@ class Property final
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const Property& from_msg);
-    ::google::protobuf::internal::ArenaStringPtr path_;
-    union ValueUnion {
-      constexpr ValueUnion() : _constinit_{} {}
-      ::google::protobuf::internal::ConstantInitialized _constinit_;
-      ::astarteplatform::msghub::AstarteDataTypeIndividual* astarte_property_;
-      ::astarteplatform::msghub::AstarteUnset* astarte_unset_;
-    } value_;
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint32_t _oneof_case_[1];
+    ::google::protobuf::internal::ArenaStringPtr path_;
+    ::astarteplatform::msghub::AstarteData* data_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1278,151 +1237,97 @@ inline void Property::set_allocated_path(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.Property.path)
 }
 
-// .astarteplatform.msghub.AstarteDataTypeIndividual astarte_property = 2;
-inline bool Property::has_astarte_property() const {
-  return value_case() == kAstarteProperty;
+// optional .astarteplatform.msghub.AstarteData data = 2;
+inline bool Property::has_data() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.data_ != nullptr);
+  return value;
 }
-inline bool Property::_internal_has_astarte_property() const {
-  return value_case() == kAstarteProperty;
+inline const ::astarteplatform::msghub::AstarteData& Property::_internal_data() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::astarteplatform::msghub::AstarteData* p = _impl_.data_;
+  return p != nullptr ? *p : reinterpret_cast<const ::astarteplatform::msghub::AstarteData&>(::astarteplatform::msghub::_AstarteData_default_instance_);
 }
-inline void Property::set_has_astarte_property() {
-  _impl_._oneof_case_[0] = kAstarteProperty;
+inline const ::astarteplatform::msghub::AstarteData& Property::data() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.Property.data)
+  return _internal_data();
 }
-inline ::astarteplatform::msghub::AstarteDataTypeIndividual* Property::release_astarte_property() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.Property.astarte_property)
-  if (value_case() == kAstarteProperty) {
-    clear_has_value();
-    auto* temp = _impl_.value_.astarte_property_;
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+inline void Property::unsafe_arena_set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.data_);
+  }
+  _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.Property.data)
+}
+inline ::astarteplatform::msghub::AstarteData* Property::release_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::astarteplatform::msghub::AstarteData* released = _impl_.data_;
+  _impl_.data_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
     }
-    _impl_.value_.astarte_property_ = nullptr;
-    return temp;
   } else {
-    return nullptr;
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
   }
+  return released;
 }
-inline const ::astarteplatform::msghub::AstarteDataTypeIndividual& Property::_internal_astarte_property() const {
-  return value_case() == kAstarteProperty ? *_impl_.value_.astarte_property_ : reinterpret_cast<::astarteplatform::msghub::AstarteDataTypeIndividual&>(::astarteplatform::msghub::_AstarteDataTypeIndividual_default_instance_);
+inline ::astarteplatform::msghub::AstarteData* Property::unsafe_arena_release_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.Property.data)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::astarteplatform::msghub::AstarteData* temp = _impl_.data_;
+  _impl_.data_ = nullptr;
+  return temp;
 }
-inline const ::astarteplatform::msghub::AstarteDataTypeIndividual& Property::astarte_property() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.Property.astarte_property)
-  return _internal_astarte_property();
-}
-inline ::astarteplatform::msghub::AstarteDataTypeIndividual* Property::unsafe_arena_release_astarte_property() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.Property.astarte_property)
-  if (value_case() == kAstarteProperty) {
-    clear_has_value();
-    auto* temp = _impl_.value_.astarte_property_;
-    _impl_.value_.astarte_property_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
+inline ::astarteplatform::msghub::AstarteData* Property::_internal_mutable_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.data_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteData>(GetArena());
+    _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(p);
   }
+  return _impl_.data_;
 }
-inline void Property::unsafe_arena_set_allocated_astarte_property(::astarteplatform::msghub::AstarteDataTypeIndividual* value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_value();
-  if (value) {
-    set_has_astarte_property();
-    _impl_.value_.astarte_property_ = value;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.Property.astarte_property)
-}
-inline ::astarteplatform::msghub::AstarteDataTypeIndividual* Property::_internal_mutable_astarte_property() {
-  if (value_case() != kAstarteProperty) {
-    clear_value();
-    set_has_astarte_property();
-    _impl_.value_.astarte_property_ =
-        ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteDataTypeIndividual>(GetArena());
-  }
-  return _impl_.value_.astarte_property_;
-}
-inline ::astarteplatform::msghub::AstarteDataTypeIndividual* Property::mutable_astarte_property() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteDataTypeIndividual* _msg = _internal_mutable_astarte_property();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.Property.astarte_property)
+inline ::astarteplatform::msghub::AstarteData* Property::mutable_data() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::astarteplatform::msghub::AstarteData* _msg = _internal_mutable_data();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.Property.data)
   return _msg;
 }
+inline void Property::set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.data_);
+  }
 
-// .astarteplatform.msghub.AstarteUnset astarte_unset = 3;
-inline bool Property::has_astarte_unset() const {
-  return value_case() == kAstarteUnset;
-}
-inline bool Property::_internal_has_astarte_unset() const {
-  return value_case() == kAstarteUnset;
-}
-inline void Property::set_has_astarte_unset() {
-  _impl_._oneof_case_[0] = kAstarteUnset;
-}
-inline ::astarteplatform::msghub::AstarteUnset* Property::release_astarte_unset() {
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.Property.astarte_unset)
-  if (value_case() == kAstarteUnset) {
-    clear_has_value();
-    auto* temp = _impl_.value_.astarte_unset_;
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_.value_.astarte_unset_ = nullptr;
-    return temp;
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    return nullptr;
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
-}
-inline const ::astarteplatform::msghub::AstarteUnset& Property::_internal_astarte_unset() const {
-  return value_case() == kAstarteUnset ? *_impl_.value_.astarte_unset_ : reinterpret_cast<::astarteplatform::msghub::AstarteUnset&>(::astarteplatform::msghub::_AstarteUnset_default_instance_);
-}
-inline const ::astarteplatform::msghub::AstarteUnset& Property::astarte_unset() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.Property.astarte_unset)
-  return _internal_astarte_unset();
-}
-inline ::astarteplatform::msghub::AstarteUnset* Property::unsafe_arena_release_astarte_unset() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.Property.astarte_unset)
-  if (value_case() == kAstarteUnset) {
-    clear_has_value();
-    auto* temp = _impl_.value_.astarte_unset_;
-    _impl_.value_.astarte_unset_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Property::unsafe_arena_set_allocated_astarte_unset(::astarteplatform::msghub::AstarteUnset* value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_value();
-  if (value) {
-    set_has_astarte_unset();
-    _impl_.value_.astarte_unset_ = value;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.Property.astarte_unset)
-}
-inline ::astarteplatform::msghub::AstarteUnset* Property::_internal_mutable_astarte_unset() {
-  if (value_case() != kAstarteUnset) {
-    clear_value();
-    set_has_astarte_unset();
-    _impl_.value_.astarte_unset_ =
-        ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteUnset>(GetArena());
-  }
-  return _impl_.value_.astarte_unset_;
-}
-inline ::astarteplatform::msghub::AstarteUnset* Property::mutable_astarte_unset() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteUnset* _msg = _internal_mutable_astarte_unset();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.Property.astarte_unset)
-  return _msg;
+
+  _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(value);
+  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.Property.data)
 }
 
-inline bool Property::has_value() const {
-  return value_case() != VALUE_NOT_SET;
-}
-inline void Property::clear_has_value() {
-  _impl_._oneof_case_[0] = VALUE_NOT_SET;
-}
-inline Property::ValueCase Property::value_case() const {
-  return Property::ValueCase(_impl_._oneof_case_[0]);
-}
 // -------------------------------------------------------------------
 
 // InterfaceProperties

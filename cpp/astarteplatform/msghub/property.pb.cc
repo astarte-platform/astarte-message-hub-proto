@@ -84,12 +84,11 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr Property::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : path_(
+      : _cached_size_{0},
+        path_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        value_{},
-        _cached_size_{0},
-        _oneof_case_{} {}
+        data_{nullptr} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR Property::Property(::_pbi::ConstantInitialized)
@@ -189,18 +188,18 @@ static constexpr const ::_pb::ServiceDescriptor**
 const ::uint32_t
     TableStruct_astarteplatform_2fmsghub_2fproperty_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
-        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _internal_metadata_),
         ~0u,  // no _extensions_
-        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _impl_._oneof_case_[0]),
+        ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _impl_.path_),
-        ::_pbi::kInvalidFieldOffsetTag,
-        ::_pbi::kInvalidFieldOffsetTag,
-        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _impl_.value_),
+        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _impl_.data_),
+        ~0u,
+        0,
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::InterfaceProperties, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -257,7 +256,7 @@ const ::uint32_t
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::astarteplatform::msghub::Property)},
+        {0, 10, -1, sizeof(::astarteplatform::msghub::Property)},
         {12, -1, -1, sizeof(::astarteplatform::msghub::InterfaceProperties)},
         {23, 33, -1, sizeof(::astarteplatform::msghub::StoredProperties_InterfacePropertiesEntry_DoNotUse)},
         {35, -1, -1, sizeof(::astarteplatform::msghub::StoredProperties)},
@@ -275,45 +274,41 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_astarteplatform_2fmsghub_2fproperty_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n%astarteplatform/msghub/property.proto\022"
-    "\026astarteplatform.msghub\032,astarteplatform"
-    "/msghub/astarte_message.proto\032)astartepl"
-    "atform/msghub/astarte_type.proto\032&astart"
-    "eplatform/msghub/interface.proto\"\257\001\n\010Pro"
-    "perty\022\014\n\004path\030\001 \001(\t\022M\n\020astarte_property\030"
-    "\002 \001(\01321.astarteplatform.msghub.AstarteDa"
-    "taTypeIndividualH\000\022=\n\rastarte_unset\030\003 \001("
-    "\0132$.astarteplatform.msghub.AstarteUnsetH"
-    "\000B\007\n\005value\"\230\001\n\023InterfaceProperties\0224\n\tow"
-    "nership\030\001 \001(\0162!.astarteplatform.msghub.O"
-    "wnership\022\025\n\rversion_major\030\002 \001(\005\0224\n\nprope"
-    "rties\030\003 \003(\0132 .astarteplatform.msghub.Pro"
-    "perty\"\334\001\n\020StoredProperties\022_\n\024interface_"
-    "properties\030\001 \003(\0132A.astarteplatform.msghu"
-    "b.StoredProperties.InterfacePropertiesEn"
-    "try\032g\n\030InterfacePropertiesEntry\022\013\n\003key\030\001"
-    " \001(\t\022:\n\005value\030\002 \001(\0132+.astarteplatform.ms"
-    "ghub.InterfaceProperties:\0028\001\"a\n\026StoredPr"
-    "opertiesFilter\0229\n\townership\030\001 \001(\0162!.asta"
-    "rteplatform.msghub.OwnershipH\000\210\001\001B\014\n\n_ow"
-    "nership\":\n\022PropertyIdentifier\022\026\n\016interfa"
-    "ce_name\030\001 \001(\t\022\014\n\004path\030\002 \001(\tb\006proto3"
+    "\026astarteplatform.msghub\032)astarteplatform"
+    "/msghub/astarte_data.proto\032&astarteplatf"
+    "orm/msghub/interface.proto\"Y\n\010Property\022\014"
+    "\n\004path\030\001 \001(\t\0226\n\004data\030\002 \001(\0132#.astarteplat"
+    "form.msghub.AstarteDataH\000\210\001\001B\007\n\005_data\"\230\001"
+    "\n\023InterfaceProperties\0224\n\townership\030\001 \001(\016"
+    "2!.astarteplatform.msghub.Ownership\022\025\n\rv"
+    "ersion_major\030\002 \001(\005\0224\n\nproperties\030\003 \003(\0132 "
+    ".astarteplatform.msghub.Property\"\334\001\n\020Sto"
+    "redProperties\022_\n\024interface_properties\030\001 "
+    "\003(\0132A.astarteplatform.msghub.StoredPrope"
+    "rties.InterfacePropertiesEntry\032g\n\030Interf"
+    "acePropertiesEntry\022\013\n\003key\030\001 \001(\t\022:\n\005value"
+    "\030\002 \001(\0132+.astarteplatform.msghub.Interfac"
+    "eProperties:\0028\001\"a\n\026StoredPropertiesFilte"
+    "r\0229\n\townership\030\001 \001(\0162!.astarteplatform.m"
+    "sghub.OwnershipH\000\210\001\001B\014\n\n_ownership\":\n\022Pr"
+    "opertyIdentifier\022\026\n\016interface_name\030\001 \001(\t"
+    "\022\014\n\004path\030\002 \001(\tb\006proto3"
 };
-static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fproperty_2eproto_deps[3] =
+static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fproperty_2eproto_deps[2] =
     {
-        &::descriptor_table_astarteplatform_2fmsghub_2fastarte_5fmessage_2eproto,
-        &::descriptor_table_astarteplatform_2fmsghub_2fastarte_5ftype_2eproto,
+        &::descriptor_table_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto,
         &::descriptor_table_astarteplatform_2fmsghub_2finterface_2eproto,
 };
 static ::absl::once_flag descriptor_table_astarteplatform_2fmsghub_2fproperty_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_astarteplatform_2fmsghub_2fproperty_2eproto = {
     false,
     false,
-    915,
+    782,
     descriptor_table_protodef_astarteplatform_2fmsghub_2fproperty_2eproto,
     "astarteplatform/msghub/property.proto",
     &descriptor_table_astarteplatform_2fmsghub_2fproperty_2eproto_once,
     descriptor_table_astarteplatform_2fmsghub_2fproperty_2eproto_deps,
-    3,
+    2,
     6,
     schemas,
     file_default_instances,
@@ -327,57 +322,16 @@ namespace msghub {
 
 class Property::_Internal {
  public:
-  static constexpr ::int32_t kOneofCaseOffset =
-      PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::Property, _impl_._oneof_case_);
+  using HasBits =
+      decltype(std::declval<Property>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(Property, _impl_._has_bits_);
 };
 
-void Property::set_allocated_astarte_property(::astarteplatform::msghub::AstarteDataTypeIndividual* astarte_property) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  clear_value();
-  if (astarte_property) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(astarte_property)->GetArena();
-    if (message_arena != submessage_arena) {
-      astarte_property = ::google::protobuf::internal::GetOwnedMessage(message_arena, astarte_property, submessage_arena);
-    }
-    set_has_astarte_property();
-    _impl_.value_.astarte_property_ = astarte_property;
-  }
-  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.Property.astarte_property)
-}
-void Property::clear_astarte_property() {
+void Property::clear_data() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case() == kAstarteProperty) {
-    if (GetArena() == nullptr) {
-      delete _impl_.value_.astarte_property_;
-    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_.astarte_property_);
-    }
-    clear_has_value();
-  }
-}
-void Property::set_allocated_astarte_unset(::astarteplatform::msghub::AstarteUnset* astarte_unset) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  clear_value();
-  if (astarte_unset) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(astarte_unset)->GetArena();
-    if (message_arena != submessage_arena) {
-      astarte_unset = ::google::protobuf::internal::GetOwnedMessage(message_arena, astarte_unset, submessage_arena);
-    }
-    set_has_astarte_unset();
-    _impl_.value_.astarte_unset_ = astarte_unset;
-  }
-  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.Property.astarte_unset)
-}
-void Property::clear_astarte_unset() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case() == kAstarteUnset) {
-    if (GetArena() == nullptr) {
-      delete _impl_.value_.astarte_unset_;
-    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_.astarte_unset_);
-    }
-    clear_has_value();
-  }
+  if (_impl_.data_ != nullptr) _impl_.data_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 Property::Property(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -391,10 +345,9 @@ Property::Property(::google::protobuf::Arena* arena)
 inline PROTOBUF_NDEBUG_INLINE Property::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::astarteplatform::msghub::Property& from_msg)
-      : path_(arena, from.path_),
-        value_{},
+      : _has_bits_{from._has_bits_},
         _cached_size_{0},
-        _oneof_case_{from._oneof_case_[0]} {}
+        path_(arena, from.path_) {}
 
 Property::Property(
     ::google::protobuf::Arena* arena,
@@ -409,29 +362,22 @@ Property::Property(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  switch (value_case()) {
-    case VALUE_NOT_SET:
-      break;
-      case kAstarteProperty:
-        _impl_.value_.astarte_property_ = ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDataTypeIndividual>(arena, *from._impl_.value_.astarte_property_);
-        break;
-      case kAstarteUnset:
-        _impl_.value_.astarte_unset_ = ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteUnset>(arena, *from._impl_.value_.astarte_unset_);
-        break;
-  }
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.data_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteData>(
+                              arena, *from._impl_.data_)
+                        : nullptr;
 
   // @@protoc_insertion_point(copy_constructor:astarteplatform.msghub.Property)
 }
 inline PROTOBUF_NDEBUG_INLINE Property::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : path_(arena),
-        value_{},
-        _cached_size_{0},
-        _oneof_case_{} {}
+      : _cached_size_{0},
+        path_(arena) {}
 
 inline void Property::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.data_ = {};
 }
 Property::~Property() {
   // @@protoc_insertion_point(destructor:astarteplatform.msghub.Property)
@@ -442,39 +388,9 @@ inline void Property::SharedDtor(MessageLite& self) {
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.path_.Destroy();
-  if (this_.has_value()) {
-    this_.clear_value();
-  }
+  delete this_._impl_.data_;
   this_._impl_.~Impl_();
 }
-
-void Property::clear_value() {
-// @@protoc_insertion_point(one_of_clear_start:astarteplatform.msghub.Property)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  switch (value_case()) {
-    case kAstarteProperty: {
-      if (GetArena() == nullptr) {
-        delete _impl_.value_.astarte_property_;
-      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_.astarte_property_);
-      }
-      break;
-    }
-    case kAstarteUnset: {
-      if (GetArena() == nullptr) {
-        delete _impl_.value_.astarte_unset_;
-      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_.astarte_unset_);
-      }
-      break;
-    }
-    case VALUE_NOT_SET: {
-      break;
-    }
-  }
-  _impl_._oneof_case_[0] = VALUE_NOT_SET;
-}
-
 
 inline void* Property::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
@@ -512,16 +428,16 @@ const ::google::protobuf::internal::ClassData* Property::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 3, 2, 44, 2> Property::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 1, 44, 2> Property::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(Property, _impl_._has_bits_),
     0, // no _extensions_
-    3, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    2,  // num_aux_entries
+    2,  // num_field_entries
+    1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -530,6 +446,9 @@ const ::_pbi::TcParseTable<0, 3, 2, 44, 2> Property::_table_ = {
     ::_pbi::TcParser::GetTable<::astarteplatform::msghub::Property>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    // optional .astarteplatform.msghub.AstarteData data = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(Property, _impl_.data_)}},
     // string path = 1;
     {::_pbi::TcParser::FastUS1,
      {10, 63, 0, PROTOBUF_FIELD_OFFSET(Property, _impl_.path_)}},
@@ -537,17 +456,13 @@ const ::_pbi::TcParseTable<0, 3, 2, 44, 2> Property::_table_ = {
     65535, 65535
   }}, {{
     // string path = 1;
-    {PROTOBUF_FIELD_OFFSET(Property, _impl_.path_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(Property, _impl_.path_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // .astarteplatform.msghub.AstarteDataTypeIndividual astarte_property = 2;
-    {PROTOBUF_FIELD_OFFSET(Property, _impl_.value_.astarte_property_), _Internal::kOneofCaseOffset + 0, 0,
-    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .astarteplatform.msghub.AstarteUnset astarte_unset = 3;
-    {PROTOBUF_FIELD_OFFSET(Property, _impl_.value_.astarte_unset_), _Internal::kOneofCaseOffset + 0, 1,
-    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional .astarteplatform.msghub.AstarteData data = 2;
+    {PROTOBUF_FIELD_OFFSET(Property, _impl_.data_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
-    {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteDataTypeIndividual>()},
-    {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteUnset>()},
+    {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteData>()},
   }}, {{
     "\37\4\0\0\0\0\0\0"
     "astarteplatform.msghub.Property"
@@ -563,7 +478,12 @@ PROTOBUF_NOINLINE void Property::Clear() {
   (void) cached_has_bits;
 
   _impl_.path_.ClearToEmpty();
-  clear_value();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.data_ != nullptr);
+    _impl_.data_->Clear();
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -590,22 +510,14 @@ PROTOBUF_NOINLINE void Property::Clear() {
             target = stream->WriteStringMaybeAliased(1, _s, target);
           }
 
-          switch (this_.value_case()) {
-            case kAstarteProperty: {
-              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                  2, *this_._impl_.value_.astarte_property_, this_._impl_.value_.astarte_property_->GetCachedSize(), target,
-                  stream);
-              break;
-            }
-            case kAstarteUnset: {
-              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                  3, *this_._impl_.value_.astarte_unset_, this_._impl_.value_.astarte_unset_->GetCachedSize(), target,
-                  stream);
-              break;
-            }
-            default:
-              break;
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional .astarteplatform.msghub.AstarteData data = 2;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                2, *this_._impl_.data_, this_._impl_.data_->GetCachedSize(), target,
+                stream);
           }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -629,6 +541,7 @@ PROTOBUF_NOINLINE void Property::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
             // string path = 1;
             if (!this_._internal_path().empty()) {
@@ -636,21 +549,12 @@ PROTOBUF_NOINLINE void Property::Clear() {
                                               this_._internal_path());
             }
           }
-          switch (this_.value_case()) {
-            // .astarteplatform.msghub.AstarteDataTypeIndividual astarte_property = 2;
-            case kAstarteProperty: {
+           {
+            // optional .astarteplatform.msghub.AstarteData data = 2;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_.astarte_property_);
-              break;
-            }
-            // .astarteplatform.msghub.AstarteUnset astarte_unset = 3;
-            case kAstarteUnset: {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_.astarte_unset_);
-              break;
-            }
-            case VALUE_NOT_SET: {
-              break;
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.data_);
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -669,39 +573,17 @@ void Property::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google
   if (!from._internal_path().empty()) {
     _this->_internal_set_path(from._internal_path());
   }
-  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
-    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
-    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
-    if (oneof_needs_init) {
-      if (oneof_to_case != 0) {
-        _this->clear_value();
-      }
-      _this->_impl_._oneof_case_[0] = oneof_from_case;
-    }
-
-    switch (oneof_from_case) {
-      case kAstarteProperty: {
-        if (oneof_needs_init) {
-          _this->_impl_.value_.astarte_property_ =
-              ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDataTypeIndividual>(arena, *from._impl_.value_.astarte_property_);
-        } else {
-          _this->_impl_.value_.astarte_property_->MergeFrom(from._internal_astarte_property());
-        }
-        break;
-      }
-      case kAstarteUnset: {
-        if (oneof_needs_init) {
-          _this->_impl_.value_.astarte_unset_ =
-              ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteUnset>(arena, *from._impl_.value_.astarte_unset_);
-        } else {
-          _this->_impl_.value_.astarte_unset_->MergeFrom(from._internal_astarte_unset());
-        }
-        break;
-      }
-      case VALUE_NOT_SET:
-        break;
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.data_ != nullptr);
+    if (_this->_impl_.data_ == nullptr) {
+      _this->_impl_.data_ =
+          ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteData>(arena, *from._impl_.data_);
+    } else {
+      _this->_impl_.data_->MergeFrom(*from._impl_.data_);
     }
   }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -718,9 +600,9 @@ void Property::InternalSwap(Property* PROTOBUF_RESTRICT other) {
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.path_, &other->_impl_.path_, arena);
-  swap(_impl_.value_, other->_impl_.value_);
-  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+  swap(_impl_.data_, other->_impl_.data_);
 }
 
 ::google::protobuf::Metadata Property::GetMetadata() const {

@@ -58,7 +58,7 @@ fn main() -> color_eyre::Result<()> {
         proto_dir.join("astarteplatform/msghub/message_hub_service.proto"),
         proto_dir.join("astarteplatform/msghub/node.proto"),
         proto_dir.join("astarteplatform/msghub/astarte_message.proto"),
-        proto_dir.join("astarteplatform/msghub/astarte_type.proto"),
+        proto_dir.join("astarteplatform/msghub/astarte_data.proto"),
         proto_dir.join("astarteplatform/msghub/config.proto"),
         proto_dir.join("astarteplatform/msghub/interface.proto"),
         proto_dir.join("astarteplatform/msghub/property.proto"),
@@ -72,9 +72,10 @@ fn main() -> color_eyre::Result<()> {
 
     config
         .compile_well_known_types(true)
+        .emit_rerun_if_changed(false)
         .out_dir(&cli.out)
         .extern_path(".google.protobuf", "::pbjson_types")
-        .compile(proto_files, &[proto_dir])
+        .compile_protos(proto_files, &[proto_dir])
         .unwrap_or_else(|e| panic!("Failed to compile protos {:?}", e));
 
     Ok(())
