@@ -26,6 +26,10 @@ mock! {
     pub Streaming<T: 'static> {
         pub async fn message(&mut self) -> Result<Option<T>, tonic::Status>;
     }
+
+    impl<T: 'static> std::fmt::Debug for Streaming<T> {
+        fn fmt<'a>(&self, f: &mut std::fmt::Formatter<'a>) -> std::fmt::Result;
+    }
 }
 
 mock! {
@@ -105,5 +109,9 @@ mock! {
 
     impl<T: 'static> std::clone::Clone for MessageHubClient<T> {
         fn clone(&self) -> Self;
+    }
+
+    impl<T: 'static> std::fmt::Debug for MessageHubClient<T> {
+        fn fmt<'a>(&self, f: &mut std::fmt::Formatter<'a>) -> std::fmt::Result;
     }
 }
