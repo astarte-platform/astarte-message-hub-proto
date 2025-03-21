@@ -27,7 +27,7 @@ mock! {
         pub async fn message(&mut self) -> Result<Option<T>, tonic::Status>;
     }
 
-    impl<T: 'static> std::fmt::Debug for Streaming<T> {
+    impl<T> std::fmt::Debug for Streaming<T> {
         fn fmt<'a>(&self, f: &mut std::fmt::Formatter<'a>) -> std::fmt::Result;
     }
 }
@@ -107,11 +107,11 @@ mock! {
             R: tonic::IntoRequest<astarte_message_hub_proto::PropertyIdentifier> + 'static;
     }
 
-    impl<T: 'static> std::clone::Clone for MessageHubClient<T> {
+    impl<T> std::clone::Clone for MessageHubClient<T> {
         fn clone(&self) -> Self;
     }
 
-    impl<T: 'static> std::fmt::Debug for MessageHubClient<T> {
+    impl<T> std::fmt::Debug for MessageHubClient<T> {
         fn fmt<'a>(&self, f: &mut std::fmt::Formatter<'a>) -> std::fmt::Result;
     }
 }
