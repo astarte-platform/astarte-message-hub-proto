@@ -17,8 +17,8 @@ codegen () {
 
     mkdir -p $PROJECT_DIR/cmake/build
     pushd $PROJECT_DIR/cmake/build
-    cmake -DOUT_FOLDER:STRING=$OUT_DIR -DPROTO_FOLDER:STRING=$PROTO_DIR ../..
-    make
+    cmake -GNinja -DOUT_FOLDER:STRING=$OUT_DIR -DPROTO_FOLDER:STRING=$PROTO_DIR ../..
+    cmake --build .
     popd
 
     }
