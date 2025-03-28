@@ -80,7 +80,7 @@ class AstarteData(_message.Message):
     date_time_array: AstarteDateTimeArray
     def __init__(self, double: _Optional[float] = ..., integer: _Optional[int] = ..., boolean: bool = ..., long_integer: _Optional[int] = ..., string: _Optional[str] = ..., binary_blob: _Optional[bytes] = ..., date_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., double_array: _Optional[_Union[AstarteDoubleArray, _Mapping]] = ..., integer_array: _Optional[_Union[AstarteIntegerArray, _Mapping]] = ..., boolean_array: _Optional[_Union[AstarteBooleanArray, _Mapping]] = ..., long_integer_array: _Optional[_Union[AstarteLongIntegerArray, _Mapping]] = ..., string_array: _Optional[_Union[AstarteStringArray, _Mapping]] = ..., binary_blob_array: _Optional[_Union[AstarteBinaryBlobArray, _Mapping]] = ..., date_time_array: _Optional[_Union[AstarteDateTimeArray, _Mapping]] = ...) -> None: ...
 
-class AstarteDatastreamInidividual(_message.Message):
+class AstarteDatastreamIndividual(_message.Message):
     __slots__ = ("data",)
     DATA_FIELD_NUMBER: _ClassVar[int]
     data: AstarteData

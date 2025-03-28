@@ -147,17 +147,17 @@ const char descriptor_table_protodef_astarteplatform_2fmsghub_2fastarte_5fmessag
     "essageHubEvent\0229\n\007message\030\001 \001(\0132&.astart"
     "eplatform.msghub.AstarteMessageH\000\0228\n\005err"
     "or\030\002 \001(\0132\'.astarteplatform.msghub.Messag"
-    "eHubErrorH\000B\007\n\005event\"\372\002\n\016AstarteMessage\022"
+    "eHubErrorH\000B\007\n\005event\"\371\002\n\016AstarteMessage\022"
     "\026\n\016interface_name\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\0222\n"
     "\ttimestamp\030\003 \001(\0132\032.google.protobuf.Times"
-    "tampH\001\210\001\001\022U\n\025datastream_individual\030\004 \001(\013"
-    "24.astarteplatform.msghub.AstarteDatastr"
-    "eamInidividualH\000\022L\n\021datastream_object\030\005 "
-    "\001(\0132/.astarteplatform.msghub.AstarteData"
-    "streamObjectH\000\022P\n\023property_individual\030\006 "
-    "\001(\01321.astarteplatform.msghub.AstarteProp"
-    "ertyIndividualH\000B\t\n\007payloadB\014\n\n_timestam"
-    "pb\006proto3"
+    "tampH\001\210\001\001\022T\n\025datastream_individual\030\004 \001(\013"
+    "23.astarteplatform.msghub.AstarteDatastr"
+    "eamIndividualH\000\022L\n\021datastream_object\030\005 \001"
+    "(\0132/.astarteplatform.msghub.AstarteDatas"
+    "treamObjectH\000\022P\n\023property_individual\030\006 \001"
+    "(\01321.astarteplatform.msghub.AstartePrope"
+    "rtyIndividualH\000B\t\n\007payloadB\014\n\n_timestamp"
+    "b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fastarte_5fmessage_2eproto_deps[3] =
     {
@@ -169,7 +169,7 @@ static ::absl::once_flag descriptor_table_astarteplatform_2fmsghub_2fastarte_5fm
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_astarteplatform_2fmsghub_2fastarte_5fmessage_2eproto = {
     false,
     false,
-    729,
+    728,
     descriptor_table_protodef_astarteplatform_2fmsghub_2fastarte_5fmessage_2eproto,
     "astarteplatform/msghub/astarte_message.proto",
     &descriptor_table_astarteplatform_2fmsghub_2fastarte_5fmessage_2eproto_once,
@@ -560,7 +560,7 @@ void AstarteMessage::clear_timestamp() {
   if (_impl_.timestamp_ != nullptr) _impl_.timestamp_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-void AstarteMessage::set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamInidividual* datastream_individual) {
+void AstarteMessage::set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamIndividual* datastream_individual) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_payload();
   if (datastream_individual) {
@@ -672,7 +672,7 @@ AstarteMessage::AstarteMessage(
     case PAYLOAD_NOT_SET:
       break;
       case kDatastreamIndividual:
-        _impl_.payload_.datastream_individual_ = ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDatastreamInidividual>(arena, *from._impl_.payload_.datastream_individual_);
+        _impl_.payload_.datastream_individual_ = ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDatastreamIndividual>(arena, *from._impl_.payload_.datastream_individual_);
         break;
       case kDatastreamObject:
         _impl_.payload_.datastream_object_ = ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDatastreamObject>(arena, *from._impl_.payload_.datastream_object_);
@@ -826,7 +826,7 @@ const ::_pbi::TcParseTable<2, 6, 4, 64, 2> AstarteMessage::_table_ = {
     // optional .google.protobuf.Timestamp timestamp = 3;
     {PROTOBUF_FIELD_OFFSET(AstarteMessage, _impl_.timestamp_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .astarteplatform.msghub.AstarteDatastreamInidividual datastream_individual = 4;
+    // .astarteplatform.msghub.AstarteDatastreamIndividual datastream_individual = 4;
     {PROTOBUF_FIELD_OFFSET(AstarteMessage, _impl_.payload_.datastream_individual_), _Internal::kOneofCaseOffset + 0, 1,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .astarteplatform.msghub.AstarteDatastreamObject datastream_object = 5;
@@ -837,7 +837,7 @@ const ::_pbi::TcParseTable<2, 6, 4, 64, 2> AstarteMessage::_table_ = {
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::google::protobuf::Timestamp>()},
-    {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteDatastreamInidividual>()},
+    {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteDatastreamIndividual>()},
     {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteDatastreamObject>()},
     {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstartePropertyIndividual>()},
   }}, {{
@@ -973,7 +973,7 @@ PROTOBUF_NOINLINE void AstarteMessage::Clear() {
             }
           }
           switch (this_.payload_case()) {
-            // .astarteplatform.msghub.AstarteDatastreamInidividual datastream_individual = 4;
+            // .astarteplatform.msghub.AstarteDatastreamIndividual datastream_individual = 4;
             case kDatastreamIndividual: {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.payload_.datastream_individual_);
@@ -1039,7 +1039,7 @@ void AstarteMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
       case kDatastreamIndividual: {
         if (oneof_needs_init) {
           _this->_impl_.payload_.datastream_individual_ =
-              ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDatastreamInidividual>(arena, *from._impl_.payload_.datastream_individual_);
+              ::google::protobuf::Message::CopyConstruct<::astarteplatform::msghub::AstarteDatastreamIndividual>(arena, *from._impl_.payload_.datastream_individual_);
         } else {
           _this->_impl_.payload_.datastream_individual_->MergeFrom(from._internal_datastream_individual());
         }
