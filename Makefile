@@ -100,7 +100,7 @@ cpp-install: $(CPP_LANG)
 install: rust-install python-install cpp-install
 
 .PHONY: clean
-clean:
+clean: rust-dirclean python-dirclean cpp-dirclean
 		rm -rf $(BUILD_DIR)
 
 .PHONY: rust-dirclean
@@ -114,6 +114,7 @@ python-dirclean:
 .PHONY: cpp-dirclean
 cpp-dirclean:
 		rm -rf $(CPP_BUILD_DIR)
+		rm -rf $(CPP_LANG_DIR)/cmake
 
 .PHONY: help
 help:
