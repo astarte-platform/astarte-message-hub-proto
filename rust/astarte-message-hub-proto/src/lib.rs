@@ -20,7 +20,6 @@
 #![doc = include_str!("../README.md")]
 
 mod proto_message_hub;
-pub mod types;
 pub use crate::proto_message_hub::*;
 pub use pbjson_types;
 pub use prost;

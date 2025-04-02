@@ -81,13 +81,15 @@ class AstarteData(_message.Message):
     def __init__(self, double: _Optional[float] = ..., integer: _Optional[int] = ..., boolean: bool = ..., long_integer: _Optional[int] = ..., string: _Optional[str] = ..., binary_blob: _Optional[bytes] = ..., date_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., double_array: _Optional[_Union[AstarteDoubleArray, _Mapping]] = ..., integer_array: _Optional[_Union[AstarteIntegerArray, _Mapping]] = ..., boolean_array: _Optional[_Union[AstarteBooleanArray, _Mapping]] = ..., long_integer_array: _Optional[_Union[AstarteLongIntegerArray, _Mapping]] = ..., string_array: _Optional[_Union[AstarteStringArray, _Mapping]] = ..., binary_blob_array: _Optional[_Union[AstarteBinaryBlobArray, _Mapping]] = ..., date_time_array: _Optional[_Union[AstarteDateTimeArray, _Mapping]] = ...) -> None: ...
 
 class AstarteDatastreamIndividual(_message.Message):
-    __slots__ = ("data",)
+    __slots__ = ("data", "timestamp")
     DATA_FIELD_NUMBER: _ClassVar[int]
+    TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     data: AstarteData
-    def __init__(self, data: _Optional[_Union[AstarteData, _Mapping]] = ...) -> None: ...
+    timestamp: _timestamp_pb2.Timestamp
+    def __init__(self, data: _Optional[_Union[AstarteData, _Mapping]] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AstarteDatastreamObject(_message.Message):
-    __slots__ = ("data",)
+    __slots__ = ("data", "timestamp")
     class DataEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -96,8 +98,10 @@ class AstarteDatastreamObject(_message.Message):
         value: AstarteData
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[AstarteData, _Mapping]] = ...) -> None: ...
     DATA_FIELD_NUMBER: _ClassVar[int]
+    TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     data: _containers.MessageMap[str, AstarteData]
-    def __init__(self, data: _Optional[_Mapping[str, AstarteData]] = ...) -> None: ...
+    timestamp: _timestamp_pb2.Timestamp
+    def __init__(self, data: _Optional[_Mapping[str, AstarteData]] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AstartePropertyIndividual(_message.Message):
     __slots__ = ("data",)

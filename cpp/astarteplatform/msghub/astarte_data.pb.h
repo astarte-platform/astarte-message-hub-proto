@@ -2371,6 +2371,7 @@ class AstarteDatastreamIndividual final
   // accessors -------------------------------------------------------
   enum : int {
     kDataFieldNumber = 1,
+    kTimestampFieldNumber = 2,
   };
   // .astarteplatform.msghub.AstarteData data = 1;
   bool has_data() const;
@@ -2387,12 +2388,27 @@ class AstarteDatastreamIndividual final
   ::astarteplatform::msghub::AstarteData* _internal_mutable_data();
 
   public:
+  // .google.protobuf.Timestamp timestamp = 2;
+  bool has_timestamp() const;
+  void clear_timestamp() ;
+  const ::google::protobuf::Timestamp& timestamp() const;
+  PROTOBUF_NODISCARD ::google::protobuf::Timestamp* release_timestamp();
+  ::google::protobuf::Timestamp* mutable_timestamp();
+  void set_allocated_timestamp(::google::protobuf::Timestamp* value);
+  void unsafe_arena_set_allocated_timestamp(::google::protobuf::Timestamp* value);
+  ::google::protobuf::Timestamp* unsafe_arena_release_timestamp();
+
+  private:
+  const ::google::protobuf::Timestamp& _internal_timestamp() const;
+  ::google::protobuf::Timestamp* _internal_mutable_timestamp();
+
+  public:
   // @@protoc_insertion_point(class_scope:astarteplatform.msghub.AstarteDatastreamIndividual)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 1,
+      1, 2, 2,
       0, 2>
       _table_;
 
@@ -2413,6 +2429,7 @@ class AstarteDatastreamIndividual final
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::astarteplatform::msghub::AstarteData* data_;
+    ::google::protobuf::Timestamp* timestamp_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2568,6 +2585,7 @@ class AstarteDatastreamObject final
   // accessors -------------------------------------------------------
   enum : int {
     kDataFieldNumber = 1,
+    kTimestampFieldNumber = 2,
   };
   // map<string, .astarteplatform.msghub.AstarteData> data = 1;
   int data_size() const;
@@ -2584,12 +2602,27 @@ class AstarteDatastreamObject final
   ::google::protobuf::Map<std::string, ::astarteplatform::msghub::AstarteData>* _internal_mutable_data();
 
   public:
+  // .google.protobuf.Timestamp timestamp = 2;
+  bool has_timestamp() const;
+  void clear_timestamp() ;
+  const ::google::protobuf::Timestamp& timestamp() const;
+  PROTOBUF_NODISCARD ::google::protobuf::Timestamp* release_timestamp();
+  ::google::protobuf::Timestamp* mutable_timestamp();
+  void set_allocated_timestamp(::google::protobuf::Timestamp* value);
+  void unsafe_arena_set_allocated_timestamp(::google::protobuf::Timestamp* value);
+  ::google::protobuf::Timestamp* unsafe_arena_release_timestamp();
+
+  private:
+  const ::google::protobuf::Timestamp& _internal_timestamp() const;
+  ::google::protobuf::Timestamp* _internal_mutable_timestamp();
+
+  public:
   // @@protoc_insertion_point(class_scope:astarteplatform.msghub.AstarteDatastreamObject)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 2,
+      0, 2, 3,
       59, 2>
       _table_;
 
@@ -2607,11 +2640,13 @@ class AstarteDatastreamObject final
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const AstarteDatastreamObject& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::MapField<AstarteDatastreamObject_DataEntry_DoNotUse, std::string, ::astarteplatform::msghub::AstarteData,
                       ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
                       ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE>
         data_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::Timestamp* timestamp_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -4047,6 +4082,97 @@ inline void AstarteDatastreamIndividual::set_allocated_data(::astarteplatform::m
   // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteDatastreamIndividual.data)
 }
 
+// .google.protobuf.Timestamp timestamp = 2;
+inline bool AstarteDatastreamIndividual::has_timestamp() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.timestamp_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Timestamp& AstarteDatastreamIndividual::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Timestamp* p = _impl_.timestamp_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Timestamp&>(::google::protobuf::_Timestamp_default_instance_);
+}
+inline const ::google::protobuf::Timestamp& AstarteDatastreamIndividual::timestamp() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteDatastreamIndividual.timestamp)
+  return _internal_timestamp();
+}
+inline void AstarteDatastreamIndividual::unsafe_arena_set_allocated_timestamp(::google::protobuf::Timestamp* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.timestamp_);
+  }
+  _impl_.timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteDatastreamIndividual.timestamp)
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamIndividual::release_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::google::protobuf::Timestamp* released = _impl_.timestamp_;
+  _impl_.timestamp_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamIndividual::unsafe_arena_release_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteDatastreamIndividual.timestamp)
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::google::protobuf::Timestamp* temp = _impl_.timestamp_;
+  _impl_.timestamp_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamIndividual::_internal_mutable_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.timestamp_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Timestamp>(GetArena());
+    _impl_.timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(p);
+  }
+  return _impl_.timestamp_;
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamIndividual::mutable_timestamp() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  ::google::protobuf::Timestamp* _msg = _internal_mutable_timestamp();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteDatastreamIndividual.timestamp)
+  return _msg;
+}
+inline void AstarteDatastreamIndividual::set_allocated_timestamp(::google::protobuf::Timestamp* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.timestamp_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+
+  _impl_.timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteDatastreamIndividual.timestamp)
+}
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -4079,6 +4205,97 @@ inline ::google::protobuf::Map<std::string, ::astarteplatform::msghub::AstarteDa
 inline ::google::protobuf::Map<std::string, ::astarteplatform::msghub::AstarteData>* AstarteDatastreamObject::mutable_data() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_mutable_map:astarteplatform.msghub.AstarteDatastreamObject.data)
   return _internal_mutable_data();
+}
+
+// .google.protobuf.Timestamp timestamp = 2;
+inline bool AstarteDatastreamObject::has_timestamp() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.timestamp_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Timestamp& AstarteDatastreamObject::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Timestamp* p = _impl_.timestamp_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Timestamp&>(::google::protobuf::_Timestamp_default_instance_);
+}
+inline const ::google::protobuf::Timestamp& AstarteDatastreamObject::timestamp() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteDatastreamObject.timestamp)
+  return _internal_timestamp();
+}
+inline void AstarteDatastreamObject::unsafe_arena_set_allocated_timestamp(::google::protobuf::Timestamp* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.timestamp_);
+  }
+  _impl_.timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteDatastreamObject.timestamp)
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamObject::release_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::google::protobuf::Timestamp* released = _impl_.timestamp_;
+  _impl_.timestamp_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamObject::unsafe_arena_release_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteDatastreamObject.timestamp)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::google::protobuf::Timestamp* temp = _impl_.timestamp_;
+  _impl_.timestamp_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamObject::_internal_mutable_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.timestamp_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Timestamp>(GetArena());
+    _impl_.timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(p);
+  }
+  return _impl_.timestamp_;
+}
+inline ::google::protobuf::Timestamp* AstarteDatastreamObject::mutable_timestamp() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::google::protobuf::Timestamp* _msg = _internal_mutable_timestamp();
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteDatastreamObject.timestamp)
+  return _msg;
+}
+inline void AstarteDatastreamObject::set_allocated_timestamp(::google::protobuf::Timestamp* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.timestamp_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteDatastreamObject.timestamp)
 }
 
 // -------------------------------------------------------------------

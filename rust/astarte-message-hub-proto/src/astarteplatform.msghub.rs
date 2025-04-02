@@ -97,6 +97,9 @@ pub mod astarte_data {
 pub struct AstarteDatastreamIndividual {
     #[prost(message, optional, tag = "1")]
     pub data: ::core::option::Option<AstarteData>,
+    /// Timestamp of the message.
+    #[prost(message, optional, tag = "2")]
+    pub timestamp: ::core::option::Option<::pbjson_types::Timestamp>,
 }
 /// A datastream object data type.
 /// To be used nested inside an `AstarteMessage`.
@@ -104,6 +107,9 @@ pub struct AstarteDatastreamIndividual {
 pub struct AstarteDatastreamObject {
     #[prost(map = "string, message", tag = "1")]
     pub data: ::std::collections::HashMap<::prost::alloc::string::String, AstarteData>,
+    /// Timestamp of the message.
+    #[prost(message, optional, tag = "2")]
+    pub timestamp: ::core::option::Option<::pbjson_types::Timestamp>,
 }
 /// A property individual data type.
 /// To be used nested inside an `AstarteMessage`.
@@ -152,11 +158,8 @@ pub struct AstarteMessage {
     /// Endpoint to send the data on.
     #[prost(string, tag = "2")]
     pub path: ::prost::alloc::string::String,
-    /// Explicit timestamp for the message transmission.
-    #[prost(message, optional, tag = "3")]
-    pub timestamp: ::core::option::Option<::pbjson_types::Timestamp>,
     /// Content of the message.
-    #[prost(oneof = "astarte_message::Payload", tags = "4, 5, 6")]
+    #[prost(oneof = "astarte_message::Payload", tags = "3, 4, 5")]
     pub payload: ::core::option::Option<astarte_message::Payload>,
 }
 /// Nested message and enum types in `AstarteMessage`.
@@ -165,13 +168,13 @@ pub mod astarte_message {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Payload {
         /// An individual data type.
-        #[prost(message, tag = "4")]
+        #[prost(message, tag = "3")]
         DatastreamIndividual(super::AstarteDatastreamIndividual),
         /// An object data type.
-        #[prost(message, tag = "5")]
+        #[prost(message, tag = "4")]
         DatastreamObject(super::AstarteDatastreamObject),
         /// A property data type.
-        #[prost(message, tag = "6")]
+        #[prost(message, tag = "5")]
         PropertyIndividual(super::AstartePropertyIndividual),
     }
 }
