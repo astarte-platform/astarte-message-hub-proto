@@ -31,11 +31,16 @@ else()
     set(ABSL_ENABLE_INSTALL ON)
     set(ABSL_PROPAGATE_CXX_STD ON)
 
+    # Show git progress since
+    Set(FETCHCONTENT_QUIET FALSE)
     message(STATUS "Using gRPC via add_subdirectory (FetchContent).")
     FetchContent_Declare(
       grpc
       GIT_REPOSITORY https://github.com/grpc/grpc.git
-      GIT_TAG        v1.69.0)
+      GIT_TAG        v1.69.0
+      GIT_SHALLOW    TRUE
+      GIT_PROGRESS   TRUE
+    )
     FetchContent_MakeAvailable(grpc)
 
     # Since FetchContent uses add_subdirectory under the hood, we can use
