@@ -97,7 +97,7 @@ message AstarteData {
 /* A datastream individual data type.
  * To be used nested inside an `AstarteMessage`.
  */
-message AstarteDatastreamInidividual {
+message AstarteDatastreamIndividual {
   AstarteData data = 1;
 }
 

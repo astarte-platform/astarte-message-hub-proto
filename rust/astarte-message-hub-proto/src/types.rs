@@ -23,7 +23,7 @@ use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 
 use crate::{
-    proto_message_hub::astarte_data::AstarteData, AstarteDatastreamInidividual,
+    proto_message_hub::astarte_data::AstarteData, AstarteDatastreamIndividual,
     AstarteDatastreamObject, AstarteDateTimeArray,
 };
 
@@ -96,7 +96,7 @@ impl From<Vec<DateTime<Utc>>> for AstarteData {
     }
 }
 
-impl<T> From<T> for AstarteDatastreamInidividual
+impl<T> From<T> for AstarteDatastreamIndividual
 where
     T: Into<AstarteData>,
 {
@@ -144,7 +144,7 @@ mod test {
     #[test]
     fn from_double_to_astarte_individual_type_success() {
         let expected_double_value: f64 = 15.5;
-        let value = AstarteDatastreamInidividual::from(expected_double_value)
+        let value = AstarteDatastreamIndividual::from(expected_double_value)
             .data
             .unwrap()
             .astarte_data
@@ -156,7 +156,7 @@ mod test {
     #[test]
     fn from_integer_into_astarte_individual_type_success() {
         let expected: i32 = 15;
-        let value = AstarteDatastreamInidividual::from(expected)
+        let value = AstarteDatastreamIndividual::from(expected)
             .data
             .unwrap()
             .astarte_data
@@ -168,7 +168,7 @@ mod test {
     #[test]
     fn bool_into_astarte_individual_type_success() {
         let expected = true;
-        let value = AstarteDatastreamInidividual::from(expected)
+        let value = AstarteDatastreamIndividual::from(expected)
             .data
             .unwrap()
             .astarte_data
@@ -180,7 +180,7 @@ mod test {
     #[test]
     fn u8_array_into_individual_type_success() {
         let expected: Vec<u8> = vec![10, 44];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -192,7 +192,7 @@ mod test {
     #[test]
     fn double_array_into_individual_type_success() {
         let expected: Vec<f64> = vec![10.54, 44.99];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -207,7 +207,7 @@ mod test {
     #[test]
     fn string_array_into_individual_type_success() {
         let expected: Vec<String> = vec!["test1".to_owned(), "test2".to_owned()];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -222,7 +222,7 @@ mod test {
     #[test]
     fn double_into_astarte_data_type_success() {
         let expected: f32 = 15.5;
-        let value = AstarteDatastreamInidividual::from(expected)
+        let value = AstarteDatastreamIndividual::from(expected)
             .data
             .unwrap()
             .astarte_data
@@ -234,7 +234,7 @@ mod test {
     #[test]
     fn longinteger_into_astarte_data_type_success() {
         let expected: i64 = 15;
-        let value = AstarteDatastreamInidividual::from(expected)
+        let value = AstarteDatastreamIndividual::from(expected)
             .data
             .unwrap()
             .astarte_data
@@ -246,7 +246,7 @@ mod test {
     #[test]
     fn string_into_astarte_data_type_success() {
         let expected: String = "15".to_owned();
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -259,7 +259,7 @@ mod test {
     fn datetime_into_astarte_data_type_success() {
         let expected = Utc::now();
 
-        let value = AstarteDatastreamInidividual::from(expected)
+        let value = AstarteDatastreamIndividual::from(expected)
             .data
             .unwrap()
             .astarte_data
@@ -276,7 +276,7 @@ mod test {
     #[test]
     fn double_array_into_astarte_data_type_success() {
         let expected: Vec<f64> = vec![10.54, 44.99];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -291,7 +291,7 @@ mod test {
     #[test]
     fn integer_array_into_astarte_data_type_success() {
         let expected: Vec<i32> = vec![10, 44];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -306,7 +306,7 @@ mod test {
     #[test]
     fn long_integer_array_into_astarte_data_type_success() {
         let expected: Vec<i64> = vec![10, 44];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -323,7 +323,7 @@ mod test {
     #[test]
     fn bool_array_into_astarte_data_type_success() {
         let expected: Vec<bool> = vec![false, true];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -338,7 +338,7 @@ mod test {
     #[test]
     fn string_array_into_astarte_data_type_success() {
         let expected: Vec<String> = vec!["test1".to_owned(), "test2".to_owned()];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -353,7 +353,7 @@ mod test {
     #[test]
     fn binary_blob_array_into_astarte_data_type_success() {
         let expected: Vec<Vec<u8>> = vec![vec![12, 245], vec![78, 11, 128]];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data
@@ -370,7 +370,7 @@ mod test {
     #[test]
     fn datetime_array_into_astarte_type_individual_success() {
         let expected = vec![Utc::now(), Utc::now()];
-        let value = AstarteDatastreamInidividual::from(expected.clone())
+        let value = AstarteDatastreamIndividual::from(expected.clone())
             .data
             .unwrap()
             .astarte_data

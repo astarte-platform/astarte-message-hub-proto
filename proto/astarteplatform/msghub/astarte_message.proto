@@ -45,7 +45,7 @@ message AstarteMessage{
   string path = 2;                                  // Endpoint to send the data on.
   optional google.protobuf.Timestamp timestamp = 3; // Explicit timestamp for the message transmission.
   oneof payload {                                   // Content of the message.
-    AstarteDatastreamInidividual datastream_individual = 4; // An individual data type.
+    AstarteDatastreamIndividual datastream_individual = 4; // An individual data type.
     AstarteDatastreamObject datastream_object = 5;          // An object data type.
     AstartePropertyIndividual property_individual = 6;      // A property data type.
   }

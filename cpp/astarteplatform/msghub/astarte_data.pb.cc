@@ -273,13 +273,13 @@ struct AstarteDatastreamObject_DataEntry_DoNotUseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AstarteDatastreamObject_DataEntry_DoNotUseDefaultTypeInternal _AstarteDatastreamObject_DataEntry_DoNotUse_default_instance_;
 
-inline constexpr AstarteDatastreamInidividual::Impl_::Impl_(
+inline constexpr AstarteDatastreamIndividual::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         data_{nullptr} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR AstarteDatastreamInidividual::AstarteDatastreamInidividual(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR AstarteDatastreamIndividual::AstarteDatastreamIndividual(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -287,16 +287,16 @@ PROTOBUF_CONSTEXPR AstarteDatastreamInidividual::AstarteDatastreamInidividual(::
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct AstarteDatastreamInidividualDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR AstarteDatastreamInidividualDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~AstarteDatastreamInidividualDefaultTypeInternal() {}
+struct AstarteDatastreamIndividualDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AstarteDatastreamIndividualDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AstarteDatastreamIndividualDefaultTypeInternal() {}
   union {
-    AstarteDatastreamInidividual _instance;
+    AstarteDatastreamIndividual _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AstarteDatastreamInidividualDefaultTypeInternal _AstarteDatastreamInidividual_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AstarteDatastreamIndividualDefaultTypeInternal _AstarteDatastreamIndividual_default_instance_;
 
 inline constexpr AstarteDatastreamObject::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -417,15 +417,15 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteData, _impl_.astarte_data_),
-        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamInidividual, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamInidividual, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamIndividual, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamIndividual, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamInidividual, _impl_.data_),
+        PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamIndividual, _impl_.data_),
         0,
         PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamObject_DataEntry_DoNotUse, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::astarteplatform::msghub::AstarteDatastreamObject_DataEntry_DoNotUse, _internal_metadata_),
@@ -470,7 +470,7 @@ static const ::_pbi::MigrationSchema
         {45, -1, -1, sizeof(::astarteplatform::msghub::AstarteBinaryBlobArray)},
         {54, -1, -1, sizeof(::astarteplatform::msghub::AstarteDateTimeArray)},
         {63, -1, -1, sizeof(::astarteplatform::msghub::AstarteData)},
-        {86, 95, -1, sizeof(::astarteplatform::msghub::AstarteDatastreamInidividual)},
+        {86, 95, -1, sizeof(::astarteplatform::msghub::AstarteDatastreamIndividual)},
         {96, 106, -1, sizeof(::astarteplatform::msghub::AstarteDatastreamObject_DataEntry_DoNotUse)},
         {108, -1, -1, sizeof(::astarteplatform::msghub::AstarteDatastreamObject)},
         {117, 126, -1, sizeof(::astarteplatform::msghub::AstartePropertyIndividual)},
@@ -484,7 +484,7 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::astarteplatform::msghub::_AstarteBinaryBlobArray_default_instance_._instance,
     &::astarteplatform::msghub::_AstarteDateTimeArray_default_instance_._instance,
     &::astarteplatform::msghub::_AstarteData_default_instance_._instance,
-    &::astarteplatform::msghub::_AstarteDatastreamInidividual_default_instance_._instance,
+    &::astarteplatform::msghub::_AstarteDatastreamIndividual_default_instance_._instance,
     &::astarteplatform::msghub::_AstarteDatastreamObject_DataEntry_DoNotUse_default_instance_._instance,
     &::astarteplatform::msghub::_AstarteDatastreamObject_default_instance_._instance,
     &::astarteplatform::msghub::_AstartePropertyIndividual_default_instance_._instance,
@@ -518,17 +518,17 @@ const char descriptor_table_protodef_astarteplatform_2fmsghub_2fastarte_5fdata_2
     "lob_array\030\r \001(\0132..astarteplatform.msghub"
     ".AstarteBinaryBlobArrayH\000\022G\n\017date_time_a"
     "rray\030\016 \001(\0132,.astarteplatform.msghub.Asta"
-    "rteDateTimeArrayH\000B\016\n\014astarte_data\"Q\n\034As"
-    "tarteDatastreamInidividual\0221\n\004data\030\001 \001(\013"
-    "2#.astarteplatform.msghub.AstarteData\"\264\001"
-    "\n\027AstarteDatastreamObject\022G\n\004data\030\001 \003(\0132"
-    "9.astarteplatform.msghub.AstarteDatastre"
-    "amObject.DataEntry\032P\n\tDataEntry\022\013\n\003key\030\001"
-    " \001(\t\0222\n\005value\030\002 \001(\0132#.astarteplatform.ms"
-    "ghub.AstarteData:\0028\001\"\\\n\031AstartePropertyI"
-    "ndividual\0226\n\004data\030\001 \001(\0132#.astarteplatfor"
-    "m.msghub.AstarteDataH\000\210\001\001B\007\n\005_datab\006prot"
-    "o3"
+    "rteDateTimeArrayH\000B\016\n\014astarte_data\"P\n\033As"
+    "tarteDatastreamIndividual\0221\n\004data\030\001 \001(\0132"
+    "#.astarteplatform.msghub.AstarteData\"\264\001\n"
+    "\027AstarteDatastreamObject\022G\n\004data\030\001 \003(\01329"
+    ".astarteplatform.msghub.AstarteDatastrea"
+    "mObject.DataEntry\032P\n\tDataEntry\022\013\n\003key\030\001 "
+    "\001(\t\0222\n\005value\030\002 \001(\0132#.astarteplatform.msg"
+    "hub.AstarteData:\0028\001\"\\\n\031AstartePropertyIn"
+    "dividual\0226\n\004data\030\001 \001(\0132#.astarteplatform"
+    ".msghub.AstarteDataH\000\210\001\001B\007\n\005_datab\006proto"
+    "3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto_deps[1] =
     {
@@ -538,7 +538,7 @@ static ::absl::once_flag descriptor_table_astarteplatform_2fmsghub_2fastarte_5fd
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto = {
     false,
     false,
-    1482,
+    1481,
     descriptor_table_protodef_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto,
     "astarteplatform/msghub/astarte_data.proto",
     &descriptor_table_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto_once,
@@ -3056,38 +3056,38 @@ void AstarteData::InternalSwap(AstarteData* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
-class AstarteDatastreamInidividual::_Internal {
+class AstarteDatastreamIndividual::_Internal {
  public:
   using HasBits =
-      decltype(std::declval<AstarteDatastreamInidividual>()._impl_._has_bits_);
+      decltype(std::declval<AstarteDatastreamIndividual>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(AstarteDatastreamInidividual, _impl_._has_bits_);
+      8 * PROTOBUF_FIELD_OFFSET(AstarteDatastreamIndividual, _impl_._has_bits_);
 };
 
-AstarteDatastreamInidividual::AstarteDatastreamInidividual(::google::protobuf::Arena* arena)
+AstarteDatastreamIndividual::AstarteDatastreamIndividual(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:astarteplatform.msghub.AstarteDatastreamInidividual)
+  // @@protoc_insertion_point(arena_constructor:astarteplatform.msghub.AstarteDatastreamIndividual)
 }
-inline PROTOBUF_NDEBUG_INLINE AstarteDatastreamInidividual::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE AstarteDatastreamIndividual::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::astarteplatform::msghub::AstarteDatastreamInidividual& from_msg)
+    const Impl_& from, const ::astarteplatform::msghub::AstarteDatastreamIndividual& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0} {}
 
-AstarteDatastreamInidividual::AstarteDatastreamInidividual(
+AstarteDatastreamIndividual::AstarteDatastreamIndividual(
     ::google::protobuf::Arena* arena,
-    const AstarteDatastreamInidividual& from)
+    const AstarteDatastreamIndividual& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  AstarteDatastreamInidividual* const _this = this;
+  AstarteDatastreamIndividual* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
@@ -3097,68 +3097,68 @@ AstarteDatastreamInidividual::AstarteDatastreamInidividual(
                               arena, *from._impl_.data_)
                         : nullptr;
 
-  // @@protoc_insertion_point(copy_constructor:astarteplatform.msghub.AstarteDatastreamInidividual)
+  // @@protoc_insertion_point(copy_constructor:astarteplatform.msghub.AstarteDatastreamIndividual)
 }
-inline PROTOBUF_NDEBUG_INLINE AstarteDatastreamInidividual::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE AstarteDatastreamIndividual::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void AstarteDatastreamInidividual::SharedCtor(::_pb::Arena* arena) {
+inline void AstarteDatastreamIndividual::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   _impl_.data_ = {};
 }
-AstarteDatastreamInidividual::~AstarteDatastreamInidividual() {
-  // @@protoc_insertion_point(destructor:astarteplatform.msghub.AstarteDatastreamInidividual)
+AstarteDatastreamIndividual::~AstarteDatastreamIndividual() {
+  // @@protoc_insertion_point(destructor:astarteplatform.msghub.AstarteDatastreamIndividual)
   SharedDtor(*this);
 }
-inline void AstarteDatastreamInidividual::SharedDtor(MessageLite& self) {
-  AstarteDatastreamInidividual& this_ = static_cast<AstarteDatastreamInidividual&>(self);
+inline void AstarteDatastreamIndividual::SharedDtor(MessageLite& self) {
+  AstarteDatastreamIndividual& this_ = static_cast<AstarteDatastreamIndividual&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   delete this_._impl_.data_;
   this_._impl_.~Impl_();
 }
 
-inline void* AstarteDatastreamInidividual::PlacementNew_(const void*, void* mem,
+inline void* AstarteDatastreamIndividual::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) AstarteDatastreamInidividual(arena);
+  return ::new (mem) AstarteDatastreamIndividual(arena);
 }
-constexpr auto AstarteDatastreamInidividual::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(AstarteDatastreamInidividual),
-                                            alignof(AstarteDatastreamInidividual));
+constexpr auto AstarteDatastreamIndividual::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(AstarteDatastreamIndividual),
+                                            alignof(AstarteDatastreamIndividual));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull AstarteDatastreamInidividual::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull AstarteDatastreamIndividual::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_AstarteDatastreamInidividual_default_instance_._instance,
+        &_AstarteDatastreamIndividual_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &AstarteDatastreamInidividual::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<AstarteDatastreamInidividual>(),
+        &AstarteDatastreamIndividual::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<AstarteDatastreamIndividual>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &AstarteDatastreamInidividual::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<AstarteDatastreamInidividual>(), &AstarteDatastreamInidividual::ByteSizeLong,
-            &AstarteDatastreamInidividual::_InternalSerialize,
+        &AstarteDatastreamIndividual::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<AstarteDatastreamIndividual>(), &AstarteDatastreamIndividual::ByteSizeLong,
+            &AstarteDatastreamIndividual::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(AstarteDatastreamInidividual, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(AstarteDatastreamIndividual, _impl_._cached_size_),
         false,
     },
-    &AstarteDatastreamInidividual::kDescriptorMethods,
+    &AstarteDatastreamIndividual::kDescriptorMethods,
     &descriptor_table_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* AstarteDatastreamInidividual::GetClassData() const {
+const ::google::protobuf::internal::ClassData* AstarteDatastreamIndividual::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2> AstarteDatastreamInidividual::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> AstarteDatastreamIndividual::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(AstarteDatastreamInidividual, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(AstarteDatastreamIndividual, _impl_._has_bits_),
     0, // no _extensions_
     1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
@@ -3171,17 +3171,17 @@ const ::_pbi::TcParseTable<0, 1, 1, 0, 2> AstarteDatastreamInidividual::_table_ 
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteDatastreamInidividual>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteDatastreamIndividual>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // .astarteplatform.msghub.AstarteData data = 1;
     {::_pbi::TcParser::FastMtS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(AstarteDatastreamInidividual, _impl_.data_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(AstarteDatastreamIndividual, _impl_.data_)}},
   }}, {{
     65535, 65535
   }}, {{
     // .astarteplatform.msghub.AstarteData data = 1;
-    {PROTOBUF_FIELD_OFFSET(AstarteDatastreamInidividual, _impl_.data_), _Internal::kHasBitsOffset + 0, 0,
+    {PROTOBUF_FIELD_OFFSET(AstarteDatastreamIndividual, _impl_.data_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::astarteplatform::msghub::AstarteData>()},
@@ -3189,8 +3189,8 @@ const ::_pbi::TcParseTable<0, 1, 1, 0, 2> AstarteDatastreamInidividual::_table_ 
   }},
 };
 
-PROTOBUF_NOINLINE void AstarteDatastreamInidividual::Clear() {
-// @@protoc_insertion_point(message_clear_start:astarteplatform.msghub.AstarteDatastreamInidividual)
+PROTOBUF_NOINLINE void AstarteDatastreamIndividual::Clear() {
+// @@protoc_insertion_point(message_clear_start:astarteplatform.msghub.AstarteDatastreamIndividual)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -3206,17 +3206,17 @@ PROTOBUF_NOINLINE void AstarteDatastreamInidividual::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* AstarteDatastreamInidividual::_InternalSerialize(
+        ::uint8_t* AstarteDatastreamIndividual::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const AstarteDatastreamInidividual& this_ = static_cast<const AstarteDatastreamInidividual&>(base);
+          const AstarteDatastreamIndividual& this_ = static_cast<const AstarteDatastreamIndividual&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* AstarteDatastreamInidividual::_InternalSerialize(
+        ::uint8_t* AstarteDatastreamIndividual::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const AstarteDatastreamInidividual& this_ = *this;
+          const AstarteDatastreamIndividual& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:astarteplatform.msghub.AstarteDatastreamInidividual)
+          // @@protoc_insertion_point(serialize_to_array_start:astarteplatform.msghub.AstarteDatastreamIndividual)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -3233,18 +3233,18 @@ PROTOBUF_NOINLINE void AstarteDatastreamInidividual::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:astarteplatform.msghub.AstarteDatastreamInidividual)
+          // @@protoc_insertion_point(serialize_to_array_end:astarteplatform.msghub.AstarteDatastreamIndividual)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t AstarteDatastreamInidividual::ByteSizeLong(const MessageLite& base) {
-          const AstarteDatastreamInidividual& this_ = static_cast<const AstarteDatastreamInidividual&>(base);
+        ::size_t AstarteDatastreamIndividual::ByteSizeLong(const MessageLite& base) {
+          const AstarteDatastreamIndividual& this_ = static_cast<const AstarteDatastreamIndividual&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t AstarteDatastreamInidividual::ByteSizeLong() const {
-          const AstarteDatastreamInidividual& this_ = *this;
+        ::size_t AstarteDatastreamIndividual::ByteSizeLong() const {
+          const AstarteDatastreamIndividual& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:astarteplatform.msghub.AstarteDatastreamInidividual)
+          // @@protoc_insertion_point(message_byte_size_start:astarteplatform.msghub.AstarteDatastreamIndividual)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -3263,11 +3263,11 @@ PROTOBUF_NOINLINE void AstarteDatastreamInidividual::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void AstarteDatastreamInidividual::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<AstarteDatastreamInidividual*>(&to_msg);
-  auto& from = static_cast<const AstarteDatastreamInidividual&>(from_msg);
+void AstarteDatastreamIndividual::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<AstarteDatastreamIndividual*>(&to_msg);
+  auto& from = static_cast<const AstarteDatastreamIndividual&>(from_msg);
   ::google::protobuf::Arena* arena = _this->GetArena();
-  // @@protoc_insertion_point(class_specific_merge_from_start:astarteplatform.msghub.AstarteDatastreamInidividual)
+  // @@protoc_insertion_point(class_specific_merge_from_start:astarteplatform.msghub.AstarteDatastreamIndividual)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -3286,22 +3286,22 @@ void AstarteDatastreamInidividual::MergeImpl(::google::protobuf::MessageLite& to
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void AstarteDatastreamInidividual::CopyFrom(const AstarteDatastreamInidividual& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:astarteplatform.msghub.AstarteDatastreamInidividual)
+void AstarteDatastreamIndividual::CopyFrom(const AstarteDatastreamIndividual& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:astarteplatform.msghub.AstarteDatastreamIndividual)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void AstarteDatastreamInidividual::InternalSwap(AstarteDatastreamInidividual* PROTOBUF_RESTRICT other) {
+void AstarteDatastreamIndividual::InternalSwap(AstarteDatastreamIndividual* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.data_, other->_impl_.data_);
 }
 
-::google::protobuf::Metadata AstarteDatastreamInidividual::GetMetadata() const {
+::google::protobuf::Metadata AstarteDatastreamIndividual::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

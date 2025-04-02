@@ -284,23 +284,23 @@ class AstarteMessage final
   ::google::protobuf::Timestamp* _internal_mutable_timestamp();
 
   public:
-  // .astarteplatform.msghub.AstarteDatastreamInidividual datastream_individual = 4;
+  // .astarteplatform.msghub.AstarteDatastreamIndividual datastream_individual = 4;
   bool has_datastream_individual() const;
   private:
   bool _internal_has_datastream_individual() const;
 
   public:
   void clear_datastream_individual() ;
-  const ::astarteplatform::msghub::AstarteDatastreamInidividual& datastream_individual() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDatastreamInidividual* release_datastream_individual();
-  ::astarteplatform::msghub::AstarteDatastreamInidividual* mutable_datastream_individual();
-  void set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamInidividual* value);
-  void unsafe_arena_set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamInidividual* value);
-  ::astarteplatform::msghub::AstarteDatastreamInidividual* unsafe_arena_release_datastream_individual();
+  const ::astarteplatform::msghub::AstarteDatastreamIndividual& datastream_individual() const;
+  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteDatastreamIndividual* release_datastream_individual();
+  ::astarteplatform::msghub::AstarteDatastreamIndividual* mutable_datastream_individual();
+  void set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamIndividual* value);
+  void unsafe_arena_set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamIndividual* value);
+  ::astarteplatform::msghub::AstarteDatastreamIndividual* unsafe_arena_release_datastream_individual();
 
   private:
-  const ::astarteplatform::msghub::AstarteDatastreamInidividual& _internal_datastream_individual() const;
-  ::astarteplatform::msghub::AstarteDatastreamInidividual* _internal_mutable_datastream_individual();
+  const ::astarteplatform::msghub::AstarteDatastreamIndividual& _internal_datastream_individual() const;
+  ::astarteplatform::msghub::AstarteDatastreamIndividual* _internal_mutable_datastream_individual();
 
   public:
   // .astarteplatform.msghub.AstarteDatastreamObject datastream_object = 5;
@@ -379,7 +379,7 @@ class AstarteMessage final
     union PayloadUnion {
       constexpr PayloadUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
-      ::astarteplatform::msghub::AstarteDatastreamInidividual* datastream_individual_;
+      ::astarteplatform::msghub::AstarteDatastreamIndividual* datastream_individual_;
       ::astarteplatform::msghub::AstarteDatastreamObject* datastream_object_;
       ::astarteplatform::msghub::AstartePropertyIndividual* property_individual_;
     } payload_;
@@ -990,7 +990,7 @@ inline void AstarteMessage::set_allocated_timestamp(::google::protobuf::Timestam
   // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteMessage.timestamp)
 }
 
-// .astarteplatform.msghub.AstarteDatastreamInidividual datastream_individual = 4;
+// .astarteplatform.msghub.AstarteDatastreamIndividual datastream_individual = 4;
 inline bool AstarteMessage::has_datastream_individual() const {
   return payload_case() == kDatastreamIndividual;
 }
@@ -1000,7 +1000,7 @@ inline bool AstarteMessage::_internal_has_datastream_individual() const {
 inline void AstarteMessage::set_has_datastream_individual() {
   _impl_._oneof_case_[0] = kDatastreamIndividual;
 }
-inline ::astarteplatform::msghub::AstarteDatastreamInidividual* AstarteMessage::release_datastream_individual() {
+inline ::astarteplatform::msghub::AstarteDatastreamIndividual* AstarteMessage::release_datastream_individual() {
   // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteMessage.datastream_individual)
   if (payload_case() == kDatastreamIndividual) {
     clear_has_payload();
@@ -1014,14 +1014,14 @@ inline ::astarteplatform::msghub::AstarteDatastreamInidividual* AstarteMessage::
     return nullptr;
   }
 }
-inline const ::astarteplatform::msghub::AstarteDatastreamInidividual& AstarteMessage::_internal_datastream_individual() const {
-  return payload_case() == kDatastreamIndividual ? *_impl_.payload_.datastream_individual_ : reinterpret_cast<::astarteplatform::msghub::AstarteDatastreamInidividual&>(::astarteplatform::msghub::_AstarteDatastreamInidividual_default_instance_);
+inline const ::astarteplatform::msghub::AstarteDatastreamIndividual& AstarteMessage::_internal_datastream_individual() const {
+  return payload_case() == kDatastreamIndividual ? *_impl_.payload_.datastream_individual_ : reinterpret_cast<::astarteplatform::msghub::AstarteDatastreamIndividual&>(::astarteplatform::msghub::_AstarteDatastreamIndividual_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteDatastreamInidividual& AstarteMessage::datastream_individual() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::astarteplatform::msghub::AstarteDatastreamIndividual& AstarteMessage::datastream_individual() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteMessage.datastream_individual)
   return _internal_datastream_individual();
 }
-inline ::astarteplatform::msghub::AstarteDatastreamInidividual* AstarteMessage::unsafe_arena_release_datastream_individual() {
+inline ::astarteplatform::msghub::AstarteDatastreamIndividual* AstarteMessage::unsafe_arena_release_datastream_individual() {
   // @@protoc_insertion_point(field_unsafe_arena_release:astarteplatform.msghub.AstarteMessage.datastream_individual)
   if (payload_case() == kDatastreamIndividual) {
     clear_has_payload();
@@ -1032,7 +1032,7 @@ inline ::astarteplatform::msghub::AstarteDatastreamInidividual* AstarteMessage::
     return nullptr;
   }
 }
-inline void AstarteMessage::unsafe_arena_set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamInidividual* value) {
+inline void AstarteMessage::unsafe_arena_set_allocated_datastream_individual(::astarteplatform::msghub::AstarteDatastreamIndividual* value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
@@ -1043,17 +1043,17 @@ inline void AstarteMessage::unsafe_arena_set_allocated_datastream_individual(::a
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteMessage.datastream_individual)
 }
-inline ::astarteplatform::msghub::AstarteDatastreamInidividual* AstarteMessage::_internal_mutable_datastream_individual() {
+inline ::astarteplatform::msghub::AstarteDatastreamIndividual* AstarteMessage::_internal_mutable_datastream_individual() {
   if (payload_case() != kDatastreamIndividual) {
     clear_payload();
     set_has_datastream_individual();
     _impl_.payload_.datastream_individual_ =
-        ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteDatastreamInidividual>(GetArena());
+        ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteDatastreamIndividual>(GetArena());
   }
   return _impl_.payload_.datastream_individual_;
 }
-inline ::astarteplatform::msghub::AstarteDatastreamInidividual* AstarteMessage::mutable_datastream_individual() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::astarteplatform::msghub::AstarteDatastreamInidividual* _msg = _internal_mutable_datastream_individual();
+inline ::astarteplatform::msghub::AstarteDatastreamIndividual* AstarteMessage::mutable_datastream_individual() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::astarteplatform::msghub::AstarteDatastreamIndividual* _msg = _internal_mutable_datastream_individual();
   // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteMessage.datastream_individual)
   return _msg;
 }

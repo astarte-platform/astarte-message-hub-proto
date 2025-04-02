@@ -26,7 +26,7 @@ class AstarteMessage(_message.Message):
     interface_name: str
     path: str
     timestamp: _timestamp_pb2.Timestamp
-    datastream_individual: _astarte_data_pb2.AstarteDatastreamInidividual
+    datastream_individual: _astarte_data_pb2.AstarteDatastreamIndividual
     datastream_object: _astarte_data_pb2.AstarteDatastreamObject
     property_individual: _astarte_data_pb2.AstartePropertyIndividual
-    def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., datastream_individual: _Optional[_Union[_astarte_data_pb2.AstarteDatastreamInidividual, _Mapping]] = ..., datastream_object: _Optional[_Union[_astarte_data_pb2.AstarteDatastreamObject, _Mapping]] = ..., property_individual: _Optional[_Union[_astarte_data_pb2.AstartePropertyIndividual, _Mapping]] = ...) -> None: ...
+    def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., datastream_individual: _Optional[_Union[_astarte_data_pb2.AstarteDatastreamIndividual, _Mapping]] = ..., datastream_object: _Optional[_Union[_astarte_data_pb2.AstarteDatastreamObject, _Mapping]] = ..., property_individual: _Optional[_Union[_astarte_data_pb2.AstartePropertyIndividual, _Mapping]] = ...) -> None: ...

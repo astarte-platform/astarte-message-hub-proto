@@ -94,7 +94,7 @@ pub mod astarte_data {
 /// A datastream individual data type.
 /// To be used nested inside an `AstarteMessage`.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AstarteDatastreamInidividual {
+pub struct AstarteDatastreamIndividual {
     #[prost(message, optional, tag = "1")]
     pub data: ::core::option::Option<AstarteData>,
 }
@@ -166,7 +166,7 @@ pub mod astarte_message {
     pub enum Payload {
         /// An individual data type.
         #[prost(message, tag = "4")]
-        DatastreamIndividual(super::AstarteDatastreamInidividual),
+        DatastreamIndividual(super::AstarteDatastreamIndividual),
         /// An object data type.
         #[prost(message, tag = "5")]
         DatastreamObject(super::AstarteDatastreamObject),

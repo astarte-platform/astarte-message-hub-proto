@@ -66,9 +66,9 @@ extern AstarteBooleanArrayDefaultTypeInternal _AstarteBooleanArray_default_insta
 class AstarteData;
 struct AstarteDataDefaultTypeInternal;
 extern AstarteDataDefaultTypeInternal _AstarteData_default_instance_;
-class AstarteDatastreamInidividual;
-struct AstarteDatastreamInidividualDefaultTypeInternal;
-extern AstarteDatastreamInidividualDefaultTypeInternal _AstarteDatastreamInidividual_default_instance_;
+class AstarteDatastreamIndividual;
+struct AstarteDatastreamIndividualDefaultTypeInternal;
+extern AstarteDatastreamIndividualDefaultTypeInternal _AstarteDatastreamIndividual_default_instance_;
 class AstarteDatastreamObject;
 struct AstarteDatastreamObjectDefaultTypeInternal;
 extern AstarteDatastreamObjectDefaultTypeInternal _AstarteDatastreamObject_default_instance_;
@@ -2223,32 +2223,32 @@ class AstarteDatastreamObject_DataEntry_DoNotUse final
 };
 // -------------------------------------------------------------------
 
-class AstarteDatastreamInidividual final
+class AstarteDatastreamIndividual final
     : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:astarteplatform.msghub.AstarteDatastreamInidividual) */ {
+/* @@protoc_insertion_point(class_definition:astarteplatform.msghub.AstarteDatastreamIndividual) */ {
  public:
-  inline AstarteDatastreamInidividual() : AstarteDatastreamInidividual(nullptr) {}
-  ~AstarteDatastreamInidividual() PROTOBUF_FINAL;
+  inline AstarteDatastreamIndividual() : AstarteDatastreamIndividual(nullptr) {}
+  ~AstarteDatastreamIndividual() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(AstarteDatastreamInidividual* msg, std::destroying_delete_t) {
+  void operator delete(AstarteDatastreamIndividual* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(AstarteDatastreamInidividual));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(AstarteDatastreamIndividual));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR AstarteDatastreamInidividual(
+  explicit PROTOBUF_CONSTEXPR AstarteDatastreamIndividual(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline AstarteDatastreamInidividual(const AstarteDatastreamInidividual& from) : AstarteDatastreamInidividual(nullptr, from) {}
-  inline AstarteDatastreamInidividual(AstarteDatastreamInidividual&& from) noexcept
-      : AstarteDatastreamInidividual(nullptr, std::move(from)) {}
-  inline AstarteDatastreamInidividual& operator=(const AstarteDatastreamInidividual& from) {
+  inline AstarteDatastreamIndividual(const AstarteDatastreamIndividual& from) : AstarteDatastreamIndividual(nullptr, from) {}
+  inline AstarteDatastreamIndividual(AstarteDatastreamIndividual&& from) noexcept
+      : AstarteDatastreamIndividual(nullptr, std::move(from)) {}
+  inline AstarteDatastreamIndividual& operator=(const AstarteDatastreamIndividual& from) {
     CopyFrom(from);
     return *this;
   }
-  inline AstarteDatastreamInidividual& operator=(AstarteDatastreamInidividual&& from) noexcept {
+  inline AstarteDatastreamIndividual& operator=(AstarteDatastreamIndividual&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -2276,16 +2276,16 @@ class AstarteDatastreamInidividual final
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const AstarteDatastreamInidividual& default_instance() {
+  static const AstarteDatastreamIndividual& default_instance() {
     return *internal_default_instance();
   }
-  static inline const AstarteDatastreamInidividual* internal_default_instance() {
-    return reinterpret_cast<const AstarteDatastreamInidividual*>(
-        &_AstarteDatastreamInidividual_default_instance_);
+  static inline const AstarteDatastreamIndividual* internal_default_instance() {
+    return reinterpret_cast<const AstarteDatastreamIndividual*>(
+        &_AstarteDatastreamIndividual_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 8;
-  friend void swap(AstarteDatastreamInidividual& a, AstarteDatastreamInidividual& b) { a.Swap(&b); }
-  inline void Swap(AstarteDatastreamInidividual* other) {
+  friend void swap(AstarteDatastreamIndividual& a, AstarteDatastreamIndividual& b) { a.Swap(&b); }
+  inline void Swap(AstarteDatastreamIndividual* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -2293,7 +2293,7 @@ class AstarteDatastreamInidividual final
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(AstarteDatastreamInidividual* other) {
+  void UnsafeArenaSwap(AstarteDatastreamIndividual* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -2301,13 +2301,13 @@ class AstarteDatastreamInidividual final
 
   // implements Message ----------------------------------------------
 
-  AstarteDatastreamInidividual* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<AstarteDatastreamInidividual>(arena);
+  AstarteDatastreamIndividual* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<AstarteDatastreamIndividual>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const AstarteDatastreamInidividual& from);
+  void CopyFrom(const AstarteDatastreamIndividual& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const AstarteDatastreamInidividual& from) { AstarteDatastreamInidividual::MergeImpl(*this, from); }
+  void MergeFrom(const AstarteDatastreamIndividual& from) { AstarteDatastreamIndividual::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -2344,18 +2344,18 @@ class AstarteDatastreamInidividual final
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(AstarteDatastreamInidividual* other);
+  void InternalSwap(AstarteDatastreamIndividual* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "astarteplatform.msghub.AstarteDatastreamInidividual"; }
+  static ::absl::string_view FullMessageName() { return "astarteplatform.msghub.AstarteDatastreamIndividual"; }
 
  protected:
-  explicit AstarteDatastreamInidividual(::google::protobuf::Arena* arena);
-  AstarteDatastreamInidividual(::google::protobuf::Arena* arena, const AstarteDatastreamInidividual& from);
-  AstarteDatastreamInidividual(::google::protobuf::Arena* arena, AstarteDatastreamInidividual&& from) noexcept
-      : AstarteDatastreamInidividual(arena) {
+  explicit AstarteDatastreamIndividual(::google::protobuf::Arena* arena);
+  AstarteDatastreamIndividual(::google::protobuf::Arena* arena, const AstarteDatastreamIndividual& from);
+  AstarteDatastreamIndividual(::google::protobuf::Arena* arena, AstarteDatastreamIndividual&& from) noexcept
+      : AstarteDatastreamIndividual(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -2387,7 +2387,7 @@ class AstarteDatastreamInidividual final
   ::astarteplatform::msghub::AstarteData* _internal_mutable_data();
 
   public:
-  // @@protoc_insertion_point(class_scope:astarteplatform.msghub.AstarteDatastreamInidividual)
+  // @@protoc_insertion_point(class_scope:astarteplatform.msghub.AstarteDatastreamIndividual)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -2409,7 +2409,7 @@ class AstarteDatastreamInidividual final
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const AstarteDatastreamInidividual& from_msg);
+                          const AstarteDatastreamIndividual& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::astarteplatform::msghub::AstarteData* data_;
@@ -3949,29 +3949,29 @@ inline AstarteData::AstarteDataCase AstarteData::astarte_data_case() const {
 }
 // -------------------------------------------------------------------
 
-// AstarteDatastreamInidividual
+// AstarteDatastreamIndividual
 
 // .astarteplatform.msghub.AstarteData data = 1;
-inline bool AstarteDatastreamInidividual::has_data() const {
+inline bool AstarteDatastreamIndividual::has_data() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.data_ != nullptr);
   return value;
 }
-inline void AstarteDatastreamInidividual::clear_data() {
+inline void AstarteDatastreamIndividual::clear_data() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.data_ != nullptr) _impl_.data_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::astarteplatform::msghub::AstarteData& AstarteDatastreamInidividual::_internal_data() const {
+inline const ::astarteplatform::msghub::AstarteData& AstarteDatastreamIndividual::_internal_data() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   const ::astarteplatform::msghub::AstarteData* p = _impl_.data_;
   return p != nullptr ? *p : reinterpret_cast<const ::astarteplatform::msghub::AstarteData&>(::astarteplatform::msghub::_AstarteData_default_instance_);
 }
-inline const ::astarteplatform::msghub::AstarteData& AstarteDatastreamInidividual::data() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteDatastreamInidividual.data)
+inline const ::astarteplatform::msghub::AstarteData& AstarteDatastreamIndividual::data() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:astarteplatform.msghub.AstarteDatastreamIndividual.data)
   return _internal_data();
 }
-inline void AstarteDatastreamInidividual::unsafe_arena_set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
+inline void AstarteDatastreamIndividual::unsafe_arena_set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.data_);
@@ -3982,9 +3982,9 @@ inline void AstarteDatastreamInidividual::unsafe_arena_set_allocated_data(::asta
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteDatastreamInidividual.data)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.AstarteDatastreamIndividual.data)
 }
-inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamInidividual::release_data() {
+inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamIndividual::release_data() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   _impl_._has_bits_[0] &= ~0x00000001u;
@@ -4003,16 +4003,16 @@ inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamInidividual::rel
   }
   return released;
 }
-inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamInidividual::unsafe_arena_release_data() {
+inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamIndividual::unsafe_arena_release_data() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteDatastreamInidividual.data)
+  // @@protoc_insertion_point(field_release:astarteplatform.msghub.AstarteDatastreamIndividual.data)
 
   _impl_._has_bits_[0] &= ~0x00000001u;
   ::astarteplatform::msghub::AstarteData* temp = _impl_.data_;
   _impl_.data_ = nullptr;
   return temp;
 }
-inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamInidividual::_internal_mutable_data() {
+inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamIndividual::_internal_mutable_data() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.data_ == nullptr) {
     auto* p = ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteData>(GetArena());
@@ -4020,13 +4020,13 @@ inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamInidividual::_in
   }
   return _impl_.data_;
 }
-inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamInidividual::mutable_data() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::astarteplatform::msghub::AstarteData* AstarteDatastreamIndividual::mutable_data() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   _impl_._has_bits_[0] |= 0x00000001u;
   ::astarteplatform::msghub::AstarteData* _msg = _internal_mutable_data();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteDatastreamInidividual.data)
+  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.AstarteDatastreamIndividual.data)
   return _msg;
 }
-inline void AstarteDatastreamInidividual::set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
+inline void AstarteDatastreamIndividual::set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -4044,7 +4044,7 @@ inline void AstarteDatastreamInidividual::set_allocated_data(::astarteplatform::
   }
 
   _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(value);
-  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteDatastreamInidividual.data)
+  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.AstarteDatastreamIndividual.data)
 }
 
 // -------------------------------------------------------------------
