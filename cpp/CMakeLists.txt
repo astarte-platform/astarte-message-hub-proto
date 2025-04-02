@@ -40,6 +40,8 @@ else()
       GIT_TAG        v1.69.0
       GIT_SHALLOW    TRUE
       GIT_PROGRESS   TRUE
+      # A value of 0 will give some reasonable default
+      GIT_CONFIG     fetch.parallel=0 submodule.fetchJobs=0
     )
     FetchContent_MakeAvailable(grpc)
 

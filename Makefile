@@ -82,7 +82,7 @@ rust: protoc-check $(RUST_LANG)
 python: protoc-check $(PYTHON_LANG)
 
 .PHONY: cpp
-cpp: protoc-check $(CPP_LANG)
+cpp: $(CPP_LANG)
 
 .PHONY: rust-install
 rust-install: $(RUST_LANG)
