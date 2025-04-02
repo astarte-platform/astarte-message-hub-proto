@@ -99,6 +99,7 @@ message AstarteData {
  */
 message AstarteDatastreamIndividual {
   AstarteData data = 1;
+  google.protobuf.Timestamp timestamp = 2; // Timestamp of the message.
 }
 
 /* A datastream object data type.
@@ -106,6 +107,7 @@ message AstarteDatastreamIndividual {
  */
 message AstarteDatastreamObject {
   map<string, AstarteData> data = 1;
+  google.protobuf.Timestamp timestamp = 2; // Timestamp of the message.
 }
 
 /* A property individual data type.
