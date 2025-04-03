@@ -45,7 +45,7 @@ service MessageHub {
   /* Get properties associated with the passed interfaces. */
   rpc GetProperties(InterfacesName) returns (StoredProperties){}
   /* Get all the properties, allowing also filtering by interface ownership. */
-  rpc GetAllProperties(StoredPropertiesFilter) returns (StoredProperties){}
+  rpc GetAllProperties(PropertyFilter) returns (StoredProperties){}
   /* Get a specific property by its identifier, could be an unset property  */
-  rpc GetProperty(PropertyIdentifier) returns (Property) {}
+  rpc GetProperty(PropertyIdentifier) returns (PropertyData) {}
 }

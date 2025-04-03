@@ -43,7 +43,7 @@ const char descriptor_table_protodef_astarteplatform_2fmsghub_2fmessage_5fhub_5f
     "/msghub/astarte_message.proto\032!astartepl"
     "atform/msghub/node.proto\032&astarteplatfor"
     "m/msghub/interface.proto\032%astarteplatfor"
-    "m/msghub/property.proto2\304\005\n\nMessageHub\022S"
+    "m/msghub/property.proto2\300\005\n\nMessageHub\022S"
     "\n\006Attach\022\034.astarteplatform.msghub.Node\032\'"
     ".astarteplatform.msghub.MessageHubEvent\""
     "\0000\001\022H\n\004Send\022&.astarteplatform.msghub.Ast"
@@ -56,12 +56,12 @@ const char descriptor_table_protodef_astarteplatform_2fmsghub_2fmessage_5fhub_5f
     "\032\026.google.protobuf.Empty\"\000\022c\n\rGetPropert"
     "ies\022&.astarteplatform.msghub.InterfacesN"
     "ame\032(.astarteplatform.msghub.StoredPrope"
-    "rties\"\000\022n\n\020GetAllProperties\022..astartepla"
-    "tform.msghub.StoredPropertiesFilter\032(.as"
-    "tarteplatform.msghub.StoredProperties\"\000\022"
-    "]\n\013GetProperty\022*.astarteplatform.msghub."
-    "PropertyIdentifier\032 .astarteplatform.msg"
-    "hub.Property\"\000b\006proto3"
+    "rties\"\000\022f\n\020GetAllProperties\022&.astartepla"
+    "tform.msghub.PropertyFilter\032(.astartepla"
+    "tform.msghub.StoredProperties\"\000\022a\n\013GetPr"
+    "operty\022*.astarteplatform.msghub.Property"
+    "Identifier\032$.astarteplatform.msghub.Prop"
+    "ertyData\"\000b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto_deps[5] =
     {
@@ -75,7 +75,7 @@ static ::absl::once_flag descriptor_table_astarteplatform_2fmsghub_2fmessage_5fh
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto = {
     false,
     false,
-    982,
+    978,
     descriptor_table_protodef_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto,
     "astarteplatform/msghub/message_hub_service.proto",
     &descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto_once,

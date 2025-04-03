@@ -7,38 +7,33 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class Property(_message.Message):
-    __slots__ = ("path", "data")
-    PATH_FIELD_NUMBER: _ClassVar[int]
+class PropertyData(_message.Message):
+    __slots__ = ("data",)
     DATA_FIELD_NUMBER: _ClassVar[int]
-    path: str
     data: _astarte_data_pb2.AstarteData
-    def __init__(self, path: _Optional[str] = ..., data: _Optional[_Union[_astarte_data_pb2.AstarteData, _Mapping]] = ...) -> None: ...
+    def __init__(self, data: _Optional[_Union[_astarte_data_pb2.AstarteData, _Mapping]] = ...) -> None: ...
 
-class InterfaceProperties(_message.Message):
-    __slots__ = ("ownership", "version_major", "properties")
-    OWNERSHIP_FIELD_NUMBER: _ClassVar[int]
+class Property(_message.Message):
+    __slots__ = ("interface_name", "path", "version_major", "ownership", "data")
+    INTERFACE_NAME_FIELD_NUMBER: _ClassVar[int]
+    PATH_FIELD_NUMBER: _ClassVar[int]
     VERSION_MAJOR_FIELD_NUMBER: _ClassVar[int]
-    PROPERTIES_FIELD_NUMBER: _ClassVar[int]
-    ownership: _interface_pb2.Ownership
+    OWNERSHIP_FIELD_NUMBER: _ClassVar[int]
+    DATA_FIELD_NUMBER: _ClassVar[int]
+    interface_name: str
+    path: str
     version_major: int
-    properties: _containers.RepeatedCompositeFieldContainer[Property]
-    def __init__(self, ownership: _Optional[_Union[_interface_pb2.Ownership, str]] = ..., version_major: _Optional[int] = ..., properties: _Optional[_Iterable[_Union[Property, _Mapping]]] = ...) -> None: ...
+    ownership: _interface_pb2.Ownership
+    data: _astarte_data_pb2.AstarteData
+    def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ..., version_major: _Optional[int] = ..., ownership: _Optional[_Union[_interface_pb2.Ownership, str]] = ..., data: _Optional[_Union[_astarte_data_pb2.AstarteData, _Mapping]] = ...) -> None: ...
 
 class StoredProperties(_message.Message):
-    __slots__ = ("interface_properties",)
-    class InterfacePropertiesEntry(_message.Message):
-        __slots__ = ("key", "value")
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: InterfaceProperties
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[InterfaceProperties, _Mapping]] = ...) -> None: ...
-    INTERFACE_PROPERTIES_FIELD_NUMBER: _ClassVar[int]
-    interface_properties: _containers.MessageMap[str, InterfaceProperties]
-    def __init__(self, interface_properties: _Optional[_Mapping[str, InterfaceProperties]] = ...) -> None: ...
+    __slots__ = ("properties",)
+    PROPERTIES_FIELD_NUMBER: _ClassVar[int]
+    properties: _containers.RepeatedCompositeFieldContainer[Property]
+    def __init__(self, properties: _Optional[_Iterable[_Union[Property, _Mapping]]] = ...) -> None: ...
 
-class StoredPropertiesFilter(_message.Message):
+class PropertyFilter(_message.Message):
     __slots__ = ("ownership",)
     OWNERSHIP_FIELD_NUMBER: _ClassVar[int]
     ownership: _interface_pb2.Ownership
