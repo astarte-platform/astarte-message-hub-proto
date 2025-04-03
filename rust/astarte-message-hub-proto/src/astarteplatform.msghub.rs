@@ -200,7 +200,8 @@ pub struct InterfacesName {
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// This message defines a list of interfaces' names to be removed from the Astarte message hub.
+/// This message is the request to the GetProperty rpc.
+/// it represents an Astarte interface name
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InterfaceName {
     /// The name of the interface
@@ -256,7 +257,7 @@ pub struct Property {
 /// This message is the response to the GetProperties rpc method.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoredProperties {
-    /// list of interface property data.
+    /// List of interface property data.
     #[prost(message, repeated, tag = "1")]
     pub properties: ::prost::alloc::vec::Vec<Property>,
 }

@@ -37,7 +37,7 @@ message Property {
 
 /* This message is the response to the GetProperties rpc method. */
 message StoredProperties {
-  repeated Property properties = 1; // list of interface property data.
+  repeated Property properties = 1; // List of interface property data.
 }
 
 /* This message is the request to the GetAllProperties rpc.
