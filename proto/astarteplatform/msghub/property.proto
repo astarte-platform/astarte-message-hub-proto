@@ -26,13 +26,6 @@ package astarteplatform.msghub;
 import "astarteplatform/msghub/astarte_data.proto";
 import "astarteplatform/msghub/interface.proto";
 
-/* A message representing the property value associated to a certain interface and path.
- * Required for the `GetProperty` method that could need to return an unset property.
- */
-message PropertyData {
-  optional AstarteData data = 1; // Astarte data or unset.
-}
-
 /* A message containing all the properties values and information associated to a given astarte interface. */
 message Property {
   string interface_name = 1;  // Interface name.

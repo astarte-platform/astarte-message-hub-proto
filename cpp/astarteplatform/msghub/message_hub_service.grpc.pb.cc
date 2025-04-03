@@ -158,23 +158,23 @@ void MessageHub::Stub::async::RemoveInterfaces(::grpc::ClientContext* context, c
   return result;
 }
 
-::grpc::Status MessageHub::Stub::GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::astarteplatform::msghub::StoredProperties* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetProperties_, context, request, response);
+::grpc::Status MessageHub::Stub::GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::astarteplatform::msghub::StoredProperties* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetProperties_, context, request, response);
 }
 
-void MessageHub::Stub::async::GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetProperties_, context, request, response, std::move(f));
+void MessageHub::Stub::async::GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetProperties_, context, request, response, std::move(f));
 }
 
-void MessageHub::Stub::async::GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) {
+void MessageHub::Stub::async::GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetProperties_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* MessageHub::Stub::PrepareAsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::astarteplatform::msghub::StoredProperties, ::astarteplatform::msghub::InterfacesName, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetProperties_, context, request);
+::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* MessageHub::Stub::PrepareAsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::astarteplatform::msghub::StoredProperties, ::astarteplatform::msghub::InterfaceName, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetProperties_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* MessageHub::Stub::AsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* MessageHub::Stub::AsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetPropertiesRaw(context, request, cq);
   result->StartCall();
@@ -204,23 +204,23 @@ void MessageHub::Stub::async::GetAllProperties(::grpc::ClientContext* context, c
   return result;
 }
 
-::grpc::Status MessageHub::Stub::GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::astarteplatform::msghub::PropertyData* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetProperty_, context, request, response);
+::grpc::Status MessageHub::Stub::GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::astarteplatform::msghub::AstartePropertyIndividual* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetProperty_, context, request, response);
 }
 
-void MessageHub::Stub::async::GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetProperty_, context, request, response, std::move(f));
+void MessageHub::Stub::async::GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetProperty_, context, request, response, std::move(f));
 }
 
-void MessageHub::Stub::async::GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response, ::grpc::ClientUnaryReactor* reactor) {
+void MessageHub::Stub::async::GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetProperty_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>* MessageHub::Stub::PrepareAsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::astarteplatform::msghub::PropertyData, ::astarteplatform::msghub::PropertyIdentifier, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetProperty_, context, request);
+::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>* MessageHub::Stub::PrepareAsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::astarteplatform::msghub::AstartePropertyIndividual, ::astarteplatform::msghub::PropertyIdentifier, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetProperty_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>* MessageHub::Stub::AsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>* MessageHub::Stub::AsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetPropertyRaw(context, request, cq);
   result->StartCall();
@@ -281,10 +281,10 @@ MessageHub::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       MessageHub_method_names[5],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MessageHub::Service, ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< MessageHub::Service, ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](MessageHub::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::astarteplatform::msghub::InterfacesName* req,
+             const ::astarteplatform::msghub::InterfaceName* req,
              ::astarteplatform::msghub::StoredProperties* resp) {
                return service->GetProperties(ctx, req, resp);
              }, this)));
@@ -301,11 +301,11 @@ MessageHub::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       MessageHub_method_names[7],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MessageHub::Service, ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< MessageHub::Service, ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](MessageHub::Service* service,
              ::grpc::ServerContext* ctx,
              const ::astarteplatform::msghub::PropertyIdentifier* req,
-             ::astarteplatform::msghub::PropertyData* resp) {
+             ::astarteplatform::msghub::AstartePropertyIndividual* resp) {
                return service->GetProperty(ctx, req, resp);
              }, this)));
 }
@@ -348,7 +348,7 @@ MessageHub::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status MessageHub::Service::GetProperties(::grpc::ServerContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response) {
+::grpc::Status MessageHub::Service::GetProperties(::grpc::ServerContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -362,7 +362,7 @@ MessageHub::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status MessageHub::Service::GetProperty(::grpc::ServerContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response) {
+::grpc::Status MessageHub::Service::GetProperty(::grpc::ServerContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response) {
   (void) context;
   (void) request;
   (void) response;

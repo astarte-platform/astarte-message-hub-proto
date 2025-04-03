@@ -112,6 +112,7 @@ message AstarteDatastreamObject {
 
 /* A property individual data type.
  * To be used nested inside an `AstarteMessage`.
+ * It is also the structure returned by the `GetProperty` rpc.
  */
 message AstartePropertyIndividual {
   optional AstarteData data = 1;

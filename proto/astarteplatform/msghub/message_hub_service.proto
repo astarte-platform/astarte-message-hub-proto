@@ -24,6 +24,7 @@ package astarteplatform.msghub;
 
 import "google/protobuf/empty.proto";
 
+import "astarteplatform/msghub/astarte_data.proto";
 import "astarteplatform/msghub/astarte_message.proto";
 import "astarteplatform/msghub/node.proto";
 import "astarteplatform/msghub/interface.proto";
@@ -43,9 +44,9 @@ service MessageHub {
   /* This function should be used to remove one or more interfaces from an instance of the Astarte message hub. */
   rpc RemoveInterfaces(InterfacesName) returns (google.protobuf.Empty){}
   /* Get properties associated with the passed interfaces. */
-  rpc GetProperties(InterfacesName) returns (StoredProperties){}
+  rpc GetProperties(InterfaceName) returns (StoredProperties){}
   /* Get all the properties, allowing also filtering by interface ownership. */
   rpc GetAllProperties(PropertyFilter) returns (StoredProperties){}
   /* Get a specific property by its identifier, could be an unset property  */
-  rpc GetProperty(PropertyIdentifier) returns (PropertyData) {}
+  rpc GetProperty(PropertyIdentifier) returns (AstartePropertyIndividual) {}
 }

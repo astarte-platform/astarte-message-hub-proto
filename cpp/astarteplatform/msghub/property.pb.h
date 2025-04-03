@@ -58,9 +58,6 @@ namespace msghub {
 class Property;
 struct PropertyDefaultTypeInternal;
 extern PropertyDefaultTypeInternal _Property_default_instance_;
-class PropertyData;
-struct PropertyDataDefaultTypeInternal;
-extern PropertyDataDefaultTypeInternal _PropertyData_default_instance_;
 class PropertyFilter;
 struct PropertyFilterDefaultTypeInternal;
 extern PropertyFilterDefaultTypeInternal _PropertyFilter_default_instance_;
@@ -145,7 +142,7 @@ class PropertyIdentifier final
     return reinterpret_cast<const PropertyIdentifier*>(
         &_PropertyIdentifier_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(PropertyIdentifier& a, PropertyIdentifier& b) { a.Swap(&b); }
   inline void Swap(PropertyIdentifier* other) {
     if (other == this) return;
@@ -360,7 +357,7 @@ class PropertyFilter final
     return reinterpret_cast<const PropertyFilter*>(
         &_PropertyFilter_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 2;
   friend void swap(PropertyFilter& a, PropertyFilter& b) { a.Swap(&b); }
   inline void Swap(PropertyFilter* other) {
     if (other == this) return;
@@ -493,203 +490,6 @@ class PropertyFilter final
 };
 // -------------------------------------------------------------------
 
-class PropertyData final
-    : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:astarteplatform.msghub.PropertyData) */ {
- public:
-  inline PropertyData() : PropertyData(nullptr) {}
-  ~PropertyData() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(PropertyData* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(PropertyData));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR PropertyData(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline PropertyData(const PropertyData& from) : PropertyData(nullptr, from) {}
-  inline PropertyData(PropertyData&& from) noexcept
-      : PropertyData(nullptr, std::move(from)) {}
-  inline PropertyData& operator=(const PropertyData& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline PropertyData& operator=(PropertyData&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const PropertyData& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const PropertyData* internal_default_instance() {
-    return reinterpret_cast<const PropertyData*>(
-        &_PropertyData_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 0;
-  friend void swap(PropertyData& a, PropertyData& b) { a.Swap(&b); }
-  inline void Swap(PropertyData* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(PropertyData* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  PropertyData* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<PropertyData>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const PropertyData& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const PropertyData& from) { PropertyData::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(PropertyData* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "astarteplatform.msghub.PropertyData"; }
-
- protected:
-  explicit PropertyData(::google::protobuf::Arena* arena);
-  PropertyData(::google::protobuf::Arena* arena, const PropertyData& from);
-  PropertyData(::google::protobuf::Arena* arena, PropertyData&& from) noexcept
-      : PropertyData(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kDataFieldNumber = 1,
-  };
-  // optional .astarteplatform.msghub.AstarteData data = 1;
-  bool has_data() const;
-  void clear_data() ;
-  const ::astarteplatform::msghub::AstarteData& data() const;
-  PROTOBUF_NODISCARD ::astarteplatform::msghub::AstarteData* release_data();
-  ::astarteplatform::msghub::AstarteData* mutable_data();
-  void set_allocated_data(::astarteplatform::msghub::AstarteData* value);
-  void unsafe_arena_set_allocated_data(::astarteplatform::msghub::AstarteData* value);
-  ::astarteplatform::msghub::AstarteData* unsafe_arena_release_data();
-
-  private:
-  const ::astarteplatform::msghub::AstarteData& _internal_data() const;
-  ::astarteplatform::msghub::AstarteData* _internal_mutable_data();
-
-  public:
-  // @@protoc_insertion_point(class_scope:astarteplatform.msghub.PropertyData)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 1,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const PropertyData& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::astarteplatform::msghub::AstarteData* data_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_astarteplatform_2fmsghub_2fproperty_2eproto;
-};
-// -------------------------------------------------------------------
-
 class Property final
     : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:astarteplatform.msghub.Property) */ {
@@ -750,7 +550,7 @@ class Property final
     return reinterpret_cast<const Property*>(
         &_Property_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages = 0;
   friend void swap(Property& a, Property& b) { a.Swap(&b); }
   inline void Swap(Property* other) {
     if (other == this) return;
@@ -1007,7 +807,7 @@ class StoredProperties final
     return reinterpret_cast<const StoredProperties*>(
         &_StoredProperties_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 1;
   friend void swap(StoredProperties& a, StoredProperties& b) { a.Swap(&b); }
   inline void Swap(StoredProperties* other) {
     if (other == this) return;
@@ -1156,101 +956,6 @@ class StoredProperties final
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// PropertyData
-
-// optional .astarteplatform.msghub.AstarteData data = 1;
-inline bool PropertyData::has_data() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.data_ != nullptr);
-  return value;
-}
-inline const ::astarteplatform::msghub::AstarteData& PropertyData::_internal_data() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::astarteplatform::msghub::AstarteData* p = _impl_.data_;
-  return p != nullptr ? *p : reinterpret_cast<const ::astarteplatform::msghub::AstarteData&>(::astarteplatform::msghub::_AstarteData_default_instance_);
-}
-inline const ::astarteplatform::msghub::AstarteData& PropertyData::data() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:astarteplatform.msghub.PropertyData.data)
-  return _internal_data();
-}
-inline void PropertyData::unsafe_arena_set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.data_);
-  }
-  _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:astarteplatform.msghub.PropertyData.data)
-}
-inline ::astarteplatform::msghub::AstarteData* PropertyData::release_data() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  ::astarteplatform::msghub::AstarteData* released = _impl_.data_;
-  _impl_.data_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::astarteplatform::msghub::AstarteData* PropertyData::unsafe_arena_release_data() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:astarteplatform.msghub.PropertyData.data)
-
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  ::astarteplatform::msghub::AstarteData* temp = _impl_.data_;
-  _impl_.data_ = nullptr;
-  return temp;
-}
-inline ::astarteplatform::msghub::AstarteData* PropertyData::_internal_mutable_data() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.data_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::astarteplatform::msghub::AstarteData>(GetArena());
-    _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(p);
-  }
-  return _impl_.data_;
-}
-inline ::astarteplatform::msghub::AstarteData* PropertyData::mutable_data() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  ::astarteplatform::msghub::AstarteData* _msg = _internal_mutable_data();
-  // @@protoc_insertion_point(field_mutable:astarteplatform.msghub.PropertyData.data)
-  return _msg;
-}
-inline void PropertyData::set_allocated_data(::astarteplatform::msghub::AstarteData* value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.data_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-
-  _impl_.data_ = reinterpret_cast<::astarteplatform::msghub::AstarteData*>(value);
-  // @@protoc_insertion_point(field_set_allocated:astarteplatform.msghub.PropertyData.data)
-}
-
 // -------------------------------------------------------------------
 
 // Property

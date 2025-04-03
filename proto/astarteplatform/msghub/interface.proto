@@ -33,6 +33,11 @@ message InterfacesName {
   repeated string names = 1; // An array of interfaces' names
 }
 
+/* This message defines a list of interfaces' names to be removed from the Astarte message hub. */
+message InterfaceName {
+  string name = 1; // The name of the interface
+}
+
 /* Enum representing an Astarte interface ownership. */
 enum Ownership {
   DEVICE = 0;

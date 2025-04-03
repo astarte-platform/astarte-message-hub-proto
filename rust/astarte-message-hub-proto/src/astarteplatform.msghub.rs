@@ -113,6 +113,7 @@ pub struct AstarteDatastreamObject {
 }
 /// A property individual data type.
 /// To be used nested inside an `AstarteMessage`.
+/// It is also the structure returned by the `GetProperty` rpc.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstartePropertyIndividual {
     #[prost(message, optional, tag = "1")]
@@ -199,6 +200,13 @@ pub struct InterfacesName {
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+/// This message defines a list of interfaces' names to be removed from the Astarte message hub.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfaceName {
+    /// The name of the interface
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+}
 /// Enum representing an Astarte interface ownership.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -225,14 +233,6 @@ impl Ownership {
             _ => None,
         }
     }
-}
-/// A message representing the property value associated to a certain interface and path.
-/// Required for the `GetProperty` method that could need to return an unset property.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PropertyData {
-    /// Astarte data or unset.
-    #[prost(message, optional, tag = "1")]
-    pub data: ::core::option::Option<AstarteData>,
 }
 /// A message containing all the properties values and information associated to a given astarte interface.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -494,7 +494,7 @@ pub mod message_hub_client {
         /// Get properties associated with the passed interfaces.
         pub async fn get_properties(
             &mut self,
-            request: impl tonic::IntoRequest<super::InterfacesName>,
+            request: impl tonic::IntoRequest<super::InterfaceName>,
         ) -> std::result::Result<
             tonic::Response<super::StoredProperties>,
             tonic::Status,
@@ -552,7 +552,10 @@ pub mod message_hub_client {
         pub async fn get_property(
             &mut self,
             request: impl tonic::IntoRequest<super::PropertyIdentifier>,
-        ) -> std::result::Result<tonic::Response<super::PropertyData>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<super::AstartePropertyIndividual>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -622,7 +625,7 @@ pub mod message_hub_server {
         /// Get properties associated with the passed interfaces.
         async fn get_properties(
             &self,
-            request: tonic::Request<super::InterfacesName>,
+            request: tonic::Request<super::InterfaceName>,
         ) -> std::result::Result<
             tonic::Response<super::StoredProperties>,
             tonic::Status,
@@ -639,7 +642,10 @@ pub mod message_hub_server {
         async fn get_property(
             &self,
             request: tonic::Request<super::PropertyIdentifier>,
-        ) -> std::result::Result<tonic::Response<super::PropertyData>, tonic::Status>;
+        ) -> std::result::Result<
+            tonic::Response<super::AstartePropertyIndividual>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct MessageHubServer<T> {
@@ -945,9 +951,7 @@ pub mod message_hub_server {
                 "/astarteplatform.msghub.MessageHub/GetProperties" => {
                     #[allow(non_camel_case_types)]
                     struct GetPropertiesSvc<T: MessageHub>(pub Arc<T>);
-                    impl<
-                        T: MessageHub,
-                    > tonic::server::UnaryService<super::InterfacesName>
+                    impl<T: MessageHub> tonic::server::UnaryService<super::InterfaceName>
                     for GetPropertiesSvc<T> {
                         type Response = super::StoredProperties;
                         type Future = BoxFuture<
@@ -956,7 +960,7 @@ pub mod message_hub_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::InterfacesName>,
+                            request: tonic::Request<super::InterfaceName>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -1039,7 +1043,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::UnaryService<super::PropertyIdentifier>
                     for GetPropertySvc<T> {
-                        type Response = super::PropertyData;
+                        type Response = super::AstartePropertyIndividual;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,

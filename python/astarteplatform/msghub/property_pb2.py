@@ -26,21 +26,19 @@ from astarteplatform.msghub import astarte_data_pb2 as astarteplatform_dot_msghu
 from astarteplatform.msghub import interface_pb2 as astarteplatform_dot_msghub_dot_interface__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%astarteplatform/msghub/property.proto\x12\x16\x61starteplatform.msghub\x1a)astarteplatform/msghub/astarte_data.proto\x1a&astarteplatform/msghub/interface.proto\"O\n\x0cPropertyData\x12\x36\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32#.astarteplatform.msghub.AstarteDataH\x00\x88\x01\x01\x42\x07\n\x05_data\"\xb0\x01\n\x08Property\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x15\n\rversion_major\x18\x03 \x01(\x05\x12\x34\n\townership\x18\x04 \x01(\x0e\x32!.astarteplatform.msghub.Ownership\x12\x31\n\x04\x64\x61ta\x18\x05 \x01(\x0b\x32#.astarteplatform.msghub.AstarteData\"H\n\x10StoredProperties\x12\x34\n\nproperties\x18\x01 \x03(\x0b\x32 .astarteplatform.msghub.Property\"Y\n\x0ePropertyFilter\x12\x39\n\townership\x18\x01 \x01(\x0e\x32!.astarteplatform.msghub.OwnershipH\x00\x88\x01\x01\x42\x0c\n\n_ownership\":\n\x12PropertyIdentifier\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%astarteplatform/msghub/property.proto\x12\x16\x61starteplatform.msghub\x1a)astarteplatform/msghub/astarte_data.proto\x1a&astarteplatform/msghub/interface.proto\"\xb0\x01\n\x08Property\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x15\n\rversion_major\x18\x03 \x01(\x05\x12\x34\n\townership\x18\x04 \x01(\x0e\x32!.astarteplatform.msghub.Ownership\x12\x31\n\x04\x64\x61ta\x18\x05 \x01(\x0b\x32#.astarteplatform.msghub.AstarteData\"H\n\x10StoredProperties\x12\x34\n\nproperties\x18\x01 \x03(\x0b\x32 .astarteplatform.msghub.Property\"Y\n\x0ePropertyFilter\x12\x39\n\townership\x18\x01 \x01(\x0e\x32!.astarteplatform.msghub.OwnershipH\x00\x88\x01\x01\x42\x0c\n\n_ownership\":\n\x12PropertyIdentifier\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\tb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'astarteplatform.msghub.property_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_PROPERTYDATA']._serialized_start=148
-  _globals['_PROPERTYDATA']._serialized_end=227
-  _globals['_PROPERTY']._serialized_start=230
-  _globals['_PROPERTY']._serialized_end=406
-  _globals['_STOREDPROPERTIES']._serialized_start=408
-  _globals['_STOREDPROPERTIES']._serialized_end=480
-  _globals['_PROPERTYFILTER']._serialized_start=482
-  _globals['_PROPERTYFILTER']._serialized_end=571
-  _globals['_PROPERTYIDENTIFIER']._serialized_start=573
-  _globals['_PROPERTYIDENTIFIER']._serialized_end=631
+  _globals['_PROPERTY']._serialized_start=149
+  _globals['_PROPERTY']._serialized_end=325
+  _globals['_STOREDPROPERTIES']._serialized_start=327
+  _globals['_STOREDPROPERTIES']._serialized_end=399
+  _globals['_PROPERTYFILTER']._serialized_start=401
+  _globals['_PROPERTYFILTER']._serialized_end=490
+  _globals['_PROPERTYIDENTIFIER']._serialized_start=492
+  _globals['_PROPERTYIDENTIFIER']._serialized_end=550
 # @@protoc_insertion_point(module_scope)

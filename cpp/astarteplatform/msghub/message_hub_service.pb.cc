@@ -39,32 +39,34 @@ const char descriptor_table_protodef_astarteplatform_2fmsghub_2fmessage_5fhub_5f
     protodesc_cold) = {
     "\n0astarteplatform/msghub/message_hub_ser"
     "vice.proto\022\026astarteplatform.msghub\032\033goog"
-    "le/protobuf/empty.proto\032,astarteplatform"
-    "/msghub/astarte_message.proto\032!astartepl"
-    "atform/msghub/node.proto\032&astarteplatfor"
-    "m/msghub/interface.proto\032%astarteplatfor"
-    "m/msghub/property.proto2\300\005\n\nMessageHub\022S"
-    "\n\006Attach\022\034.astarteplatform.msghub.Node\032\'"
-    ".astarteplatform.msghub.MessageHubEvent\""
-    "\0000\001\022H\n\004Send\022&.astarteplatform.msghub.Ast"
-    "arteMessage\032\026.google.protobuf.Empty\"\000\022:\n"
-    "\006Detach\022\026.google.protobuf.Empty\032\026.google"
-    ".protobuf.Empty\"\000\022Q\n\rAddInterfaces\022&.ast"
-    "arteplatform.msghub.InterfacesJson\032\026.goo"
-    "gle.protobuf.Empty\"\000\022T\n\020RemoveInterfaces"
-    "\022&.astarteplatform.msghub.InterfacesName"
-    "\032\026.google.protobuf.Empty\"\000\022c\n\rGetPropert"
-    "ies\022&.astarteplatform.msghub.InterfacesN"
-    "ame\032(.astarteplatform.msghub.StoredPrope"
-    "rties\"\000\022f\n\020GetAllProperties\022&.astartepla"
-    "tform.msghub.PropertyFilter\032(.astartepla"
-    "tform.msghub.StoredProperties\"\000\022a\n\013GetPr"
-    "operty\022*.astarteplatform.msghub.Property"
-    "Identifier\032$.astarteplatform.msghub.Prop"
-    "ertyData\"\000b\006proto3"
+    "le/protobuf/empty.proto\032)astarteplatform"
+    "/msghub/astarte_data.proto\032,astarteplatf"
+    "orm/msghub/astarte_message.proto\032!astart"
+    "eplatform/msghub/node.proto\032&astarteplat"
+    "form/msghub/interface.proto\032%astarteplat"
+    "form/msghub/property.proto2\314\005\n\nMessageHu"
+    "b\022S\n\006Attach\022\034.astarteplatform.msghub.Nod"
+    "e\032\'.astarteplatform.msghub.MessageHubEve"
+    "nt\"\0000\001\022H\n\004Send\022&.astarteplatform.msghub."
+    "AstarteMessage\032\026.google.protobuf.Empty\"\000"
+    "\022:\n\006Detach\022\026.google.protobuf.Empty\032\026.goo"
+    "gle.protobuf.Empty\"\000\022Q\n\rAddInterfaces\022&."
+    "astarteplatform.msghub.InterfacesJson\032\026."
+    "google.protobuf.Empty\"\000\022T\n\020RemoveInterfa"
+    "ces\022&.astarteplatform.msghub.InterfacesN"
+    "ame\032\026.google.protobuf.Empty\"\000\022b\n\rGetProp"
+    "erties\022%.astarteplatform.msghub.Interfac"
+    "eName\032(.astarteplatform.msghub.StoredPro"
+    "perties\"\000\022f\n\020GetAllProperties\022&.astartep"
+    "latform.msghub.PropertyFilter\032(.astartep"
+    "latform.msghub.StoredProperties\"\000\022n\n\013Get"
+    "Property\022*.astarteplatform.msghub.Proper"
+    "tyIdentifier\0321.astarteplatform.msghub.As"
+    "tartePropertyIndividual\"\000b\006proto3"
 };
-static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto_deps[5] =
+static const ::_pbi::DescriptorTable* const descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto_deps[6] =
     {
+        &::descriptor_table_astarteplatform_2fmsghub_2fastarte_5fdata_2eproto,
         &::descriptor_table_astarteplatform_2fmsghub_2fastarte_5fmessage_2eproto,
         &::descriptor_table_astarteplatform_2fmsghub_2finterface_2eproto,
         &::descriptor_table_astarteplatform_2fmsghub_2fnode_2eproto,
@@ -75,12 +77,12 @@ static ::absl::once_flag descriptor_table_astarteplatform_2fmsghub_2fmessage_5fh
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto = {
     false,
     false,
-    978,
+    1033,
     descriptor_table_protodef_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto,
     "astarteplatform/msghub/message_hub_service.proto",
     &descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto_once,
     descriptor_table_astarteplatform_2fmsghub_2fmessage_5fhub_5fservice_2eproto_deps,
-    5,
+    6,
     0,
     schemas,
     file_default_instances,

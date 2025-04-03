@@ -7,12 +7,6 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class PropertyData(_message.Message):
-    __slots__ = ("data",)
-    DATA_FIELD_NUMBER: _ClassVar[int]
-    data: _astarte_data_pb2.AstarteData
-    def __init__(self, data: _Optional[_Union[_astarte_data_pb2.AstarteData, _Mapping]] = ...) -> None: ...
-
 class Property(_message.Message):
     __slots__ = ("interface_name", "path", "version_major", "ownership", "data")
     INTERFACE_NAME_FIELD_NUMBER: _ClassVar[int]

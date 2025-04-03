@@ -100,11 +100,11 @@ class MessageHub final {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncRemoveInterfacesRaw(context, request, cq));
     }
     // Get properties associated with the passed interfaces. 
-    virtual ::grpc::Status GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::astarteplatform::msghub::StoredProperties* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>> AsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
+    virtual ::grpc::Status GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::astarteplatform::msghub::StoredProperties* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>> AsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>>(AsyncGetPropertiesRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>> PrepareAsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>> PrepareAsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>>(PrepareAsyncGetPropertiesRaw(context, request, cq));
     }
     // Get all the properties, allowing also filtering by interface ownership. 
@@ -116,12 +116,12 @@ class MessageHub final {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>>(PrepareAsyncGetAllPropertiesRaw(context, request, cq));
     }
     // Get a specific property by its identifier, could be an unset property  
-    virtual ::grpc::Status GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::astarteplatform::msghub::PropertyData* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::PropertyData>> AsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::PropertyData>>(AsyncGetPropertyRaw(context, request, cq));
+    virtual ::grpc::Status GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::astarteplatform::msghub::AstartePropertyIndividual* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::AstartePropertyIndividual>> AsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::AstartePropertyIndividual>>(AsyncGetPropertyRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::PropertyData>> PrepareAsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::PropertyData>>(PrepareAsyncGetPropertyRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::AstartePropertyIndividual>> PrepareAsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::AstartePropertyIndividual>>(PrepareAsyncGetPropertyRaw(context, request, cq));
     }
     class async_interface {
      public:
@@ -142,14 +142,14 @@ class MessageHub final {
       virtual void RemoveInterfaces(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       virtual void RemoveInterfaces(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Get properties associated with the passed interfaces. 
-      virtual void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Get all the properties, allowing also filtering by interface ownership. 
       virtual void GetAllProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetAllProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Get a specific property by its identifier, could be an unset property  
-      virtual void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -166,12 +166,12 @@ class MessageHub final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncAddInterfacesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesJson& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncRemoveInterfacesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncRemoveInterfacesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>* AsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>* PrepareAsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>* AsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>* PrepareAsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>* AsyncGetAllPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::StoredProperties>* PrepareAsyncGetAllPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::PropertyData>* AsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::PropertyData>* PrepareAsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::AstartePropertyIndividual>* AsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::astarteplatform::msghub::AstartePropertyIndividual>* PrepareAsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -213,11 +213,11 @@ class MessageHub final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncRemoveInterfaces(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncRemoveInterfacesRaw(context, request, cq));
     }
-    ::grpc::Status GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::astarteplatform::msghub::StoredProperties* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>> AsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
+    ::grpc::Status GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::astarteplatform::msghub::StoredProperties* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>> AsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>>(AsyncGetPropertiesRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>> PrepareAsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) {
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>> PrepareAsyncGetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>>(PrepareAsyncGetPropertiesRaw(context, request, cq));
     }
     ::grpc::Status GetAllProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter& request, ::astarteplatform::msghub::StoredProperties* response) override;
@@ -227,12 +227,12 @@ class MessageHub final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>> PrepareAsyncGetAllProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>>(PrepareAsyncGetAllPropertiesRaw(context, request, cq));
     }
-    ::grpc::Status GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::astarteplatform::msghub::PropertyData* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>> AsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>>(AsyncGetPropertyRaw(context, request, cq));
+    ::grpc::Status GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::astarteplatform::msghub::AstartePropertyIndividual* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>> AsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>>(AsyncGetPropertyRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>> PrepareAsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>>(PrepareAsyncGetPropertyRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>> PrepareAsyncGetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>>(PrepareAsyncGetPropertyRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
@@ -246,12 +246,12 @@ class MessageHub final {
       void AddInterfaces(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesJson* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
       void RemoveInterfaces(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void RemoveInterfaces(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)>) override;
-      void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)>) override;
+      void GetProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) override;
       void GetAllProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter* request, ::astarteplatform::msghub::StoredProperties* response, std::function<void(::grpc::Status)>) override;
       void GetAllProperties(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter* request, ::astarteplatform::msghub::StoredProperties* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response, std::function<void(::grpc::Status)>) override;
-      void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response, std::function<void(::grpc::Status)>) override;
+      void GetProperty(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -274,12 +274,12 @@ class MessageHub final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncAddInterfacesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesJson& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncRemoveInterfacesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncRemoveInterfacesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* AsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* PrepareAsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfacesName& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* AsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* PrepareAsyncGetPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::InterfaceName& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* AsyncGetAllPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::StoredProperties>* PrepareAsyncGetAllPropertiesRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyFilter& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>* AsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::PropertyData>* PrepareAsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>* AsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::astarteplatform::msghub::AstartePropertyIndividual>* PrepareAsyncGetPropertyRaw(::grpc::ClientContext* context, const ::astarteplatform::msghub::PropertyIdentifier& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_Attach_;
     const ::grpc::internal::RpcMethod rpcmethod_Send_;
     const ::grpc::internal::RpcMethod rpcmethod_Detach_;
@@ -307,11 +307,11 @@ class MessageHub final {
     // This function should be used to remove one or more interfaces from an instance of the Astarte message hub. 
     virtual ::grpc::Status RemoveInterfaces(::grpc::ServerContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::google::protobuf::Empty* response);
     // Get properties associated with the passed interfaces. 
-    virtual ::grpc::Status GetProperties(::grpc::ServerContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response);
+    virtual ::grpc::Status GetProperties(::grpc::ServerContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response);
     // Get all the properties, allowing also filtering by interface ownership. 
     virtual ::grpc::Status GetAllProperties(::grpc::ServerContext* context, const ::astarteplatform::msghub::PropertyFilter* request, ::astarteplatform::msghub::StoredProperties* response);
     // Get a specific property by its identifier, could be an unset property  
-    virtual ::grpc::Status GetProperty(::grpc::ServerContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response);
+    virtual ::grpc::Status GetProperty(::grpc::ServerContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_Attach : public BaseClass {
@@ -425,11 +425,11 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
+    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetProperties(::grpc::ServerContext* context, ::astarteplatform::msghub::InterfacesName* request, ::grpc::ServerAsyncResponseWriter< ::astarteplatform::msghub::StoredProperties>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetProperties(::grpc::ServerContext* context, ::astarteplatform::msghub::InterfaceName* request, ::grpc::ServerAsyncResponseWriter< ::astarteplatform::msghub::StoredProperties>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -465,11 +465,11 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/) override {
+    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetProperty(::grpc::ServerContext* context, ::astarteplatform::msghub::PropertyIdentifier* request, ::grpc::ServerAsyncResponseWriter< ::astarteplatform::msghub::PropertyData>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetProperty(::grpc::ServerContext* context, ::astarteplatform::msghub::PropertyIdentifier* request, ::grpc::ServerAsyncResponseWriter< ::astarteplatform::msghub::AstartePropertyIndividual>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -611,25 +611,25 @@ class MessageHub final {
    public:
     WithCallbackMethod_GetProperties() {
       ::grpc::Service::MarkMethodCallback(5,
-          new ::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties>(
+          new ::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::astarteplatform::msghub::InterfacesName* request, ::astarteplatform::msghub::StoredProperties* response) { return this->GetProperties(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::astarteplatform::msghub::InterfaceName* request, ::astarteplatform::msghub::StoredProperties* response) { return this->GetProperties(context, request, response); }));}
     void SetMessageAllocatorFor_GetProperties(
-        ::grpc::MessageAllocator< ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties>* allocator) {
+        ::grpc::MessageAllocator< ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_GetProperties() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
+    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* GetProperties(
-      ::grpc::CallbackServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_GetAllProperties : public BaseClass {
@@ -665,25 +665,25 @@ class MessageHub final {
    public:
     WithCallbackMethod_GetProperty() {
       ::grpc::Service::MarkMethodCallback(7,
-          new ::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData>(
+          new ::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::PropertyData* response) { return this->GetProperty(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::astarteplatform::msghub::PropertyIdentifier* request, ::astarteplatform::msghub::AstartePropertyIndividual* response) { return this->GetProperty(context, request, response); }));}
     void SetMessageAllocatorFor_GetProperty(
-        ::grpc::MessageAllocator< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData>* allocator) {
+        ::grpc::MessageAllocator< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(7);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_GetProperty() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/) override {
+    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* GetProperty(
-      ::grpc::CallbackServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/)  { return nullptr; }
   };
   typedef WithCallbackMethod_Attach<WithCallbackMethod_Send<WithCallbackMethod_Detach<WithCallbackMethod_AddInterfaces<WithCallbackMethod_RemoveInterfaces<WithCallbackMethod_GetProperties<WithCallbackMethod_GetAllProperties<WithCallbackMethod_GetProperty<Service > > > > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
@@ -784,7 +784,7 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
+    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -818,7 +818,7 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/) override {
+    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -935,7 +935,7 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
+    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -975,7 +975,7 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/) override {
+    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1108,7 +1108,7 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
+    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1152,7 +1152,7 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/) override {
+    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1275,10 +1275,10 @@ class MessageHub final {
     WithStreamedUnaryMethod_GetProperties() {
       ::grpc::Service::MarkMethodStreamed(5,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties>(
+          ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::astarteplatform::msghub::InterfacesName, ::astarteplatform::msghub::StoredProperties>* streamer) {
+                     ::astarteplatform::msghub::InterfaceName, ::astarteplatform::msghub::StoredProperties>* streamer) {
                        return this->StreamedGetProperties(context,
                          streamer);
                   }));
@@ -1287,12 +1287,12 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfacesName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
+    ::grpc::Status GetProperties(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::InterfaceName* /*request*/, ::astarteplatform::msghub::StoredProperties* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetProperties(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::astarteplatform::msghub::InterfacesName,::astarteplatform::msghub::StoredProperties>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedGetProperties(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::astarteplatform::msghub::InterfaceName,::astarteplatform::msghub::StoredProperties>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetAllProperties : public BaseClass {
@@ -1329,10 +1329,10 @@ class MessageHub final {
     WithStreamedUnaryMethod_GetProperty() {
       ::grpc::Service::MarkMethodStreamed(7,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData>(
+          ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::PropertyData>* streamer) {
+                     ::astarteplatform::msghub::PropertyIdentifier, ::astarteplatform::msghub::AstartePropertyIndividual>* streamer) {
                        return this->StreamedGetProperty(context,
                          streamer);
                   }));
@@ -1341,12 +1341,12 @@ class MessageHub final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::PropertyData* /*response*/) override {
+    ::grpc::Status GetProperty(::grpc::ServerContext* /*context*/, const ::astarteplatform::msghub::PropertyIdentifier* /*request*/, ::astarteplatform::msghub::AstartePropertyIndividual* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetProperty(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::astarteplatform::msghub::PropertyIdentifier,::astarteplatform::msghub::PropertyData>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedGetProperty(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::astarteplatform::msghub::PropertyIdentifier,::astarteplatform::msghub::AstartePropertyIndividual>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_Send<WithStreamedUnaryMethod_Detach<WithStreamedUnaryMethod_AddInterfaces<WithStreamedUnaryMethod_RemoveInterfaces<WithStreamedUnaryMethod_GetProperties<WithStreamedUnaryMethod_GetAllProperties<WithStreamedUnaryMethod_GetProperty<Service > > > > > > > StreamedUnaryService;
   template <class BaseClass>
