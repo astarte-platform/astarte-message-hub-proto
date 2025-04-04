@@ -24,17 +24,19 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&astarteplatform/msghub/interface.proto\x12\x16\x61starteplatform.msghub\")\n\x0eInterfacesJson\x12\x17\n\x0finterfaces_json\x18\x01 \x03(\t\"\x1f\n\x0eInterfacesName\x12\r\n\x05names\x18\x01 \x03(\t*#\n\tOwnership\x12\n\n\x06\x44\x45VICE\x10\x00\x12\n\n\x06SERVER\x10\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&astarteplatform/msghub/interface.proto\x12\x16\x61starteplatform.msghub\")\n\x0eInterfacesJson\x12\x17\n\x0finterfaces_json\x18\x01 \x03(\t\"\x1f\n\x0eInterfacesName\x12\r\n\x05names\x18\x01 \x03(\t\"\x1d\n\rInterfaceName\x12\x0c\n\x04name\x18\x01 \x01(\t*#\n\tOwnership\x12\n\n\x06\x44\x45VICE\x10\x00\x12\n\n\x06SERVER\x10\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'astarteplatform.msghub.interface_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_OWNERSHIP']._serialized_start=142
-  _globals['_OWNERSHIP']._serialized_end=177
+  _globals['_OWNERSHIP']._serialized_start=173
+  _globals['_OWNERSHIP']._serialized_end=208
   _globals['_INTERFACESJSON']._serialized_start=66
   _globals['_INTERFACESJSON']._serialized_end=107
   _globals['_INTERFACESNAME']._serialized_start=109
   _globals['_INTERFACESNAME']._serialized_end=140
+  _globals['_INTERFACENAME']._serialized_start=142
+  _globals['_INTERFACENAME']._serialized_end=171
 # @@protoc_insertion_point(module_scope)
