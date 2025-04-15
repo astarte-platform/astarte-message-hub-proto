@@ -87,7 +87,7 @@ mock! {
             tonic::Status,
         >
         where
-            R: tonic::IntoRequest<astarte_message_hub_proto::InterfacesName> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::InterfaceName> + 'static;
 
         pub async fn get_all_properties<R>(
             &mut self,
@@ -97,12 +97,12 @@ mock! {
             tonic::Status,
         >
         where
-            R: tonic::IntoRequest<astarte_message_hub_proto::StoredPropertiesFilter> + 'static;
+            R: tonic::IntoRequest<astarte_message_hub_proto::PropertyFilter> + 'static;
 
         pub async fn get_property<R>(
             &mut self,
             request: R,
-        ) -> std::result::Result<tonic::Response<astarte_message_hub_proto::Property>, tonic::Status>
+        ) -> std::result::Result<tonic::Response<astarte_message_hub_proto::AstartePropertyIndividual>, tonic::Status>
         where
             R: tonic::IntoRequest<astarte_message_hub_proto::PropertyIdentifier> + 'static;
     }
