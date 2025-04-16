@@ -23,9 +23,11 @@ on:
   workflow_call:
 env:
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: '-D warnings'
+  RUSTDOCFLAGS: '-D warnings'
 defaults:
   run:
-    working-directory: rust/astarte-message-hub-proto
+    working-directory: rust/
 
 jobs:
   fmt:
@@ -39,7 +41,7 @@ jobs:
         with:
           components: rustfmt
       - name: Check formatting
-        run: cargo fmt --check
+        run: cargo fmt --check --all
   clippy:
     runs-on: ubuntu-latest
     name: ${{ matrix.toolchain }} / clippy
@@ -58,10 +60,7 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
       - name: cargo clippy
-        uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --manifest-path rust/astarte-message-hub-proto/Cargo.toml  --all-targets --all-features -- -D warnings
+        run: cargo clippy --locked --all-targets --all-features --workspace
 
   test:
     runs-on: ubuntu-latest
@@ -71,7 +70,7 @@ jobs:
       - name: Install stable
         uses: dtolnay/rust-toolchain@stable
       - name: cargo test
-        run: cargo test --all-features --package astarte-message-hub-proto
+        run: cargo test --locked --all-features --workspace
 
   doc:
     runs-on: ubuntu-latest
@@ -96,7 +95,7 @@ jobs:
         uses: taiki-e/install-action@cargo-hack
       # intentionally no target specifier; see https://github.com/jonhoo/rust-ci-conf/pull/4
       - name: cargo hack
-        run: cargo hack --feature-powerset check
+        run: cargo hack --each-feature test --workspace
 
   msrv:
     runs-on: ubuntu-latest
@@ -113,4 +112,4 @@ jobs:
         with:
           toolchain: ${{ matrix.msrv }}
       - name: cargo +${{ matrix.msrv }} check
-        run: cargo check --all-features --package astarte-message-hub-proto
+        run: cargo +${{ matrix.msrv }} check --all-features --package astarte-message-hub-proto

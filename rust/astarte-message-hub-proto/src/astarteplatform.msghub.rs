@@ -113,6 +113,7 @@ pub struct AstarteDatastreamObject {
 }
 /// A property individual data type.
 /// To be used nested inside an `AstarteMessage`.
+/// It is also the structure returned by the `GetProperty` rpc.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstartePropertyIndividual {
     #[prost(message, optional, tag = "1")]
@@ -199,6 +200,14 @@ pub struct InterfacesName {
     #[prost(string, repeated, tag = "1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+/// This message is the request to the GetProperty rpc.
+/// it represents an Astarte interface name
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InterfaceName {
+    /// The name of the interface
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+}
 /// Enum representing an Astarte interface ownership.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -226,45 +235,37 @@ impl Ownership {
         }
     }
 }
-/// A message representing the property value associated to a certain interface and path.
-/// Required for the `GetProperty` method that could need to return an unset property.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Property {
-    /// Property path.
-    #[prost(string, tag = "1")]
-    pub path: ::prost::alloc::string::String,
-    /// Astarte data.
-    #[prost(message, optional, tag = "2")]
-    pub data: ::core::option::Option<AstarteData>,
-}
 /// A message containing all the properties values and information associated to a given astarte interface.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct InterfaceProperties {
-    /// Interface ownership.
-    #[prost(enumeration = "Ownership", tag = "1")]
-    pub ownership: i32,
+pub struct Property {
+    /// Interface name.
+    #[prost(string, tag = "1")]
+    pub interface_name: ::prost::alloc::string::String,
+    /// Property path.
+    #[prost(string, tag = "2")]
+    pub path: ::prost::alloc::string::String,
     /// Interface major version.
-    #[prost(int32, tag = "2")]
+    #[prost(int32, tag = "3")]
     pub version_major: i32,
-    /// A list of Properties values. These properties should not be unset
-    #[prost(message, repeated, tag = "3")]
-    pub properties: ::prost::alloc::vec::Vec<Property>,
+    /// Interface ownership.
+    #[prost(enumeration = "Ownership", tag = "4")]
+    pub ownership: i32,
+    /// Astarte data.
+    #[prost(message, optional, tag = "5")]
+    pub data: ::core::option::Option<AstarteData>,
 }
 /// This message is the response to the GetProperties rpc method.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoredProperties {
-    /// Map interface names to interface property data.
-    #[prost(map = "string, message", tag = "1")]
-    pub interface_properties: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        InterfaceProperties,
-    >,
+    /// List of interface property data.
+    #[prost(message, repeated, tag = "1")]
+    pub properties: ::prost::alloc::vec::Vec<Property>,
 }
 /// This message is the request to the GetAllProperties rpc.
 /// If the ownership is not specified, all the interfaces are retrieved, both device and server owned.
 /// Otherwise, only the interfaces with the specified interfaces are retrieved.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct StoredPropertiesFilter {
+pub struct PropertyFilter {
     /// Optional field representing the ownership of the interface to retrieve.
     #[prost(enumeration = "Ownership", optional, tag = "1")]
     pub ownership: ::core::option::Option<i32>,
@@ -494,7 +495,7 @@ pub mod message_hub_client {
         /// Get properties associated with the passed interfaces.
         pub async fn get_properties(
             &mut self,
-            request: impl tonic::IntoRequest<super::InterfacesName>,
+            request: impl tonic::IntoRequest<super::InterfaceName>,
         ) -> std::result::Result<
             tonic::Response<super::StoredProperties>,
             tonic::Status,
@@ -521,7 +522,7 @@ pub mod message_hub_client {
         /// Get all the properties, allowing also filtering by interface ownership.
         pub async fn get_all_properties(
             &mut self,
-            request: impl tonic::IntoRequest<super::StoredPropertiesFilter>,
+            request: impl tonic::IntoRequest<super::PropertyFilter>,
         ) -> std::result::Result<
             tonic::Response<super::StoredProperties>,
             tonic::Status,
@@ -552,7 +553,10 @@ pub mod message_hub_client {
         pub async fn get_property(
             &mut self,
             request: impl tonic::IntoRequest<super::PropertyIdentifier>,
-        ) -> std::result::Result<tonic::Response<super::Property>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<super::AstartePropertyIndividual>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -622,7 +626,7 @@ pub mod message_hub_server {
         /// Get properties associated with the passed interfaces.
         async fn get_properties(
             &self,
-            request: tonic::Request<super::InterfacesName>,
+            request: tonic::Request<super::InterfaceName>,
         ) -> std::result::Result<
             tonic::Response<super::StoredProperties>,
             tonic::Status,
@@ -630,7 +634,7 @@ pub mod message_hub_server {
         /// Get all the properties, allowing also filtering by interface ownership.
         async fn get_all_properties(
             &self,
-            request: tonic::Request<super::StoredPropertiesFilter>,
+            request: tonic::Request<super::PropertyFilter>,
         ) -> std::result::Result<
             tonic::Response<super::StoredProperties>,
             tonic::Status,
@@ -639,7 +643,10 @@ pub mod message_hub_server {
         async fn get_property(
             &self,
             request: tonic::Request<super::PropertyIdentifier>,
-        ) -> std::result::Result<tonic::Response<super::Property>, tonic::Status>;
+        ) -> std::result::Result<
+            tonic::Response<super::AstartePropertyIndividual>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct MessageHubServer<T> {
@@ -945,9 +952,7 @@ pub mod message_hub_server {
                 "/astarteplatform.msghub.MessageHub/GetProperties" => {
                     #[allow(non_camel_case_types)]
                     struct GetPropertiesSvc<T: MessageHub>(pub Arc<T>);
-                    impl<
-                        T: MessageHub,
-                    > tonic::server::UnaryService<super::InterfacesName>
+                    impl<T: MessageHub> tonic::server::UnaryService<super::InterfaceName>
                     for GetPropertiesSvc<T> {
                         type Response = super::StoredProperties;
                         type Future = BoxFuture<
@@ -956,7 +961,7 @@ pub mod message_hub_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::InterfacesName>,
+                            request: tonic::Request<super::InterfaceName>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -992,7 +997,7 @@ pub mod message_hub_server {
                     struct GetAllPropertiesSvc<T: MessageHub>(pub Arc<T>);
                     impl<
                         T: MessageHub,
-                    > tonic::server::UnaryService<super::StoredPropertiesFilter>
+                    > tonic::server::UnaryService<super::PropertyFilter>
                     for GetAllPropertiesSvc<T> {
                         type Response = super::StoredProperties;
                         type Future = BoxFuture<
@@ -1001,7 +1006,7 @@ pub mod message_hub_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::StoredPropertiesFilter>,
+                            request: tonic::Request<super::PropertyFilter>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -1039,7 +1044,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::UnaryService<super::PropertyIdentifier>
                     for GetPropertySvc<T> {
-                        type Response = super::Property;
+                        type Response = super::AstartePropertyIndividual;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,

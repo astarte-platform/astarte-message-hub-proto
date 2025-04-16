@@ -1,4 +1,5 @@
 from google.protobuf import empty_pb2 as _empty_pb2
+from astarteplatform.msghub import astarte_data_pb2 as _astarte_data_pb2
 from astarteplatform.msghub import astarte_message_pb2 as _astarte_message_pb2
 from astarteplatform.msghub import node_pb2 as _node_pb2
 from astarteplatform.msghub import interface_pb2 as _interface_pb2

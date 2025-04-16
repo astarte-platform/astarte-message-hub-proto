@@ -27,6 +27,7 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/empty.pb.h"
+#include "astarteplatform/msghub/astarte_data.pb.h"
 #include "astarteplatform/msghub/astarte_message.pb.h"
 #include "astarteplatform/msghub/node.pb.h"
 #include "astarteplatform/msghub/interface.pb.h"
