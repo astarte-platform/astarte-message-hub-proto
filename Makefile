@@ -40,7 +40,6 @@ DL_DIR := $(shell mkdir -p $(BASE_DIR)/dl >/dev/null 2>&1)$(BASE_DIR)/dl
 BUILD_DIR := $(BASE_DIR)/build
 RUST_BUILD_DIR := $(BUILD_DIR)/rust
 PYTHON_BUILD_DIR := $(BUILD_DIR)/python
-CPP_BUILD_DIR := $(BUILD_DIR)/cpp
 
 FILES=$(wildcard proto/astarteplatform/msghub/*.proto)
 
@@ -52,12 +51,12 @@ RUST_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/rust_codegen.sh
 PYTHON_LANG=$(PYTHON_BUILD_DIR)/astarteplatform
 PYTHON_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/python_codegen.sh
 
-CPP_LANG=$(CPP_BUILD_DIR)/astarteplatform
+CPP_CMAKE=$(CPP_LANG_DIR)/cmake
 CPP_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/cpp_codegen.sh
 
 # This is our default rule, so must come first
 .PHONY: all
-all : $(RUST_LANG) $(PYTHON_LANG) $(CPP_LANG)
+all : $(RUST_LANG) $(PYTHON_LANG) $(CPP_CMAKE)
 
 $(RUST_LANG): $(FILES) $(RUST_CODEGEN_SCRIPT)
 		mkdir -p $(RUST_BUILD_DIR)
@@ -67,9 +66,8 @@ $(PYTHON_LANG): $(FILES) $(PYTHON_CODEGEN_SCRIPT)
 		mkdir -p $(PYTHON_BUILD_DIR)
 		$(PYTHON_CODEGEN_SCRIPT) codegen $(PROTO_DIR) $(PYTHON_LANG_DIR) $(PYTHON_BUILD_DIR) $(DL_DIR)
 
-$(CPP_LANG): $(FILES) $(CPP_CODEGEN_SCRIPT)
-		mkdir -p $(CPP_BUILD_DIR)
-		$(CPP_CODEGEN_SCRIPT) codegen $(PROTO_DIR) $(CPP_LANG_DIR) $(CPP_BUILD_DIR)
+$(CPP_CMAKE): $(FILES) $(CPP_CODEGEN_SCRIPT)
+		$(CPP_CODEGEN_SCRIPT) codegen $(PROTO_DIR) $(CPP_LANG_DIR)
 
 .PHONY: protoc-check
 protoc-check: $(PROTOC_CHECK_SCRIPT)
@@ -82,7 +80,7 @@ rust: protoc-check $(RUST_LANG)
 python: protoc-check $(PYTHON_LANG)
 
 .PHONY: cpp
-cpp: $(CPP_LANG)
+cpp: $(CPP_CMAKE)
 
 .PHONY: rust-install
 rust-install: $(RUST_LANG)
@@ -91,10 +89,6 @@ rust-install: $(RUST_LANG)
 .PHONY: python-install
 python-install: $(PYTHON_LANG)
 		$(PYTHON_CODEGEN_SCRIPT) install_code $(PYTHON_BUILD_DIR) $(PYTHON_LANG_DIR)
-
-.PHONY: cpp-install
-cpp-install: $(CPP_LANG)
-		$(CPP_CODEGEN_SCRIPT) install_code $(CPP_BUILD_DIR) $(CPP_LANG_DIR)
 
 .PHONY: install
 install: rust-install python-install cpp-install
@@ -113,8 +107,7 @@ python-dirclean:
 
 .PHONY: cpp-dirclean
 cpp-dirclean:
-		rm -rf $(CPP_BUILD_DIR)
-		rm -rf $(CPP_LANG_DIR)/cmake
+		rm -rf $(CPP_CMAKE)
 
 .PHONY: help
 help:

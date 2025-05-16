@@ -19,7 +19,7 @@ a table with the used versions.
 
 | Language | gRPC library                                 | gRPC library version | Protoc version |
 |----------|----------------------------------------------|----------------------|----------------|
-| Rust     | [tonic](https://docs.rs/tonic/latest/tonic/) | v0.11.0              | 29.3           |
+| Rust     | [tonic](https://docs.rs/tonic/latest/tonic/) | v0.12.3              | 29.3           |
 | Python   | [grpc](https://github.com/grpc/grpc)         | v1.69.0              | 29.0           |
 | C++      | [grpc](https://github.com/grpc/grpc)         | v1.69.0              | 29.0           |
 
