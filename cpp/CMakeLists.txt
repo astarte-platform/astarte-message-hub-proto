@@ -16,12 +16,12 @@ include(FetchContent)
 option(USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
 if(USE_SYSTEM_GRPC)
     # Protobuf
-    find_package(Protobuf CONFIG REQUIRED)
+    find_package(Protobuf 29.0.0 CONFIG REQUIRED)
     message(STATUS "Using system protobuf ${protobuf_VERSION}")
     set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
 
     # gRPC
-    find_package(gRPC CONFIG REQUIRED)
+    find_package(gRPC 1.69.0 CONFIG REQUIRED)
     message(STATUS "Using system gRPC ${gRPC_VERSION}")
     set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
     set(_GRPC_CPP gRPC::grpc++)
