@@ -4,34 +4,41 @@
 # Minimum CMake required
 cmake_minimum_required(VERSION 3.15)
 
-# Project
-project(astarte-msg-hub-proto)
+# Project definition
+project(astarte-msg-hub-proto VERSION 0.7.0 LANGUAGES CXX)
+
+# At least C++ 17 is required
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
 option(USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
 if(USE_SYSTEM_GRPC)
     # Protobuf
-    set(protobuf_MODULE_COMPATIBLE TRUE)
-    find_package(Protobuf CONFIG REQUIRED)
-    message(STATUS "Using protobuf ${protobuf_VERSION}")
+    find_package(Protobuf 29.0.0 CONFIG REQUIRED)
+    message(STATUS "Using system protobuf ${protobuf_VERSION}")
     set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
 
     # gRPC
-    find_package(gRPC CONFIG REQUIRED)
-    message(STATUS "Using gRPC ${gRPC_VERSION}")
+    find_package(gRPC 1.69.0 CONFIG REQUIRED)
+    message(STATUS "Using system gRPC ${gRPC_VERSION}")
     set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
+    set(_GRPC_CPP gRPC::grpc++)
 else()
+    # Required settings for windows
     if(MSVC)
       add_definitions(-D_WIN32_WINNT=0x600)
     endif()
 
+    # gRPC needs Threads
     find_package(Threads REQUIRED)
 
+    # Enable installation of dependencies
     set(ABSL_ENABLE_INSTALL ON)
     set(ABSL_PROPAGATE_CXX_STD ON)
 
-    # Show git progress since
+    # Fetch gRPC, includes Protobuf as a submodule
     Set(FETCHCONTENT_QUIET FALSE)
     message(STATUS "Using gRPC via add_subdirectory (FetchContent).")
     FetchContent_Declare(
@@ -40,76 +47,94 @@ else()
       GIT_TAG        v1.69.0
       GIT_SHALLOW    TRUE
       GIT_PROGRESS   TRUE
-      # A value of 0 will give some reasonable default
       GIT_CONFIG     fetch.parallel=0 submodule.fetchJobs=0
     )
     FetchContent_MakeAvailable(grpc)
 
-    # Since FetchContent uses add_subdirectory under the hood, we can use
-    # the grpc targets directly from this build.
-    set(_PROTOBUF_LIBPROTOBUF libprotobuf)
-    set(_REFLECTION grpc++_reflection)
+    message(STATUS "Fetched gRPC source directory: ${grpc_SOURCE_DIR}")
+
     set(_PROTOBUF_PROTOC $<TARGET_FILE:protoc>)
     set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:grpc_cpp_plugin>)
+    set(_GRPC_CPP grpc++)
+
+    # Define the include folder for standard protobuf types (any.proto, etc.)
+    set(_PROTOBUF_STANDARD_INCLUDE_DIR "${grpc_SOURCE_DIR}/third_party/protobuf/src")
+    message(STATUS "Protobuf std include directory (for protoc): ${_PROTOBUF_STANDARD_INCLUDE_DIR}")
 endif()
 
-# Output directory
-if(NOT DEFINED OUT_FOLDER)
-    set(OUT_FOLDER "${CMAKE_CURRENT_LIST_DIR}")
-endif()
-message(STATUS "Output directory for generated files: ${OUT_FOLDER}")
+# Define where generated files will go relative to the binary directory
+set(_PROTO_GENERATED_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
+file(MAKE_DIRECTORY "${_PROTO_GENERATED_OUTPUT_DIR}")
+message(STATUS "Generated files output directory: ${_PROTO_GENERATED_OUTPUT_DIR}")
 
-# Directory containing proto files
+# Directory containing proto files (default to ../proto relative to this file)
 if(NOT DEFINED PROTO_FOLDER)
     set(PROTO_FOLDER "${CMAKE_CURRENT_LIST_DIR}/../proto")
 endif()
-message(STATUS "Proto files directory: ${PROTO_FOLDER}")
+message(STATUS "Proto files source directory: ${PROTO_FOLDER}")
+
 # Collect all .proto files
 file(GLOB_RECURSE proto_files "${PROTO_FOLDER}/astarteplatform/msghub/*.proto")
+if(NOT proto_files)
+    message(FATAL_ERROR "No .proto files found in ${PROTO_FOLDER}/astarteplatform/msghub/")
+endif()
 
-# List of outputs
-set(generated_files)
+set(_proto_generated_sources)
+set(_proto_generated_headers)
 
+# Compile all .proto files
 foreach(proto_file ${proto_files})
+    get_filename_component(proto_dir ${proto_file} DIRECTORY)
     get_filename_component(proto_name ${proto_file} NAME_WE)
+    file(RELATIVE_PATH proto_rel_dir "${PROTO_FOLDER}" "${proto_dir}")
 
-    # Output paths
-    set(out_proto_src "${OUT_FOLDER}/astarteplatform/msghub/${proto_name}.pb.cc")
-    set(out_proto_hdr "${OUT_FOLDER}/astarteplatform/msghub/${proto_name}.pb.h")
-    set(out_grpc_src "${OUT_FOLDER}/astarteplatform/msghub/${proto_name}.grpc.pb.cc")
-    set(out_grpc_hdr "${OUT_FOLDER}/astarteplatform/msghub/${proto_name}.grpc.pb.h")
+    set(out_proto_src "${_PROTO_GENERATED_OUTPUT_DIR}/${proto_rel_dir}/${proto_name}.pb.cc")
+    set(out_proto_hdr "${_PROTO_GENERATED_OUTPUT_DIR}/${proto_rel_dir}/${proto_name}.pb.h")
+    set(out_grpc_src "${_PROTO_GENERATED_OUTPUT_DIR}/${proto_rel_dir}/${proto_name}.grpc.pb.cc")
+    set(out_grpc_hdr "${_PROTO_GENERATED_OUTPUT_DIR}/${proto_rel_dir}/${proto_name}.grpc.pb.h")
 
-    # Add generated files to the list
-    list(APPEND generated_files ${out_proto_src} ${out_proto_hdr} ${out_grpc_src} ${out_grpc_hdr})
+    list(APPEND _proto_generated_sources ${out_proto_src} ${out_grpc_src})
+    list(APPEND _proto_generated_headers ${out_proto_hdr} ${out_grpc_hdr})
 
-    # When using protoc from FetchContent the protobuf  source have to be included manually
-    if(USE_SYSTEM_GRPC)
-        add_custom_command(
-            OUTPUT "${out_proto_src}" "${out_proto_hdr}" "${out_grpc_src}" "${out_grpc_hdr}"
-            COMMAND ${_PROTOBUF_PROTOC}
-            ARGS --grpc_out "${OUT_FOLDER}"
-                --cpp_out "${OUT_FOLDER}"
-                -I "${PROTO_FOLDER}"
-                --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-                "${proto_file}"
-          DEPENDS "${proto_file}")
-    else()
-        set(PROTOBUF_INCLUDE_FOLDER "${CMAKE_CURRENT_LIST_DIR}/cmake/build/_deps/grpc-src/third_party/protobuf/src")
-        add_custom_command(
-            OUTPUT "${out_proto_src}" "${out_proto_hdr}" "${out_grpc_src}" "${out_grpc_hdr}"
-            COMMAND ${_PROTOBUF_PROTOC}
-            ARGS --grpc_out "${OUT_FOLDER}"
-                --cpp_out "${OUT_FOLDER}"
-                -I "${PROTOBUF_INCLUDE_FOLDER}"
-                -I "${PROTO_FOLDER}"
-                --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-                "${proto_file}"
-          DEPENDS "${proto_file}")
+    set(PROTOC_CMD_ARGS "")
+    list(APPEND PROTOC_CMD_ARGS --grpc_out "${_PROTO_GENERATED_OUTPUT_DIR}")
+    list(APPEND PROTOC_CMD_ARGS --cpp_out "${_PROTO_GENERATED_OUTPUT_DIR}")
+    list(APPEND PROTOC_CMD_ARGS -I "${PROTO_FOLDER}")
+
+    if(NOT USE_SYSTEM_GRPC)
+        if(IS_DIRECTORY "${_PROTOBUF_STANDARD_INCLUDE_DIR}")
+            list(APPEND PROTOC_CMD_ARGS -I "${_PROTOBUF_STANDARD_INCLUDE_DIR}")
+        else()
+            message(WARNING "Protobuf standard include directory (for protoc) NOT FOUND: ${_PROTOBUF_STANDARD_INCLUDE_DIR}. Standard imports in .proto files might fail.")
+        endif()
     endif()
 
+    list(APPEND PROTOC_CMD_ARGS --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}")
+    list(APPEND PROTOC_CMD_ARGS "${proto_file}")
 
-
+    add_custom_command(
+        OUTPUT "${out_proto_src}" "${out_proto_hdr}" "${out_grpc_src}" "${out_grpc_hdr}"
+        COMMAND ${_PROTOBUF_PROTOC}
+        ARGS ${PROTOC_CMD_ARGS}
+        DEPENDS "${proto_file}"
+                "${_PROTOBUF_PROTOC}"
+                "${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+        COMMENT "Generating C++ and gRPC files from ${proto_name}.proto"
+    )
 endforeach()
 
-# Create a custom target to generate protobuf and gRPC files
-add_custom_target(generate_protos ALL DEPENDS ${generated_files})
+add_library(astarte_msghub_proto STATIC ${_proto_generated_sources})
+
+# Link the library against required dependencies (gRPC, Protobuf, Threads).
+target_link_libraries(astarte_msghub_proto
+    PUBLIC ${_GRPC_CPP}
+)
+
+# Add include directories for the generated headers and the original proto source directory
+target_include_directories(astarte_msghub_proto
+    PRIVATE
+        "${_PROTO_GENERATED_OUTPUT_DIR}" # For compiling this library's sources
+    PUBLIC
+        # For consumers building alongside this project (e.g., via FetchContent)
+        "$<BUILD_INTERFACE:${_PROTO_GENERATED_OUTPUT_DIR}>"
+)

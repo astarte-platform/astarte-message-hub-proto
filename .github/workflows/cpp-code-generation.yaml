@@ -40,18 +40,50 @@ jobs:
         run: |
           sudo apt install -y cmake build-essential autoconf libtool pkg-config ninja-build
       - uses: actions/checkout@v4
-      - name: Cached build directory
-        uses: actions/cache@v4
-        id: cache-build
         with:
-          path: ./cpp/cmake
-          key: grpc-cpp-v${{ inputs.grpc-version }}
-      - name: Generate code
+          path: astarte-message-hub-proto
+      - name: Install gRPC dependencies
         run: |
-          make cpp
-          make cpp-install
-      - name: Upload artifact with generated code
-        uses: actions/upload-artifact@v4
+          sudo apt update
+          sudo apt install -y build-essential autoconf libtool pkg-config
+      - name: Check out the gRPC repo
+        run: git clone --recurse-submodules -b v${{ inputs.grpc-version }} --depth 1 --shallow-submodules https://github.com/grpc/grpc
+      - name: Set MY_INSTALL_DIR variable
+        run: |
+          MY_INSTALL_DIR=$PWD/grpc-install
+          echo "MY_INSTALL_DIR=$MY_INSTALL_DIR" >> $GITHUB_ENV
+          mkdir -p $MY_INSTALL_DIR
+          echo "$MY_INSTALL_DIR" >> "$GITHUB_PATH"
+      - name: Restore cached gRPC build directory
+        id: cache-grpc-cpp-restore
+        uses: actions/cache/restore@v4
         with:
-          name: cpp-dist
-          path: ./cpp/astarteplatform
+          path: |
+            ./grpc/cmake
+            ./grpc-install
+          key: grpc-cpp-v${{ env.grpc-version }}
+      - name: Compile from source gRPC
+        if: steps.cache-grpc-cpp-restore.outputs.cache-hit != 'true'
+        run: |
+          mkdir ./grpc/cmake/build
+          pushd ./grpc/cmake/build
+          cmake -DgRPC_INSTALL=ON \
+                -DgRPC_BUILD_TESTS=OFF \
+                -DCMAKE_CXX_STANDARD=17 \
+                -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR \
+                ../..
+          make -j $(nproc)
+          make install
+          popd
+      - name: Cache the gRPC build directory
+        if: steps.cache-grpc-cpp-restore.outputs.cache-hit != 'true'
+        id: cache-grpc-cpp-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ./grpc/cmake
+            ./grpc-install
+          key: ${{ steps.cache-grpc-cpp-restore.outputs.cache-primary-key }}
+      - name: Generate code
+        working-directory: ./astarte-message-hub-proto
+        run: make cpp
