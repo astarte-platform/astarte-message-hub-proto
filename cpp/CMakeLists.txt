@@ -13,8 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
-option(USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
-if(USE_SYSTEM_GRPC)
+option(ASTARTE_USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
+if(ASTARTE_USE_SYSTEM_GRPC)
     # Protobuf
     find_package(Protobuf 29.0.0 CONFIG REQUIRED)
     message(STATUS "Using system protobuf ${protobuf_VERSION}")
@@ -101,7 +101,7 @@ foreach(proto_file ${proto_files})
     list(APPEND PROTOC_CMD_ARGS --cpp_out "${_PROTO_GENERATED_OUTPUT_DIR}")
     list(APPEND PROTOC_CMD_ARGS -I "${PROTO_FOLDER}")
 
-    if(NOT USE_SYSTEM_GRPC)
+    if(NOT ASTARTE_USE_SYSTEM_GRPC)
         if(IS_DIRECTORY "${_PROTOBUF_STANDARD_INCLUDE_DIR}")
             list(APPEND PROTOC_CMD_ARGS -I "${_PROTOBUF_STANDARD_INCLUDE_DIR}")
         else()

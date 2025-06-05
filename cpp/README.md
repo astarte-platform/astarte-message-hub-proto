@@ -14,7 +14,7 @@ In production we recomend letting CMake fetch gRPC automatically, this is the de
 the CMakeList in this folder.
 If you wish to manually install CMake follow the
 [online guide](https://grpc.io/docs/languages/cpp/quickstart/#install-grpc) making sure you choose
-the appropriate version. Then provide CMake with the `USE_SYSTEM_GRPC` option during build.
+the appropriate version. Then provide CMake with the `ASTARTE_USE_SYSTEM_GRPC` option during build.
 
 ## Import the proto files as a CMake library
 
