@@ -15,7 +15,7 @@ codegen() {
     cmake \
         -DPROTO_FOLDER:STRING=$PROTO_DIR \
         -DCMAKE_POLICY_VERSION_MINIMUM=3.15 \
-        -DUSE_SYSTEM_GRPC=ON \
+        -DASTARTE_USE_SYSTEM_GRPC=ON \
         ../..
     cmake --build . --target astarte_msghub_proto -j $(nproc --all)
     popd
