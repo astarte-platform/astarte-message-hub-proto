@@ -11,17 +11,37 @@ project(astarte-msg-hub-proto VERSION 0.7.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Project configuration
+option(ASTARTE_USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
+set(DEFAULT_PROTOBUF_VERSION "29.0.0" CACHE STRING "Default version of protobuf.")
+set(DEFAULT_GRPC_VERSION "1.69.0" CACHE STRING "Default version of gRPC.")
+
+if (ASTARTE_USE_SYSTEM_GRPC)
+    if(NOT DEFINED ASTARTE_PROTOBUF_VERSION)
+        set(ASTARTE_PROTOBUF_VERSION "${DEFAULT_PROTOBUF_VERSION}" CACHE STRING "Version of proto buffer to use for Astarte.")
+        message(STATUS "ASTARTE_PROTOBUF_VERSION was not set, defaulting to ${ASTARTE_PROTOBUF_VERSION}")
+    else()
+        message(STATUS "ASTARTE_PROTOBUF_VERSION set to ${ASTARTE_PROTOBUF_VERSION}")
+    endif()
+endif()
+
+if(NOT DEFINED ASTARTE_GRPC_VERSION)
+    set(ASTARTE_GRPC_VERSION "${DEFAULT_GRPC_VERSION}" CACHE STRING "Version of gRPC to use for Astarte.")
+    message(STATUS "ASTARTE_GRPC_VERSION was not set, defaulting to ${ASTARTE_GRPC_VERSION}")
+else()
+    message(STATUS "ASTARTE_GRPC_VERSION set to ${ASTARTE_GRPC_VERSION}")
+endif()
+
 include(FetchContent)
 
-option(ASTARTE_USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
 if(ASTARTE_USE_SYSTEM_GRPC)
     # Protobuf
-    find_package(Protobuf 29.0.0 CONFIG REQUIRED)
+    find_package(Protobuf ${ASTARTE_PROTOBUF_VERSION} CONFIG REQUIRED)
     message(STATUS "Using system protobuf ${protobuf_VERSION}")
     set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
 
     # gRPC
-    find_package(gRPC 1.69.0 CONFIG REQUIRED)
+    find_package(gRPC ${ASTARTE_GRPC_VERSION} CONFIG REQUIRED)
     message(STATUS "Using system gRPC ${gRPC_VERSION}")
     set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
     set(_GRPC_CPP gRPC::grpc++)
@@ -44,7 +64,7 @@ else()
     FetchContent_Declare(
       grpc
       GIT_REPOSITORY https://github.com/grpc/grpc.git
-      GIT_TAG        v1.69.0
+      GIT_TAG        "v${ASTARTE_GRPC_VERSION}"
       GIT_SHALLOW    TRUE
       GIT_PROGRESS   TRUE
       GIT_CONFIG     fetch.parallel=0 submodule.fetchJobs=0

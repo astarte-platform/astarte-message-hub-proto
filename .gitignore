@@ -25,3 +25,6 @@ output/
 
 # CMake build directory
 cmake/
+
+# VSCode config
+.vscode/
