@@ -61,7 +61,7 @@ jobs:
           path: |
             ./grpc/cmake
             ./grpc-install
-          key: grpc-cpp-v${{ env.grpc-version }}
+          key: grpc-cpp-v${{ inputs.grpc-version }}
       - name: Compile from source gRPC
         if: steps.cache-grpc-cpp-restore.outputs.cache-hit != 'true'
         run: |
