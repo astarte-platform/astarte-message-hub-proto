@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Project definition
-project(astarte-msg-hub-proto VERSION 0.7.0 LANGUAGES CXX)
+project(astarte-msg-hub-proto VERSION 0.8.0 LANGUAGES CXX)
 
 # At least C++ 17 is required
 set(CMAKE_CXX_STANDARD 17)
