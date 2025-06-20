@@ -73,7 +73,7 @@ else()
 
     message(STATUS "Fetched gRPC source directory: ${grpc_SOURCE_DIR}")
 
-    set(_GRPC_CPP gRPC::grpc++)
+    set(_GRPC_CPP grpc++)
 
     #if cross-compiling, find host programs
     if(CMAKE_CROSSCOMPILING)
