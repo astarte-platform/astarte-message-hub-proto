@@ -53,7 +53,7 @@ jobs:
           MY_INSTALL_DIR=$PWD/grpc-install
           echo "MY_INSTALL_DIR=$MY_INSTALL_DIR" >> $GITHUB_ENV
           mkdir -p $MY_INSTALL_DIR
-          echo "$MY_INSTALL_DIR" >> "$GITHUB_PATH"
+          echo "$MY_INSTALL_DIR/bin" >> "$GITHUB_PATH"
       - name: Restore cached gRPC build directory
         id: cache-grpc-cpp-restore
         uses: actions/cache/restore@v4
