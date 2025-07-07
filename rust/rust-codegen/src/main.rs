@@ -76,7 +76,7 @@ fn main() -> color_eyre::Result<()> {
         .out_dir(&cli.out)
         .extern_path(".google.protobuf", "::pbjson_types")
         .compile_protos(proto_files, &[proto_dir])
-        .unwrap_or_else(|e| panic!("Failed to compile protos {:?}", e));
+        .unwrap_or_else(|e| panic!("Failed to compile protos {e:?}"));
 
     Ok(())
 }
