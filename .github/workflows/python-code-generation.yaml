@@ -31,10 +31,9 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install Python dependencies
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install termcolor
-        python -m pip install grpcio==1.69.0
-        python -m pip install grpcio-tools==1.69.0
+        python3 --version
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -e ./python[generation]
     - name: Remove old code
       working-directory: ./python
       run: (! test -d ./astarteplatform) || rm -r ./astarteplatform
