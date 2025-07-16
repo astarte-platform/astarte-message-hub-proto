@@ -7,11 +7,6 @@ cmake_minimum_required(VERSION 3.15)
 # Project definition
 project(astarte-msg-hub-proto VERSION 0.8.3 LANGUAGES CXX)
 
-# At least C++ 17 is required
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
 # Setup libraries
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
@@ -173,6 +168,7 @@ foreach(proto_file ${proto_files})
 endforeach()
 
 add_library(astarte_msghub_proto ${_proto_generated_sources})
+target_compile_features(astarte_msghub_proto PUBLIC cxx_std_17)
 
 # Link the library against required dependencies (gRPC, Protobuf, Threads).
 target_link_libraries(astarte_msghub_proto
