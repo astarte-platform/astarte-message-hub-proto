@@ -104,7 +104,7 @@ checksum = "dcfed56ad506cb2c684a14971b8861fdc3baaaae314b9e5f9bb532cbe3ba7a4f"
 
 [[package]]
 name = "astarte-message-hub-proto"
-version = "0.8.3"
+version = "0.8.4"
 dependencies = [
  "chrono",
  "clap",
@@ -122,7 +122,7 @@ dependencies = [
 
 [[package]]
 name = "astarte-message-hub-proto-mock"
-version = "0.8.3"
+version = "0.8.4"
 dependencies = [
  "astarte-message-hub-proto",
  "mockall",

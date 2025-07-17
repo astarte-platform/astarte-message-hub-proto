@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Project definition
-project(astarte-msg-hub-proto VERSION 0.8.3 LANGUAGES CXX)
+project(astarte-msg-hub-proto VERSION 0.8.4 LANGUAGES CXX)
 
 # Setup libraries
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
