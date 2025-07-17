@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.4] - 2025-07-17
+
+### Fixed
+
+- Avoid setting `CMAKE_CXX_STANDARD` and `CMAKE_CXX_STANDARD_REQUIRED` and use
+  `target_compile_features` to specify the minimum required C++ version.
+  [#93](https://github.com/astarte-platform/astarte-message-hub-proto/pull/93)
+
 ## [0.8.3] - 2025-07-08
 
 ### Fixed
