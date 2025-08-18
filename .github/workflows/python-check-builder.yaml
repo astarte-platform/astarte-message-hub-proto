@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Checks
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install dependencies
       run: |
         python3 --version
