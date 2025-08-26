@@ -16,59 +16,48 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 # Project configuration
 option(ASTARTE_USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
-set(DEFAULT_PROTOBUF_VERSION "29.0.0" CACHE STRING "Default version of protobuf.")
-set(DEFAULT_GRPC_VERSION "1.69.0" CACHE STRING "Default version of gRPC.")
 
-if (ASTARTE_USE_SYSTEM_GRPC)
-    if(NOT DEFINED ASTARTE_PROTOBUF_VERSION)
-        set(ASTARTE_PROTOBUF_VERSION "${DEFAULT_PROTOBUF_VERSION}" CACHE STRING "Version of proto buffer to use for Astarte.")
-        message(STATUS "ASTARTE_PROTOBUF_VERSION was not set, defaulting to ${ASTARTE_PROTOBUF_VERSION}")
+if(NOT ASTARTE_USE_SYSTEM_GRPC)
+    set(DEFAULT_GRPC_VERSION "1.69.0" CACHE STRING "Default version of gRPC.")
+
+    if(NOT DEFINED ASTARTE_GRPC_VERSION)
+        set(ASTARTE_GRPC_VERSION "${DEFAULT_GRPC_VERSION}" CACHE STRING "Version of gRPC to use for Astarte.")
+        message(STATUS "ASTARTE_GRPC_VERSION was not set, defaulting to ${ASTARTE_GRPC_VERSION}")
     else()
-        message(STATUS "ASTARTE_PROTOBUF_VERSION set to ${ASTARTE_PROTOBUF_VERSION}")
+        message(STATUS "ASTARTE_GRPC_VERSION set to ${ASTARTE_GRPC_VERSION}")
     endif()
-endif()
 
-if(NOT DEFINED ASTARTE_GRPC_VERSION)
-    set(ASTARTE_GRPC_VERSION "${DEFAULT_GRPC_VERSION}" CACHE STRING "Version of gRPC to use for Astarte.")
-    message(STATUS "ASTARTE_GRPC_VERSION was not set, defaulting to ${ASTARTE_GRPC_VERSION}")
-else()
-    message(STATUS "ASTARTE_GRPC_VERSION set to ${ASTARTE_GRPC_VERSION}")
+    include(FetchContent)
 endif()
-
-include(FetchContent)
 
 # Required settings for windows
 if(MSVC)
     add_definitions(-D_WIN32_WINNT=0x600)
 endif()
 
-# gRPC needs Threads
-find_package(Threads REQUIRED)
-
 if(ASTARTE_USE_SYSTEM_GRPC)
-    # Protobuf
+    # gRPC needs Threads
+    find_package(Threads REQUIRED)
     option(protobuf_MODULE_COMPATIBLE TRUE)
-    find_package(Protobuf ${ASTARTE_PROTOBUF_VERSION} CONFIG REQUIRED)
-    message(STATUS "Using system protobuf ${protobuf_VERSION}")
+    find_package(Protobuf CONFIG REQUIRED)
+    find_package(gRPC CONFIG REQUIRED)
 
     set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
     set(_REFLECTION gRPC::grpc++_reflection)
+    set(_GRPC_CPP gRPC::grpc++)
+
     if(CMAKE_CROSSCOMPILING)
         find_program(_PROTOBUF_PROTOC protoc)
     else()
         set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
     endif()
 
-    # gRPC
-    find_package(gRPC ${ASTARTE_GRPC_VERSION} CONFIG REQUIRED)
-    message(STATUS "Using system gRPC ${gRPC_VERSION}")
-
-    set(_GRPC_CPP gRPC::grpc++)
     if(CMAKE_CROSSCOMPILING)
         find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
     else()
         set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
     endif()
+
 else()
     # Enable installation of dependencies
     set(ABSL_ENABLE_INSTALL ON)
@@ -178,12 +167,11 @@ target_link_libraries(astarte_msghub_proto
         ${_PROTOBUF_LIBPROTOBUF}
 )
 
-# Add include directories for the generated headers and the original proto source directory
+# Add include directories for the generated headers
 target_include_directories(astarte_msghub_proto
     PRIVATE
-        "${_PROTO_GENERATED_OUTPUT_DIR}" # For compiling this library's sources
+        "${_PROTO_GENERATED_OUTPUT_DIR}"
     PUBLIC
-        # For consumers building alongside this project (e.g., via FetchContent)
         "$<BUILD_INTERFACE:${_PROTO_GENERATED_OUTPUT_DIR}>"
 )
 
