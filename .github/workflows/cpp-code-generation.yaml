@@ -59,19 +59,19 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            ./grpc/cmake
+            ./grpc/build
             ./grpc-install
           key: grpc-cpp-v${{ inputs.grpc-version }}
       - name: Compile from source gRPC
         if: steps.cache-grpc-cpp-restore.outputs.cache-hit != 'true'
         run: |
-          mkdir ./grpc/cmake/build
-          pushd ./grpc/cmake/build
+          mkdir ./grpc/build
+          pushd ./grpc/build
           cmake -DgRPC_INSTALL=ON \
                 -DgRPC_BUILD_TESTS=OFF \
                 -DCMAKE_CXX_STANDARD=17 \
                 -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR \
-                ../..
+                ..
           make -j $(nproc)
           make install
           popd
@@ -81,7 +81,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            ./grpc/cmake
+            ./grpc/build
             ./grpc-install
           key: ${{ steps.cache-grpc-cpp-restore.outputs.cache-primary-key }}
       - name: Generate code
