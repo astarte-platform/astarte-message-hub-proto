@@ -39,7 +39,7 @@ jobs:
       - name: Install gRPC dependencies
         run: |
           sudo apt install -y cmake build-essential autoconf libtool pkg-config ninja-build
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: astarte-message-hub-proto
       - name: Install gRPC dependencies
