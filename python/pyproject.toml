@@ -23,7 +23,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "astarte_message_hub_proto"
 description="Astarte message hub protocol buffers for Python"
-version = "0.7.0"
+version = "0.8.4"
 authors = [
     { name = "Simone Orru", email = "simone.orru@secomind.com" }
 ]
@@ -33,9 +33,10 @@ requires-python = ">=3.8"
 classifiers = [
     "License :: OSI Approved :: Apache Software License"
 ]
-dependencies = ["grpcio", "protobuf"]
+dependencies = ["grpcio==1.69.0", "protobuf==5.29.5"]
 
 [project.optional-dependencies]
+generation = ["grpcio-tools==1.69.0", "termcolor==3.1.0"]
 static = ["black", "pylint", "termcolor"]
 
 [project.urls]
