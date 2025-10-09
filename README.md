@@ -17,11 +17,13 @@ generated.
 Since different languages may use different gRPC implementations and protobuf compilers here is
 a table with the used versions.
 
-| Language | gRPC library                                 | gRPC library version | Protoc version |
+| Language | gRPC library                                 | gRPC library version | protoc version |
 |----------|----------------------------------------------|----------------------|----------------|
 | Rust     | [tonic](https://docs.rs/tonic/latest/tonic/) | v0.12.3              | 29.3           |
 | Python   | [grpc](https://github.com/grpc/grpc)         | v1.69.0              | 29.0           |
-| C++      | [grpc](https://github.com/grpc/grpc)         | v1.69.0              | 29.0           |
+| C++      | [grpc](https://github.com/grpc/grpc)         | Default v1.69.0      | Default 29.0   |
+
+**N.B.** For C++ the version of gRPC and protoc is user configurable through CMake options.
 
 ## Code generation
 

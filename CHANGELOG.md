@@ -7,6 +7,42 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Removed
+
+- For C++ no check is performed on the versions of the gRPC and protobuffer libraries when
+  using the system libraries through CMake find_package.
+- Removing unused  `ASTARTE_PROTOBUF_VERSION` CMake variable 
+
+## [0.8.4] - 2025-07-17
+
+### Fixed
+
+- Avoid setting `CMAKE_CXX_STANDARD` and `CMAKE_CXX_STANDARD_REQUIRED` and use
+  `target_compile_features` to specify the minimum required C++ version.
+  [#93](https://github.com/astarte-platform/astarte-message-hub-proto/pull/93)
+
+## [0.8.3] - 2025-07-08
+
+### Fixed
+
+- Lock the project's Python dependencies to the versions used by the proto stubs.
+  [#90](https://github.com/astarte-platform/astarte-message-hub-proto/pull/90)
+
+## [0.8.2] - 2025-06-26
+
+### Changed
+
+- CMake minor corrections in the C++ project for library installation.
+
+## [0.8.1] - 2025-06-20
+
+### Added
+
+- CMake install steps have been added to the C++ project.
+- CMake steps for pkg-conf have been added to the C++ project.
+
+## [0.8.0] - 2025-06-17
+
 ### Added
 
 - Get properties API. [astarte-device-sdk-rust#290](https://github.com/astarte-platform/astarte-device-sdk-rust/issues/290)

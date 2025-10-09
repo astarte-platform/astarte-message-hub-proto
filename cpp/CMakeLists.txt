@@ -5,55 +5,60 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Project definition
-project(astarte-msg-hub-proto VERSION 0.7.0 LANGUAGES CXX)
+project(astarte-msg-hub-proto VERSION 0.8.4 LANGUAGES CXX)
 
-# At least C++ 17 is required
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Setup libraries
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 # Project configuration
 option(ASTARTE_USE_SYSTEM_GRPC "Use system installed gRPC" OFF)
-set(DEFAULT_PROTOBUF_VERSION "29.0.0" CACHE STRING "Default version of protobuf.")
-set(DEFAULT_GRPC_VERSION "1.69.0" CACHE STRING "Default version of gRPC.")
 
-if (ASTARTE_USE_SYSTEM_GRPC)
-    if(NOT DEFINED ASTARTE_PROTOBUF_VERSION)
-        set(ASTARTE_PROTOBUF_VERSION "${DEFAULT_PROTOBUF_VERSION}" CACHE STRING "Version of proto buffer to use for Astarte.")
-        message(STATUS "ASTARTE_PROTOBUF_VERSION was not set, defaulting to ${ASTARTE_PROTOBUF_VERSION}")
+if(NOT ASTARTE_USE_SYSTEM_GRPC)
+    set(DEFAULT_GRPC_VERSION "1.69.0" CACHE STRING "Default version of gRPC.")
+
+    if(NOT DEFINED ASTARTE_GRPC_VERSION)
+        set(ASTARTE_GRPC_VERSION "${DEFAULT_GRPC_VERSION}" CACHE STRING "Version of gRPC to use for Astarte.")
+        message(STATUS "ASTARTE_GRPC_VERSION was not set, defaulting to ${ASTARTE_GRPC_VERSION}")
     else()
-        message(STATUS "ASTARTE_PROTOBUF_VERSION set to ${ASTARTE_PROTOBUF_VERSION}")
+        message(STATUS "ASTARTE_GRPC_VERSION set to ${ASTARTE_GRPC_VERSION}")
     endif()
+
+    include(FetchContent)
 endif()
 
-if(NOT DEFINED ASTARTE_GRPC_VERSION)
-    set(ASTARTE_GRPC_VERSION "${DEFAULT_GRPC_VERSION}" CACHE STRING "Version of gRPC to use for Astarte.")
-    message(STATUS "ASTARTE_GRPC_VERSION was not set, defaulting to ${ASTARTE_GRPC_VERSION}")
-else()
-    message(STATUS "ASTARTE_GRPC_VERSION set to ${ASTARTE_GRPC_VERSION}")
+# Required settings for windows
+if(MSVC)
+    add_definitions(-D_WIN32_WINNT=0x600)
 endif()
-
-include(FetchContent)
 
 if(ASTARTE_USE_SYSTEM_GRPC)
-    # Protobuf
-    find_package(Protobuf ${ASTARTE_PROTOBUF_VERSION} CONFIG REQUIRED)
-    message(STATUS "Using system protobuf ${protobuf_VERSION}")
-    set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
-
-    # gRPC
-    find_package(gRPC ${ASTARTE_GRPC_VERSION} CONFIG REQUIRED)
-    message(STATUS "Using system gRPC ${gRPC_VERSION}")
-    set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
-    set(_GRPC_CPP gRPC::grpc++)
-else()
-    # Required settings for windows
-    if(MSVC)
-      add_definitions(-D_WIN32_WINNT=0x600)
-    endif()
-
     # gRPC needs Threads
     find_package(Threads REQUIRED)
+    option(protobuf_MODULE_COMPATIBLE TRUE)
+    find_package(Protobuf CONFIG REQUIRED)
+    find_package(gRPC CONFIG REQUIRED)
 
+    set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
+    set(_REFLECTION gRPC::grpc++_reflection)
+    set(_GRPC_CPP gRPC::grpc++)
+
+    if(CMAKE_CROSSCOMPILING)
+        find_program(_PROTOBUF_PROTOC protoc)
+    else()
+        set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
+    endif()
+
+    if(CMAKE_CROSSCOMPILING)
+        find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
+    else()
+        set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
+    endif()
+
+else()
     # Enable installation of dependencies
     set(ABSL_ENABLE_INSTALL ON)
     set(ABSL_PROPAGATE_CXX_STD ON)
@@ -73,9 +78,17 @@ else()
 
     message(STATUS "Fetched gRPC source directory: ${grpc_SOURCE_DIR}")
 
+    # Since FetchContent uses add_subdirectory under the hood, we can use
+    # the grpc targets directly from this build.
+    set(_PROTOBUF_LIBPROTOBUF libprotobuf)
+    set(_REFLECTION grpc++_reflection)
     set(_PROTOBUF_PROTOC $<TARGET_FILE:protoc>)
-    set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:grpc_cpp_plugin>)
     set(_GRPC_CPP grpc++)
+    if(CMAKE_CROSSCOMPILING)
+        find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
+    else()
+        set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:grpc_cpp_plugin>)
+    endif()
 
     # Define the include folder for standard protobuf types (any.proto, etc.)
     set(_PROTOBUF_STANDARD_INCLUDE_DIR "${grpc_SOURCE_DIR}/third_party/protobuf/src")
@@ -143,18 +156,59 @@ foreach(proto_file ${proto_files})
     )
 endforeach()
 
-add_library(astarte_msghub_proto STATIC ${_proto_generated_sources})
+add_library(astarte_msghub_proto ${_proto_generated_sources})
+target_compile_features(astarte_msghub_proto PUBLIC cxx_std_17)
 
 # Link the library against required dependencies (gRPC, Protobuf, Threads).
 target_link_libraries(astarte_msghub_proto
-    PUBLIC ${_GRPC_CPP}
+    PUBLIC
+        ${_GRPC_CPP}
+        ${_REFLECTION}
+        ${_PROTOBUF_LIBPROTOBUF}
 )
 
-# Add include directories for the generated headers and the original proto source directory
+# Add include directories for the generated headers
 target_include_directories(astarte_msghub_proto
     PRIVATE
-        "${_PROTO_GENERATED_OUTPUT_DIR}" # For compiling this library's sources
+        "${_PROTO_GENERATED_OUTPUT_DIR}"
     PUBLIC
-        # For consumers building alongside this project (e.g., via FetchContent)
         "$<BUILD_INTERFACE:${_PROTO_GENERATED_OUTPUT_DIR}>"
 )
+
+set_target_properties(astarte_msghub_proto
+    PROPERTIES
+        PUBLIC_HEADER "$<BUILD_INTERFACE:${_PROTO_GENERATED_OUTPUT_DIR}>"
+        POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS}
+)
+
+
+include(GNUInstallDirs)
+
+install(
+    TARGETS astarte_msghub_proto
+    EXPORT astarte_msghub_proto
+    LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/astarte_msghub_proto
+)
+
+# create pkg-conf .pc for astarte_device_sdk
+set(PC_NAME "astarte_msghub_proto")
+set(PC_DESCRIPTION "Astarte MessageHub Proto")
+set(PC_VERSION ${PROJECT_VERSION})
+set(PC_REQUIRES "grpc++ protobuf")
+set(PC_REQUIRES_PRIVATE "")
+set(PC_LIB "-lastarte_msghub_proto")
+set(PC_LIBS_PRIVATE "")
+configure_file(
+    pkg-config-template.pc.in
+    astarte_msghub_proto.pc
+    @ONLY
+)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/astarte_msghub_proto.pc  DESTINATION lib/pkgconfig)

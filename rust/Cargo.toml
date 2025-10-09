@@ -13,7 +13,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.7.0"
+version = "0.8.4"
 edition = "2021"
 license = "Apache-2.0"
 rust-version = "1.78"
@@ -22,7 +22,7 @@ repository = "https://github.com/astarte-platform/astarte-message-hub-proto"
 readme = "README.md"
 
 [workspace.dependencies]
-astarte-message-hub-proto = { path = "./astarte-message-hub-proto", version = "=0.7.0" }
+astarte-message-hub-proto = { path = "./astarte-message-hub-proto", version = "=0.8.4" }
 chrono = "0.4.0"
 clap = "4.5.31"
 color-eyre = "0.6.3"

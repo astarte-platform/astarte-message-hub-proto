@@ -94,7 +94,7 @@ async fn main() {
         info!("Waiting for messages from the message hub.");
 
         while let Some(astarte_message) = stream.message().await.unwrap() {
-            println!("Received AstarteMessage = {:?}", astarte_message);
+            println!("Received AstarteMessage = {astarte_message:?}");
         }
 
         info!("Done receiving messages, closing the connection.");
@@ -140,7 +140,7 @@ async fn main() {
 
     match res {
         (Ok(_), Ok(_)) => (),
-        (Err(e), Ok(_)) | (Ok(_), Err(e)) => panic!("Error: {}", e),
-        (Err(e1), Err(e2)) => panic!("Error:\n\t{}\n\t{}", e1, e2),
+        (Err(e), Ok(_)) | (Ok(_), Err(e)) => panic!("Error: {e}"),
+        (Err(e1), Err(e2)) => panic!("Error:\n\t{e1}\n\t{e2}"),
     }
 }
