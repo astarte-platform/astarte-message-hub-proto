@@ -51,7 +51,7 @@ RUST_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/rust_codegen.sh
 PYTHON_LANG=$(PYTHON_BUILD_DIR)/astarteplatform
 PYTHON_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/python_codegen.sh
 
-CPP_CMAKE=$(CPP_LANG_DIR)/cmake
+CPP_CMAKE=$(CPP_LANG_DIR)/build
 CPP_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/cpp_codegen.sh
 
 # This is our default rule, so must come first

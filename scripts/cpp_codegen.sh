@@ -9,14 +9,14 @@ codegen() {
     PROTO_DIR=$1
     PROJECT_DIR=$2
 
-    mkdir -p $PROJECT_DIR/cmake/build
-    pushd $PROJECT_DIR/cmake/build
+    mkdir -p $PROJECT_DIR/build
+    pushd $PROJECT_DIR/build
     # TODO: remove CMake policy when updating gRPC
     cmake \
         -DPROTO_FOLDER:STRING=$PROTO_DIR \
         -DCMAKE_POLICY_VERSION_MINIMUM=3.15 \
         -DASTARTE_USE_SYSTEM_GRPC=ON \
-        ../..
+        ..
     cmake --build . --target astarte_msghub_proto -j $(nproc --all)
     popd
 
