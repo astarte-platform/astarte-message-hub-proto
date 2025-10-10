@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.23)
 
 # Project definition
-project(AstarteMsghubProto VERSION 0.8.4 LANGUAGES CXX)
+project(AstarteMsghubProto VERSION 0.9.0 LANGUAGES CXX)
 
 # Setup library options
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
