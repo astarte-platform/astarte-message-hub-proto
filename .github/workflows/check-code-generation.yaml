@@ -30,7 +30,7 @@ jobs:
     name: Check generated code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v5
       - name: Check the Rust generated code
