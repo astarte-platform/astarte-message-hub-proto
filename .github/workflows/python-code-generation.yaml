@@ -41,7 +41,7 @@ jobs:
       working-directory: ./python
       run: python ./protoc.py
     - name: Upload artifact with generated code
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: python-dist
         path: ./python/astarteplatform
