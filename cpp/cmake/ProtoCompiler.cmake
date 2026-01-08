@@ -14,10 +14,8 @@ include_guard()
 #   OUTPUT_DIR (required)             - The directory where generated files will be placed.
 #   PROTOC_EXECUTABLE (required)      - The path to the protoc compiler.
 #   PLUGIN_EXECUTABLE (required)      - The path to the grpc_cpp_plugin.
-#   GENERATED_SRCS_VAR (required)     - The name of the variable in the parent scope to which
-#                                       the generated .cc file paths will be appended.
-#   GENERATED_HDRS_VAR (required)     - The name of the variable in the parent scope to which
-#                                       the generated .h file paths will be appended.
+#   GENERATED_SRCS_VAR (required)     - The variable name to append .cc paths to.
+#   GENERATED_HDRS_VAR (required)     - The variable name to append .h paths to.
 #   STANDARD_INCLUDE_DIR (optional)   - Path to Google's standard protobuf includes.
 #]]
 function(compile_proto_file)
@@ -30,7 +28,8 @@ function(compile_proto_file)
         PLUGIN_EXECUTABLE
         GENERATED_SRCS_VAR
         GENERATED_HDRS_VAR
-        STANDARD_INCLUDE_DIR)
+        STANDARD_INCLUDE_DIR
+    )
     set(multi_value_args "")
     cmake_parse_arguments(ARGS "${options}" "${one_value_args}" "${multi_value_args}" ${ARGN})
 
@@ -45,9 +44,13 @@ function(compile_proto_file)
     set(_OUT_GRPC_SRC "${ARGS_OUTPUT_DIR}/${_PROTO_REL_DIR}/${_PROTO_FILE_NAME}.grpc.pb.cc")
     set(_OUT_GRPC_HDR "${ARGS_OUTPUT_DIR}/${_PROTO_REL_DIR}/${_PROTO_FILE_NAME}.grpc.pb.h")
 
+    # Define the dependency file path (Makefiles format)
+    set(_DEP_FILE "${ARGS_OUTPUT_DIR}/${_PROTO_REL_DIR}/${_PROTO_FILE_NAME}.d")
+
     # Append the generated source/header files to the variable specified by the caller
     list(APPEND ${ARGS_GENERATED_SRCS_VAR} ${_OUT_PROTO_SRC} ${_OUT_GRPC_SRC})
     set(${ARGS_GENERATED_SRCS_VAR} "${${ARGS_GENERATED_SRCS_VAR}}" PARENT_SCOPE)
+
     list(APPEND ${ARGS_GENERATED_HDRS_VAR} ${_OUT_PROTO_HDR} ${_OUT_GRPC_HDR})
     set(${ARGS_GENERATED_HDRS_VAR} "${${ARGS_GENERATED_HDRS_VAR}}" PARENT_SCOPE)
 
@@ -57,27 +60,30 @@ function(compile_proto_file)
     list(APPEND _PROTOC_CMD_ARGS --cpp_out "${ARGS_OUTPUT_DIR}")
     list(APPEND _PROTOC_CMD_ARGS -I "${ARGS_BASE_DIR}")
 
+    # Tell protoc to generate a dependency file in Makefile format
+    list(APPEND _PROTOC_CMD_ARGS --dependency_out "${_DEP_FILE}")
+
     if(ARGS_STANDARD_INCLUDE_DIR)
         if(IS_DIRECTORY "${ARGS_STANDARD_INCLUDE_DIR}")
             list(APPEND _PROTOC_CMD_ARGS -I "${ARGS_STANDARD_INCLUDE_DIR}")
         else()
-            message(WARNING "Protobuf standard include directory (for protoc) not found: "
-                    "${_PROTOBUF_STANDARD_INCLUDE_DIR}. "
-                    "Standard imports in .proto files might fail.")
+            message(
+                WARNING
+                "Protobuf standard include directory not found: ${ARGS_STANDARD_INCLUDE_DIR}"
+            )
         endif()
     endif()
 
-    list(APPEND _PROTOC_CMD_ARGS --plugin=protoc-gen-grpc="${ARGS_PLUGIN_EXECUTABLE}")
+    list(APPEND _PROTOC_CMD_ARGS --plugin=protoc-gen-grpc=${ARGS_PLUGIN_EXECUTABLE})
     list(APPEND _PROTOC_CMD_ARGS "${ARGS_PROTO_FILE}")
 
     # Create the custom command to generate the files
     add_custom_command(
         OUTPUT "${_OUT_PROTO_SRC}" "${_OUT_PROTO_HDR}" "${_OUT_GRPC_SRC}" "${_OUT_GRPC_HDR}"
-        COMMAND ${ARGS_PROTOC_EXECUTABLE}
-        ARGS ${_PROTOC_CMD_ARGS}
-        DEPENDS "${ARGS_PROTO_FILE}"
-                "${ARGS_PROTOC_EXECUTABLE}"
-                "${ARGS_PLUGIN_EXECUTABLE}"
+        COMMAND ${ARGS_PROTOC_EXECUTABLE} ${_PROTOC_CMD_ARGS}
+        DEPENDS "${ARGS_PROTO_FILE}" "${ARGS_PROTOC_EXECUTABLE}" "${ARGS_PLUGIN_EXECUTABLE}"
+        DEPFILE "${_DEP_FILE}"
+        VERBATIM
         COMMENT "Generating C++ and gRPC files from ${_PROTO_FILE_NAME}.proto"
     )
 endfunction()
