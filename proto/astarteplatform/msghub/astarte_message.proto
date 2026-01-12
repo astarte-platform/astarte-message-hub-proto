@@ -22,30 +22,29 @@ syntax = "proto3";
 
 package astarteplatform.msghub;
 
-import "google/protobuf/timestamp.proto";
-
 import "astarteplatform/msghub/astarte_data.proto";
 import "astarteplatform/msghub/message_hub_error.proto";
+import "google/protobuf/timestamp.proto";
 
 /* MessageHubEvent is a type of message for returning and propagating errors.
-* It is an enum with the variants, AstarteMessage(message), representing success and
-* containing an astarte message value, and MessageHubError(E) representing error and
-* containing an error value.
-*/
-message MessageHubEvent{
+ * It is an enum with the variants, AstarteMessage(message), representing success and
+ * containing an astarte message value, and MessageHubError(E) representing error and
+ * containing an error value.
+ */
+message MessageHubEvent {
   oneof event {
-    AstarteMessage message = 1;  // A message that contains data sent from Astarte.
-    MessageHubError error = 2;   // A message that contains a specific Astarte Message Hub error.
+    AstarteMessage message = 1; // A message that contains data sent from Astarte.
+    MessageHubError error = 2; // A message that contains a specific Astarte Message Hub error.
   }
 }
 
 /* Astarte message to be used when sending data to Astarte. */
-message AstarteMessage{
-  string interface_name = 1;                        // Name of the interface to send data on.
-  string path = 2;                                  // Endpoint to send the data on.
-  oneof payload {                                   // Content of the message.
+message AstarteMessage {
+  string interface_name = 1; // Name of the interface to send data on.
+  string path = 2; // Endpoint to send the data on.
+  oneof payload { // Content of the message.
     AstarteDatastreamIndividual datastream_individual = 3; // An individual data type.
-    AstarteDatastreamObject datastream_object = 4;          // An object data type.
-    AstartePropertyIndividual property_individual = 5;      // A property data type.
+    AstarteDatastreamObject datastream_object = 4; // An object data type.
+    AstartePropertyIndividual property_individual = 5; // A property data type.
   }
 }

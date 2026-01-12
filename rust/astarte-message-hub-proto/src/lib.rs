@@ -21,7 +21,6 @@
 
 mod proto_message_hub;
 pub use crate::proto_message_hub::*;
-pub use pbjson_types;
 pub use prost;
 pub use serde;
 pub use serde_json;

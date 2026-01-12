@@ -52,7 +52,7 @@ fn main() -> color_eyre::Result<()> {
         )
     })?;
 
-    let mut config = tonic_build::configure();
+    let mut config = tonic_prost_build::configure();
 
     let proto_files = &[
         proto_dir.join("astarteplatform/msghub/message_hub_service.proto"),
@@ -71,12 +71,10 @@ fn main() -> color_eyre::Result<()> {
     }
 
     config
-        .compile_well_known_types(true)
         .emit_rerun_if_changed(false)
         .out_dir(&cli.out)
-        .extern_path(".google.protobuf", "::pbjson_types")
         .compile_protos(proto_files, &[proto_dir])
-        .unwrap_or_else(|e| panic!("Failed to compile protos {e:?}"));
+        .wrap_err("couldn't compile protos")?;
 
     Ok(())
 }

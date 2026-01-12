@@ -5,13 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- (rust) Bump the MSRV to 1.85 and the edition to 2024. [#120]
+- (rust) Bump to the last major all the dependencies, in particular tonic to 0.14. [#120]
+
+[#120]: https://github.com/astarte-platform/astarte-message-hub-proto/pull/120
+
 ## [0.9.0] - 2025-10-10
 
 ### Removed
 
-- For C++ no check is performed on the versions of the gRPC and protobuffer libraries when
-  using the system libraries through CMake find_package.
-- Removing unused  `ASTARTE_PROTOBUF_VERSION` CMake variable
+- For C++ no check is performed on the versions of the gRPC and protobuffer libraries when using the
+  system libraries through CMake find_package.
+- Removing unused `ASTARTE_PROTOBUF_VERSION` CMake variable
 - Compatibility with CMake versions older than `v3.23`.
 
 ## [0.8.4] - 2025-07-17
@@ -46,7 +55,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Get properties API. [astarte-device-sdk-rust#290](https://github.com/astarte-platform/astarte-device-sdk-rust/issues/290)
+- Get properties API.
+  [astarte-device-sdk-rust#290](https://github.com/astarte-platform/astarte-device-sdk-rust/issues/290)
 - Support for C++.
 
 ### Changed
@@ -59,17 +69,22 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Dynamic introspection API. [#46](https://github.com/astarte-platform/astarte-message-hub-proto/pull/46)
-- Add `grpc_socket_host` optional field to the `ConfigMessage` to configure the server IP to bind. [#57]
+- Dynamic introspection API.
+  [#46](https://github.com/astarte-platform/astarte-message-hub-proto/pull/46)
+- Add `grpc_socket_host` optional field to the `ConfigMessage` to configure the server IP to bind.
+  [#57]
 
 ### Changed
 
-- Send Empty parameter instead of Node in the Detach rpc. [#54](https://github.com/astarte-platform/astarte-message-hub-proto/pull/54)
+- Send Empty parameter instead of Node in the Detach rpc.
+  [#54](https://github.com/astarte-platform/astarte-message-hub-proto/pull/54)
 - Make the `grpc_socket_port` field optional for the `ConfigMessage`, the default port will be
   `50051` on the server. [#57]
-- The Attach rpc now returns a `MessageHubEvent`, which can either be an error or an Astarte message. [#56](https://github.com/astarte-platform/astarte-message-hub-proto/pull/56)
-- The information about the Node sent in an Attach rpc now contains only the node introspection, since
-  the Node ID is sent inside the rpc metadata. [#58](https://github.com/astarte-platform/astarte-message-hub-proto/pull/58)
+- The Attach rpc now returns a `MessageHubEvent`, which can either be an error or an Astarte
+  message. [#56](https://github.com/astarte-platform/astarte-message-hub-proto/pull/56)
+- The information about the Node sent in an Attach rpc now contains only the node introspection,
+  since the Node ID is sent inside the rpc metadata.
+  [#58](https://github.com/astarte-platform/astarte-message-hub-proto/pull/58)
 
 [#57]: https://github.com/astarte-platform/astarte-message-hub-proto/pull/57
 

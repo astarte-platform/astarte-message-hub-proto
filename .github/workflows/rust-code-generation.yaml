@@ -26,7 +26,7 @@ on:
 
 env:
   PB_REL: https://github.com/protocolbuffers/protobuf/releases
-  PB_VER: "29.3"
+  PB_VER: "33.3"
 
 jobs:
   rust_build:

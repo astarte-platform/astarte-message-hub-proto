@@ -56,7 +56,7 @@ CPP_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/cpp_codegen.sh
 
 # This is our default rule, so must come first
 .PHONY: all
-all : $(RUST_LANG) $(PYTHON_LANG) $(CPP_CMAKE)
+all: $(RUST_LANG) $(PYTHON_LANG) $(CPP_CMAKE)
 
 $(RUST_LANG): $(FILES) $(RUST_CODEGEN_SCRIPT)
 		mkdir -p $(RUST_BUILD_DIR)
@@ -91,7 +91,7 @@ python-install: $(PYTHON_LANG)
 		$(PYTHON_CODEGEN_SCRIPT) install_code $(PYTHON_BUILD_DIR) $(PYTHON_LANG_DIR)
 
 .PHONY: install
-install: rust-install python-install cpp-install
+install: rust-install python-install
 
 .PHONY: clean
 clean: rust-dirclean python-dirclean cpp-dirclean

@@ -34,12 +34,12 @@ mock! {
 
 mock! {
     pub MessageHubClient<T: 'static> {
-        pub fn with_interceptor<F>(
+        pub fn with_interceptor<I>(
             inner: T,
-            interceptor: F,
-        ) -> MockMessageHubClient<tonic::service::interceptor::InterceptedService<T, F>>
+            interceptor: I,
+        ) -> MockMessageHubClient<tonic::service::interceptor::InterceptedService<T, I>>
         where
-            F: 'static;
+            I: 'static;
 
         pub async fn attach<R>(
             &mut self,
@@ -54,28 +54,28 @@ mock! {
         pub async fn send<R>(
             &mut self,
             request: R,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>
         where
             R: tonic::IntoRequest<astarte_message_hub_proto::AstarteMessage> + 'static;
 
         pub async fn detach<R>(
             &mut self,
             request: R,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>
         where
-            R: tonic::IntoRequest<::pbjson_types::Empty> + 'static;
+            R: tonic::IntoRequest<()> + 'static;
 
         pub async fn add_interfaces<R>(
             &mut self,
             request: R,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>
         where
             R: tonic::IntoRequest<astarte_message_hub_proto::InterfacesJson> + 'static;
 
         pub async fn remove_interfaces<R>(
             &mut self,
             request: R,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>
         where
             R: tonic::IntoRequest<astarte_message_hub_proto::InterfacesName> + 'static;
 

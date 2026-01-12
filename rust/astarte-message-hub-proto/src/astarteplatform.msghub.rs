@@ -8,35 +8,35 @@ pub struct AstarteDoubleArray {
 }
 /// An array of int32 for transmission with protobuf.
 /// To be used nested inside an `AstarteData`.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AstarteIntegerArray {
     #[prost(int32, repeated, tag = "1")]
     pub values: ::prost::alloc::vec::Vec<i32>,
 }
 /// An array of booleans for transmission with protobuf.
 /// To be used nested inside an `AstarteData`.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AstarteBooleanArray {
     #[prost(bool, repeated, tag = "1")]
     pub values: ::prost::alloc::vec::Vec<bool>,
 }
 /// An array of int64 for transmission with protobuf.
 /// To be used nested inside an `AstarteData`.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AstarteLongIntegerArray {
     #[prost(int64, repeated, tag = "1")]
     pub values: ::prost::alloc::vec::Vec<i64>,
 }
 /// An array of strings for transmission with protobuf.
 /// To be used nested inside an `AstarteData`.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AstarteStringArray {
     #[prost(string, repeated, tag = "1")]
     pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// An array of bytes for transmission with protobuf.
 /// To be used nested inside an `AstarteData`.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AstarteBinaryBlobArray {
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub values: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
@@ -46,7 +46,7 @@ pub struct AstarteBinaryBlobArray {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AstarteDateTimeArray {
     #[prost(message, repeated, tag = "1")]
-    pub values: ::prost::alloc::vec::Vec<::pbjson_types::Timestamp>,
+    pub values: ::prost::alloc::vec::Vec<::prost_types::Timestamp>,
 }
 /// A base Astarte data type for transmission with protobuf.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -74,7 +74,7 @@ pub mod astarte_data {
         #[prost(bytes, tag = "6")]
         BinaryBlob(::prost::alloc::vec::Vec<u8>),
         #[prost(message, tag = "7")]
-        DateTime(::pbjson_types::Timestamp),
+        DateTime(::prost_types::Timestamp),
         #[prost(message, tag = "8")]
         DoubleArray(super::AstarteDoubleArray),
         #[prost(message, tag = "9")]
@@ -99,7 +99,7 @@ pub struct AstarteDatastreamIndividual {
     pub data: ::core::option::Option<AstarteData>,
     /// Timestamp of the message.
     #[prost(message, optional, tag = "2")]
-    pub timestamp: ::core::option::Option<::pbjson_types::Timestamp>,
+    pub timestamp: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// A datastream object data type.
 /// To be used nested inside an `AstarteMessage`.
@@ -109,7 +109,7 @@ pub struct AstarteDatastreamObject {
     pub data: ::std::collections::HashMap<::prost::alloc::string::String, AstarteData>,
     /// Timestamp of the message.
     #[prost(message, optional, tag = "2")]
-    pub timestamp: ::core::option::Option<::pbjson_types::Timestamp>,
+    pub timestamp: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// A property individual data type.
 /// To be used nested inside an `AstarteMessage`.
@@ -120,7 +120,7 @@ pub struct AstartePropertyIndividual {
     pub data: ::core::option::Option<AstarteData>,
 }
 /// MessageHub error type
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MessageHubError {
     /// Human-readable string describing the error.
     #[prost(string, tag = "1")]
@@ -179,22 +179,15 @@ pub mod astarte_message {
         PropertyIndividual(super::AstartePropertyIndividual),
     }
 }
-/// This message defines a node to be attached to the Astarte message hub.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Node {
-    /// Array of string representing all .json interface files of the node.
-    #[prost(string, repeated, tag = "2")]
-    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
 /// This message defines a list of json interfaces to be added/removed to the Astarte message hub.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InterfacesJson {
     /// An array of json interfaces.
     #[prost(string, repeated, tag = "1")]
     pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// This message defines a list of interfaces' names to be removed from the Astarte message hub.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InterfacesName {
     /// An array of interfaces' names
     #[prost(string, repeated, tag = "1")]
@@ -202,7 +195,7 @@ pub struct InterfacesName {
 }
 /// This message is the request to the GetProperty rpc.
 /// it represents an Astarte interface name
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InterfaceName {
     /// The name of the interface
     #[prost(string, tag = "1")]
@@ -235,6 +228,13 @@ impl Ownership {
         }
     }
 }
+/// This message defines a node to be attached to the Astarte message hub.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct Node {
+    /// Array of string representing all .json interface files of the node.
+    #[prost(string, repeated, tag = "2")]
+    pub interfaces_json: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// A message containing all the properties values and information associated to a given astarte interface.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
@@ -264,14 +264,14 @@ pub struct StoredProperties {
 /// This message is the request to the GetAllProperties rpc.
 /// If the ownership is not specified, all the interfaces are retrieved, both device and server owned.
 /// Otherwise, only the interfaces with the specified interfaces are retrieved.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PropertyFilter {
     /// Optional field representing the ownership of the interface to retrieve.
     #[prost(enumeration = "Ownership", optional, tag = "1")]
     pub ownership: ::core::option::Option<i32>,
 }
 /// This message is the request for a single property identified by interface name and path.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PropertyIdentifier {
     /// Interface name.
     #[prost(string, tag = "1")]
@@ -308,7 +308,7 @@ pub mod message_hub_client {
     }
     impl<T> MessageHubClient<T>
     where
-        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T: tonic::client::GrpcService<tonic::body::Body>,
         T::Error: Into<StdError>,
         T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
         <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
@@ -329,13 +329,13 @@ pub mod message_hub_client {
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
             T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
+                http::Request<tonic::body::Body>,
                 Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
                 >,
             >,
             <T as tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
+                http::Request<tonic::body::Body>,
             >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             MessageHubClient::new(InterceptedService::new(inner, interceptor))
@@ -388,7 +388,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/Attach",
             );
@@ -401,7 +401,7 @@ pub mod message_hub_client {
         pub async fn send(
             &mut self,
             request: impl tonic::IntoRequest<super::AstarteMessage>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -410,7 +410,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/Send",
             );
@@ -422,8 +422,8 @@ pub mod message_hub_client {
         /// This function should be used to detach a node from an instance of the Astarte message hub.
         pub async fn detach(
             &mut self,
-            request: impl tonic::IntoRequest<::pbjson_types::Empty>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+            request: impl tonic::IntoRequest<()>,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -432,7 +432,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/Detach",
             );
@@ -445,7 +445,7 @@ pub mod message_hub_client {
         pub async fn add_interfaces(
             &mut self,
             request: impl tonic::IntoRequest<super::InterfacesJson>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -454,7 +454,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/AddInterfaces",
             );
@@ -469,7 +469,7 @@ pub mod message_hub_client {
         pub async fn remove_interfaces(
             &mut self,
             request: impl tonic::IntoRequest<super::InterfacesName>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -478,7 +478,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/RemoveInterfaces",
             );
@@ -508,7 +508,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/GetProperties",
             );
@@ -535,7 +535,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/GetAllProperties",
             );
@@ -565,7 +565,7 @@ pub mod message_hub_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHub/GetProperty",
             );
@@ -607,22 +607,22 @@ pub mod message_hub_server {
         async fn send(
             &self,
             request: tonic::Request<super::AstarteMessage>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
         /// This function should be used to detach a node from an instance of the Astarte message hub.
         async fn detach(
             &self,
-            request: tonic::Request<::pbjson_types::Empty>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+            request: tonic::Request<()>,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
         /// This function should be used to add one or more interfaces to an instance of the Astarte message hub.
         async fn add_interfaces(
             &self,
             request: tonic::Request<super::InterfacesJson>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
         /// This function should be used to remove one or more interfaces from an instance of the Astarte message hub.
         async fn remove_interfaces(
             &self,
             request: tonic::Request<super::InterfacesName>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
         /// Get properties associated with the passed interfaces.
         async fn get_properties(
             &self,
@@ -713,7 +713,7 @@ pub mod message_hub_server {
         B: Body + std::marker::Send + 'static,
         B::Error: Into<StdError> + std::marker::Send + 'static,
     {
-        type Response = http::Response<tonic::body::BoxBody>;
+        type Response = http::Response<tonic::body::Body>;
         type Error = std::convert::Infallible;
         type Future = BoxFuture<Self::Response, Self::Error>;
         fn poll_ready(
@@ -755,7 +755,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = AttachSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -776,7 +776,7 @@ pub mod message_hub_server {
                     impl<
                         T: MessageHub,
                     > tonic::server::UnaryService<super::AstarteMessage> for SendSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = ();
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -799,7 +799,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = SendSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -817,19 +817,14 @@ pub mod message_hub_server {
                 "/astarteplatform.msghub.MessageHub/Detach" => {
                     #[allow(non_camel_case_types)]
                     struct DetachSvc<T: MessageHub>(pub Arc<T>);
-                    impl<
-                        T: MessageHub,
-                    > tonic::server::UnaryService<::pbjson_types::Empty>
+                    impl<T: MessageHub> tonic::server::UnaryService<()>
                     for DetachSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = ();
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<::pbjson_types::Empty>,
-                        ) -> Self::Future {
+                        fn call(&mut self, request: tonic::Request<()>) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 <T as MessageHub>::detach(&inner, request).await
@@ -844,7 +839,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = DetachSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -866,7 +861,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::UnaryService<super::InterfacesJson>
                     for AddInterfacesSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = ();
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -889,7 +884,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = AddInterfacesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -911,7 +906,7 @@ pub mod message_hub_server {
                         T: MessageHub,
                     > tonic::server::UnaryService<super::InterfacesName>
                     for RemoveInterfacesSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = ();
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -934,7 +929,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = RemoveInterfacesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -977,7 +972,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetPropertiesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -1022,7 +1017,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetAllPropertiesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -1067,7 +1062,7 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetPropertySvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -1084,7 +1079,9 @@ pub mod message_hub_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        let mut response = http::Response::new(empty_body());
+                        let mut response = http::Response::new(
+                            tonic::body::Body::default(),
+                        );
                         let headers = response.headers_mut();
                         headers
                             .insert(
@@ -1121,7 +1118,7 @@ pub mod message_hub_server {
     }
 }
 /// Configuration message to be used to send configuration to the Astarte message hub.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ConfigMessage {
     #[prost(string, tag = "1")]
     pub realm: ::prost::alloc::string::String,
@@ -1166,7 +1163,7 @@ pub mod message_hub_config_client {
     }
     impl<T> MessageHubConfigClient<T>
     where
-        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T: tonic::client::GrpcService<tonic::body::Body>,
         T::Error: Into<StdError>,
         T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
         <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
@@ -1187,13 +1184,13 @@ pub mod message_hub_config_client {
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
             T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
+                http::Request<tonic::body::Body>,
                 Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
                 >,
             >,
             <T as tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
+                http::Request<tonic::body::Body>,
             >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             MessageHubConfigClient::new(InterceptedService::new(inner, interceptor))
@@ -1233,7 +1230,7 @@ pub mod message_hub_config_client {
         pub async fn set_config(
             &mut self,
             request: impl tonic::IntoRequest<super::ConfigMessage>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status> {
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -1242,7 +1239,7 @@ pub mod message_hub_config_client {
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/astarteplatform.msghub.MessageHubConfig/SetConfig",
             );
@@ -1275,7 +1272,7 @@ pub mod message_hub_config_server {
         async fn set_config(
             &self,
             request: tonic::Request<super::ConfigMessage>,
-        ) -> std::result::Result<tonic::Response<::pbjson_types::Empty>, tonic::Status>;
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct MessageHubConfigServer<T> {
@@ -1342,7 +1339,7 @@ pub mod message_hub_config_server {
         B: Body + std::marker::Send + 'static,
         B::Error: Into<StdError> + std::marker::Send + 'static,
     {
-        type Response = http::Response<tonic::body::BoxBody>;
+        type Response = http::Response<tonic::body::Body>;
         type Error = std::convert::Infallible;
         type Future = BoxFuture<Self::Response, Self::Error>;
         fn poll_ready(
@@ -1360,7 +1357,7 @@ pub mod message_hub_config_server {
                         T: MessageHubConfig,
                     > tonic::server::UnaryService<super::ConfigMessage>
                     for SetConfigSvc<T> {
-                        type Response = ::pbjson_types::Empty;
+                        type Response = ();
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -1383,7 +1380,7 @@ pub mod message_hub_config_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = SetConfigSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
                                 accept_compression_encodings,
@@ -1400,7 +1397,9 @@ pub mod message_hub_config_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        let mut response = http::Response::new(empty_body());
+                        let mut response = http::Response::new(
+                            tonic::body::Body::default(),
+                        );
                         let headers = response.headers_mut();
                         headers
                             .insert(
