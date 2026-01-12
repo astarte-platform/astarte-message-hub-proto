@@ -36,5 +36,5 @@ message ConfigMessage {
 
 service MessageHubConfig {
   /* Set the configuration for the Astarte message hub. */
-  rpc SetConfig (ConfigMessage) returns (google.protobuf.Empty);
+  rpc SetConfig(ConfigMessage) returns (google.protobuf.Empty);
 }

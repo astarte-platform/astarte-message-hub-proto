@@ -69,7 +69,7 @@ message AstarteBinaryBlobArray {
 /* An array of timestamps for transmission with protobuf.
  * To be used nested inside an `AstarteData`.
  */
-message AstarteDateTimeArray{
+message AstarteDateTimeArray {
   repeated google.protobuf.Timestamp values = 1;
 }
 

@@ -7,28 +7,29 @@
 [package]
 name = "astarte-message-hub-proto"
 version.workspace = true
+categories = ["api-bindings"]
 edition.workspace = true
 homepage.workspace = true
+keywords = ["astarte", "protobuf", "iot"]
 license.workspace = true
+readme.workspace = true
 repository.workspace = true
 rust-version.workspace = true
-readme.workspace = true
 description = "Astarte message hub protocol buffers for Rust"
-categories = ["api-bindings"]
-keywords = ["astarte", "protobuf", "iot"]
 
 [dependencies]
-chrono = { workspace = true }
-pbjson-types = { workspace = true }
-prost = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-thiserror = { workspace = true }
-tonic = { workspace = true }
+chrono.workspace = true
+prost.workspace = true
+prost-types = { workspace = true, features = ["chrono"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tonic.workspace = true
+tonic-prost.workspace = true
 uuid = { workspace = true, features = ["v4"] }
 
 [dev-dependencies]
 clap = { workspace = true, features = ["derive"] }
-env_logger = { workspace = true }
-log = { workspace = true }
+env_logger.workspace = true
+log.workspace = true
 tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

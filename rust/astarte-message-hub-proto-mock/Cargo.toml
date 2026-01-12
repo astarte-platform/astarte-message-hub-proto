@@ -7,18 +7,17 @@
 [package]
 name = "astarte-message-hub-proto-mock"
 version.workspace = true
+categories = ["development-tools::testing"]
 edition.workspace = true
-license.workspace = true
 homepage.workspace = true
-rust-version.workspace = true
+keywords = ["test", "mock"]
+license.workspace = true
 readme.workspace = true
 repository.workspace = true
+rust-version.workspace = true
 description = "Astarte message hub protocol buffers mock crate"
-keywords = ["test", "mock"]
-categories = ["development-tools::testing"]
 
 [dependencies]
 astarte-message-hub-proto = { workspace = true }
 mockall = { workspace = true }
-pbjson-types = { workspace = true }
 tonic = { workspace = true }

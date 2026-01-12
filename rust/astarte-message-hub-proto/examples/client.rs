@@ -18,17 +18,18 @@
 
 use std::time;
 
-use astarte_message_hub_proto::astarte_data::AstarteData as InnerData;
-use astarte_message_hub_proto::astarte_message::Payload;
-use astarte_message_hub_proto::message_hub_client::MessageHubClient;
-use astarte_message_hub_proto::pbjson_types::Empty;
 use astarte_message_hub_proto::AstarteData;
 use astarte_message_hub_proto::AstarteDatastreamIndividual;
 use astarte_message_hub_proto::AstarteMessage;
 use astarte_message_hub_proto::Node;
+use astarte_message_hub_proto::astarte_data::AstarteData as InnerData;
+use astarte_message_hub_proto::astarte_message::Payload;
+use astarte_message_hub_proto::message_hub_client::MessageHubClient;
+use chrono::Timelike;
 use chrono::Utc;
 use clap::Parser;
 use log::info;
+use prost_types::Timestamp;
 use tonic::metadata::MetadataValue;
 use tonic::transport::channel::Endpoint;
 use uuid::Uuid;
@@ -116,6 +117,13 @@ async fn main() {
             let elapsed = now.elapsed().unwrap().as_secs();
 
             let elapsed_str = format!("Uptime for node {}: {}", args.uuid, elapsed);
+
+            let now = Utc::now();
+            let timestmp = Timestamp {
+                seconds: now.second().into(),
+                nanos: now.timestamp_subsec_millis().try_into().unwrap(),
+            };
+
             let msg = AstarteMessage {
                 interface_name: "org.astarte-platform.rust.examples.datastream.DeviceDatastream"
                     .to_string(),
@@ -124,7 +132,7 @@ async fn main() {
                     data: Some(AstarteData {
                         astarte_data: Some(InnerData::String(elapsed_str)),
                     }),
-                    timestamp: Some(Utc::now().into()),
+                    timestamp: Some(timestmp),
                 })),
             };
             client.send(msg).await.unwrap();
@@ -133,7 +141,7 @@ async fn main() {
         }
 
         info!("Done sending messages, closing the connection.");
-        client.detach(Empty {}).await.expect("Detach failed");
+        client.detach(()).await.expect("Detach failed");
     });
 
     let res = tokio::join!(reply_handle, send_handle);
