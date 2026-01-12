@@ -23,7 +23,7 @@ CMake library using FetchContent.
 Use fetch content as follows replacing the tag with the wanted version:
 ```CMake
 set(MSGHUB_PROTO_GITHUB_URL https://github.com/astarte-platform/astarte-message-hub-proto.git)
-set(MSGHUB_PROTO_GIT_TAG v0.8.4)
+set(MSGHUB_PROTO_GIT_TAG v0.9.0)
 FetchContent_Declare(
   astarte_msghub_proto
   GIT_REPOSITORY ${MSGHUB_PROTO_GITHUB_URL}
