@@ -11,6 +11,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - (rust) Bump the MSRV to 1.85 and the edition to 2024. [#120]
 - (rust) Bump to the last major all the dependencies, in particular tonic to 0.14. [#120]
+- (cpp) Replaced the CMake package with a set of functions. Importing projects will not only add the
+  compiled sources to their target instead of linking a separate CMake library.
 
 [#120]: https://github.com/astarte-platform/astarte-message-hub-proto/pull/120
 

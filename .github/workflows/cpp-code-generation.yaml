@@ -32,17 +32,11 @@ jobs:
   cpp-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install gRPC dependencies
-        run: |
-          sudo apt install -y cmake build-essential autoconf libtool pkg-config ninja-build
       - uses: actions/checkout@v6
-        with:
-          path: astarte-message-hub-proto
       - name: Install Conan
         uses: conan-io/setup-conan@v1
         with:
           cache_packages: true
           use_venv: true
       - name: Generate code
-        working-directory: ./astarte-message-hub-proto
         run: make cpp
