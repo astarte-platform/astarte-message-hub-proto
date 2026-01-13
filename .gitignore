@@ -28,3 +28,6 @@ build/
 
 # VSCode config
 .vscode/
+
+# Conan settings
+CMakeUserPresets.json
