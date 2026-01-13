@@ -10,13 +10,8 @@ codegen() {
     PROJECT_DIR=$2
 
     pushd $PROJECT_DIR/sample_project
-    # TODO: remove CMake policy when updating gRPC
-    cmake \
-        -DCMAKE_POLICY_VERSION_MINIMUM=3.15 \
-        -DASTARTE_USE_SYSTEM_GRPC=ON \
-        -S . \
-        -B build
-    cmake --build build -j $(nproc --all)
+    conan install . --build=missing --settings=compiler.cppstd=20
+    conan build . --settings=compiler.cppstd=20
     popd
 
 }
