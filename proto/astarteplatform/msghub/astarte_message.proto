@@ -24,7 +24,6 @@ package astarteplatform.msghub;
 
 import "astarteplatform/msghub/astarte_data.proto";
 import "astarteplatform/msghub/message_hub_error.proto";
-import "google/protobuf/timestamp.proto";
 
 /* MessageHubEvent is a type of message for returning and propagating errors.
  * It is an enum with the variants, AstarteMessage(message), representing success and
