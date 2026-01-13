@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.23)
-project(AstarteMsghubProto VERSION 0.9.0 LANGUAGES CXX)
+project(AstarteMsghubProto VERSION 0.10.0 LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cpp/cmake")
 include(AstarteProto)
