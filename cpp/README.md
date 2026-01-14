@@ -18,7 +18,7 @@ The CMakeList in this folder allows you to import the proto files present in thi
 The simplest way to get the protos is to use fetch content as follows replacing the tag with the wanted version:
 ```CMake
 set(MSGHUB_PROTO_GITHUB_URL https://github.com/astarte-platform/astarte-message-hub-proto.git)
-set(MSGHUB_PROTO_GIT_TAG v0.10.0)
+set(MSGHUB_PROTO_GIT_TAG v0.10.1)
 FetchContent_Declare(
   astarte_msghub_proto
   GIT_REPOSITORY ${MSGHUB_PROTO_GITHUB_URL}
