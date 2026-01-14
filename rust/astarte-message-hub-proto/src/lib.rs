@@ -22,6 +22,7 @@
 mod proto_message_hub;
 pub use crate::proto_message_hub::*;
 pub use prost;
+pub use prost_types;
 pub use serde;
 pub use serde_json;
 pub use tonic;
