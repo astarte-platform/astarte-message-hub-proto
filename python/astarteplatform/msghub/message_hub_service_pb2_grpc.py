@@ -95,6 +95,11 @@ class MessageHubStub:
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.GetConnectionStateResponse.FromString,
                 _registered_method=True)
+        self.PurgeDeviceProperties = channel.unary_unary(
+                '/astarteplatform.msghub.MessageHub/PurgeDeviceProperties',
+                request_serializer=astarteplatform_dot_msghub_dot_property__pb2.PropertyList.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
 
 
 class MessageHubServicer:
@@ -179,6 +184,13 @@ class MessageHubServicer:
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PurgeDeviceProperties(self, request, context):
+        """Purge device owned properties to be able to resend only set ones
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MessageHubServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -236,6 +248,11 @@ def add_MessageHubServicer_to_server(servicer, server):
                     servicer.GetConnectionState,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=astarteplatform_dot_msghub_dot_message__hub__service__pb2.GetConnectionStateResponse.SerializeToString,
+            ),
+            'PurgeDeviceProperties': grpc.unary_unary_rpc_method_handler(
+                    servicer.PurgeDeviceProperties,
+                    request_deserializer=astarteplatform_dot_msghub_dot_property__pb2.PropertyList.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -535,6 +552,33 @@ class MessageHub:
             '/astarteplatform.msghub.MessageHub/GetConnectionState',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             astarteplatform_dot_msghub_dot_message__hub__service__pb2.GetConnectionStateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def PurgeDeviceProperties(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/astarteplatform.msghub.MessageHub/PurgeDeviceProperties',
+            astarteplatform_dot_msghub_dot_property__pb2.PropertyList.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,

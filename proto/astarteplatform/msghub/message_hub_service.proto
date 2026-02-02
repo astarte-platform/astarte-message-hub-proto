@@ -54,6 +54,8 @@ service MessageHub {
   rpc IsConnected(google.protobuf.Empty) returns (IsConnectedResponse) {}
   // Get the current device connection status.
   rpc GetConnectionState(google.protobuf.Empty) returns (GetConnectionStateResponse) {}
+  // Purge device owned properties to be able to resend only set ones
+  rpc PurgeDeviceProperties(PropertyList) returns (google.protobuf.Empty) {}
 }
 
 // Response for IsRegistered rpc.
