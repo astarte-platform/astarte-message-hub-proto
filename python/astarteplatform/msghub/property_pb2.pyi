@@ -40,3 +40,9 @@ class PropertyIdentifier(_message.Message):
     interface_name: str
     path: str
     def __init__(self, interface_name: _Optional[str] = ..., path: _Optional[str] = ...) -> None: ...
+
+class PropertyList(_message.Message):
+    __slots__ = ("properties",)
+    PROPERTIES_FIELD_NUMBER: _ClassVar[int]
+    properties: _containers.RepeatedCompositeFieldContainer[PropertyIdentifier]
+    def __init__(self, properties: _Optional[_Iterable[_Union[PropertyIdentifier, _Mapping]]] = ...) -> None: ...
