@@ -280,6 +280,13 @@ pub struct PropertyIdentifier {
     #[prost(string, tag = "2")]
     pub path: ::prost::alloc::string::String,
 }
+/// Following astarte prtocol this message contains a list of set properties.
+/// This message maps exactly to the astarte protocol purge properties message.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PropertyList {
+    #[prost(message, repeated, tag = "1")]
+    pub properties: ::prost::alloc::vec::Vec<PropertyIdentifier>,
+}
 /// Generated client implementations.
 pub mod message_hub_client {
     #![allow(
@@ -576,6 +583,33 @@ pub mod message_hub_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Purge device owned properties to be able to resend only set ones
+        pub async fn purge_device_properties(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PropertyList>,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic_prost::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/astarteplatform.msghub.MessageHub/PurgeDeviceProperties",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "astarteplatform.msghub.MessageHub",
+                        "PurgeDeviceProperties",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -647,6 +681,11 @@ pub mod message_hub_server {
             tonic::Response<super::AstartePropertyIndividual>,
             tonic::Status,
         >;
+        /// Purge device owned properties to be able to resend only set ones
+        async fn purge_device_properties(
+            &self,
+            request: tonic::Request<super::PropertyList>,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct MessageHubServer<T> {
@@ -1062,6 +1101,50 @@ pub mod message_hub_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetPropertySvc(inner);
+                        let codec = tonic_prost::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/astarteplatform.msghub.MessageHub/PurgeDeviceProperties" => {
+                    #[allow(non_camel_case_types)]
+                    struct PurgeDevicePropertiesSvc<T: MessageHub>(pub Arc<T>);
+                    impl<T: MessageHub> tonic::server::UnaryService<super::PropertyList>
+                    for PurgeDevicePropertiesSvc<T> {
+                        type Response = ();
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::PropertyList>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MessageHub>::purge_device_properties(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = PurgeDevicePropertiesSvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

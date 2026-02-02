@@ -26,7 +26,7 @@ from astarteplatform.msghub import astarte_data_pb2 as astarteplatform_dot_msghu
 from astarteplatform.msghub import interface_pb2 as astarteplatform_dot_msghub_dot_interface__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%astarteplatform/msghub/property.proto\x12\x16\x61starteplatform.msghub\x1a)astarteplatform/msghub/astarte_data.proto\x1a&astarteplatform/msghub/interface.proto\"\xb0\x01\n\x08Property\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x15\n\rversion_major\x18\x03 \x01(\x05\x12\x34\n\townership\x18\x04 \x01(\x0e\x32!.astarteplatform.msghub.Ownership\x12\x31\n\x04\x64\x61ta\x18\x05 \x01(\x0b\x32#.astarteplatform.msghub.AstarteData\"H\n\x10StoredProperties\x12\x34\n\nproperties\x18\x01 \x03(\x0b\x32 .astarteplatform.msghub.Property\"Y\n\x0ePropertyFilter\x12\x39\n\townership\x18\x01 \x01(\x0e\x32!.astarteplatform.msghub.OwnershipH\x00\x88\x01\x01\x42\x0c\n\n_ownership\":\n\x12PropertyIdentifier\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%astarteplatform/msghub/property.proto\x12\x16\x61starteplatform.msghub\x1a)astarteplatform/msghub/astarte_data.proto\x1a&astarteplatform/msghub/interface.proto\"\xb0\x01\n\x08Property\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x15\n\rversion_major\x18\x03 \x01(\x05\x12\x34\n\townership\x18\x04 \x01(\x0e\x32!.astarteplatform.msghub.Ownership\x12\x31\n\x04\x64\x61ta\x18\x05 \x01(\x0b\x32#.astarteplatform.msghub.AstarteData\"H\n\x10StoredProperties\x12\x34\n\nproperties\x18\x01 \x03(\x0b\x32 .astarteplatform.msghub.Property\"Y\n\x0ePropertyFilter\x12\x39\n\townership\x18\x01 \x01(\x0e\x32!.astarteplatform.msghub.OwnershipH\x00\x88\x01\x01\x42\x0c\n\n_ownership\":\n\x12PropertyIdentifier\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\"N\n\x0cPropertyList\x12>\n\nproperties\x18\x01 \x03(\x0b\x32*.astarteplatform.msghub.PropertyIdentifierb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -41,4 +41,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_PROPERTYFILTER']._serialized_end=490
   _globals['_PROPERTYIDENTIFIER']._serialized_start=492
   _globals['_PROPERTYIDENTIFIER']._serialized_end=550
+  _globals['_PROPERTYLIST']._serialized_start=552
+  _globals['_PROPERTYLIST']._serialized_end=630
 # @@protoc_insertion_point(module_scope)

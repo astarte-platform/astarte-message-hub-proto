@@ -105,6 +105,13 @@ mock! {
         ) -> std::result::Result<tonic::Response<astarte_message_hub_proto::AstartePropertyIndividual>, tonic::Status>
         where
             R: tonic::IntoRequest<astarte_message_hub_proto::PropertyIdentifier> + 'static;
+
+        async fn purge_device_properties<R>(
+            &self,
+            request: R,
+        ) -> std::result::Result<tonic::Response<()>, tonic::Status>
+        where
+            R: tonic::IntoRequest<astarte_message_hub_proto::PropertyList> + 'static;
     }
 
     impl<T> std::clone::Clone for MessageHubClient<T> {
