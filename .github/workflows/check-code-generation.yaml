@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
       - name: Check the Rust generated code
         run: |
           git --no-pager diff --no-index -- ./rust-dist/astarteplatform.msghub.rs ./rust/astarte-message-hub-proto/src/astarteplatform.msghub.rs
