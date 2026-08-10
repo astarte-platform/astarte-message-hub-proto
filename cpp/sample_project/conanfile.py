@@ -19,11 +19,11 @@ class Pkg(ConanFile):
             del self.options.fPIC
 
     def requirements(self):
-        self.requires("grpc/1.72.0")
-        self.requires("protobuf/6.30.1", override = True)
+        self.requires("grpc/1.84.0")
+        self.requires("protobuf/6.33.5", override = True)
 
     def build_requirements(self):
-        self.tool_requires("protobuf/6.30.1")
+        self.tool_requires("protobuf/6.33.5")
 
     def validate(self):
         check_min_cppstd(self, 20)

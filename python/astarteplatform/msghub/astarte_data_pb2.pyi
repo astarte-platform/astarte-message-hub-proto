@@ -1,8 +1,11 @@
+import datetime
+
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from collections.abc import Iterable as _Iterable, Mapping as _Mapping
+from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -46,7 +49,7 @@ class AstarteDateTimeArray(_message.Message):
     __slots__ = ("values",)
     VALUES_FIELD_NUMBER: _ClassVar[int]
     values: _containers.RepeatedCompositeFieldContainer[_timestamp_pb2.Timestamp]
-    def __init__(self, values: _Optional[_Iterable[_Union[_timestamp_pb2.Timestamp, _Mapping]]] = ...) -> None: ...
+    def __init__(self, values: _Optional[_Iterable[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]] = ...) -> None: ...
 
 class AstarteData(_message.Message):
     __slots__ = ("double", "integer", "boolean", "long_integer", "string", "binary_blob", "date_time", "double_array", "integer_array", "boolean_array", "long_integer_array", "string_array", "binary_blob_array", "date_time_array")
@@ -78,7 +81,7 @@ class AstarteData(_message.Message):
     string_array: AstarteStringArray
     binary_blob_array: AstarteBinaryBlobArray
     date_time_array: AstarteDateTimeArray
-    def __init__(self, double: _Optional[float] = ..., integer: _Optional[int] = ..., boolean: bool = ..., long_integer: _Optional[int] = ..., string: _Optional[str] = ..., binary_blob: _Optional[bytes] = ..., date_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., double_array: _Optional[_Union[AstarteDoubleArray, _Mapping]] = ..., integer_array: _Optional[_Union[AstarteIntegerArray, _Mapping]] = ..., boolean_array: _Optional[_Union[AstarteBooleanArray, _Mapping]] = ..., long_integer_array: _Optional[_Union[AstarteLongIntegerArray, _Mapping]] = ..., string_array: _Optional[_Union[AstarteStringArray, _Mapping]] = ..., binary_blob_array: _Optional[_Union[AstarteBinaryBlobArray, _Mapping]] = ..., date_time_array: _Optional[_Union[AstarteDateTimeArray, _Mapping]] = ...) -> None: ...
+    def __init__(self, double: _Optional[float] = ..., integer: _Optional[int] = ..., boolean: _Optional[bool] = ..., long_integer: _Optional[int] = ..., string: _Optional[str] = ..., binary_blob: _Optional[bytes] = ..., date_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., double_array: _Optional[_Union[AstarteDoubleArray, _Mapping]] = ..., integer_array: _Optional[_Union[AstarteIntegerArray, _Mapping]] = ..., boolean_array: _Optional[_Union[AstarteBooleanArray, _Mapping]] = ..., long_integer_array: _Optional[_Union[AstarteLongIntegerArray, _Mapping]] = ..., string_array: _Optional[_Union[AstarteStringArray, _Mapping]] = ..., binary_blob_array: _Optional[_Union[AstarteBinaryBlobArray, _Mapping]] = ..., date_time_array: _Optional[_Union[AstarteDateTimeArray, _Mapping]] = ...) -> None: ...
 
 class AstarteDatastreamIndividual(_message.Message):
     __slots__ = ("data", "timestamp")
@@ -86,7 +89,7 @@ class AstarteDatastreamIndividual(_message.Message):
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     data: AstarteData
     timestamp: _timestamp_pb2.Timestamp
-    def __init__(self, data: _Optional[_Union[AstarteData, _Mapping]] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, data: _Optional[_Union[AstarteData, _Mapping]] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AstarteDatastreamObject(_message.Message):
     __slots__ = ("data", "timestamp")
@@ -101,7 +104,7 @@ class AstarteDatastreamObject(_message.Message):
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     data: _containers.MessageMap[str, AstarteData]
     timestamp: _timestamp_pb2.Timestamp
-    def __init__(self, data: _Optional[_Mapping[str, AstarteData]] = ..., timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, data: _Optional[_Mapping[str, AstarteData]] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AstartePropertyIndividual(_message.Message):
     __slots__ = ("data",)
