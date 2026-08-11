@@ -27,7 +27,6 @@ CANONICAL_O := $(shell mkdir -p $(O) >/dev/null 2>&1)$(realpath $(O))
 CANONICAL_CURDIR = $(realpath $(CURDIR))
 
 PROTO_DIR = $(CANONICAL_CURDIR)/proto
-RUST_LANG_DIR = $(CANONICAL_CURDIR)/rust
 PYTHON_LANG_DIR = $(CANONICAL_CURDIR)/python
 CPP_LANG_DIR = $(CANONICAL_CURDIR)/cpp
 
@@ -38,15 +37,11 @@ $(if $(BASE_DIR),, $(error output directory "$(O)" does not exist))
 DL_DIR := $(shell mkdir -p $(BASE_DIR)/dl >/dev/null 2>&1)$(BASE_DIR)/dl
 
 BUILD_DIR := $(BASE_DIR)/build
-RUST_BUILD_DIR := $(BUILD_DIR)/rust
 PYTHON_BUILD_DIR := $(BUILD_DIR)/python
 
 FILES=$(wildcard proto/astarteplatform/msghub/*.proto)
 
 PROTOC_CHECK_SCRIPT=$(CANONICAL_CURDIR)/scripts/protoc_check.sh
-
-RUST_LANG=$(RUST_BUILD_DIR)/astarte-message-hub-proto
-RUST_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/rust_codegen.sh
 
 PYTHON_LANG=$(PYTHON_BUILD_DIR)/astarteplatform
 PYTHON_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/python_codegen.sh
@@ -56,11 +51,7 @@ CPP_CODEGEN_SCRIPT=$(CANONICAL_CURDIR)/scripts/cpp_codegen.sh
 
 # This is our default rule, so must come first
 .PHONY: all
-all: $(RUST_LANG) $(PYTHON_LANG) $(CPP_CMAKE)
-
-$(RUST_LANG): $(FILES) $(RUST_CODEGEN_SCRIPT)
-		mkdir -p $(RUST_BUILD_DIR)
-		$(RUST_CODEGEN_SCRIPT) codegen $(PROTO_DIR) $(RUST_LANG_DIR) $(RUST_BUILD_DIR)
+all: $(PYTHON_LANG) $(CPP_CMAKE)
 
 $(PYTHON_LANG): $(FILES) $(PYTHON_CODEGEN_SCRIPT)
 		mkdir -p $(PYTHON_BUILD_DIR)
@@ -73,33 +64,22 @@ $(CPP_CMAKE): $(FILES) $(CPP_CODEGEN_SCRIPT)
 protoc-check: $(PROTOC_CHECK_SCRIPT)
 		$(PROTOC_CHECK_SCRIPT)
 
-.PHONY: rust
-rust: protoc-check $(RUST_LANG)
-
 .PHONY: python
 python: protoc-check $(PYTHON_LANG)
 
 .PHONY: cpp
 cpp: $(CPP_CMAKE)
 
-.PHONY: rust-install
-rust-install: $(RUST_LANG)
-		$(RUST_CODEGEN_SCRIPT) install_code $(RUST_BUILD_DIR) $(RUST_LANG_DIR)
-
 .PHONY: python-install
 python-install: $(PYTHON_LANG)
 		$(PYTHON_CODEGEN_SCRIPT) install_code $(PYTHON_BUILD_DIR) $(PYTHON_LANG_DIR)
 
 .PHONY: install
-install: rust-install python-install
+install: python-install
 
 .PHONY: clean
-clean: rust-dirclean python-dirclean cpp-dirclean
+clean: python-dirclean cpp-dirclean
 		rm -rf $(BUILD_DIR)
-
-.PHONY: rust-dirclean
-rust-dirclean:
-		rm -rf $(RUST_BUILD_DIR)
 
 .PHONY: python-dirclean
 python-dirclean:
