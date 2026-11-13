@@ -32,7 +32,7 @@ jobs:
   cpp-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install Conan
         uses: conan-io/setup-conan@v1
         with:
