@@ -16,28 +16,23 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "astarte_message_hub_proto"
-description="Astarte message hub protocol buffers for Python"
 version = "0.10.1"
-authors = [
-    { name = "Simone Orru", email = "simone.orru@secomind.com" }
-]
+description = "Astarte message hub protocol buffers for Python"
 readme = "README.md"
 requires-python = ">=3.8"
-# Classifier list: https://pypi.org/classifiers/
-classifiers = [
-    "License :: OSI Approved :: Apache Software License"
-]
-dependencies = ["grpcio==1.69.0", "protobuf==5.29.5"]
-
-[project.optional-dependencies]
-generation = ["grpcio-tools==1.69.0", "termcolor==3.1.0"]
-static = ["black", "pylint", "termcolor"]
+license = "Apache-2.0"
+authors = [{ name = "Simone Orru", email = "simone.orru@secomind.com" }]
+dependencies = ["grpcio==1.85.1"]
 
 [project.urls]
 Source = "https://github.com/astarte-platform/astarte-message-hub-proto"
+
+[project.optional-dependencies]
+generation = ["grpcio-tools==1.85.1", "termcolor==3.1.0"]
+static = ["black", "pylint", "termcolor"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

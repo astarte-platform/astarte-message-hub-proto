@@ -23,8 +23,8 @@ on:
   pull_request:
   push:
     branches:
-      - 'master'
-      - 'release-*'
+      - "master"
+      - "release-*"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -34,17 +34,11 @@ jobs:
   reuse:
     uses: ./.github/workflows/reuse-lint.yaml
   python-code-generation:
-    needs: [ reuse ]
+    needs: [reuse]
     uses: ./.github/workflows/python-code-generation.yaml
-  rust-code-generation:
-    needs: [ reuse ]
-    uses: ./.github/workflows/rust-code-generation.yaml
   cpp-code-generation:
-    needs: [ reuse ]
+    needs: [reuse]
     uses: ./.github/workflows/cpp-code-generation.yaml
   check-codegen:
-    needs: [ python-code-generation, rust-code-generation, cpp-code-generation ]
+    needs: [python-code-generation, cpp-code-generation]
     uses: ./.github/workflows/check-code-generation.yaml
-  rust-code-check:
-    needs: [ check-codegen ]
-    uses: ./.github/workflows/rust-check-code-generation.yaml

@@ -11,7 +11,7 @@ from astarteplatform.msghub import node_pb2 as astarteplatform_dot_msghub_dot_no
 from astarteplatform.msghub import property_pb2 as astarteplatform_dot_msghub_dot_property__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
-GRPC_GENERATED_VERSION = '1.69.0'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -24,14 +24,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in astarteplatform/msghub/message_hub_service_pb2_grpc.py depends on'
+        + ' but the generated code in astarteplatform/msghub/message_hub_service_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class MessageHubStub(object):
+class MessageHubStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -97,7 +97,7 @@ class MessageHubStub(object):
                 _registered_method=True)
 
 
-class MessageHubServicer(object):
+class MessageHubServicer:
     """Missing associated documentation comment in .proto file."""
 
     def Attach(self, request, context):
@@ -245,7 +245,7 @@ def add_MessageHubServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class MessageHub(object):
+class MessageHub:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

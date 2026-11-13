@@ -28,20 +28,20 @@ jobs:
   python-build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - name: Install Python dependencies
-      run: |
-        python3 --version
-        python3 -m pip install --upgrade pip
-        python3 -m pip install -e ./python[generation]
-    - name: Remove old code
-      working-directory: ./python
-      run: (! test -d ./astarteplatform) || rm -r ./astarteplatform
-    - name: Generate code
-      working-directory: ./python
-      run: python ./protoc.py
-    - name: Upload artifact with generated code
-      uses: actions/upload-artifact@v7
-      with:
-        name: python-dist
-        path: ./python/astarteplatform
+      - uses: actions/checkout@v6
+      - name: Install Python dependencies
+        run: |
+          python3 --version
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -e ./python[generation]
+      - name: Remove old code
+        working-directory: ./python
+        run: (! test -d ./astarteplatform) || rm -r ./astarteplatform
+      - name: Generate code
+        working-directory: ./python
+        run: python ./protoc.py
+      - name: Upload artifact with generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: python-dist
+          path: ./python/astarteplatform

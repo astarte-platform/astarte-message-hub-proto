@@ -18,7 +18,7 @@ codegen () {
     source .venv/bin/activate
     pip install --upgrade pip
     package_name="grpcio"
-    package_version="1.69.0"
+    package_version="1.85.1"
     installed_version=$((pip show $package_name | grep Version | awk '{print $2}') || true)
     if [ "$installed_version" != "$package_version" ]; then
         pip install $package_name==$package_version
@@ -28,7 +28,7 @@ codegen () {
         fi
     fi
     package_name="grpcio-tools"
-    package_version="1.69.0"
+    package_version="1.85.1"
     installed_version=$((pip show $package_name | grep Version | awk '{print $2}') || true)
     if [ "$installed_version" != "$package_version" ]; then
         pip install $package_name==$package_version
@@ -57,7 +57,7 @@ install_code (){
       fi
 
       install -d "$INSTALL_DIR"/astarteplatform/msghub
-      install -m 644 "$OUT_DIR"/astarteplatform/msghub/* "$INSTALL_DIR"/astarteplatform/msghub
+      install -v -m 644 "$OUT_DIR"/astarteplatform/msghub/* "$INSTALL_DIR"/astarteplatform/msghub
 }
 
 if [ "$1" = "codegen" ]; then

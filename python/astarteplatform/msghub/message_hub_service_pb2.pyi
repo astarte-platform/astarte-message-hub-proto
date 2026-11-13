@@ -14,13 +14,13 @@ class IsRegisteredResponse(_message.Message):
     __slots__ = ("registered",)
     REGISTERED_FIELD_NUMBER: _ClassVar[int]
     registered: bool
-    def __init__(self, registered: bool = ...) -> None: ...
+    def __init__(self, registered: _Optional[bool] = ...) -> None: ...
 
 class IsConnectedResponse(_message.Message):
     __slots__ = ("connected",)
     CONNECTED_FIELD_NUMBER: _ClassVar[int]
     connected: bool
-    def __init__(self, connected: bool = ...) -> None: ...
+    def __init__(self, connected: _Optional[bool] = ...) -> None: ...
 
 class GetConnectionStateResponse(_message.Message):
     __slots__ = ("state",)
